@@ -1,6 +1,14 @@
 // ── Error Handling ──
 export { ErrorBoundary } from './error-boundary';
 
+// ── Core UI ──
+export { Sheet } from './sheet';
+export { CommandPalette } from './command-palette';
+export { Carousel } from './carousel';
+export { ImageViewer } from './image-viewer';
+export { BottomNavigation } from './bottom-navigation';
+export { AppBar } from './app-bar';
+
 // ── Core Form & Input ──
 export { Button } from './button';
 export { SplitButton } from './split-button';
@@ -12,6 +20,7 @@ export { Switch } from './switch';
 export { Checkbox } from './checkbox';
 export { RadioGroup } from './radio-group';
 export { Select } from './select';
+export { Dropdown } from './dropdown';
 export { MultiSelect } from './multi-select';
 export { TagInput } from './tag-input';
 export { DatePicker } from './date-picker';
@@ -43,6 +52,7 @@ export { ConfirmDialog } from './confirm-dialog';
 export { Drawer } from './drawer';
 export { DropdownMenu } from './dropdown-menu';
 export { Alert } from './alert';
+export { InlineNotification } from './inline-notification';
 export { Banner } from './banner';
 export { Popover } from './popover';
 export { Snackbar } from './snackbar';
@@ -56,6 +66,7 @@ export { Tabs } from './tabs';
 export { Accordion } from './accordion';
 export { SegmentedControl } from './segmented-control';
 export { StepIndicator } from './step-indicator';
+export { VerticalStepper } from './vertical-stepper';
 export { Header } from './header';
 export { Collapsible } from './collapsible';
 export { KeyboardAvoidingContainer } from './keyboard-avoiding-container';
@@ -78,6 +89,7 @@ export { Separator } from './separator';
 export { Progress } from './progress';
 export { CircularProgress } from './circular-progress';
 export { Skeleton, SkeletonText, SkeletonCard } from './skeleton';
+export { SkeletonAvatar, SkeletonImage } from './skeleton-avatar';
 export { ListItem } from './list-item';
 export { InfoRow } from './info-row';
 export { Slider } from './slider';
