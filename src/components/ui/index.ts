@@ -1,6 +1,22 @@
 // ── Error Handling ──
 export { ErrorBoundary } from './error-boundary';
 
+// ── Status & Notifications ──
+export { NotificationCenter } from './notification-center';
+export type { NotificationCenterProps, NotificationItem as NotificationCenterItem } from './notification-center';
+export { BadgeCounter } from './badge-counter';
+export type { BadgeCounterProps } from './badge-counter';
+export { ConnectionStatus } from './connection-status';
+export type { ConnectionStatusProps } from './connection-status';
+export { MaintenanceScreen } from './maintenance-screen';
+export type { MaintenanceScreenProps } from './maintenance-screen';
+export { UpdateRequiredScreen } from './update-required-screen';
+export type { UpdateRequiredScreenProps } from './update-required-screen';
+export { SuccessScreen } from './success-screen';
+export type { SuccessScreenProps } from './success-screen';
+export { ErrorScreen } from './error-screen';
+export type { ErrorScreenProps } from './error-screen';
+
 // ── Core UI ──
 export { Sheet } from './sheet';
 export { CommandPalette } from './command-palette';
@@ -84,6 +100,20 @@ export { ToastProvider } from '../../providers/toast-provider';
 export { useToast } from '../../hooks/use-toast';
 
 // ── Navigation & Layout ──
+export { SidebarMenu } from './sidebar-menu';
+export type { SidebarMenuProps, SidebarMenuItem } from './sidebar-menu';
+export { FloatingHeader } from './floating-header';
+export type { FloatingHeaderProps } from './floating-header';
+export { ParallaxScrollView } from './parallax-scroll-view';
+export type { ParallaxScrollViewProps } from './parallax-scroll-view';
+export { StickyHeaderList } from './sticky-header-list';
+export type { StickyHeaderListProps, StickyHeaderSection } from './sticky-header-list';
+export { SwipeableTabView } from './swipeable-tab-view';
+export type { SwipeableTabViewProps, SwipeableTab } from './swipeable-tab-view';
+export { MasonryGrid } from './masonry-grid';
+export type { MasonryGridProps, MasonryGridItem } from './masonry-grid';
+export { ResponsiveGrid } from './responsive-grid';
+export type { ResponsiveGridProps } from './responsive-grid';
 export { Tabs } from './tabs';
 export { Accordion } from './accordion';
 export { SegmentedControl } from './segmented-control';
@@ -151,6 +181,25 @@ export { OrderSummary } from './order-summary';
 export { PricingCard } from './pricing-card';
 export { MenuItemCard } from './menu-item-card';
 export { RestaurantCard } from './restaurant-card';
+
+// ── E-Commerce ──
+export { ProductGallery } from './product-gallery';
+export type { ProductGalleryProps, ProductGalleryImage } from './product-gallery';
+export { SizeSelector } from './size-selector';
+export type { SizeSelectorProps, SizeOption } from './size-selector';
+export { ColorSwatchSelector } from './color-swatch-selector';
+export type {
+  ColorSwatchSelectorProps,
+  ColorSwatchOption,
+} from './color-swatch-selector';
+export { CouponCard } from './coupon-card';
+export type { CouponCardProps } from './coupon-card';
+export { Receipt } from './receipt';
+export type { ReceiptProps, ReceiptItem } from './receipt';
+export { TipSelector } from './tip-selector';
+export type { TipSelectorProps } from './tip-selector';
+export { SubscriptionCard } from './subscription-card';
+export type { SubscriptionCardProps } from './subscription-card';
 
 // ── Social & Communication ──
 export { ReactionBar } from './reaction-bar';
