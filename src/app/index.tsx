@@ -896,7 +896,7 @@ export default function HomeScreen() {
 
           <Demo title="ColorPicker">
             <ColorPicker
-              colors={[t.primary, t.purple, t.error, t.success, t.warning, t.pink]}
+              colors={['#2563eb', '#8b5cf6', '#ef4444', '#22c55e', '#f59e0b', '#ec4899']}
               value={selectedColor}
               onValueChange={setSelectedColor}
             />
