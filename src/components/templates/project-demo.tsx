@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
+import { Rocket } from 'lucide-react-native';
 
 import {
   AvatarGroup,
@@ -54,7 +55,7 @@ export function ProjectDemo() {
           title="Sprint 12 — Component Library"
           subtitle="8 of 14 tasks completed"
           progress={57}
-          icon="🚀"
+          icon={<Rocket size={20} color={t.primary} />}
           completedLabel="57% done"
           totalLabel="3 days left"
         />

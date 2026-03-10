@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dimensions, Text, View } from 'react-native';
-import { Bell, Home, Search, User } from 'lucide-react-native';
+import { Bell, Home, Search, Settings, User } from 'lucide-react-native';
 
 import {
   AppBar,
@@ -83,7 +83,7 @@ export function NavigationSection() {
           title="My Screen"
           subtitle="Dashboard"
           onBack={() => {}}
-          rightActions={<Text style={{ fontSize: 20, color: t.text }}>⚙️</Text>}
+          rightActions={<Settings size={20} color={t.text} />}
         />
       </Demo>
 

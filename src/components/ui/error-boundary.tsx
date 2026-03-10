@@ -1,7 +1,8 @@
 import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
+import { AlertTriangle } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Fonts, Radius, Shadows } from '@/constants/theme';
 
 type Props = {
   children: ReactNode;
@@ -53,9 +54,9 @@ export class ErrorBoundary extends Component<Props, State> {
               padding: 28,
               ...Shadows.xl,
             }}>
-            <Text style={{ fontSize: 40, textAlign: 'center', marginBottom: 12 }}>
-              💥
-            </Text>
+            <View style={{ alignItems: 'center', marginBottom: 12 }}>
+              <AlertTriangle size={40} color="#ef4444" />
+            </View>
             <Text
               style={{
                 fontSize: 20,
@@ -90,7 +91,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   style={{
                     fontSize: 12,
                     color: '#ef4444',
-                    fontFamily: 'monospace',
+                    fontFamily: Fonts?.mono ?? 'monospace',
                   }}>
                   {this.state.error.message}
                 </Text>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
+import { Flame } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -102,7 +103,7 @@ export function CountdownBadge({
         },
         style,
       ]}>
-      <Text style={{ fontSize: 12, color: t.error }}>🔥</Text>
+      <Flame size={12} color={t.error} />
       {label && (
         <Text style={{ fontSize: 12, fontWeight: '600', color: t.error }}>{label}</Text>
       )}

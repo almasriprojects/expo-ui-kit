@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
+import { Flame } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -35,7 +36,7 @@ export function StreakCounter({
         },
         style,
       ]}>
-      <Text style={{ fontSize: 36 }}>🔥</Text>
+      <Flame size={36} color={t.orange} />
       <Text style={{ fontSize: 40, fontWeight: '900', color: t.text, marginTop: 4 }}>
         {count}
       </Text>
@@ -56,7 +57,7 @@ export function StreakCounter({
                   justifyContent: 'center',
                 }}>
                 {active ? (
-                  <Text style={{ fontSize: 14 }}>🔥</Text>
+                  <Flame size={14} color={t.orange} />
                 ) : (
                   <View style={{ width: 8, height: 8, borderRadius: Radius.full, backgroundColor: t.surfaceActive }} />
                 )}

@@ -206,7 +206,7 @@ export function AdvancedSection() {
         <View style={{ gap: 12 }}>
           <Banner variant="info" message="New update available" title="Update" />
           <Banner variant="warning" message="Your trial expires in 3 days" />
-          <Marquee text="🔥 Flash Sale — 50% off all premium plans! Limited time offer!" speed={50} />
+          <Marquee text="Flash Sale — 50% off all premium plans! Limited time offer!" speed={50} />
         </View>
       </Demo>
 

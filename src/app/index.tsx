@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Moon, Settings, Sun } from 'lucide-react-native';
 
 import { Screen } from '@/components/layout';
 import { Snackbar } from '@/components/ui';
@@ -41,7 +42,7 @@ const CATEGORIES = [
 
 type CategoryKey = (typeof CATEGORIES)[number]['key'];
 
-const modeIcons: Record<string, string> = { system: '⚙️', light: '☀️', dark: '🌙' };
+const modeIcons: Record<string, React.ComponentType<{ size?: number; color?: string }>> = { system: Settings, light: Sun, dark: Moon };
 const modeLabels: Record<string, string> = { system: 'Auto', light: 'Light', dark: 'Dark' };
 
 function ThemeToggle() {
@@ -227,7 +228,7 @@ export default function HomeScreen() {
               borderColor: t.border,
               ...Shadows.sm,
             }}>
-            <Text style={{ fontSize: 16 }}>{modeIcons[mode]}</Text>
+            {React.createElement(modeIcons[mode], { size: 16, color: t.text })}
             <Text style={{ fontSize: 13, fontWeight: '600', fontFamily: resolveFontFamily(fonts, '600'), color: t.text }}>
               {modeLabels[mode]}
             </Text>

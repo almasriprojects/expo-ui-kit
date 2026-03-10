@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Dimensions, Text, View, type ViewStyle } from 'react-native';
+import { PartyPopper } from 'lucide-react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -85,7 +86,7 @@ export function SwipeCards({ items, onSwipeLeft, onSwipeRight, style }: SwipeCar
   if (currentIndex >= items.length) {
     return (
       <View style={[{ alignItems: 'center', justifyContent: 'center', height: 300 }, style]}>
-        <Text style={{ fontSize: 32, marginBottom: 12 }}>🎉</Text>
+        <PartyPopper size={32} color={t.primary} style={{ marginBottom: 12 }} />
         <Text style={{ fontSize: 18, fontWeight: '600', color: t.text }}>All done!</Text>
         <Text style={{ fontSize: 14, color: t.textSecondary, marginTop: 4 }}>No more cards to show</Text>
       </View>

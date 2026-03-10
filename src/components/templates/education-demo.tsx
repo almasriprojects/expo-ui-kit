@@ -45,7 +45,7 @@ export function EducationDemo() {
       <View style={{ flexDirection: 'row', gap: 10 }}>
         <StatCard title="Courses" value="3" subtitle="In progress" style={{ flex: 1 }} />
         <StatCard title="Hours" value="42" subtitle="Total learned" style={{ flex: 1 }} />
-        <StatCard title="Streak" value="12🔥" subtitle="Days" style={{ flex: 1 }} />
+        <StatCard title="Streak" value="12" subtitle="Days" style={{ flex: 1 }} />
       </View>
 
       <Separator label="Continue Learning" />
