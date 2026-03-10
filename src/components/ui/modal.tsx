@@ -37,7 +37,7 @@ export function Modal({
   const width = Math.min(screenWidth - 48, maxWidths[size]);
 
   return (
-    <RNModal visible={visible} transparent animationType="fade">
+    <RNModal visible={visible} transparent animationType="fade" accessibilityViewIsModal>
       <Pressable
         onPress={onClose}
         style={{

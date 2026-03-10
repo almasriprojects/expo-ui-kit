@@ -1,3 +1,6 @@
+// ── Error Handling ──
+export { ErrorBoundary } from './error-boundary';
+
 // ── Core Form & Input ──
 export { Button } from './button';
 export { SplitButton } from './split-button';
@@ -42,7 +45,8 @@ export { Banner } from './banner';
 export { Popover } from './popover';
 export { Snackbar } from './snackbar';
 export { Tooltip } from './tooltip';
-export { ToastProvider, useToast } from './toast';
+export { ToastProvider } from '../../providers/toast-provider';
+export { useToast } from '../../hooks/use-toast';
 
 // ── Navigation & Layout ──
 export { Tabs } from './tabs';

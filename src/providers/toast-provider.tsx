@@ -2,6 +2,8 @@ import React, {
   createContext,
   type ReactNode,
   useCallback,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
 import { Dimensions, Pressable, View } from 'react-native';
@@ -45,6 +47,15 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const insets = useSafeAreaInsets();
   const screenWidth = Dimensions.get('window').width;
   const t = useTheme();
+  const timerIdsRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
+
+  useEffect(() => {
+    const timers = timerIdsRef.current;
+    return () => {
+      timers.forEach((id) => clearTimeout(id));
+      timers.clear();
+    };
+  }, []);
 
   const variantConfig: Record<ToastVariant, { bg: string; icon: string }> = {
     default: { bg: t.snackbar, icon: 'ℹ' },
@@ -64,9 +75,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     };
     setToasts((prev) => [...prev, toast]);
 
-    setTimeout(() => {
+    const timerId = setTimeout(() => {
+      timerIdsRef.current.delete(id);
       setToasts((prev) => prev.filter((ti) => ti.id !== id));
     }, options.duration ?? 3000);
+    timerIdsRef.current.set(id, timerId);
   }, []);
 
   const dismiss = useCallback((id: string) => {

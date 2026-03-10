@@ -50,6 +50,9 @@ export function Select({
       )}
       <Pressable
         onPress={() => !disabled && setOpen(true)}
+        accessibilityRole="button"
+        accessibilityLabel={selectedLabel ?? placeholder}
+        accessibilityState={{ expanded: open, disabled }}
         style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -73,7 +76,7 @@ export function Select({
         <Text style={{ fontSize: 14, color: t.textSecondary }}>▼</Text>
       </Pressable>
 
-      <Modal visible={open} transparent animationType="slide">
+      <Modal visible={open} transparent animationType="slide" accessibilityViewIsModal>
         <Pressable
           style={{ flex: 1, backgroundColor: t.overlay, justifyContent: 'flex-end' }}
           onPress={() => setOpen(false)}>
@@ -127,6 +130,8 @@ export function Select({
                       onValueChange(item.value);
                       setOpen(false);
                     }}
+                    accessibilityRole="button"
+                    accessibilityLabel={item.label}
                     style={{
                       paddingHorizontal: 24,
                       paddingVertical: 16,

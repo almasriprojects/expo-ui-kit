@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Text, View, type TextStyle, type ViewStyle } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
+import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
@@ -33,7 +32,7 @@ export function AnimatedCounter({
 
   useEffect(() => {
     animatedValue.value = withTiming(value, { duration });
-  }, [value, duration]);
+  }, [value, duration, animatedValue]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,7 +47,7 @@ export function AnimatedCounter({
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [value, duration, decimals]);
+  }, [value, duration, decimals, animatedValue]);
 
   return (
     <View style={[{ flexDirection: 'row', alignItems: 'baseline' }, style]}>

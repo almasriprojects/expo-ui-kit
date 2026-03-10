@@ -8,7 +8,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { ThemedText } from '@/components/themed-text';
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -55,6 +54,9 @@ function AccordionRow({
       }}>
       <Pressable
         onPress={onToggle}
+        accessibilityRole="button"
+        accessibilityLabel={item.title}
+        accessibilityState={{ expanded: isOpen }}
         style={{
           flexDirection: 'row',
           alignItems: 'center',

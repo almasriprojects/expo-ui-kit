@@ -32,7 +32,7 @@ export function ActionSheet({
   const insets = useSafeAreaInsets();
 
   return (
-    <Modal visible={visible} transparent animationType="slide">
+    <Modal visible={visible} transparent animationType="slide" accessibilityViewIsModal>
       <Pressable
         style={{ flex: 1, backgroundColor: t.overlay, justifyContent: 'flex-end' }}
         onPress={onClose}>
@@ -95,6 +95,8 @@ export function ActionSheet({
                     option.onPress();
                     onClose();
                   }}
+                  accessibilityRole="button"
+                  accessibilityLabel={option.label}
                   style={{
                     paddingVertical: 16,
                     alignItems: 'center',
@@ -115,6 +117,8 @@ export function ActionSheet({
           {/* Cancel button */}
           <Pressable
             onPress={onClose}
+            accessibilityRole="button"
+            accessibilityLabel={cancelLabel}
             style={{
               borderRadius: Radius['2xl'],
               paddingVertical: 16,

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { Screen } from '@/components/layout';
@@ -53,7 +53,6 @@ import {
   SegmentedControl,
   Select,
   Separator,
-  Skeleton,
   SkeletonCard,
   SkeletonText,
   Slider,
@@ -382,6 +381,13 @@ export default function HomeScreen() {
   const [currentPage, setCurrentPage] = useState(2);
   const [todo1, setTodo1] = useState(true);
   const [todo2, setTodo2] = useState(false);
+  const loadingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (loadingTimerRef.current != null) clearTimeout(loadingTimerRef.current);
+    };
+  }, []);
 
   return (
     <Screen>
@@ -460,7 +466,14 @@ export default function HomeScreen() {
               <Button
                 title={loadingBtn ? 'Saving...' : 'Tap for loading'}
                 loading={loadingBtn}
-                onPress={() => { setLoadingBtn(true); setTimeout(() => setLoadingBtn(false), 2000); }}
+                onPress={() => {
+                if (loadingTimerRef.current != null) clearTimeout(loadingTimerRef.current);
+                setLoadingBtn(true);
+                loadingTimerRef.current = setTimeout(() => {
+                  setLoadingBtn(false);
+                  loadingTimerRef.current = null;
+                }, 2000);
+              }}
               />
               <Button title="Disabled" disabled />
             </View>

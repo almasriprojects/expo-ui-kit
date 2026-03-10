@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
@@ -31,6 +31,13 @@ export function OTPScreen({
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [resendCooldown, setResendCooldown] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current != null) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   const destination = email || phone || 'your email';
 
@@ -45,12 +52,16 @@ export function OTPScreen({
 
   function handleResend() {
     if (resendCooldown > 0) return;
+    if (intervalRef.current != null) clearInterval(intervalRef.current);
     onResend?.();
     setResendCooldown(30);
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setResendCooldown((prev) => {
         if (prev <= 1) {
-          clearInterval(interval);
+          if (intervalRef.current != null) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
           return 0;
         }
         return prev - 1;
@@ -107,7 +118,7 @@ export function OTPScreen({
         <View style={{ alignItems: 'center', gap: 16 }}>
           <View style={{ flexDirection: 'row', gap: 4 }}>
             <Text style={{ fontSize: 14, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
-              Didn't receive the code?
+              {"Didn't receive the code?"}
             </Text>
             <Pressable onPress={handleResend} disabled={resendCooldown > 0}>
               <Text style={{

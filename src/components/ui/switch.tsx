@@ -38,6 +38,9 @@ export function Switch({
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }} {...props}>
       <Pressable
+        accessibilityRole="switch"
+        accessibilityLabel={label}
+        accessibilityState={{ checked: value, disabled }}
         onPress={() => !disabled && onValueChange(!value)}
         style={{
           width: 44,

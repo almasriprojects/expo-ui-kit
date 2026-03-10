@@ -41,6 +41,9 @@ export function SegmentedControl({
           <Pressable
             key={segment}
             onPress={() => !disabled && onIndexChange(i)}
+            accessibilityRole="tab"
+            accessibilityLabel={segment}
+            accessibilityState={{ selected, disabled }}
             style={[
               {
                 flex: 1,

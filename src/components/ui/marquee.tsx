@@ -41,7 +41,7 @@ export function Marquee({ text, speed = 60, style, textStyle }: MarqueeProps) {
         -1,
       );
     }
-  }, [containerWidth, textWidth, speed]);
+  }, [containerWidth, textWidth, speed, translateX]);
 
   const animStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],

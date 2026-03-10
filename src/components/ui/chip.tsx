@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View, type ViewProps } from 'react-native';
+import { Pressable, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';

@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useRef, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -30,13 +30,24 @@ export function useToast() {
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastData[]>([]);
   const counter = useRef(0);
+  const timerIdsRef = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map());
+
+  useEffect(() => {
+    const timers = timerIdsRef.current;
+    return () => {
+      timers.forEach((id) => clearTimeout(id));
+      timers.clear();
+    };
+  }, []);
 
   const show = useCallback((message: string, type: ToastType = 'info', duration = 3000) => {
     const id = ++counter.current;
     setToasts((prev) => [...prev, { id, message, type, duration }]);
-    setTimeout(() => {
+    const timerId = setTimeout(() => {
+      timerIdsRef.current.delete(id);
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, duration);
+    timerIdsRef.current.set(id, timerId);
   }, []);
 
   const dismiss = useCallback((id: number) => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform, Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Platform, Pressable, Text, type ViewStyle } from 'react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';

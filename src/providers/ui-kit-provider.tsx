@@ -1,10 +1,3 @@
-import React, { type ReactNode, useEffect } from 'react';
-import { LogBox } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-LogBox.ignoreLogs(['SafeAreaView has been deprecated']);
-
 import {
   DMSans_400Regular,
   DMSans_500Medium,
@@ -31,13 +24,20 @@ import {
 } from '@expo-google-fonts/poppins';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import React, { type ReactNode, useEffect } from 'react';
+import { LogBox } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { ErrorBoundary } from '@/components/ui/error-boundary';
 
 import { ThemeModeProvider } from './theme-mode-provider';
 import { ToastProvider } from './toast-provider';
 
+LogBox.ignoreLogs(['SafeAreaView has been deprecated']);
+
 type UIKitProviderProps = {
   children: ReactNode;
-  /** Callback fired once all fonts are loaded and the provider is ready */
   onReady?: () => void;
 };
 
@@ -75,12 +75,14 @@ export function UIKitProvider({ children, onReady }: UIKitProviderProps) {
   if (!fontsLoaded) return null;
 
   return (
-    <ThemeModeProvider>
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <ToastProvider>{children}</ToastProvider>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </ThemeModeProvider>
+    <ErrorBoundary>
+      <ThemeModeProvider>
+        <SafeAreaProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <ToastProvider>{children}</ToastProvider>
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </ThemeModeProvider>
+    </ErrorBoundary>
   );
 }

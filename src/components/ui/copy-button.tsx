@@ -1,5 +1,5 @@
 import * as Clipboard from 'expo-clipboard';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
 import { Fonts, Radius } from '@/constants/theme';
@@ -20,11 +20,22 @@ export function CopyButton({
 }: CopyButtonProps) {
   const t = useTheme();
   const [copied, setCopied] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current != null) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleCopy = async () => {
+    if (timerRef.current != null) clearTimeout(timerRef.current);
     await Clipboard.setStringAsync(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    timerRef.current = setTimeout(() => {
+      setCopied(false);
+      timerRef.current = null;
+    }, 2000);
   };
 
   if (variant === 'field') {

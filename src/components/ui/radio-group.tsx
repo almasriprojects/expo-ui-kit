@@ -38,13 +38,19 @@ export function RadioGroup({
           {label}
         </ThemedText>
       )}
-      <View style={horizontal ? { flexDirection: 'row', flexWrap: 'wrap', gap: 16 } : { gap: 12 }}>
+      <View
+        style={horizontal ? { flexDirection: 'row', flexWrap: 'wrap', gap: 16 } : { gap: 12 }}
+        accessibilityRole="radiogroup"
+        accessibilityLabel={label}>
         {options.map((option) => {
           const selected = option.value === value;
           return (
             <Pressable
               key={option.value}
               onPress={() => !disabled && onValueChange(option.value)}
+              accessibilityRole="radio"
+              accessibilityLabel={option.label}
+              accessibilityState={{ checked: selected, disabled }}
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',

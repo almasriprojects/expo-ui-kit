@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import {
-  Accordion,
-  Badge,
   Card,
   CodeBlock,
-  Divider,
   FilterBar,
   FlashCard,
   LessonCard,
@@ -17,7 +14,6 @@ import {
   Separator,
   StatCard,
   StepIndicator,
-  StreakCounter,
   VideoThumbnail,
 } from '@/components/ui';
 import { useTheme } from '@/hooks/use-theme';

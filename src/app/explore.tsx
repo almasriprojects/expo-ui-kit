@@ -12,7 +12,7 @@ import { MessagingDemo } from '@/components/templates/messaging-demo';
 import { ProjectDemo } from '@/components/templates/project-demo';
 import { RealEstateDemo } from '@/components/templates/realestate-demo';
 import { SocialDemo } from '@/components/templates/social-demo';
-import { Radius, Shadows, resolveFontFamily } from '@/constants/theme';
+import { Radius, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 

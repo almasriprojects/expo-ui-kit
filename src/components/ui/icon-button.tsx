@@ -9,6 +9,7 @@ type IconButtonVariant = 'default' | 'primary' | 'ghost' | 'outline';
 
 type IconButtonProps = PressableProps & {
   icon: ReactNode;
+  label?: string;
   size?: IconButtonSize;
   variant?: IconButtonVariant;
 };
@@ -48,6 +49,7 @@ function getVariantStyle(
 
 export function IconButton({
   icon,
+  label,
   size = 'md',
   variant = 'default',
   disabled,
@@ -61,6 +63,9 @@ export function IconButton({
 
   return (
     <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityState={{ disabled: !!disabled }}
       onPressIn={(e) => {
         setPressed(true);
         onPressInProp?.(e);

@@ -107,7 +107,7 @@ export function ForgotPasswordScreen({
                 fontSize: 14, fontWeight: '600', color: t.primary,
                 fontFamily: resolveFontFamily(f, '600'), textAlign: 'center',
               }}>
-                Didn't receive it? Resend
+                {"Didn't receive it? Resend"}
               </Text>
             </Pressable>
           </>

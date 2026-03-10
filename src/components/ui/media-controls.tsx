@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
 import { Radius, Shadows } from '@/constants/theme';

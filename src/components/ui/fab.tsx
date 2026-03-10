@@ -30,6 +30,8 @@ export function FAB({
 
   return (
     <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={label}
       onPressIn={(e) => {
         setPressed(true);
         onPressInProp?.(e);

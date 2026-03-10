@@ -78,6 +78,9 @@ export function Slider({
       <GestureDetector gesture={composed}>
         <View
           style={{ height: 40, justifyContent: 'center' }}
+          accessibilityRole="adjustable"
+          accessibilityLabel={label}
+          accessibilityValue={{ min, max, now: value }}
           onLayout={(e) => {
             trackWidth.value = e.nativeEvent.layout.width;
           }}>

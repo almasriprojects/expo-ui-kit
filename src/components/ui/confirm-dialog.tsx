@@ -30,7 +30,7 @@ export function ConfirmDialog({
   const width = Math.min(Dimensions.get('window').width - 48, 340);
 
   return (
-    <Modal visible={visible} transparent animationType="fade">
+    <Modal visible={visible} transparent animationType="fade" accessibilityViewIsModal>
       <Pressable
         onPress={onClose}
         style={{

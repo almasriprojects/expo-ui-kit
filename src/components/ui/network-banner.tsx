@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, type ViewStyle } from 'react-native';
+import { Text, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 

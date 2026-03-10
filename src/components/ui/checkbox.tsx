@@ -22,6 +22,9 @@ export function Checkbox({
 
   return (
     <Pressable
+      accessibilityRole="checkbox"
+      accessibilityLabel={label}
+      accessibilityState={{ checked, disabled }}
       onPress={() => !disabled && onCheckedChange(!checked)}
       style={{
         flexDirection: 'row',

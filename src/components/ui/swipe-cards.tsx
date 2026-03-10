@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Dimensions, Text, View, type ViewStyle } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, {
@@ -32,6 +32,13 @@ export function SwipeCards({ items, onSwipeLeft, onSwipeRight, style }: SwipeCar
   const [currentIndex, setCurrentIndex] = useState(0);
   const translateX = useSharedValue(0);
   const rotate = useSharedValue(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current != null) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleSwipe = (direction: 'left' | 'right') => {
     const item = items[currentIndex];
@@ -40,6 +47,15 @@ export function SwipeCards({ items, onSwipeLeft, onSwipeRight, style }: SwipeCar
     else onSwipeRight?.(item);
     setCurrentIndex((prev) => prev + 1);
   };
+
+  const scheduleReset = useCallback(() => {
+    if (timerRef.current != null) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      translateX.value = 0;
+      rotate.value = 0;
+      timerRef.current = null;
+    }, 300);
+  }, [translateX, rotate]);
 
   const gesture = Gesture.Pan()
     .onUpdate((e) => {
@@ -52,10 +68,7 @@ export function SwipeCards({ items, onSwipeLeft, onSwipeRight, style }: SwipeCar
         translateX.value = withTiming(e.translationX > 0 ? SCREEN_WIDTH : -SCREEN_WIDTH, { duration: 250 });
         rotate.value = withTiming(e.translationX > 0 ? 30 : -30, { duration: 250 });
         runOnJS(handleSwipe)(dir);
-        setTimeout(() => {
-          translateX.value = 0;
-          rotate.value = 0;
-        }, 300);
+        runOnJS(scheduleReset)();
       } else {
         translateX.value = withSpring(0);
         rotate.value = withSpring(0);

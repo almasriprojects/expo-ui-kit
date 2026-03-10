@@ -23,6 +23,9 @@ export const Input = forwardRef<TextInput, InputProps>(
         )}
         <TextInput
           ref={ref}
+          accessibilityLabel={label ?? props.placeholder}
+          aria-invalid={!!error}
+          accessibilityHint={error ?? hint}
           placeholderTextColor={t.textTertiary}
           style={[
             {

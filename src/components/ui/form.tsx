@@ -1,4 +1,12 @@
-import React, { createContext, useCallback, useContext, useState, type ReactNode } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
 import { useTheme } from '@/hooks/use-theme';
@@ -104,10 +112,12 @@ type FormFieldProps = {
 export function FormField({ name, label, rules: fieldRules, children }: FormFieldProps) {
   const t = useTheme();
   const form = useForm();
+  const fieldRulesRef = useRef(fieldRules);
+  fieldRulesRef.current = fieldRules;
 
-  React.useEffect(() => {
-    if (fieldRules) form.register(name, fieldRules);
-  }, [name]);
+  useEffect(() => {
+    if (fieldRulesRef.current) form.register(name, fieldRulesRef.current);
+  }, [name, form]);
 
   return (
     <View style={{ gap: 6 }}>

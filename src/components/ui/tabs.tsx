@@ -30,13 +30,17 @@ export function Tabs({ tabs, defaultTab, ...props }: TabsProps) {
           backgroundColor: theme.surface,
           borderRadius: Radius.xl,
           padding: 4,
-        }}>
+        }}
+        accessibilityRole="tablist">
         {tabs.map((tab) => {
           const active = tab.key === activeKey;
           return (
             <Pressable
               key={tab.key}
               onPress={() => setActiveKey(tab.key)}
+              accessibilityRole="tab"
+              accessibilityLabel={tab.label}
+              accessibilityState={{ selected: active }}
               style={[
                 {
                   flex: 1,

@@ -31,7 +31,7 @@ function Dot({ delay }: { delay: number }) {
         -1,
       ),
     );
-  }, [delay]);
+  }, [delay, translateY]);
 
   const animStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }],

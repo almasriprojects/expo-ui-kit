@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Pressable, ScrollView, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type CalendarStripProps = {

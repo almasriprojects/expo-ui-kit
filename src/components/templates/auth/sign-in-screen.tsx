@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { SocialButton } from '@/components/ui/social-button';
 import { Divider } from '@/components/ui/divider';
-import { Radius, Spacing, resolveFontFamily } from '@/constants/theme';
+import { Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -131,7 +131,7 @@ export function SignInScreen({
 
         <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 4, marginTop: 8 }}>
           <Text style={{ fontSize: 14, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
-            Don't have an account?
+            {"Don't have an account?"}
           </Text>
           <Pressable onPress={onSignUp}>
             <Text style={{ fontSize: 14, fontWeight: '700', color: t.primary, fontFamily: resolveFontFamily(f, '700') }}>
