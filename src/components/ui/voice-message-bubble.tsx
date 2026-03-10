@@ -89,7 +89,7 @@ export function VoiceMessageBubble({
             style={{
               flex: 1,
               height: `${h * 100}%`,
-              borderRadius: 1,
+              borderRadius: Radius.xs,
               backgroundColor:
                 i < progressIndex
                   ? isOwn

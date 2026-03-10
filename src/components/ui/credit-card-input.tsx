@@ -37,8 +37,8 @@ function CardIcon({ type, color }: { type: string; color: string }) {
   if (type === 'mastercard') {
     return (
       <View style={{ width: size, height: size * 0.65, flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: color, opacity: 0.9 }} />
-        <View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: color, marginLeft: -6, opacity: 0.5 }} />
+        <View style={{ width: 14, height: 14, borderRadius: Radius.full, backgroundColor: color, opacity: 0.9 }} />
+        <View style={{ width: 14, height: 14, borderRadius: Radius.full, backgroundColor: color, marginLeft: -6, opacity: 0.5 }} />
       </View>
     );
   }

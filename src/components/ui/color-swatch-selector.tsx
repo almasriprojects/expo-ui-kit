@@ -70,7 +70,7 @@ export function ColorSwatchSelector({
                   style={{
                     width: 18,
                     height: 18,
-                    borderRadius: 9,
+                    borderRadius: Radius.full,
                     backgroundColor: t.primary,
                     alignItems: 'center',
                     justifyContent: 'center',

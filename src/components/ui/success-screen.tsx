@@ -7,6 +7,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 import { Button } from './button';
@@ -57,7 +58,7 @@ export function SuccessScreen({
           {
             width: 80,
             height: 80,
-            borderRadius: 40,
+            borderRadius: Radius.full,
             backgroundColor: t.successSoft,
             alignItems: 'center',
             justifyContent: 'center',
