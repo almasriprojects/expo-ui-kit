@@ -1,5 +1,21 @@
+// ── Accessibility ──
+export { VisuallyHidden } from './visually-hidden';
+export type { VisuallyHiddenProps } from './visually-hidden';
+export { ScreenReaderAnnounce } from './screen-reader-announce';
+export type { ScreenReaderAnnounceProps } from './screen-reader-announce';
+export { ReducedMotionWrapper } from './reduced-motion-wrapper';
+export type { ReducedMotionWrapperProps } from './reduced-motion-wrapper';
+
 // ── Error Handling ──
 export { ErrorBoundary } from './error-boundary';
+
+// ── Media ──
+export { QRCode } from './qr-code';
+export type { QRCodeProps } from './qr-code';
+export { AudioPlayer } from './audio-player';
+export type { AudioPlayerProps } from './audio-player';
+export { VideoPlayer } from './video-player';
+export type { VideoPlayerProps } from './video-player';
 
 // ── Status & Notifications ──
 export { NotificationCenter } from './notification-center';
@@ -97,6 +113,30 @@ export { Snackbar } from './snackbar';
 export { Tooltip } from './tooltip';
 export { ContextMenu } from './context-menu';
 
+// ── Transitions & Animation ──
+export { FadeTransition } from './fade-transition';
+export type { FadeTransitionProps } from './fade-transition';
+export { SlideTransition } from './slide-transition';
+export type { SlideTransitionProps, SlideDirection } from './slide-transition';
+export { CollapseTransition } from './collapse-transition';
+export type { CollapseTransitionProps } from './collapse-transition';
+export { ScaleTransition } from './scale-transition';
+export type { ScaleTransitionProps } from './scale-transition';
+export { Confetti } from './confetti';
+export type { ConfettiProps } from './confetti';
+
+// ── Layout Primitives ──
+export { Stack, VStack, HStack } from './stack';
+export type { StackProps } from './stack';
+export { Box } from './box';
+export type { BoxProps } from './box';
+export { Center } from './center';
+export type { CenterProps } from './center';
+export { Spacer } from './spacer';
+export type { SpacerProps } from './spacer';
+export { Wrap } from './wrap';
+export type { WrapProps } from './wrap';
+
 // ── Navigation & Layout ──
 export { SidebarMenu } from './sidebar-menu';
 export type { SidebarMenuProps, SidebarMenuItem } from './sidebar-menu';
@@ -127,6 +167,8 @@ export { BottomBar } from './bottom-bar';
 export { CalendarStrip } from './calendar-strip';
 export { Breadcrumb } from './breadcrumb';
 export { TreeView } from './tree-view';
+export { BackButton } from './back-button';
+export type { BackButtonProps } from './back-button';
 
 // ── Data Display ──
 export { Card } from './card';
@@ -169,6 +211,18 @@ export { CodeBlock } from './code-block';
 export { ChecklistItem } from './checklist-item';
 export { VideoThumbnail } from './video-thumbnail';
 export { NetworkBanner } from './network-banner';
+export { DescriptionList } from './description-list';
+export type { DescriptionListProps } from './description-list';
+export { Highlight } from './highlight';
+export type { HighlightProps } from './highlight';
+export { Kbd } from './kbd';
+export type { KbdProps } from './kbd';
+export { Statistic } from './statistic';
+export type { StatisticProps } from './statistic';
+export { CurrencyDisplay } from './currency-display';
+export type { CurrencyDisplayProps } from './currency-display';
+export { ComparisonTable } from './comparison-table';
+export type { ComparisonTableProps } from './comparison-table';
 
 // ── Domain: E-Commerce / Marketplace ──
 export { ProductCard } from './product-card';
@@ -179,6 +233,8 @@ export { OrderSummary } from './order-summary';
 export { PricingCard } from './pricing-card';
 export { MenuItemCard } from './menu-item-card';
 export { RestaurantCard } from './restaurant-card';
+export { InventoryBadge } from './inventory-badge';
+export type { InventoryBadgeProps } from './inventory-badge';
 
 // ── E-Commerce ──
 export { ProductGallery } from './product-gallery';
@@ -316,8 +372,16 @@ export { NearbyList } from './nearby-list';
 export type { NearbyListProps, NearbyPlace } from './nearby-list';
 
 // ── Data & Charts ──
+export { AreaChart } from './area-chart';
+export type { AreaChartProps } from './area-chart';
 export { BarChart } from './bar-chart';
 export type { BarChartDataItem, BarChartProps } from './bar-chart';
+export { DonutChart } from './donut-chart';
+export type { DonutChartDataItem, DonutChartProps } from './donut-chart';
+export { Gauge } from './gauge';
+export type { GaugeProps } from './gauge';
+export { HorizontalBarChart } from './horizontal-bar-chart';
+export type { HorizontalBarChartDataItem, HorizontalBarChartProps } from './horizontal-bar-chart';
 export { LineChart } from './line-chart';
 export type { LineChartProps } from './line-chart';
 export { PieChart } from './pie-chart';
