@@ -1,14 +1,55 @@
 {
   "name": "expo-ui-kit",
-  "main": "expo-router/entry",
   "version": "1.0.0",
+  "description": "A production-ready React Native / Expo component library — 143 UI components, 8 shadcn-style color themes, 5 font presets, 10 app template demos.",
+  "main": "expo-router/entry",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/ui/*.tsx",
+    "./templates/*": "./src/components/templates/*.tsx",
+    "./hooks": "./src/hooks/index.ts",
+    "./providers": "./src/providers/index.ts",
+    "./constants": "./src/constants/index.ts",
+    "./theme": "./src/constants/theme.ts"
+  },
+  "files": [
+    "src/",
+    "assets/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "expo",
+    "react-native",
+    "ui-kit",
+    "component-library",
+    "shadcn",
+    "typescript",
+    "theming",
+    "design-system",
+    "mobile-ui",
+    "expo-router"
+  ],
+  "author": "almasriprojects",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/almasriprojects/expo-ui-kit.git"
+  },
+  "homepage": "https://github.com/almasriprojects/expo-ui-kit#readme",
+  "bugs": {
+    "url": "https://github.com/almasriprojects/expo-ui-kit/issues"
+  },
   "scripts": {
     "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "typecheck": "tsc --noEmit",
+    "reset-project": "node ./scripts/reset-project.js"
   },
   "dependencies": {
     "@expo-google-fonts/dm-sans": "^0.4.2",
@@ -54,6 +95,5 @@
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.19",
     "typescript": "~5.9.2"
-  },
-  "private": true
+  }
 }
