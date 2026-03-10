@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import {
   Modal,
   Pressable,
@@ -8,6 +8,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Copy, Mail, MessageCircle, MoreHorizontal } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -15,18 +16,8 @@ import { useTheme } from '@/hooks/use-theme';
 export type ShareOption = {
   key: string;
   label: string;
-  icon: string;
+  icon: ReactNode;
 };
-
-const DEFAULT_OPTIONS: ShareOption[] = [
-  { key: 'copy', label: 'Copy Link', icon: '📋' },
-  { key: 'messages', label: 'Messages', icon: '💬' },
-  { key: 'mail', label: 'Mail', icon: '✉️' },
-  { key: 'twitter', label: 'Twitter', icon: '𝕏' },
-  { key: 'facebook', label: 'Facebook', icon: '📘' },
-  { key: 'whatsapp', label: 'WhatsApp', icon: '📱' },
-  { key: 'more', label: 'More', icon: '⋯' },
-];
 
 export type ShareSheetProps = {
   visible: boolean;
@@ -36,15 +27,33 @@ export type ShareSheetProps = {
   style?: ViewStyle;
 };
 
+function BrandCircle({ letter, color }: { letter: string; color: string }) {
+  return (
+    <Text style={{ fontSize: 16, fontWeight: '800', color }}>{letter}</Text>
+  );
+}
+
 export function ShareSheet({
   visible,
   onClose,
-  options = DEFAULT_OPTIONS,
+  options,
   onSelect,
   style,
 }: ShareSheetProps) {
   const t = useTheme();
   const insets = useSafeAreaInsets();
+
+  const defaultOptions: ShareOption[] = [
+    { key: 'copy', label: 'Copy Link', icon: <Copy size={24} color={t.text} /> },
+    { key: 'messages', label: 'Messages', icon: <MessageCircle size={24} color={t.text} /> },
+    { key: 'mail', label: 'Mail', icon: <Mail size={24} color={t.text} /> },
+    { key: 'twitter', label: 'Twitter', icon: <BrandCircle letter="X" color={t.text} /> },
+    { key: 'facebook', label: 'Facebook', icon: <BrandCircle letter="f" color="#1877F2" /> },
+    { key: 'whatsapp', label: 'WhatsApp', icon: <BrandCircle letter="W" color="#25D366" /> },
+    { key: 'more', label: 'More', icon: <MoreHorizontal size={24} color={t.text} /> },
+  ];
+
+  const resolvedOptions = options ?? defaultOptions;
 
   const handleSelect = (key: string) => {
     onSelect(key);
@@ -90,7 +99,7 @@ export function ShareSheet({
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 20, paddingBottom: 8 }}>
-          {options.map((opt) => (
+          {resolvedOptions.map((opt) => (
             <Pressable
               key={opt.key}
               onPress={() => handleSelect(opt.key)}
@@ -110,7 +119,7 @@ export function ShareSheet({
                   justifyContent: 'center',
                   marginBottom: 8,
                 }}>
-                <Text style={{ fontSize: 24 }}>{opt.icon}</Text>
+                {opt.icon}
               </View>
               <Text
                 style={{

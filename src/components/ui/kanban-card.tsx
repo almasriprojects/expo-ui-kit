@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Paperclip, MessageCircle } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -119,10 +120,16 @@ export function KanbanCard({
             <Text style={{ fontSize: 11, color: t.textTertiary }}>📅 {dueDate}</Text>
           )}
           {comments > 0 && (
-            <Text style={{ fontSize: 11, color: t.textTertiary }}>💬 {comments}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+              <MessageCircle size={11} color={t.textTertiary} />
+              <Text style={{ fontSize: 11, color: t.textTertiary }}>{comments}</Text>
+            </View>
           )}
           {attachments > 0 && (
-            <Text style={{ fontSize: 11, color: t.textTertiary }}>📎 {attachments}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+              <Paperclip size={11} color={t.textTertiary} />
+              <Text style={{ fontSize: 11, color: t.textTertiary }}>{attachments}</Text>
+            </View>
           )}
         </View>
         {assignee && <Avatar source={assigneeAvatar} initials={assignee[0]} size="xs" />}

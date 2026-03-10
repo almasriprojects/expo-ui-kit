@@ -1,5 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Text, View, type ViewStyle } from 'react-native';
+import { ActivityIndicator, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { useTheme } from '@/hooks/use-theme';
 
@@ -46,11 +47,9 @@ export function ReadReceipt({ status, size = 14, style }: ReadReceiptProps) {
             ? 'Delivered'
             : 'Read'
       }>
-      <Text style={{ fontSize: size, color: checkColor }}>✓</Text>
+      <Check size={size} color={checkColor} />
       {isDelivered && (
-        <Text style={{ fontSize: size, color: checkColor, marginLeft: -2 }}>
-          ✓
-        </Text>
+        <Check size={size} color={checkColor} style={{ marginLeft: -2 }} />
       )}
     </View>
   );

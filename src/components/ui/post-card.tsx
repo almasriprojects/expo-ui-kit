@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Heart, MessageCircle, ExternalLink, Image as ImageIcon } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -93,7 +94,7 @@ export function PostCard({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{ fontSize: 32, opacity: 0.3 }}>🖼️</Text>
+          <ImageIcon size={32} color={t.textSecondary} style={{ opacity: 0.3 }} />
         </View>
       )}
 
@@ -113,19 +114,19 @@ export function PostCard({
         <Pressable
           onPress={handleLike}
           style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10 }}>
-          <Text style={{ fontSize: 16 }}>{isLiked ? '❤️' : '🤍'}</Text>
+          <Heart size={16} color={isLiked ? t.error : t.textSecondary} fill={isLiked ? t.error : 'none'} />
           <Text style={{ fontSize: 13, fontWeight: '500', color: isLiked ? t.error : t.textSecondary }}>Like</Text>
         </Pressable>
         <Pressable
           onPress={onComment}
           style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10 }}>
-          <Text style={{ fontSize: 15 }}>💬</Text>
+          <MessageCircle size={16} color={t.textSecondary} />
           <Text style={{ fontSize: 13, fontWeight: '500', color: t.textSecondary }}>Comment</Text>
         </Pressable>
         <Pressable
           onPress={onShare}
           style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10 }}>
-          <Text style={{ fontSize: 15 }}>↗️</Text>
+          <ExternalLink size={16} color={t.textSecondary} />
           <Text style={{ fontSize: 13, fontWeight: '500', color: t.textSecondary }}>Share</Text>
         </Pressable>
       </View>

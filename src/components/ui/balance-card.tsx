@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -9,7 +10,7 @@ type BalanceCardProps = {
   currency?: string;
   label?: string;
   trend?: { value: string; positive: boolean };
-  actions?: { label: string; icon: string; onPress: () => void }[];
+  actions?: { label: string; icon: ReactNode; onPress: () => void }[];
   style?: ViewStyle;
 };
 
@@ -47,9 +48,11 @@ export function BalanceCard({
       </View>
       {trend && (
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 8 }}>
-          <Text style={{ fontSize: 13, color: t.primaryForeground }}>
-            {trend.positive ? '▲' : '▼'}
-          </Text>
+          {trend.positive ? (
+            <ArrowUp size={13} color={t.primaryForeground} />
+          ) : (
+            <ArrowDown size={13} color={t.primaryForeground} />
+          )}
           <Text style={{ fontSize: 13, fontWeight: '600', color: t.primaryForeground }}>
             {trend.value}
           </Text>
@@ -72,7 +75,7 @@ export function BalanceCard({
                 borderRadius: Radius.xl,
                 backgroundColor: t.surfaceOnColorSubtle,
               }}>
-              <Text style={{ fontSize: 18 }}>{a.icon}</Text>
+              {a.icon}
               <Text style={{ fontSize: 11, fontWeight: '600', color: t.primaryForeground }}>
                 {a.label}
               </Text>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -23,10 +24,17 @@ export function ChatBubble({
 }: ChatBubbleProps) {
   const t = useTheme();
 
-  const statusIcons = {
-    sent: '✓',
-    delivered: '✓✓',
-    read: '✓✓',
+  const renderStatusIcon = (s: 'sent' | 'delivered' | 'read') => {
+    const color = s === 'read' ? t.readReceipt : t.textOnColorMuted;
+    if (s === 'sent') {
+      return <Check size={10} color={color} />;
+    }
+    return (
+      <View style={{ flexDirection: 'row', gap: -4 }}>
+        <Check size={10} color={color} />
+        <Check size={10} color={color} />
+      </View>
+    );
   };
 
   return (
@@ -80,15 +88,7 @@ export function ChatBubble({
               {timestamp}
             </Text>
           )}
-          {isOwn && status && (
-            <Text
-              style={{
-                fontSize: 10,
-                color: status === 'read' ? t.readReceipt : t.textOnColorMuted,
-              }}>
-              {statusIcons[status]}
-            </Text>
-          )}
+          {isOwn && status && renderStatusIcon(status)}
         </View>
       </View>
     </View>

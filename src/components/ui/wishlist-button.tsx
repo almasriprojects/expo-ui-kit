@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, Text, type ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring } from 'react-native-reanimated';
+import { Heart } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -55,9 +56,11 @@ export function WishlistButton({
           },
           style,
         ]}>
-        <Text style={{ fontSize: iconSizes[size], color: active ? t.error : t.textSecondary }}>
-          {active ? '❤️' : '🤍'}
-        </Text>
+        <Heart
+          size={iconSizes[size]}
+          color={active ? t.error : t.textSecondary}
+          fill={active ? t.error : 'none'}
+        />
         {count != null && (
           <Text style={{ fontSize: 13, fontWeight: '600', color: active ? t.error : t.textSecondary }}>
             {count}
@@ -85,9 +88,11 @@ export function WishlistButton({
           },
           style,
         ]}>
-        <Text style={{ fontSize: iconSizes[size] }}>
-          {active ? '❤️' : '🤍'}
-        </Text>
+        <Heart
+          size={iconSizes[size]}
+          color={active ? t.error : t.textSecondary}
+          fill={active ? t.error : 'none'}
+        />
       </Pressable>
     </Animated.View>
   );

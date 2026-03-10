@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Platform, Pressable, Text, type ViewStyle } from 'react-native';
+import { Lock, User } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -20,7 +21,7 @@ export function BiometricButton({
   const t = useTheme();
   const [loading, setLoading] = useState(false);
   const isIOS = Platform.OS === 'ios';
-  const icon = isIOS ? '👤' : '🔐';
+  const IconComponent = isIOS ? User : Lock;
   const defaultLabel = isIOS ? 'Sign in with Face ID' : 'Sign in with Fingerprint';
 
   const handlePress = async () => {
@@ -52,7 +53,7 @@ export function BiometricButton({
           },
           style,
         ]}>
-        <Text style={{ fontSize: 24 }}>{icon}</Text>
+        <IconComponent size={24} color={t.text} />
       </Pressable>
     );
   }
@@ -78,7 +79,7 @@ export function BiometricButton({
         },
         style,
       ]}>
-      <Text style={{ fontSize: 22 }}>{icon}</Text>
+      <IconComponent size={22} color={t.text} />
       <Text style={{ fontSize: 16, fontWeight: '600', color: t.text }}>
         {loading ? 'Authenticating...' : label ?? defaultLabel}
       </Text>

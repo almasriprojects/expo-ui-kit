@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
+import { X } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -83,7 +84,7 @@ export function FilePickerButton({
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text style={{ color: t.primary, fontSize: 16, fontWeight: '700' }}>×</Text>
+              <X size={16} color={t.primary} />
             </Pressable>
           </View>
         ) : (

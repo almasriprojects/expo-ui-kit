@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable } from 'react-native';
+import { ArrowLeft } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -31,7 +32,7 @@ export function BackButton({ onPress, label, color }: BackButtonProps) {
       })}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}>
-      <ThemedText style={{ fontSize: 20, color: btnColor }}>←</ThemedText>
+      <ArrowLeft size={20} color={btnColor} />
       {label && (
         <ThemedText style={{ fontSize: 16, fontWeight: '500', color: btnColor }}>
           {label}

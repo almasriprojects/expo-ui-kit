@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { CheckCircle } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -8,7 +9,7 @@ type ProgressCardProps = {
   title: string;
   subtitle?: string;
   progress: number;
-  icon?: string;
+  icon?: ReactNode;
   completedLabel?: string;
   totalLabel?: string;
   onPress?: () => void;
@@ -55,7 +56,7 @@ export function ProgressCard({
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{ fontSize: 20 }}>{isComplete ? '✅' : icon}</Text>
+            {isComplete ? <CheckCircle size={20} color={t.success} /> : icon}
           </View>
         )}
         <View style={{ flex: 1 }}>

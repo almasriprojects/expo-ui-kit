@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -117,14 +118,7 @@ export function PricingCard({
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontWeight: '700',
-                  color: highlighted ? t.textOnColor : t.success,
-                }}>
-                ✓
-              </Text>
+              <Check size={12} color={highlighted ? t.textOnColor : t.success} />
             </View>
             <Text
               style={{

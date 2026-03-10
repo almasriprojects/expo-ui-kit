@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -113,14 +114,7 @@ export function SubscriptionCard({
                 alignItems: 'center',
                 gap: 8,
               }}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: t.success,
-                  fontWeight: '700',
-                }}>
-                ✓
-              </Text>
+              <Check size={16} color={t.success} />
               <Text
                 style={{
                   fontSize: 14,

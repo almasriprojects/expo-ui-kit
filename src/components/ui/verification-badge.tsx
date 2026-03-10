@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
+import { Check, Crown, Star } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -12,11 +13,12 @@ type VerificationBadgeProps = {
 };
 
 const sizes = { sm: 16, md: 20, lg: 26 };
-const icons: Record<string, string> = {
-  verified: '✓',
-  official: '★',
-  premium: '♛',
-};
+
+function VariantIcon({ variant, iconSize, color }: { variant: string; iconSize: number; color: string }) {
+  if (variant === 'official') return <Star size={iconSize} color={color} fill={color} />;
+  if (variant === 'premium') return <Crown size={iconSize} color={color} />;
+  return <Check size={iconSize} color={color} />;
+}
 
 export function VerificationBadge({
   variant = 'verified',
@@ -26,7 +28,7 @@ export function VerificationBadge({
 }: VerificationBadgeProps) {
   const t = useTheme();
   const dim = sizes[size];
-  const fontSize = dim * 0.55;
+  const iconSize = Math.round(dim * 0.55);
 
   const colors: Record<string, string> = {
     verified: t.primary,
@@ -60,9 +62,7 @@ export function VerificationBadge({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{ fontSize, fontWeight: '700', color: t.textOnColor }}>
-            {icons[variant]}
-          </Text>
+          <VariantIcon variant={variant} iconSize={iconSize} color={t.textOnColor} />
         </View>
         <Text style={{ fontSize: 12, fontWeight: '600', color: bg }}>{label}</Text>
       </View>
@@ -82,9 +82,7 @@ export function VerificationBadge({
         },
         style,
       ]}>
-      <Text style={{ fontSize, fontWeight: '700', color: t.textOnColor }}>
-        {icons[variant]}
-      </Text>
+      <VariantIcon variant={variant} iconSize={iconSize} color={t.textOnColor} />
     </View>
   );
 }

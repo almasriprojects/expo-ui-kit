@@ -18,7 +18,7 @@ const providerConfig: Record<SocialProvider, { icon: string; label: string; bg: 
   google: { icon: 'G', label: 'Google', bg: BrandColors.google.bg, text: BrandColors.google.text },
   apple: { icon: '', label: 'Apple', bg: BrandColors.apple.bg, text: BrandColors.apple.text },
   facebook: { icon: 'f', label: 'Facebook', bg: BrandColors.facebook.bg, text: BrandColors.facebook.text },
-  twitter: { icon: '𝕏', label: 'X', bg: BrandColors.twitter.bg, text: BrandColors.twitter.text },
+  twitter: { icon: 'X', label: 'X', bg: BrandColors.twitter.bg, text: BrandColors.twitter.text },
   github: { icon: '⬢', label: 'GitHub', bg: BrandColors.github.bg, text: BrandColors.github.text },
 };
 

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Play, Pause } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -66,13 +67,11 @@ export function VoiceMessageBubble({
         accessibilityRole="button"
         accessibilityLabel={isPlaying ? 'Pause' : 'Play'}
         accessibilityState={{ expanded: isPlaying }}>
-        <Text
-          style={{
-            fontSize: 14,
-            color: isOwn ? t.primaryForeground : t.text,
-          }}>
-          {isPlaying ? '⏸' : '▶'}
-        </Text>
+        {isPlaying ? (
+          <Pause size={14} color={isOwn ? t.primaryForeground : t.text} />
+        ) : (
+          <Play size={14} color={isOwn ? t.primaryForeground : t.text} />
+        )}
       </Pressable>
 
       <View

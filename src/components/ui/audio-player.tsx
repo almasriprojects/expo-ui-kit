@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Pressable, View } from 'react-native';
+import { Play, Pause, SkipBack, SkipForward } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Slider } from './slider';
@@ -89,7 +90,7 @@ export function AudioPlayer({
           })}
           accessibilityRole="button"
           accessibilityLabel="Skip back">
-          <ThemedText style={{ fontSize: 20, color: t.text }}>⏪</ThemedText>
+          <SkipBack size={20} color={t.text} />
         </Pressable>
 
         <Pressable
@@ -106,9 +107,7 @@ export function AudioPlayer({
           accessibilityRole="button"
           accessibilityLabel={isPlaying ? 'Pause' : 'Play'}
           accessibilityState={{ selected: isPlaying }}>
-          <ThemedText style={{ fontSize: 20, color: t.primaryForeground }}>
-            {isPlaying ? '⏸' : '▶'}
-          </ThemedText>
+          {isPlaying ? <Pause size={20} color={t.primaryForeground} /> : <Play size={20} color={t.primaryForeground} />}
         </Pressable>
 
         <Pressable
@@ -119,7 +118,7 @@ export function AudioPlayer({
           })}
           accessibilityRole="button"
           accessibilityLabel="Skip forward">
-          <ThemedText style={{ fontSize: 20, color: t.text }}>⏩</ThemedText>
+          <SkipForward size={20} color={t.text} />
         </Pressable>
       </View>
 

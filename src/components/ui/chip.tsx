@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, type ViewProps } from 'react-native';
+import { X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -54,16 +55,8 @@ export function Chip({
         {label}
       </ThemedText>
       {onDelete && (
-        <Pressable onPress={onDelete} hitSlop={8} style={{ marginLeft: 2 }}>
-          <ThemedText
-            style={{
-              fontSize: 12,
-              fontWeight: '700',
-              color: selected ? t.primaryForeground : t.textSecondary,
-              opacity: selected ? 0.8 : 1,
-            }}>
-            ✕
-          </ThemedText>
+        <Pressable onPress={onDelete} hitSlop={8} style={{ marginLeft: 2, opacity: selected ? 0.8 : 1 }}>
+          <X size={12} color={selected ? t.primaryForeground : t.textSecondary} />
         </Pressable>
       )}
     </Pressable>

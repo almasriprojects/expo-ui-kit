@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'react-native';
+import { Bell } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -50,7 +51,7 @@ export function NotificationItem({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        {icon ?? <Text style={{ fontSize: 16, color: theme.text }}>🔔</Text>}
+        {icon ?? <Bell size={16} color={theme.text} />}
       </View>
       <View style={{ flex: 1 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>

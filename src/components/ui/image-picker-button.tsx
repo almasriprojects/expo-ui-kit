@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from 'expo-image';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
+import { X } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -72,7 +73,7 @@ export function ImagePickerButton({
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text style={{ color: t.textOnColor, fontSize: 14, fontWeight: '700' }}>×</Text>
+              <X size={14} color={t.textOnColor} />
             </Pressable>
           </View>
         ) : (

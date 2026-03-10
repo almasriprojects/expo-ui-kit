@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
+import { ArrowDownLeft, ArrowUpRight, Car, Film, Plus, ShoppingBag, UtensilsCrossed } from 'lucide-react-native';
 
 import {
   BalanceCard,
@@ -28,9 +29,9 @@ export function FinanceDemo() {
         balance="12,847.50"
         trend={{ value: '+$1,240.00 (10.7%)', positive: true }}
         actions={[
-          { label: 'Send', icon: '↗️', onPress: () => {} },
-          { label: 'Request', icon: '↙️', onPress: () => {} },
-          { label: 'Top Up', icon: '➕', onPress: () => {} },
+          { label: 'Send', icon: <ArrowUpRight size={18} color={t.primaryForeground} />, onPress: () => {} },
+          { label: 'Request', icon: <ArrowDownLeft size={18} color={t.primaryForeground} />, onPress: () => {} },
+          { label: 'Top Up', icon: <Plus size={18} color={t.primaryForeground} />, onPress: () => {} },
         ]}
       />
 
@@ -51,10 +52,10 @@ export function FinanceDemo() {
       <CircularProgress progress={68} size={100} label="Budget Used" />
       <BudgetProgress
         items={[
-          { label: 'Food & Dining', spent: 450, budget: 600, color: t.orange, icon: '🍕' },
-          { label: 'Transport', spent: 220, budget: 200, color: t.statusLow, icon: '🚗' },
-          { label: 'Shopping', spent: 380, budget: 500, color: t.purple, icon: '🛍️' },
-          { label: 'Entertainment', spent: 90, budget: 150, color: t.statusDone, icon: '🎬' },
+          { label: 'Food & Dining', spent: 450, budget: 600, color: t.orange, icon: <UtensilsCrossed size={16} color={t.text} /> },
+          { label: 'Transport', spent: 220, budget: 200, color: t.statusLow, icon: <Car size={16} color={t.text} /> },
+          { label: 'Shopping', spent: 380, budget: 500, color: t.purple, icon: <ShoppingBag size={16} color={t.text} /> },
+          { label: 'Entertainment', spent: 90, budget: 150, color: t.statusDone, icon: <Film size={16} color={t.text} /> },
         ]}
       />
 

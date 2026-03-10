@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { Coffee, UtensilsCrossed } from 'lucide-react-native';
 
 import {
   BottomBar,
@@ -32,10 +33,10 @@ export function FoodDemo() {
         <SearchBar value={search} onChangeText={setSearch} placeholder="Search food, restaurants..." />
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12 }}>
-          <CategoryCard title="Pizza" subtitle="28 places" color={t.error} icon="🍕" />
-          <CategoryCard title="Sushi" subtitle="15 places" color={t.primary} icon="🍣" />
-          <CategoryCard title="Burger" subtitle="32 places" color={t.warning} icon="🍔" />
-          <CategoryCard title="Coffee" subtitle="45 places" color={t.purple} icon="☕" />
+          <CategoryCard title="Pizza" subtitle="28 places" color={t.error} icon={<UtensilsCrossed size={24} color={t.textOnColor} />} />
+          <CategoryCard title="Sushi" subtitle="15 places" color={t.primary} icon={<UtensilsCrossed size={24} color={t.textOnColor} />} />
+          <CategoryCard title="Burger" subtitle="32 places" color={t.warning} icon={<UtensilsCrossed size={24} color={t.textOnColor} />} />
+          <CategoryCard title="Coffee" subtitle="45 places" color={t.purple} icon={<Coffee size={24} color={t.textOnColor} />} />
         </ScrollView>
 
         <FilterBar
@@ -130,7 +131,7 @@ export function FoodDemo() {
           <Text style={{ fontSize: 11, color: t.textSecondary }}>2 items · $43.46</Text>
           <Text style={{ fontSize: 17, fontWeight: '800', color: t.text }}>Place Order</Text>
         </View>
-        <Button title="Checkout →" style={{ flex: 1 }} />
+        <Button title="Checkout" style={{ flex: 1 }} />
       </BottomBar>
     </View>
   );

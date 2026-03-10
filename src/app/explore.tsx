@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
+import {
+  BookOpen,
+  Building,
+  ClipboardList,
+  CreditCard,
+  Dumbbell,
+  Home,
+  Lock,
+  MessageCircle,
+  ShoppingCart,
+  Smartphone,
+  UtensilsCrossed,
+} from 'lucide-react-native';
 
 import { Screen } from '@/components/layout';
 import { AuthDemo } from '@/components/templates/auth-demo';
@@ -18,17 +31,17 @@ import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
 const APP_TYPES = [
-  { key: 'auth', label: '🔐 Auth', desc: 'Sign in, sign up, forgot password, OTP, reset' },
-  { key: 'marketplace', label: '🛒 Marketplace', desc: 'Products, cart, checkout' },
-  { key: 'finance', label: '💳 Finance', desc: 'Banking, payments, budgets' },
-  { key: 'social', label: '📱 Social', desc: 'Feed, profiles, stories' },
-  { key: 'messaging', label: '💬 Messaging', desc: 'Chat, calls, contacts' },
-  { key: 'food', label: '🍕 Food & Delivery', desc: 'Restaurants, menus, orders' },
-  { key: 'booking', label: '🏨 Booking', desc: 'Hotels, travel, events' },
-  { key: 'project', label: '📋 Projects', desc: 'Tasks, boards, teams' },
-  { key: 'fitness', label: '💪 Fitness', desc: 'Workouts, tracking, goals' },
-  { key: 'education', label: '📚 Education', desc: 'Courses, quizzes, progress' },
-  { key: 'realestate', label: '🏡 Real Estate', desc: 'Listings, mortgage, tours' },
+  { key: 'auth', label: 'Auth', icon: Lock, desc: 'Sign in, sign up, forgot password, OTP, reset' },
+  { key: 'marketplace', label: 'Marketplace', icon: ShoppingCart, desc: 'Products, cart, checkout' },
+  { key: 'finance', label: 'Finance', icon: CreditCard, desc: 'Banking, payments, budgets' },
+  { key: 'social', label: 'Social', icon: Smartphone, desc: 'Feed, profiles, stories' },
+  { key: 'messaging', label: 'Messaging', icon: MessageCircle, desc: 'Chat, calls, contacts' },
+  { key: 'food', label: 'Food & Delivery', icon: UtensilsCrossed, desc: 'Restaurants, menus, orders' },
+  { key: 'booking', label: 'Booking', icon: Building, desc: 'Hotels, travel, events' },
+  { key: 'project', label: 'Projects', icon: ClipboardList, desc: 'Tasks, boards, teams' },
+  { key: 'fitness', label: 'Fitness', icon: Dumbbell, desc: 'Workouts, tracking, goals' },
+  { key: 'education', label: 'Education', icon: BookOpen, desc: 'Courses, quizzes, progress' },
+  { key: 'realestate', label: 'Real Estate', icon: Home, desc: 'Listings, mortgage, tours' },
 ] as const;
 
 type AppType = (typeof APP_TYPES)[number]['key'];
@@ -74,6 +87,9 @@ export default function ExploreScreen() {
                 key={app.key}
                 onPress={() => setSelected(app.key)}
                 style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 6,
                   paddingHorizontal: 14,
                   paddingVertical: 8,
                   borderRadius: Radius.full,
@@ -81,6 +97,10 @@ export default function ExploreScreen() {
                   borderWidth: isActive ? 0 : 1,
                   borderColor: t.border,
                 }}>
+                {React.createElement(app.icon, {
+                  size: 14,
+                  color: isActive ? t.primaryForeground : t.text,
+                })}
                 <Text
                   style={{
                     fontSize: 13,

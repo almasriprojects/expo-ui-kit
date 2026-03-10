@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
+import { ArrowLeft } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@/hooks/use-theme';
@@ -56,7 +57,7 @@ export function AppBar({
             }}
             accessibilityRole="button"
             accessibilityLabel="Go back">
-            <Text style={{ fontSize: 24, color: t.text }}>←</Text>
+            <ArrowLeft size={24} color={t.text} />
           </Pressable>
         )}
         <View style={{ flex: 1, minWidth: 0 }}>

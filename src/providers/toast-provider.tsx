@@ -13,6 +13,7 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AlertCircle, AlertTriangle, CheckCircle, Info } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Shadows } from '@/constants/theme';
@@ -57,12 +58,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const variantConfig: Record<ToastVariant, { bg: string; icon: string }> = {
-    default: { bg: t.snackbar, icon: 'ℹ' },
-    success: { bg: t.success, icon: '✓' },
-    error: { bg: t.error, icon: '✕' },
-    info: { bg: t.primaryPressed, icon: 'ℹ' },
-    warning: { bg: t.warning, icon: '!' },
+  const fgColor = t.primaryForeground;
+  const variantConfig: Record<ToastVariant, { bg: string; icon: ReactNode }> = {
+    default: { bg: t.snackbar, icon: <Info size={14} color={fgColor} /> },
+    success: { bg: t.success, icon: <CheckCircle size={14} color={fgColor} /> },
+    error: { bg: t.error, icon: <AlertCircle size={14} color={fgColor} /> },
+    info: { bg: t.primaryPressed, icon: <Info size={14} color={fgColor} /> },
+    warning: { bg: t.warning, icon: <AlertTriangle size={14} color={fgColor} /> },
   };
 
   const show = useCallback((options: ToastOptions) => {
@@ -85,8 +87,6 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const dismiss = useCallback((id: string) => {
     setToasts((prev) => prev.filter((ti) => ti.id !== id));
   }, []);
-
-  const fgColor = t.primaryForeground;
 
   return (
     <ToastContext.Provider value={{ show }}>
@@ -134,16 +134,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <ThemedText
-                    style={{ color: fgColor, fontSize: 14, fontWeight: '700' }}>
-                    {config.icon}
-                  </ThemedText>
+                  {config.icon}
                 </View>
                 <View style={{ flex: 1 }}>
                   {toast.title && (
                     <ThemedText
                       style={{
-                        color: fgColor,
+                        color: t.primaryForeground,
                         fontSize: 14,
                         fontWeight: '600',
                         marginBottom: 2,
@@ -153,7 +150,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                   )}
                   <ThemedText
                     style={{
-                      color: fgColor,
+                      color: t.primaryForeground,
                       fontSize: 13,
                       fontWeight: '500',
                       opacity: toast.title ? 0.9 : 1,

@@ -7,7 +7,7 @@ import { useTheme } from '@/hooks/use-theme';
 export type ContextMenuItem = {
   key: string;
   label: string;
-  icon?: string;
+  icon?: React.ComponentType<{ size?: number; color?: string }>;
   destructive?: boolean;
   disabled?: boolean;
 };
@@ -67,19 +67,15 @@ export function ContextMenu({ items, onItemPress, children }: ContextMenuProps) 
                     borderTopWidth: index > 0 ? 1 : 0,
                     borderTopColor: t.border,
                   })}>
-                  {item.icon != null && (
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        color: item.disabled
-                          ? t.textTertiary
-                          : item.destructive
-                            ? t.error
-                            : t.text,
-                      }}>
-                      {item.icon}
-                    </Text>
-                  )}
+                  {item.icon != null &&
+                    React.createElement(item.icon, {
+                      size: 16,
+                      color: item.disabled
+                        ? t.textTertiary
+                        : item.destructive
+                          ? t.error
+                          : t.text,
+                    })}
                   <Text
                     style={{
                       flex: 1,

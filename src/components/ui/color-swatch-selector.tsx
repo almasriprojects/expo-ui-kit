@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -75,14 +76,7 @@ export function ColorSwatchSelector({
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <Text
-                    style={{
-                      fontSize: 11,
-                      fontWeight: '700',
-                      color: t.primaryForeground,
-                    }}>
-                    ✓
-                  </Text>
+                  <Check size={12} color={t.primaryForeground} strokeWidth={3} />
                 </View>
               )}
             </View>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Dimensions, Text, View } from 'react-native';
+import { Bell, Home, Search, User } from 'lucide-react-native';
 
 import {
   AppBar,
@@ -89,10 +90,10 @@ export function NavigationSection() {
       <Demo title="BottomNavigation">
         <BottomNavigation
           tabs={[
-            { key: 'home', label: 'Home', icon: '🏠' },
-            { key: 'search', label: 'Search', icon: '🔍' },
-            { key: 'alerts', label: 'Alerts', icon: '🔔', badge: 3 },
-            { key: 'profile', label: 'Profile', icon: '👤' },
+            { key: 'home', label: 'Home', icon: Home },
+            { key: 'search', label: 'Search', icon: Search },
+            { key: 'alerts', label: 'Alerts', icon: Bell, badge: 3 },
+            { key: 'profile', label: 'Profile', icon: User },
           ]}
           activeKey={activeKey}
           onTabPress={setActiveKey}

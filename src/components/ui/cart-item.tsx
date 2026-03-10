@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
 import { Image } from 'expo-image';
+import { X } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -101,7 +102,7 @@ export function CartItem({
 
       {onRemove && (
         <Pressable onPress={onRemove} hitSlop={8} style={{ paddingTop: 2 }}>
-          <Text style={{ fontSize: 14, color: t.textSecondary }}>✕</Text>
+          <X size={14} color={t.textSecondary} />
         </Pressable>
       )}
     </View>

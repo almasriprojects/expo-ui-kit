@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Dimensions, Modal, Pressable, ScrollView, Text, View } from 'react-native';
+import { X } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Shadows } from '@/constants/theme';
@@ -56,7 +57,7 @@ export function Drawer({
                   {title}
                 </Text>
                 <Pressable onPress={onClose} hitSlop={12}>
-                  <Text style={{ fontSize: 22, color: t.textSecondary }}>✕</Text>
+                  <X size={22} color={t.textSecondary} />
                 </Pressable>
               </View>
             </View>

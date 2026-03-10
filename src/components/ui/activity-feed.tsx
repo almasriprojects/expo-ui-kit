@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Image } from 'expo-image';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
@@ -11,7 +11,7 @@ export type ActivityFeedItem = {
   title: string;
   subtitle?: string;
   time: string;
-  icon?: string;
+  icon?: ReactNode;
 };
 
 export type ActivityFeedProps = {
@@ -67,7 +67,11 @@ export function ActivityFeed({
                     justifyContent: 'center',
                   }}>
                   {item.icon ? (
-                    <Text style={{ fontSize: 18 }}>{item.icon}</Text>
+                    typeof item.icon === 'string' ? (
+                      <Text style={{ fontSize: 18 }}>{item.icon}</Text>
+                    ) : (
+                      item.icon
+                    )
                   ) : (
                     <Text
                       style={{

@@ -8,6 +8,7 @@ import {
   type ViewProps,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Check, ChevronDown } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -73,7 +74,7 @@ export function Select({
           }}>
           {selectedLabel ?? placeholder}
         </Text>
-        <Text style={{ fontSize: 14, color: t.textSecondary }}>▼</Text>
+        <ChevronDown size={16} color={t.textSecondary} />
       </Pressable>
 
       <Modal visible={open} transparent animationType="slide" accessibilityViewIsModal>
@@ -149,7 +150,7 @@ export function Select({
                       {item.label}
                     </Text>
                     {selected && (
-                      <Text style={{ fontSize: 16, fontWeight: '700', color: t.primary }}>✓</Text>
+                      <Check size={16} color={t.primary} strokeWidth={3} />
                     )}
                   </Pressable>
                 );

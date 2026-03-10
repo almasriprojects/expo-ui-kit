@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from 'react-native';
+import { ArrowLeft } from 'lucide-react-native';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -113,12 +114,13 @@ export function ForgotPasswordScreen({
           </>
         )}
 
-        <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: 8 }}>
+        <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: 8, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+          <ArrowLeft size={16} color={t.textSecondary} />
           <Text style={{
             fontSize: 14, fontWeight: '600', color: t.textSecondary,
             fontFamily: resolveFontFamily(f, '600'),
           }}>
-            ← Back to Sign In
+            Back to Sign In
           </Text>
         </Pressable>
 

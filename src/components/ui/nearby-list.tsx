@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, Pressable, Text, View, type ViewProps } from 'react-native';
+import { Star } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -27,15 +28,11 @@ function StarRatingDisplay({ rating }: { rating: number }) {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
       {Array.from({ length: fullStars }, (_, i) => (
-        <Text key={`f${i}`} style={{ fontSize: 12, color: t.star }}>
-          ★
-        </Text>
+        <Star key={`f${i}`} size={12} color={t.warning} fill={t.warning} />
       ))}
-      {hasHalf && <Text style={{ fontSize: 12, color: t.star }}>★</Text>}
+      {hasHalf && <Star size={12} color={t.warning} fill={t.warning} />}
       {Array.from({ length: Math.max(0, emptyStars) }, (_, i) => (
-        <Text key={`e${i}`} style={{ fontSize: 12, color: t.surfaceActive }}>
-          ★
-        </Text>
+        <Star key={`e${i}`} size={12} color={t.surfaceActive} />
       ))}
       <Text style={{ fontSize: 12, color: t.textSecondary, marginLeft: 4 }}>
         {rating.toFixed(1)}

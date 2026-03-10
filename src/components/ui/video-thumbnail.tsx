@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Play } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -56,7 +57,7 @@ export function VideoThumbnail({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{ fontSize: 22, color: t.textOnColor, marginLeft: 3 }}>▶</Text>
+          <Play size={22} color={t.textOnColor} />
         </View>
         {duration && (
           <View

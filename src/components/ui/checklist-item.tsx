@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 import Animated, {
   useAnimatedStyle,
   withTiming,
@@ -64,7 +65,7 @@ export function ChecklistItem({
           justifyContent: 'center',
         }}>
         {checked && (
-          <Text style={{ fontSize: 13, fontWeight: '700', color: t.textOnColor }}>✓</Text>
+          <Check size={14} color={t.textOnColor} strokeWidth={3} />
         )}
       </View>
       <View style={{ flex: 1 }}>

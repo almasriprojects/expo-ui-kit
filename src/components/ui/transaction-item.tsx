@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type PressableProps } from 'react-native';
+import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -71,7 +72,11 @@ export function TransactionItem({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{ fontSize: 18, color: theme.text }}>{isCredit ? '↓' : '↑'}</Text>
+          {isCredit ? (
+            <ArrowDown size={18} color={theme.success} />
+          ) : (
+            <ArrowUp size={18} color={theme.text} />
+          )}
         </View>
       )}
       <View style={{ flex: 1 }}>

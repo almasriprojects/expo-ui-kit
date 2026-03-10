@@ -1,6 +1,7 @@
 import * as Clipboard from 'expo-clipboard';
 import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check, Copy } from 'lucide-react-native';
 
 import { Fonts, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -86,9 +87,11 @@ export function CopyButton({
     return (
       <Pressable onPress={handleCopy} style={[{ flexDirection: 'row', alignItems: 'center', gap: 6 }, style]}>
         <Text style={{ fontSize: 14, color: t.text }}>{text}</Text>
-        <Text style={{ fontSize: 12, color: copied ? t.success : t.primary, fontWeight: '600' }}>
-          {copied ? '✓' : '📋'}
-        </Text>
+        {copied ? (
+          <Check size={12} color={t.success} strokeWidth={3} />
+        ) : (
+          <Copy size={12} color={t.primary} />
+        )}
       </Pressable>
     );
   }
@@ -111,8 +114,13 @@ export function CopyButton({
         },
         style,
       ]}>
+      {copied ? (
+        <Check size={14} color={t.success} strokeWidth={3} />
+      ) : (
+        <Copy size={14} color={t.text} />
+      )}
       <Text style={{ fontSize: 14, fontWeight: '600', color: copied ? t.success : t.text }}>
-        {copied ? '✓ Copied!' : label ?? 'Copy'}
+        {copied ? 'Copied!' : label ?? 'Copy'}
       </Text>
     </Pressable>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
+import { Check, X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
@@ -86,12 +87,7 @@ export function ComparisonTable({ columns, rows }: ComparisonTableProps) {
             {columns.map((col) => {
               const val = row.values[col.key];
               const isBoolean = typeof val === 'boolean';
-              const display = isBoolean ? (val ? '✓' : '✗') : String(val);
-              const displayColor = isBoolean
-                ? val
-                  ? t.success
-                  : t.textSecondary
-                : t.text;
+              const display = isBoolean ? (val ? 'Yes' : 'No') : String(val);
 
               return (
                 <View
@@ -103,14 +99,22 @@ export function ComparisonTable({ columns, rows }: ComparisonTableProps) {
                     justifyContent: 'center',
                   }}
                   accessibilityLabel={`${row.feature} ${col.title}: ${display}`}>
-                  <ThemedText
-                    style={{
-                      fontSize: 14,
-                      color: displayColor,
-                      fontWeight: isBoolean ? '600' : '400',
-                    }}>
-                    {display}
-                  </ThemedText>
+                  {isBoolean ? (
+                    val ? (
+                      <Check size={16} color={t.success} />
+                    ) : (
+                      <X size={16} color={t.textSecondary} />
+                    )
+                  ) : (
+                    <ThemedText
+                      style={{
+                        fontSize: 14,
+                        color: t.text,
+                        fontWeight: '400',
+                      }}>
+                      {display}
+                    </ThemedText>
+                  )}
                 </View>
               );
             })}

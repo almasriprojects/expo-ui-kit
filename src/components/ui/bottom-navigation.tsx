@@ -8,7 +8,7 @@ import { useTheme } from '@/hooks/use-theme';
 export type BottomNavTab = {
   key: string;
   label: string;
-  icon: string;
+  icon: React.ComponentType<{ size?: number; color?: string }>;
   badge?: number;
 };
 
@@ -60,13 +60,10 @@ export function BottomNavigation({
             accessibilityLabel={tab.label}
             accessibilityState={{ selected: isActive }}>
             <View style={{ position: 'relative' }}>
-              <Text
-                style={{
-                  fontSize: 24,
-                  color: isActive ? t.primary : t.textTertiary,
-                }}>
-                {tab.icon}
-              </Text>
+              {React.createElement(tab.icon, {
+                size: 24,
+                color: isActive ? t.primary : t.textTertiary,
+              })}
               {tab.badge != null && tab.badge > 0 && (
                 <View
                   style={{

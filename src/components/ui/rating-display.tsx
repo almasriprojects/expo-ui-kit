@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
+import { Star } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -43,7 +44,7 @@ export function RatingDisplay({
             paddingVertical: 4,
             borderRadius: Radius.md,
           }}>
-          <Text style={{ fontSize: s.star, color: t.star }}>★</Text>
+          <Star size={s.star} color={t.warning} fill={t.warning} />
           <Text style={{ fontSize: s.text, fontWeight: '700', color: t.text }}>
             {rating.toFixed(1)}
           </Text>
@@ -60,7 +61,7 @@ export function RatingDisplay({
   if (variant === 'compact') {
     return (
       <View style={[{ flexDirection: 'row', alignItems: 'center', gap: 4 }, style]}>
-        <Text style={{ fontSize: s.star, color: t.star }}>★</Text>
+        <Star size={s.star} color={t.warning} fill={t.warning} />
         <Text style={{ fontSize: s.text, fontWeight: '600', color: t.text }}>
           {rating.toFixed(1)}
         </Text>
@@ -81,11 +82,11 @@ export function RatingDisplay({
     <View style={[{ flexDirection: 'row', alignItems: 'center', gap: 6 }, style]}>
       <View style={{ flexDirection: 'row', gap: s.gap }}>
         {Array.from({ length: fullStars }, (_, i) => (
-          <Text key={`f${i}`} style={{ fontSize: s.star, color: t.star }}>★</Text>
+          <Star key={`f${i}`} size={s.star} color={t.warning} fill={t.warning} />
         ))}
-        {hasHalf && <Text style={{ fontSize: s.star, color: t.star }}>★</Text>}
+        {hasHalf && <Star size={s.star} color={t.warning} fill={t.warning} />}
         {Array.from({ length: Math.max(0, emptyStars) }, (_, i) => (
-          <Text key={`e${i}`} style={{ fontSize: s.star, color: t.surfaceActive }}>★</Text>
+          <Star key={`e${i}`} size={s.star} color={t.textSecondary} />
         ))}
       </View>
       <Text style={{ fontSize: s.text, fontWeight: '600', color: t.text }}>

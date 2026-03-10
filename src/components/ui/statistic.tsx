@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
@@ -42,14 +43,21 @@ export function Statistic({
           {label}
         </ThemedText>
         {trend && (
-          <ThemedText
-            style={{
-              fontSize: 13,
-              fontWeight: '600',
-              color: trend.direction === 'up' ? t.success : t.error,
-            }}>
-            {trend.direction === 'up' ? '↑' : '↓'} {trend.value}%
-          </ThemedText>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+            {trend.direction === 'up' ? (
+              <ArrowUp size={13} color={t.success} strokeWidth={3} />
+            ) : (
+              <ArrowDown size={13} color={t.error} strokeWidth={3} />
+            )}
+            <ThemedText
+              style={{
+                fontSize: 13,
+                fontWeight: '600',
+                color: trend.direction === 'up' ? t.success : t.error,
+              }}>
+              {trend.value}%
+            </ThemedText>
+          </View>
         )}
       </View>
     </View>

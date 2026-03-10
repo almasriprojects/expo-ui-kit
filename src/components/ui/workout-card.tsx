@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { CheckCircle, Clock, Flame } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -12,7 +13,7 @@ type WorkoutCardProps = {
   exercises?: number;
   difficulty?: 'beginner' | 'intermediate' | 'advanced';
   completed?: boolean;
-  icon?: string;
+  icon?: ReactNode;
   onPress?: () => void;
   style?: ViewStyle;
 };
@@ -31,7 +32,7 @@ export function WorkoutCard({
   exercises,
   difficulty,
   completed = false,
-  icon = '💪',
+  icon,
   onPress,
   style,
 }: WorkoutCardProps) {
@@ -64,7 +65,7 @@ export function WorkoutCard({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ fontSize: 22 }}>{completed ? '✅' : icon}</Text>
+        {completed ? <CheckCircle size={22} color={t.success} /> : icon}
       </View>
       <View style={{ flex: 1 }}>
         <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>{name}</Text>
@@ -72,9 +73,15 @@ export function WorkoutCard({
           <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 1 }}>{category}</Text>
         )}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 6 }}>
-          <Text style={{ fontSize: 12, color: t.textSecondary }}>🕐 {duration}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+            <Clock size={11} color={t.textSecondary} />
+            <Text style={{ fontSize: 12, color: t.textSecondary }}>{duration}</Text>
+          </View>
           {calories && (
-            <Text style={{ fontSize: 12, color: t.textSecondary }}>🔥 {calories}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+              <Flame size={11} color={t.textSecondary} />
+              <Text style={{ fontSize: 12, color: t.textSecondary }}>{calories}</Text>
+            </View>
           )}
           {exercises != null && (
             <Text style={{ fontSize: 12, color: t.textSecondary }}>{exercises} exercises</Text>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Play, Pause } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -52,9 +53,7 @@ export function AudioWaveform({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ fontSize: 14, color: t.primaryForeground }}>
-          {isPlaying ? '⏸' : '▶'}
-        </Text>
+        {isPlaying ? <Pause size={14} color={t.primaryForeground} /> : <Play size={14} color={t.primaryForeground} />}
       </Pressable>
 
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', height: 32, gap: 1.5 }}>

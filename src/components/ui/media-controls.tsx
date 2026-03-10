@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Play, Pause, SkipBack, SkipForward } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -100,7 +101,7 @@ export function MediaControls({
       {/* Controls */}
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 24 }}>
         <Pressable onPress={onPrevious} hitSlop={12}>
-          <Text style={{ fontSize: 24, color: t.text }}>⏮</Text>
+          <SkipBack size={24} color={t.text} />
         </Pressable>
         <Pressable
           onPress={onPlayPause}
@@ -113,12 +114,10 @@ export function MediaControls({
             justifyContent: 'center',
             ...Shadows.md,
           }}>
-          <Text style={{ fontSize: 22, color: t.primaryForeground }}>
-            {isPlaying ? '⏸' : '▶'}
-          </Text>
+          {isPlaying ? <Pause size={22} color={t.primaryForeground} /> : <Play size={22} color={t.primaryForeground} />}
         </Pressable>
         <Pressable onPress={onNext} hitSlop={12}>
-          <Text style={{ fontSize: 24, color: t.text }}>⏭</Text>
+          <SkipForward size={24} color={t.text} />
         </Pressable>
       </View>
     </View>

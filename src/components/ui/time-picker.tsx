@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Pressable, View, type ViewProps } from 'react-native';
+import { ChevronDown, ChevronUp } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Shadows } from '@/constants/theme';
@@ -122,7 +123,7 @@ export function TimePicker({
               {/* Hours */}
               <View style={{ alignItems: 'center' }}>
                 <Pressable onPress={() => adjustHours(1)} hitSlop={8} style={{ padding: 8 }}>
-                  <ThemedText style={{ fontSize: 20, color: t.text }}>▲</ThemedText>
+                  <ChevronUp size={20} color={t.text} />
                 </Pressable>
                 <View
                   style={{
@@ -140,7 +141,7 @@ export function TimePicker({
                   </ThemedText>
                 </View>
                 <Pressable onPress={() => adjustHours(-1)} hitSlop={8} style={{ padding: 8 }}>
-                  <ThemedText style={{ fontSize: 20, color: t.text }}>▼</ThemedText>
+                  <ChevronDown size={20} color={t.text} />
                 </Pressable>
               </View>
 
@@ -149,7 +150,7 @@ export function TimePicker({
               {/* Minutes */}
               <View style={{ alignItems: 'center' }}>
                 <Pressable onPress={() => adjustMinutes(5)} hitSlop={8} style={{ padding: 8 }}>
-                  <ThemedText style={{ fontSize: 20, color: t.text }}>▲</ThemedText>
+                  <ChevronUp size={20} color={t.text} />
                 </Pressable>
                 <View
                   style={{
@@ -167,7 +168,7 @@ export function TimePicker({
                   </ThemedText>
                 </View>
                 <Pressable onPress={() => adjustMinutes(-5)} hitSlop={8} style={{ padding: 8 }}>
-                  <ThemedText style={{ fontSize: 20, color: t.text }}>▼</ThemedText>
+                  <ChevronDown size={20} color={t.text} />
                 </Pressable>
               </View>
 

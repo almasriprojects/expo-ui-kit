@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -13,11 +14,11 @@ export type InlineNotificationProps = {
   onDismiss?: () => void;
 };
 
-const icons: Record<NonNullable<InlineNotificationProps['variant']>, string> = {
-  info: 'ℹ',
-  success: '✓',
-  warning: '⚠',
-  error: '✕',
+const icons: Record<NonNullable<InlineNotificationProps['variant']>, React.ComponentType<{ size: number; color: string }>> = {
+  info: Info,
+  success: CheckCircle,
+  warning: AlertTriangle,
+  error: AlertCircle,
 };
 
 function getVariantStyles(
@@ -61,7 +62,7 @@ export function InlineNotification({
         borderLeftColor: styles.border,
         gap: 12,
       }}>
-      <Text style={{ fontSize: 18, color: styles.icon }}>{icons[variant]}</Text>
+      {React.createElement(icons[variant], { size: 18, color: styles.icon })}
       <View style={{ flex: 1 }}>
         {title && (
           <Text
@@ -107,7 +108,7 @@ export function InlineNotification({
             padding: 4,
             borderRadius: Radius.sm,
           }}>
-          <Text style={{ fontSize: 16, color: t.textSecondary }}>✕</Text>
+          <X size={16} color={t.textSecondary} />
         </Pressable>
       )}
     </View>

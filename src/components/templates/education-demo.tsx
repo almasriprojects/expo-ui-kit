@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { BookOpen, Smartphone } from 'lucide-react-native';
 
 import {
   Card,
@@ -52,14 +53,14 @@ export function EducationDemo() {
         title="React Native Masterclass"
         subtitle="12 of 24 lessons · 6h remaining"
         progress={50}
-        icon="📱"
+        icon={<Smartphone size={20} color={t.primary} />}
         completedLabel="50% complete"
       />
       <ProgressCard
         title="TypeScript Deep Dive"
         subtitle="18 of 20 lessons · 1h remaining"
         progress={90}
-        icon="📘"
+        icon={<BookOpen size={20} color={t.primary} />}
         completedLabel="Almost done!"
       />
 

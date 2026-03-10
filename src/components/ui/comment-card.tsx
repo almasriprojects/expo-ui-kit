@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Heart } from 'lucide-react-native';
 
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
@@ -46,9 +47,11 @@ export function CommentCard({
           <Pressable
             onPress={onLike}
             style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <Text style={{ fontSize: 13, color: liked ? t.error : t.textTertiary }}>
-              {liked ? '❤️' : '🤍'}
-            </Text>
+            <Heart
+              size={16}
+              color={liked ? t.error : t.textSecondary}
+              fill={liked ? t.error : 'none'}
+            />
             {likes > 0 && (
               <Text style={{ fontSize: 12, fontWeight: '500', color: liked ? t.error : t.textSecondary }}>
                 {likes}

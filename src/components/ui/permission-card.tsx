@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { CheckCircle } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type PermissionCardProps = {
-  icon: string;
+  icon: ReactNode;
   title: string;
   description: string;
   granted?: boolean;
@@ -49,7 +50,7 @@ export function PermissionCard({
           justifyContent: 'center',
           marginBottom: 14,
         }}>
-        <Text style={{ fontSize: 28 }}>{granted ? '✅' : icon}</Text>
+        {granted ? <CheckCircle size={28} color={t.success} /> : icon}
       </View>
       <Text style={{ fontSize: 17, fontWeight: '700', color: t.text, textAlign: 'center' }}>
         {title}

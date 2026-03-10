@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { AtSign, Heart, Link, Mail, MessageCircle, MoreHorizontal, User } from 'lucide-react-native';
 
 import {
   ActivityFeed,
@@ -29,19 +30,19 @@ const POLL_OPTIONS = [
   { key: 'swift', label: 'SwiftUI', votes: 18 },
 ];
 
-const SHARE_OPTIONS = [
-  { key: 'copy', label: 'Copy Link', icon: '🔗' },
-  { key: 'message', label: 'Message', icon: '💬' },
-  { key: 'email', label: 'Email', icon: '📧' },
-  { key: 'more', label: 'More', icon: '⋯' },
-];
+const SHARE_OPTIONS_BASE = [
+  { key: 'copy', label: 'Copy Link', Icon: Link },
+  { key: 'message', label: 'Message', Icon: MessageCircle },
+  { key: 'email', label: 'Email', Icon: Mail },
+  { key: 'more', label: 'More', Icon: MoreHorizontal },
+] as const;
 
-const ACTIVITY_ITEMS = [
-  { key: '1', title: 'New comment', subtitle: 'Alice replied to your post', time: '2m ago', icon: '💬' },
-  { key: '2', title: 'Like received', subtitle: 'Bob liked your photo', time: '15m ago', icon: '❤️' },
-  { key: '3', title: 'Mention', subtitle: 'Charlie mentioned you', time: '1h ago', icon: '@' },
-  { key: '4', title: 'Follow', subtitle: 'Diana started following you', time: '3h ago', icon: '👤' },
-];
+const ACTIVITY_ITEMS_BASE = [
+  { key: '1', title: 'New comment', subtitle: 'Alice replied to your post', time: '2m ago', Icon: MessageCircle },
+  { key: '2', title: 'Like received', subtitle: 'Bob liked your photo', time: '15m ago', Icon: Heart },
+  { key: '3', title: 'Mention', subtitle: 'Charlie mentioned you', time: '1h ago', Icon: AtSign },
+  { key: '4', title: 'Follow', subtitle: 'Diana started following you', time: '3h ago', Icon: User },
+] as const;
 
 const MENTION_USERS = [
   { id: '1', name: 'Alice' },
@@ -113,7 +114,12 @@ export function SocialSection() {
       </Demo>
 
       <Demo title="ActivityFeed">
-        <ActivityFeed items={ACTIVITY_ITEMS} />
+        <ActivityFeed
+          items={ACTIVITY_ITEMS_BASE.map(({ Icon, ...rest }) => ({
+            ...rest,
+            icon: <Icon size={18} color={t.primaryForeground} />,
+          }))}
+        />
       </Demo>
 
       <Demo title="EmojiPicker">
@@ -135,7 +141,10 @@ export function SocialSection() {
         <ShareSheet
           visible={shareSheetVisible}
           onClose={() => setShareSheetVisible(false)}
-          options={SHARE_OPTIONS}
+          options={SHARE_OPTIONS_BASE.map(({ Icon, ...rest }) => ({
+            ...rest,
+            icon: <Icon size={24} color={t.text} />,
+          }))}
           onSelect={() => setShareSheetVisible(false)}
         />
       </Demo>

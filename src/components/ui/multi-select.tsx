@@ -8,6 +8,7 @@ import {
   type ViewProps,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Check, ChevronDown } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -92,7 +93,7 @@ export function MultiSelect({
             <Text style={{ fontSize: 16, color: t.textTertiary }}>{placeholder}</Text>
           )}
         </View>
-        <Text style={{ fontSize: 14, color: t.textSecondary, marginLeft: 8 }}>▼</Text>
+        <ChevronDown size={16} color={t.textSecondary} style={{ marginLeft: 8 }} />
       </Pressable>
 
       <Modal visible={open} transparent animationType="slide">
@@ -183,7 +184,7 @@ export function MultiSelect({
                         justifyContent: 'center',
                       }}>
                       {selected && (
-                        <Text style={{ fontSize: 12, fontWeight: '700', color: t.primaryForeground }}>✓</Text>
+                        <Check size={12} color={t.primaryForeground} strokeWidth={3} />
                       )}
                     </View>
                   </Pressable>

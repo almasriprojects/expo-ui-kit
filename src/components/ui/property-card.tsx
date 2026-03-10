@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Bath, Bed, Heart, Home, Ruler } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -53,7 +54,7 @@ export function PropertyCard({
         style,
       ]}>
       <View style={{ height: 160, backgroundColor: t.surfaceActive, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ fontSize: 36, opacity: 0.4 }}>🏡</Text>
+        <Home size={36} color={t.textSecondary} />
         {featured && (
           <View
             style={{
@@ -96,7 +97,11 @@ export function PropertyCard({
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{ fontSize: 16 }}>{favorited ? '❤️' : '🤍'}</Text>
+            <Heart
+              size={16}
+              color={favorited ? t.error : t.textSecondary}
+              fill={favorited ? t.error : 'none'}
+            />
           </Pressable>
         )}
       </View>
@@ -121,17 +126,17 @@ export function PropertyCard({
             borderTopColor: t.border,
           }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <Text style={{ fontSize: 13 }}>🛏️</Text>
+            <Bed size={13} color={t.textSecondary} />
             <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{beds}</Text>
             <Text style={{ fontSize: 12, color: t.textSecondary }}>beds</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <Text style={{ fontSize: 13 }}>🚿</Text>
+            <Bath size={13} color={t.textSecondary} />
             <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{baths}</Text>
             <Text style={{ fontSize: 12, color: t.textSecondary }}>baths</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <Text style={{ fontSize: 13 }}>📐</Text>
+            <Ruler size={13} color={t.textSecondary} />
             <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{sqft}</Text>
             <Text style={{ fontSize: 12, color: t.textSecondary }}>sqft</Text>
           </View>

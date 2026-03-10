@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
-import { Dimensions, Modal, Pressable, Text, View } from 'react-native';
+import { Dimensions, Modal, Pressable, View } from 'react-native';
+import { X } from 'lucide-react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -190,9 +191,7 @@ export function ImageViewer({
               }}
               accessibilityRole="button"
               accessibilityLabel="Close image viewer">
-              <Text style={{ fontSize: 20, color: t.text, fontWeight: '600' }}>
-                ×
-              </Text>
+              <X size={20} color={t.text} strokeWidth={2.5} />
             </Pressable>
           </View>
 

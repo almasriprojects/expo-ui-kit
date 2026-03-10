@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { Home, Shirt, Smartphone } from 'lucide-react-native';
 
 import {
   BottomBar,
@@ -53,9 +54,9 @@ export function MarketplaceDemo() {
 
         <Separator label="Categories" />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12 }}>
-          <CategoryCard title="Electronics" subtitle="2.4K items" color={t.primary} icon="📱" />
-          <CategoryCard title="Fashion" subtitle="1.8K items" color={t.purple} icon="👗" />
-          <CategoryCard title="Home" subtitle="960 items" color={t.warning} icon="🏠" />
+          <CategoryCard title="Electronics" subtitle="2.4K items" color={t.primary} icon={<Smartphone size={36} color={t.textOnColor} />} />
+          <CategoryCard title="Fashion" subtitle="1.8K items" color={t.purple} icon={<Shirt size={36} color={t.textOnColor} />} />
+          <CategoryCard title="Home" subtitle="960 items" color={t.warning} icon={<Home size={36} color={t.textOnColor} />} />
         </ScrollView>
 
         <Separator label="Featured Products" />

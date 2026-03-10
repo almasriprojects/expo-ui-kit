@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Star } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -71,7 +72,7 @@ export function MapCard({
             <View style={{ alignItems: 'flex-end', gap: 4 }}>
               {rating && (
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-                  <Text style={{ fontSize: 12, color: t.star }}>★</Text>
+                  <Star size={12} color={t.warning} fill={t.warning} />
                   <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{rating}</Text>
                 </View>
               )}

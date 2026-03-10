@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
+import { X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -104,7 +105,7 @@ export function NotificationCenter({
           </ThemedText>
         </View>
         <IconButton
-          icon={<Text style={{ fontSize: 16, color: t.textSecondary }}>✕</Text>}
+          icon={<X size={16} color={t.textSecondary} />}
           onPress={() => onDismiss?.(item.key)}
           accessibilityLabel="Dismiss notification"
           variant="ghost"
@@ -121,7 +122,7 @@ export function NotificationCenter({
               label: 'Dismiss',
               color: t.error,
               onPress: () => onDismiss(item.key),
-              icon: '✕',
+              icon: X,
             },
           ]}>
           <View style={{ paddingVertical: 4, paddingHorizontal: 6 }}>

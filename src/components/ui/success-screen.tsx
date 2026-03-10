@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import React, { type ReactNode, useEffect } from 'react';
+import { View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSequence,
   withSpring,
 } from 'react-native-reanimated';
+import { CheckCircle } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -18,7 +19,7 @@ export type SuccessScreenProps = {
   message?: string;
   onAction?: () => void;
   actionLabel?: string;
-  icon?: string;
+  icon?: ReactNode;
 };
 
 export function SuccessScreen({
@@ -26,7 +27,7 @@ export function SuccessScreen({
   message,
   onAction,
   actionLabel = 'Continue',
-  icon = '✓',
+  icon,
 }: SuccessScreenProps) {
   const t = useTheme();
   const scale = useSharedValue(0);
@@ -66,7 +67,7 @@ export function SuccessScreen({
           },
           animatedStyle,
         ]}>
-        <Text style={{ fontSize: 40, color: t.success }}>{icon}</Text>
+        {icon ?? <CheckCircle size={40} color={t.success} />}
       </Animated.View>
       <ThemedText
         style={{

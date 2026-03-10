@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Pressable, TextInput, type TextInputProps, View } from 'react-native';
+import { Search, X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -28,7 +29,7 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
             paddingVertical: 10,
             gap: 8,
           }}>
-          <ThemedText style={{ fontSize: 14, color: t.textSecondary }}>🔍</ThemedText>
+          <Search size={16} color={t.textSecondary} />
           <TextInput
             ref={ref}
             value={value}
@@ -45,7 +46,7 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
           />
           {value && value.length > 0 && onClear && (
             <Pressable onPress={onClear} hitSlop={8}>
-              <ThemedText style={{ fontSize: 14, color: t.textSecondary }}>✕</ThemedText>
+              <X size={14} color={t.textSecondary} />
             </Pressable>
           )}
         </View>

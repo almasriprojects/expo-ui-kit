@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, View, type ViewProps } from 'react-native';
+import { Star } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
@@ -47,9 +48,11 @@ export function StarRating({
               onPress={() => !readonly && onValueChange?.(starIndex)}
               disabled={readonly}
               hitSlop={4}>
-              <ThemedText style={{ fontSize: starSize, color: t.text }}>
-                {filled ? '★' : half ? '★' : '☆'}
-              </ThemedText>
+              <Star
+                size={starSize}
+                color={t.warning}
+                fill={filled || half ? t.warning : 'none'}
+              />
             </Pressable>
           );
         })}

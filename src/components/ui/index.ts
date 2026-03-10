@@ -1,3 +1,7 @@
+// ── Icon System ──
+export { Icon } from './icon';
+export type { IconName, IconProps } from './icon';
+
 // ── Accessibility ──
 export { VisuallyHidden } from './visually-hidden';
 export type { VisuallyHiddenProps } from './visually-hidden';

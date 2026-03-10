@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
 import { Radius } from '@/constants/theme';
@@ -9,7 +9,7 @@ type BudgetItem = {
   spent: number;
   budget: number;
   color: string;
-  icon?: string;
+  icon?: ReactNode;
 };
 
 type BudgetProgressProps = {
@@ -30,7 +30,7 @@ export function BudgetProgress({ items, style }: BudgetProgressProps) {
           <View key={i}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                {item.icon && <Text style={{ fontSize: 16 }}>{item.icon}</Text>}
+                {item.icon && item.icon}
                 <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{item.label}</Text>
               </View>
               <Text style={{ fontSize: 13, color: over ? t.error : t.textSecondary }}>

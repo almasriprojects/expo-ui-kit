@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, type ViewProps } from 'react-native';
+import { Star } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -27,7 +28,7 @@ export function ReviewCard({
 }: ReviewCardProps) {
   const t = useTheme();
 
-  const stars = Array.from({ length: 5 }, (_, i) => (i < rating ? '★' : '☆')).join('');
+  const starsArray = Array.from({ length: 5 }, (_, i) => i < rating);
 
   return (
     <View
@@ -60,7 +61,16 @@ export function ReviewCard({
             )}
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-            <ThemedText style={{ fontSize: 12, color: t.star }}>{stars}</ThemedText>
+            <View style={{ flexDirection: 'row', gap: 2 }}>
+              {starsArray.map((filled, i) => (
+                <Star
+                  key={i}
+                  size={12}
+                  color={t.warning}
+                  fill={filled ? t.warning : 'none'}
+                />
+              ))}
+            </View>
             {date && (
               <ThemedText style={{ fontSize: 11, color: t.textSecondary }}>
                 {date}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'react-native';
 import { Image } from 'expo-image';
+import { Star } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -79,7 +80,7 @@ export function ProductCard({
 
         {rating != null && (
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <ThemedText style={{ fontSize: 12, color: t.star }}>★</ThemedText>
+            <Star size={12} color={t.warning} fill={t.warning} />
             <Text style={{ fontSize: 12, fontWeight: '500', color: t.text }}>
               {rating.toFixed(1)}
             </Text>

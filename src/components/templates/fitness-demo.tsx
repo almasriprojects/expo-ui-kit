@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { Activity, Dumbbell, Droplets, Flower2, Target } from 'lucide-react-native';
 
 import {
   ActivityRing,
@@ -58,16 +59,16 @@ export function FitnessDemo() {
       />
 
       <Separator label="Today's Workouts" />
-      <WorkoutCard name="Morning HIIT" category="Cardio" duration="30 min" calories="320 cal" exercises={8} difficulty="intermediate" completed icon="🏃" />
-      <WorkoutCard name="Upper Body Strength" category="Strength" duration="45 min" calories="280 cal" exercises={12} difficulty="advanced" icon="💪" />
-      <WorkoutCard name="Evening Yoga" category="Flexibility" duration="20 min" calories="90 cal" exercises={6} difficulty="beginner" icon="🧘" />
+      <WorkoutCard name="Morning HIIT" category="Cardio" duration="30 min" calories="320 cal" exercises={8} difficulty="intermediate" completed icon={<Activity size={22} color={t.success} />} />
+      <WorkoutCard name="Upper Body Strength" category="Strength" duration="45 min" calories="280 cal" exercises={12} difficulty="advanced" icon={<Dumbbell size={22} color={t.primary} />} />
+      <WorkoutCard name="Evening Yoga" category="Flexibility" duration="20 min" calories="90 cal" exercises={6} difficulty="beginner" icon={<Flower2 size={22} color={t.primary} />} />
 
       <Separator label="Progress" />
       <ProgressCard
         title="Weekly Workout Goal"
         subtitle="4 of 5 workouts completed"
         progress={80}
-        icon="🎯"
+        icon={<Target size={20} color={t.primary} />}
         completedLabel="80% complete"
         totalLabel="1 remaining"
       />
@@ -76,7 +77,10 @@ export function FitnessDemo() {
       <Card>
         <View style={{ gap: 12 }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>💧 Water</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+              <Droplets size={15} color={t.primary} />
+              <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>Water</Text>
+            </View>
             <Text style={{ fontSize: 14, fontWeight: '700', color: t.primary }}>{water} / 8 glasses</Text>
           </View>
           <Progress value={(water / 8) * 100} />

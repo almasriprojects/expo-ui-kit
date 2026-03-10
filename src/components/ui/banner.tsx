@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -30,11 +31,18 @@ export function Banner({
 
   if (dismissed) return null;
 
-  const config: Record<BannerVariant, { bg: string; accent: string; defaultIcon: string }> = {
-    info: { bg: t.primarySoft, accent: t.primary, defaultIcon: 'ℹ' },
-    success: { bg: t.successSoft, accent: t.success, defaultIcon: '✓' },
-    warning: { bg: t.warningSoft, accent: t.warning, defaultIcon: '⚠' },
-    error: { bg: t.errorSoft, accent: t.error, defaultIcon: '✕' },
+  const defaultIcons: Record<BannerVariant, React.ComponentType<{ size: number; color: string; strokeWidth?: number }>> = {
+    info: Info,
+    success: CheckCircle,
+    warning: AlertTriangle,
+    error: AlertCircle,
+  };
+
+  const config: Record<BannerVariant, { bg: string; accent: string }> = {
+    info: { bg: t.primarySoft, accent: t.primary },
+    success: { bg: t.successSoft, accent: t.success },
+    warning: { bg: t.warningSoft, accent: t.warning },
+    error: { bg: t.errorSoft, accent: t.error },
   };
 
   const c = config[variant];
@@ -64,9 +72,13 @@ export function Banner({
           justifyContent: 'center',
           marginTop: 1,
         }}>
-        <Text style={{ fontSize: 12, fontWeight: '700', color: t.textOnColor }}>
-          {icon ?? c.defaultIcon}
-        </Text>
+        {icon ? (
+          <Text style={{ fontSize: 12, fontWeight: '700', color: t.textOnColor }}>
+            {icon}
+          </Text>
+        ) : (
+          React.createElement(defaultIcons[variant], { size: 14, color: t.textOnColor, strokeWidth: 2.5 })
+        )}
       </View>
       <View style={{ flex: 1 }}>
         {title && (
@@ -87,7 +99,7 @@ export function Banner({
       </View>
       {dismissible && (
         <Pressable onPress={() => setDismissed(true)} hitSlop={8}>
-          <Text style={{ fontSize: 16, color: t.textSecondary }}>✕</Text>
+          <X size={16} color={t.textSecondary} />
         </Pressable>
       )}
     </View>

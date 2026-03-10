@@ -1,5 +1,6 @@
-import React from 'react';
-import { Linking, Text, View } from 'react-native';
+import React, { type ReactNode } from 'react';
+import { Linking, View } from 'react-native';
+import { Smartphone } from 'lucide-react-native';
 
 import { useTheme } from '@/hooks/use-theme';
 
@@ -11,7 +12,7 @@ export type UpdateRequiredScreenProps = {
   message?: string;
   updateUrl?: string;
   onUpdate?: () => void;
-  icon?: string;
+  icon?: ReactNode;
 };
 
 export function UpdateRequiredScreen({
@@ -19,7 +20,7 @@ export function UpdateRequiredScreen({
   message = 'A new version of the app is available. Please update to continue.',
   updateUrl,
   onUpdate,
-  icon = '📱',
+  icon,
 }: UpdateRequiredScreenProps) {
   const t = useTheme();
 
@@ -42,7 +43,9 @@ export function UpdateRequiredScreen({
       }}
       accessibilityLabel={title}
       accessibilityRole="summary">
-      <Text style={{ fontSize: 64, marginBottom: 24 }}>{icon}</Text>
+      <View style={{ marginBottom: 24 }}>
+        {icon ?? <Smartphone size={64} color={t.primary} />}
+      </View>
       <ThemedText
         style={{
           fontSize: 24,

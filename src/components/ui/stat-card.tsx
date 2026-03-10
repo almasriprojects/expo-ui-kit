@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Text, View, type ViewProps } from 'react-native';
+import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius, type ThemeTokens } from '@/constants/theme';
@@ -86,14 +87,21 @@ export function StatCard({
               paddingVertical: 2,
               borderRadius: Radius.sm,
             }}>
-            <ThemedText
-              style={{
-                fontSize: 12,
-                fontWeight: '600',
-                color: trendUp ? t.success : t.error,
-              }}>
-              {trendUp ? '↑' : '↓'} {Math.abs(trend.value)}%
-            </ThemedText>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+              {trendUp ? (
+                <ArrowUp size={12} color={t.success} strokeWidth={3} />
+              ) : (
+                <ArrowDown size={12} color={t.error} strokeWidth={3} />
+              )}
+              <ThemedText
+                style={{
+                  fontSize: 12,
+                  fontWeight: '600',
+                  color: trendUp ? t.success : t.error,
+                }}>
+                {Math.abs(trend.value)}%
+              </ThemedText>
+            </View>
           </View>
         )}
         {(subtitle || trend?.label) && (

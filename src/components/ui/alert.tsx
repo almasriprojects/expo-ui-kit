@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, type ViewProps } from 'react-native';
+import { AlertCircle, AlertTriangle, CheckCircle, Info } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius, type ThemeTokens } from '@/constants/theme';
@@ -13,12 +14,12 @@ type AlertProps = ViewProps & {
   variant?: AlertVariant;
 };
 
-const icons: Record<AlertVariant, string> = {
-  default: 'ℹ️',
-  success: '✅',
-  warning: '⚠️',
-  error: '❌',
-  info: 'ℹ️',
+const icons: Record<AlertVariant, React.ComponentType<{ size: number; color: string }>> = {
+  default: Info,
+  success: CheckCircle,
+  warning: AlertTriangle,
+  error: AlertCircle,
+  info: Info,
 };
 
 function getVariantStyle(variant: AlertVariant, t: ThemeTokens) {
@@ -61,7 +62,7 @@ export function Alert({
         typeof style === 'object' ? style : undefined,
       ]}
       {...props}>
-      <ThemedText style={{ fontSize: 16 }}>{icons[variant]}</ThemedText>
+      {React.createElement(icons[variant], { size: 20, color: v.border })}
       <View style={{ flex: 1 }}>
         {title && (
           <ThemedText style={{ fontSize: 14, fontWeight: '600', marginBottom: 2, color: v.title }}>

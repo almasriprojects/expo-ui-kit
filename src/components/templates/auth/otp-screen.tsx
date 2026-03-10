@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from 'react-native';
+import { ArrowLeft } from 'lucide-react-native';
 
 import { Button } from '@/components/ui/button';
 import { OTPInput } from '@/components/ui/otp-input';
@@ -131,12 +132,13 @@ export function OTPScreen({
             </Pressable>
           </View>
 
-          <Pressable onPress={onBack}>
+          <Pressable onPress={onBack} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+            <ArrowLeft size={16} color={t.textSecondary} />
             <Text style={{
               fontSize: 14, fontWeight: '600', color: t.textSecondary,
               fontFamily: resolveFontFamily(f, '600'),
             }}>
-              ← Back
+              Back
             </Text>
           </Pressable>
         </View>

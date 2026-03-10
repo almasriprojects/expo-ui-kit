@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Fonts, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -52,14 +53,7 @@ export function ColorPicker({
                 ...(selected ? Shadows.md : {}),
               }}>
               {selected && (
-                <Text
-                  style={{
-                    fontSize: dim * 0.35,
-                    fontWeight: '700',
-                    color: isLight(color) ? t.text : t.textOnColor,
-                  }}>
-                  ✓
-                </Text>
+                <Check size={dim * 0.4} color={isLight(color) ? t.text : t.textOnColor} strokeWidth={3} />
               )}
             </Pressable>
           );

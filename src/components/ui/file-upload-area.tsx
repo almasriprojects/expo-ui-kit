@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Folder, Paperclip } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -8,7 +9,7 @@ type FileUploadAreaProps = {
   onPress: () => void;
   label?: string;
   hint?: string;
-  icon?: string;
+  icon?: ReactNode;
   fileName?: string;
   fileSize?: string;
   error?: string;
@@ -20,7 +21,7 @@ export function FileUploadArea({
   onPress,
   label = 'Upload File',
   hint = 'Tap to browse or drag & drop',
-  icon = '📂',
+  icon,
   fileName,
   fileSize,
   error,
@@ -55,7 +56,7 @@ export function FileUploadArea({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{ fontSize: 20 }}>📎</Text>
+          <Paperclip size={20} color={t.primary} />
         </View>
         <View style={{ flex: 1 }}>
           <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }} numberOfLines={1}>
@@ -89,7 +90,9 @@ export function FileUploadArea({
           backgroundColor: t.surface,
           opacity: disabled ? 0.5 : 1,
         }}>
-        <Text style={{ fontSize: 32, marginBottom: 8 }}>{icon}</Text>
+        <View style={{ marginBottom: 8 }}>
+          {icon ?? <Folder size={32} color={t.primary} />}
+        </View>
         <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>{label}</Text>
         <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 4, textAlign: 'center' }}>
           {hint}

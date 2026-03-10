@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { ChevronDown, ChevronRight } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -61,14 +62,11 @@ function TreeNodeRow({
     >
       <View style={{ width: 20, alignItems: 'center', marginRight: 6 }}>
         {hasChildren ? (
-          <Text
-            style={{
-              fontSize: 12,
-              color: isExpanded ? theme.primary : theme.textSecondary,
-            }}
-          >
-            {isExpanded ? '▼' : '▶'}
-          </Text>
+          isExpanded ? (
+            <ChevronDown size={14} color={theme.primary} />
+          ) : (
+            <ChevronRight size={14} color={theme.textSecondary} />
+          )
         ) : (
           <Text style={{ fontSize: 8, color: theme.textSecondary }}>•</Text>
         )}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -43,7 +44,7 @@ export function PromoCodeInput({
           style,
         ]}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <Text style={{ fontSize: 14, color: t.success }}>✓</Text>
+          <Check size={14} color={t.success} />
           <Text style={{ fontSize: 14, fontWeight: '700', color: t.success }}>{appliedCode}</Text>
           {discount && (
             <Text style={{ fontSize: 13, color: t.success }}>({discount})</Text>

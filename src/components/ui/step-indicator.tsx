@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, type ViewProps } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -44,14 +45,18 @@ export function StepIndicator({
                     borderWidth: isUpcoming ? 2 : 0,
                     borderColor: theme.cardPressed,
                   }}>
-                  <ThemedText
-                    style={{
-                      fontSize: 12,
-                      fontWeight: '700',
-                      color: isCompleted || isCurrent ? theme.primaryForeground : theme.textSecondary,
-                    }}>
-                    {isCompleted ? '✓' : i + 1}
-                  </ThemedText>
+                  {isCompleted ? (
+                    <Check size={14} color={theme.primaryForeground} strokeWidth={3} />
+                  ) : (
+                    <ThemedText
+                      style={{
+                        fontSize: 12,
+                        fontWeight: '700',
+                        color: isCurrent ? theme.primaryForeground : theme.textSecondary,
+                      }}>
+                      {i + 1}
+                    </ThemedText>
+                  )}
                 </View>
               </View>
 

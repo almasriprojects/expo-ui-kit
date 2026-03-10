@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Mail, MessageCircle, Phone } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -17,7 +18,7 @@ type ContactCardProps = {
   style?: ViewStyle;
 };
 
-function ActionBtn({ icon, label, onPress, color }: { icon: string; label: string; onPress?: () => void; color: string }) {
+function ActionBtn({ icon, label, onPress, color }: { icon: ReactNode; label: string; onPress?: () => void; color: string }) {
   const t = useTheme();
   return (
     <Pressable
@@ -32,7 +33,7 @@ function ActionBtn({ icon, label, onPress, color }: { icon: string; label: strin
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ fontSize: 16 }}>{icon}</Text>
+        {icon}
       </View>
       <Text style={{ fontSize: 11, fontWeight: '500', color: t.textSecondary }}>{label}</Text>
     </Pressable>
@@ -72,10 +73,16 @@ export function ContactCard({
         <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}>{role}</Text>
       )}
       {phone && (
-        <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 6 }}>📞 {phone}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6 }}>
+          <Phone size={13} color={t.textSecondary} />
+          <Text style={{ fontSize: 13, color: t.textSecondary }}>{phone}</Text>
+        </View>
       )}
       {email && (
-        <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}>✉️ {email}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 2 }}>
+          <Mail size={13} color={t.textSecondary} />
+          <Text style={{ fontSize: 13, color: t.textSecondary }}>{email}</Text>
+        </View>
       )}
       <View
         style={{
@@ -86,9 +93,9 @@ export function ContactCard({
           borderTopColor: t.border,
           width: '100%',
         }}>
-        {onCall && <ActionBtn icon="📞" label="Call" onPress={onCall} color={t.success} />}
-        {onMessage && <ActionBtn icon="💬" label="Message" onPress={onMessage} color={t.primary} />}
-        {onEmail && <ActionBtn icon="✉️" label="Email" onPress={onEmail} color={t.warning} />}
+        {onCall && <ActionBtn icon={<Phone size={18} color={t.success} />} label="Call" onPress={onCall} color={t.success} />}
+        {onMessage && <ActionBtn icon={<MessageCircle size={18} color={t.primary} />} label="Message" onPress={onMessage} color={t.primary} />}
+        {onEmail && <ActionBtn icon={<Mail size={18} color={t.warning} />} label="Email" onPress={onEmail} color={t.warning} />}
       </View>
     </View>
   );

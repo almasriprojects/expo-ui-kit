@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Pressable, View } from 'react-native';
+import { Play, Pause, Maximize } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Slider } from './slider';
@@ -86,9 +87,7 @@ export function VideoPlayer({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <ThemedText style={{ fontSize: 28, color: t.textOnColor }}>
-            {isPlaying ? '⏸' : '▶'}
-          </ThemedText>
+          {isPlaying ? <Pause size={28} color={t.textOnColor} /> : <Play size={28} color={t.textOnColor} />}
         </View>
       </Pressable>
 
@@ -125,7 +124,7 @@ export function VideoPlayer({
             })}
             accessibilityRole="button"
             accessibilityLabel="Fullscreen">
-            <ThemedText style={{ fontSize: 18, color: t.text }}>⛶</ThemedText>
+            <Maximize size={18} color={t.text} />
           </Pressable>
         </View>
       </View>

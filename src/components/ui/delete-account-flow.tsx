@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { AlertTriangle } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -83,7 +84,7 @@ export function DeleteAccountFlow({
               accessibilityRole="image"
               accessibilityLabel="Warning icon"
             >
-              <Text style={{ fontSize: 32 }}>⚠️</Text>
+              <AlertTriangle size={32} color={t.error} />
             </View>
             <Text
               style={{

@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { Text, View, type ViewProps } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -49,16 +50,7 @@ export function Timeline({ items, ...props }: TimelineProps) {
                   marginTop: 4,
                 }}>
                 {status === 'completed' && (
-                  <ThemedText
-                    style={{
-                      color: theme.primaryForeground,
-                      fontSize: 8,
-                      fontWeight: '700',
-                      textAlign: 'center',
-                      lineHeight: 10,
-                    }}>
-                    ✓
-                  </ThemedText>
+                  <Check size={8} color={theme.primaryForeground} strokeWidth={3} />
                 )}
               </View>
               {!isLast && (

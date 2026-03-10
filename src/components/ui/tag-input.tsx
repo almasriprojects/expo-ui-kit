@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View, type ViewStyle } from 'react-native';
+import { X } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -73,7 +74,7 @@ export function TagInput({
               {tag}
             </Text>
             <Pressable onPress={() => removeTag(i)} hitSlop={4}>
-              <Text style={{ fontSize: 14, fontWeight: '700', color: t.primary }}>×</Text>
+              <X size={12} color={t.primary} strokeWidth={3} />
             </Pressable>
           </View>
         ))}

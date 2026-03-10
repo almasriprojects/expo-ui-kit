@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
@@ -8,7 +8,7 @@ type CategoryCardProps = Omit<PressableProps, 'style'> & {
   style?: ViewStyle;
   title: string;
   subtitle?: string;
-  icon?: string;
+  icon?: ReactNode;
   count?: number;
   color?: string;
   size?: 'sm' | 'md' | 'lg';
@@ -49,7 +49,11 @@ export function CategoryCard({
         style,
       ]}
       {...props}>
-      <Text style={{ fontSize: s.iconSize }}>{icon}</Text>
+      {typeof icon === 'string' ? (
+        <Text style={{ fontSize: s.iconSize }}>{icon}</Text>
+      ) : (
+        <View>{icon}</View>
+      )}
       <View>
         <Text
           style={{

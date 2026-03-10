@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check, X } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -89,9 +90,11 @@ export function QuizOption({
           justifyContent: 'center',
         }}>
         {showResult ? (
-          <Text style={{ fontSize: 14, fontWeight: '700', color: t.textOnColor }}>
-            {isCorrect ? '✓' : '✕'}
-          </Text>
+          isCorrect ? (
+            <Check size={14} color={t.textOnColor} />
+          ) : (
+            <X size={14} color={t.textOnColor} />
+          )
         ) : (
           <Text style={{ fontSize: 14, fontWeight: '700', color: letterColor }}>
             {letters[index] ?? index + 1}

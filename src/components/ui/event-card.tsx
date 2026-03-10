@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -110,9 +111,12 @@ export function EventCard({
                   borderRadius: Radius.full,
                   backgroundColor: rsvpStatus === 'going' ? t.success : accentColor,
                 }}>
-                <Text style={{ fontSize: 13, fontWeight: '600', color: t.textOnColor }}>
-                  {rsvpStatus === 'going' ? '✓ Going' : rsvpStatus === 'maybe' ? 'Maybe' : 'RSVP'}
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                  {rsvpStatus === 'going' && <Check size={13} color={t.textOnColor} />}
+                  <Text style={{ fontSize: 13, fontWeight: '600', color: t.textOnColor }}>
+                    {rsvpStatus === 'going' ? 'Going' : rsvpStatus === 'maybe' ? 'Maybe' : 'RSVP'}
+                  </Text>
+                </View>
               </Pressable>
             )}
           </View>

@@ -4,11 +4,11 @@ import {
   Modal,
   Pressable,
   ScrollView,
-  Text,
   View,
   type ViewStyle,
 } from 'react-native';
 import { Image } from 'expo-image';
+import { X } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -160,9 +160,7 @@ export function ProductGallery({
               }}
               accessibilityRole="button"
               accessibilityLabel="Close">
-              <Text style={{ fontSize: 20, color: t.text, fontWeight: '600' }}>
-                ×
-              </Text>
+              <X size={20} color={t.text} />
             </Pressable>
           </View>
         </Pressable>

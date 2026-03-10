@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { Copy, Pencil, Share2, Trash2 } from 'lucide-react-native';
 
 import {
   AnimatedCounter,
@@ -232,7 +233,7 @@ return <Text style={{ color: t.text }}>Hello</Text>;`}
       <Demo title="CopyButton & LinkText">
         <View style={{ gap: 12 }}>
           <CopyButton text="npm install @my-expo/ui" variant="field" />
-          <LinkText href="https://expo.dev">Visit Expo →</LinkText>
+          <LinkText href="https://expo.dev">Visit Expo</LinkText>
         </View>
       </Demo>
 
@@ -316,10 +317,10 @@ return <Text style={{ color: t.text }}>Hello</Text>;`}
       <Demo title="ContextMenu">
         <ContextMenu
           items={[
-            { key: 'copy', label: 'Copy', icon: '📋' },
-            { key: 'edit', label: 'Edit', icon: '✏️' },
-            { key: 'share', label: 'Share', icon: '🔗' },
-            { key: 'delete', label: 'Delete', icon: '🗑️', destructive: true },
+            { key: 'copy', label: 'Copy', icon: Copy },
+            { key: 'edit', label: 'Edit', icon: Pencil },
+            { key: 'share', label: 'Share', icon: Share2 },
+            { key: 'delete', label: 'Delete', icon: Trash2, destructive: true },
           ]}
           onItemPress={(item) => toast.show({ message: `${item.label} pressed`, variant: 'info' })}>
           <View

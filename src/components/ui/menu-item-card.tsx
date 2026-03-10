@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Flame, Leaf, UtensilsCrossed } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -52,8 +53,8 @@ export function MenuItemCard({
               <Text style={{ fontSize: 9, fontWeight: '700', color: t.textOnColor }}>POPULAR</Text>
             </View>
           )}
-          {vegetarian && <Text style={{ fontSize: 12 }}>🌱</Text>}
-          {spicy && <Text style={{ fontSize: 12 }}>🌶️</Text>}
+          {vegetarian && <Leaf size={12} color={t.success} />}
+          {spicy && <Flame size={12} color={t.error} />}
         </View>
         <Text style={{ fontSize: 15, fontWeight: '600', color: t.text, marginTop: popular || vegetarian || spicy ? 4 : 0 }}>
           {name}
@@ -76,7 +77,7 @@ export function MenuItemCard({
         </View>
       </View>
       <View style={{ width: 100, backgroundColor: t.surfaceActive, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ fontSize: 28, opacity: 0.4 }}>🍕</Text>
+        <UtensilsCrossed size={28} color={t.textSecondary} />
         {onAdd && (
           <Pressable
             onPress={onAdd}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from 'react-native';
+import { ArrowLeft, CheckCircle, Lock } from 'lucide-react-native';
 
 import { Button } from '@/components/ui/button';
 import { PasswordInput } from '@/components/ui/password-input';
@@ -56,7 +57,7 @@ export function ResetPasswordScreen({
 
         {success ? (
           <View style={{ gap: 16, alignItems: 'center' }}>
-            <Text style={{ fontSize: 56 }}>✅</Text>
+            <CheckCircle size={56} color={t.success} />
             <Text style={{
               fontSize: 26, fontWeight: '800', textAlign: 'center',
               fontFamily: resolveFontFamily(f, '700'), color: t.text,
@@ -81,7 +82,7 @@ export function ResetPasswordScreen({
         ) : (
           <>
             <View style={{ gap: 8, marginBottom: 8 }}>
-              <Text style={{ fontSize: 48, marginBottom: 4 }}>🔒</Text>
+              <Lock size={48} color={t.text} style={{ marginBottom: 4 }} />
               <Text style={{
                 fontSize: 28, fontWeight: '800',
                 fontFamily: resolveFontFamily(f, '700'), color: t.text,
@@ -127,12 +128,13 @@ export function ResetPasswordScreen({
               fullWidth
             />
 
-            <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: 8 }}>
+            <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: 8, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+              <ArrowLeft size={16} color={t.textSecondary} />
               <Text style={{
                 fontSize: 14, fontWeight: '600', color: t.textSecondary,
                 fontFamily: resolveFontFamily(f, '600'),
               }}>
-                ← Back to Sign In
+                Back to Sign In
               </Text>
             </Pressable>
           </>

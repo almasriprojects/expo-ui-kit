@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { X } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -136,7 +137,7 @@ export function Autocomplete({
             }}
             accessibilityRole="button"
             accessibilityLabel="Clear selection">
-            <Text style={{ fontSize: 16, color: t.textSecondary }}>✕</Text>
+            <X size={16} color={t.textSecondary} />
           </Pressable>
         )}
         {isOpen && (

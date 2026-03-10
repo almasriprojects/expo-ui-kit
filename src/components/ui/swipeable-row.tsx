@@ -8,7 +8,7 @@ type SwipeAction = {
   label: string;
   color: string;
   onPress: () => void;
-  icon?: string;
+  icon?: React.ComponentType<{ size?: number; color?: string }>;
 };
 
 type SwipeableRowProps = ViewProps & {
@@ -60,29 +60,32 @@ export function SwipeableRow({
         flexDirection: 'row',
         alignItems: 'stretch',
       }}>
-      {actions.map((action, i) => (
-        <Pressable
-          key={i}
-          onPress={() => {
-            action.onPress();
-            Animated.spring(pan, { toValue: 0, useNativeDriver: false }).start();
-          }}
-          style={{
-            width: 72,
-            backgroundColor: action.color,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          {action.icon && (
-            <ThemedText style={{ fontSize: 18, color: theme.primaryForeground, marginBottom: 2 }}>
-              {action.icon}
+      {actions.map((action, i) => {
+        const ActionIcon = action.icon;
+        return (
+          <Pressable
+            key={i}
+            onPress={() => {
+              action.onPress();
+              Animated.spring(pan, { toValue: 0, useNativeDriver: false }).start();
+            }}
+            style={{
+              width: 72,
+              backgroundColor: action.color,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            {ActionIcon && (
+              <View style={{ marginBottom: 2 }}>
+                <ActionIcon size={18} color={theme.primaryForeground} />
+              </View>
+            )}
+            <ThemedText style={{ color: theme.primaryForeground, fontSize: 11, fontWeight: '600' }}>
+              {action.label}
             </ThemedText>
-          )}
-          <ThemedText style={{ color: theme.primaryForeground, fontSize: 11, fontWeight: '600' }}>
-            {action.label}
-          </ThemedText>
-        </Pressable>
-      ))}
+          </Pressable>
+        );
+      })}
     </View>
   );
 

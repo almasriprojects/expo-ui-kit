@@ -5,6 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -93,9 +94,7 @@ export function LanguageSelector({
                 {item.name}
               </Text>
               {isSelected && (
-                <Text style={{ fontSize: 18, color: t.primary }} accessibilityLabel="Selected">
-                  ✓
-                </Text>
+                <Check size={18} color={t.primary} accessibilityLabel="Selected" />
               )}
             </Pressable>
           );

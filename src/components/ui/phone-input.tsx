@@ -1,5 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, Text, TextInput, type TextInputProps, View } from 'react-native';
+import { ChevronDown } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
@@ -87,7 +88,7 @@ export const PhoneInput = forwardRef<TextInput, PhoneInputProps>(
               gap: 4,
             }}>
             <Text style={{ fontSize: 18, color: theme.text }}>{country.flag}</Text>
-            <ThemedText style={{ fontSize: 13, color: theme.textSecondary }}>▼</ThemedText>
+            <ChevronDown size={13} color={theme.textSecondary} />
           </Pressable>
           <ThemedText style={{ paddingLeft: 10, color: theme.textSecondary, fontSize: 14 }}>
             {country.dial}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { CheckCircle, Lock } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -66,9 +67,9 @@ export function LessonCard({
           justifyContent: 'center',
         }}>
         {locked ? (
-          <Text style={{ fontSize: 18 }}>🔒</Text>
+          <Lock size={18} color={t.textSecondary} />
         ) : completed ? (
-          <Text style={{ fontSize: 18 }}>✅</Text>
+          <CheckCircle size={18} color={t.success} />
         ) : lessonNumber ? (
           <Text
             style={{

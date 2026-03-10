@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Radius } from '@/constants/theme';
@@ -56,9 +57,7 @@ export function VerticalStepper({ steps, currentStep = 0 }: VerticalStepperProps
                   borderColor: t.border,
                 }}>
                 {isCompleted ? (
-                  <ThemedText style={{ fontSize: 12, fontWeight: '700', color: t.primaryForeground }}>
-                    ✓
-                  </ThemedText>
+                  <Check size={14} color={t.primaryForeground} strokeWidth={3} />
                 ) : isCurrent ? (
                   <ThemedText style={{ fontSize: 14, fontWeight: '700', color: t.primaryForeground }}>
                     {index + 1}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
+import { Check } from 'lucide-react-native';
 
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -45,15 +46,7 @@ export function Checkbox({
           borderColor: checked ? t.primary : t.borderStrong,
         }}>
         {checked && (
-          <Text
-            style={{
-              color: t.primaryForeground,
-              fontSize: 14,
-              fontWeight: '700',
-              lineHeight: 16,
-            }}>
-            ✓
-          </Text>
+          <Check size={14} color={t.primaryForeground} strokeWidth={3} />
         )}
       </View>
       {label && (

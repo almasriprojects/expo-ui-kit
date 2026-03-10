@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Star, UtensilsCrossed } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -52,7 +53,7 @@ export function RestaurantCard({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ fontSize: 40, opacity: 0.4 }}>🍽️</Text>
+        <UtensilsCrossed size={40} color={t.textTertiary} style={{ opacity: 0.4 }} />
         {promo && (
           <View
             style={{
@@ -73,7 +74,7 @@ export function RestaurantCard({
         <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}>{cuisine}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 10 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <Text style={{ fontSize: 13 }}>⭐</Text>
+            <Star size={13} color={t.warning} fill={t.warning} />
             <Text style={{ fontSize: 13, fontWeight: '700', color: t.text }}>{rating.toFixed(1)}</Text>
             {reviewCount != null && (
               <Text style={{ fontSize: 12, color: t.textTertiary }}>({reviewCount})</Text>

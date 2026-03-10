@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'react-native';
+import { CreditCard, Landmark } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { BrandColors, Radius } from '@/constants/theme';
@@ -16,13 +17,13 @@ type PaymentMethodCardProps = Omit<PressableProps, 'style'> & {
 };
 
 const methodConfig = {
-  visa: { icon: '💳', name: 'Visa', color: BrandColors.visa },
-  mastercard: { icon: '💳', name: 'Mastercard', color: BrandColors.mastercard },
-  amex: { icon: '💳', name: 'Amex', color: BrandColors.amex },
-  paypal: { icon: '🅿️', name: 'PayPal', color: BrandColors.paypal },
-  apple_pay: { icon: '🍎', name: 'Apple Pay', color: BrandColors.applePay },
-  google_pay: { icon: '🔵', name: 'Google Pay', color: BrandColors.googlePay },
-  bank: { icon: '🏦', name: 'Bank Transfer', color: BrandColors.bank },
+  visa: { abbr: 'V', name: 'Visa', color: BrandColors.visa, useIcon: true },
+  mastercard: { abbr: 'MC', name: 'Mastercard', color: BrandColors.mastercard, useIcon: true },
+  amex: { abbr: 'AX', name: 'Amex', color: BrandColors.amex, useIcon: true },
+  paypal: { abbr: 'PP', name: 'PayPal', color: BrandColors.paypal, useIcon: false },
+  apple_pay: { abbr: 'AP', name: 'Apple Pay', color: BrandColors.applePay, useIcon: false },
+  google_pay: { abbr: 'GP', name: 'Google Pay', color: BrandColors.googlePay, useIcon: false },
+  bank: { abbr: 'BK', name: 'Bank Transfer', color: BrandColors.bank, useIcon: false },
 };
 
 export function PaymentMethodCard({
@@ -80,7 +81,13 @@ export function PaymentMethodCard({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ fontSize: 16, color: theme.text }}>{config.icon}</Text>
+        {config.useIcon ? (
+          <CreditCard size={16} color={config.color} />
+        ) : type === 'bank' ? (
+          <Landmark size={16} color={config.color} />
+        ) : (
+          <Text style={{ fontSize: 11, fontWeight: '800', color: config.color }}>{config.abbr}</Text>
+        )}
       </View>
 
       {/* Details */}

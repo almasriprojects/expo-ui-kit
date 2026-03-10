@@ -1,5 +1,6 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { type ReactNode } from 'react';
+import { View } from 'react-native';
+import { AlertCircle } from 'lucide-react-native';
 
 import { useTheme } from '@/hooks/use-theme';
 
@@ -11,7 +12,7 @@ export type ErrorScreenProps = {
   message?: string;
   onRetry?: () => void;
   retryLabel?: string;
-  icon?: string;
+  icon?: ReactNode;
 };
 
 export function ErrorScreen({
@@ -19,7 +20,7 @@ export function ErrorScreen({
   message = 'An unexpected error occurred. Please try again.',
   onRetry,
   retryLabel = 'Try Again',
-  icon = '❌',
+  icon,
 }: ErrorScreenProps) {
   const t = useTheme();
 
@@ -34,7 +35,9 @@ export function ErrorScreen({
       }}
       accessibilityLabel={title}
       accessibilityRole="alert">
-      <Text style={{ fontSize: 64, marginBottom: 24 }}>{icon}</Text>
+      <View style={{ marginBottom: 24 }}>
+        {icon ?? <AlertCircle size={64} color={t.error} />}
+      </View>
       <ThemedText
         style={{
           fontSize: 24,

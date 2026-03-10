@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Home, Star } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -53,7 +54,7 @@ export function RoomCard({
         style,
       ]}>
       <View style={{ height: 160, backgroundColor: t.surfaceActive, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ fontSize: 36, opacity: 0.4 }}>🏠</Text>
+        <Home size={36} color={t.textSecondary} />
         {superhost && (
           <View
             style={{
@@ -66,7 +67,10 @@ export function RoomCard({
               borderRadius: Radius.sm,
               ...Shadows.sm,
             }}>
-            <Text style={{ fontSize: 10, fontWeight: '700', color: t.text }}>⭐ SUPERHOST</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+              <Star size={10} color={t.warning} fill={t.warning} />
+              <Text style={{ fontSize: 10, fontWeight: '700', color: t.text }}>SUPERHOST</Text>
+            </View>
           </View>
         )}
       </View>
@@ -96,7 +100,7 @@ export function RoomCard({
           </View>
           {rating != null && (
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-              <Text style={{ fontSize: 12 }}>⭐</Text>
+              <Star size={12} color={t.warning} fill={t.warning} />
               <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{rating.toFixed(1)}</Text>
               {reviewCount != null && (
                 <Text style={{ fontSize: 12, color: t.textTertiary }}>({reviewCount})</Text>

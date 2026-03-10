@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { Plus, X } from 'lucide-react-native';
 
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -14,14 +15,14 @@ type SpeedDialAction = {
 
 type SpeedDialProps = {
   actions: SpeedDialAction[];
-  icon?: string;
-  openIcon?: string;
+  icon?: React.ReactNode;
+  openIcon?: React.ReactNode;
 };
 
 export function SpeedDial({
   actions,
-  icon = '+',
-  openIcon = '✕',
+  icon,
+  openIcon,
 }: SpeedDialProps) {
   const [open, setOpen] = useState(false);
   const t = useTheme();
@@ -85,14 +86,11 @@ export function SpeedDial({
           justifyContent: 'center',
           ...Shadows.lg,
         }}>
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: '700',
-            color: open ? t.text : t.primaryForeground,
-          }}>
-          {open ? openIcon : icon}
-        </Text>
+        {open ? (
+          openIcon ?? <X size={24} color={t.text} />
+        ) : (
+          icon ?? <Plus size={24} color={t.primaryForeground} />
+        )}
       </Pressable>
     </View>
   );

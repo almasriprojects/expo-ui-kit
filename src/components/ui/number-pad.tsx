@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
+import { Check } from 'lucide-react-native';
 
-import { ThemedText } from '@/components/themed-text';
+
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -10,7 +11,7 @@ type NumberPadProps = ViewProps & {
   onDelete?: () => void;
   onConfirm?: () => void;
   showDecimal?: boolean;
-  confirmLabel?: string;
+  confirmLabel?: ReactNode;
 };
 
 export function NumberPad({
@@ -18,7 +19,7 @@ export function NumberPad({
   onDelete,
   onConfirm,
   showDecimal = true,
-  confirmLabel = '✓',
+  confirmLabel,
   ...props
 }: NumberPadProps) {
   const theme = useTheme();
@@ -76,9 +77,7 @@ export function NumberPad({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <ThemedText style={{ color: theme.primaryForeground, fontSize: 16, fontWeight: '600' }}>
-            {confirmLabel}
-          </ThemedText>
+          {confirmLabel ?? <Check size={20} color={theme.primaryForeground} />}
         </Pressable>
       )}
     </View>
