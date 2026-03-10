@@ -1,3 +1,11 @@
+// ── Auth Screens ──
+export { SignInScreen } from './auth/sign-in-screen';
+export { SignUpScreen } from './auth/sign-up-screen';
+export { ForgotPasswordScreen } from './auth/forgot-password-screen';
+export { OTPScreen } from './auth/otp-screen';
+export { ResetPasswordScreen } from './auth/reset-password-screen';
+
+// ── App Template Demos ──
 export { BookingDemo } from './booking-demo';
 export { EducationDemo } from './education-demo';
 export { FinanceDemo } from './finance-demo';
