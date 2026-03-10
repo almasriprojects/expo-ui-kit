@@ -41,6 +41,28 @@ export { FileUploadArea } from './file-upload-area';
 export { Autocomplete } from './autocomplete';
 export { DateRangePicker } from './date-range-picker';
 
+// ── Advanced Inputs ──
+export { SignaturePad } from './signature-pad';
+export type { SignaturePadProps } from './signature-pad';
+export { ImagePickerButton } from './image-picker-button';
+export type { ImagePickerButtonProps } from './image-picker-button';
+export { FilePickerButton } from './file-picker-button';
+export type { FilePickerButtonProps, FilePickerFile } from './file-picker-button';
+export { RichTextEditor } from './rich-text-editor';
+export type { RichTextEditorProps } from './rich-text-editor';
+export { MaskedInput } from './masked-input';
+export type { MaskedInputProps } from './masked-input';
+export { CreditCardInput } from './credit-card-input';
+export type { CreditCardInputProps, CreditCardData } from './credit-card-input';
+export { AddressInput } from './address-input';
+export type { AddressInputProps, AddressValue } from './address-input';
+export { MultiStepForm } from './multi-step-form';
+export type { MultiStepFormProps, MultiStepFormStep } from './multi-step-form';
+export { CheckboxGroup } from './checkbox-group';
+export type { CheckboxGroupProps, CheckboxGroupOption } from './checkbox-group';
+export { InlineEdit } from './inline-edit';
+export type { InlineEditProps } from './inline-edit';
+
 // ── Form Helpers ──
 export { Form, FormField, useForm } from './form';
 
@@ -130,6 +152,24 @@ export { PricingCard } from './pricing-card';
 export { MenuItemCard } from './menu-item-card';
 export { RestaurantCard } from './restaurant-card';
 
+// ── Social & Communication ──
+export { ReactionBar } from './reaction-bar';
+export type { ReactionBarProps, ReactionItem } from './reaction-bar';
+export { ShareSheet } from './share-sheet';
+export type { ShareSheetProps, ShareOption } from './share-sheet';
+export { MentionInput } from './mention-input';
+export type { MentionInputProps, MentionUser } from './mention-input';
+export { ReadReceipt } from './read-receipt';
+export type { ReadReceiptProps, ReadReceiptStatus } from './read-receipt';
+export { VoiceMessageBubble } from './voice-message-bubble';
+export type { VoiceMessageBubbleProps } from './voice-message-bubble';
+export { Poll } from './poll';
+export type { PollProps, PollOption } from './poll';
+export { EmojiPicker } from './emoji-picker';
+export type { EmojiPickerProps, EmojiCategory } from './emoji-picker';
+export { ActivityFeed } from './activity-feed';
+export type { ActivityFeedProps, ActivityFeedItem } from './activity-feed';
+
 // ── Domain: Social / Profile ──
 export { ProfileCard } from './profile-card';
 export { SocialButton } from './social-button';
@@ -193,3 +233,25 @@ export { BoardColumn } from './board-column';
 // ── Domain: Real Estate ──
 export { PropertyCard } from './property-card';
 export { MortgageSlider } from './mortgage-slider';
+
+// ── Data & Charts ──
+export { BarChart } from './bar-chart';
+export type { BarChartDataItem, BarChartProps } from './bar-chart';
+export { LineChart } from './line-chart';
+export type { LineChartProps } from './line-chart';
+export { PieChart } from './pie-chart';
+export type { PieChartDataItem, PieChartProps } from './pie-chart';
+export { Sparkline } from './sparkline';
+export type { SparklineProps } from './sparkline';
+export { HeatmapCalendar } from './heatmap-calendar';
+export type { HeatmapCalendarProps } from './heatmap-calendar';
+export { KanbanBoard } from './kanban-board';
+export type { KanbanBoardProps, KanbanColumn, KanbanItem } from './kanban-board';
+export { SortableList } from './sortable-list';
+export type { SortableListProps, SortableListItem } from './sortable-list';
+export { InfiniteScrollList } from './infinite-scroll-list';
+export type { InfiniteScrollListProps } from './infinite-scroll-list';
+export { PullToRefresh } from './pull-to-refresh';
+export type { PullToRefreshProps } from './pull-to-refresh';
+export { ThemedSectionList } from './themed-section-list';
+export type { ThemedSectionListProps, ThemedSection } from './themed-section-list';
