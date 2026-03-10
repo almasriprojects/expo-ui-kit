@@ -10,12 +10,17 @@ import { useThemeMode } from '@/providers/theme-mode-provider';
 
 import {
   AdvancedSection,
+  ChartsSection,
+  CommerceSection,
   ControlsSection,
   DisplaySection,
   FeedbackSection,
   FormsSection,
   LayoutSection,
+  NavigationSection,
   OverlaySection,
+  ScreensSection,
+  SocialSection,
 } from '@/components/sections';
 
 const CATEGORIES = [
@@ -26,6 +31,11 @@ const CATEGORIES = [
   { key: 'feedback', label: 'Feedback' },
   { key: 'overlay', label: 'Overlay' },
   { key: 'layout', label: 'Layout' },
+  { key: 'navigation', label: 'Navigation' },
+  { key: 'charts', label: 'Charts' },
+  { key: 'social', label: 'Social' },
+  { key: 'commerce', label: 'Commerce' },
+  { key: 'screens', label: 'Screens' },
   { key: 'advanced', label: 'Advanced' },
 ] as const;
 
@@ -240,6 +250,11 @@ export default function HomeScreen() {
         <View onLayout={handleLayout('feedback')}><FeedbackSection /></View>
         <View onLayout={handleLayout('overlay')}><OverlaySection /></View>
         <View onLayout={handleLayout('layout')}><LayoutSection /></View>
+        <View onLayout={handleLayout('navigation')}><NavigationSection /></View>
+        <View onLayout={handleLayout('charts')}><ChartsSection /></View>
+        <View onLayout={handleLayout('social')}><SocialSection /></View>
+        <View onLayout={handleLayout('commerce')}><CommerceSection /></View>
+        <View onLayout={handleLayout('screens')}><ScreensSection /></View>
         <View onLayout={handleLayout('advanced')}><AdvancedSection /></View>
 
         <View style={{ alignItems: 'center', marginTop: 40, marginBottom: 20 }}>

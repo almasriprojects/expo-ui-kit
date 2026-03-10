@@ -6,3 +6,8 @@ export { FeedbackSection } from './feedback-section';
 export { OverlaySection } from './overlay-section';
 export { LayoutSection } from './layout-section';
 export { AdvancedSection } from './advanced-section';
+export { ChartsSection } from './charts-section';
+export { NavigationSection } from './navigation-section';
+export { SocialSection } from './social-section';
+export { CommerceSection } from './commerce-section';
+export { ScreensSection } from './screens-section';
