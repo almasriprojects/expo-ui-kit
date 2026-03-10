@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import Animated, { Easing, Keyframe } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
-import { SplashColors } from '@/constants/theme';
+import { Radius, SplashColors } from '@/constants/theme';
 
 const INITIAL_SCALE_FACTOR = Dimensions.get('screen').height / 90;
 const DURATION = 600;
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     height: 71,
   },
   background: {
-    borderRadius: 40,
+    borderRadius: Radius.full,
     experimental_backgroundImage: `linear-gradient(180deg, ${SplashColors.gradientStart}, ${SplashColors.gradientEnd})`,
     width: 128,
     height: 128,

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type Ring = {
@@ -70,7 +71,7 @@ export function ActivityRing({
             ring.label ? (
               <View key={i} style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
                 <View
-                  style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: ring.color }}
+                  style={{ width: 10, height: 10, borderRadius: Radius.full, backgroundColor: ring.color }}
                 />
                 <Text style={{ fontSize: 12, color: t.textSecondary }}>{ring.label}</Text>
                 <Text style={{ fontSize: 12, fontWeight: '700', color: t.text }}>

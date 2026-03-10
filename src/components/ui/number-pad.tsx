@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type NumberPadProps = ViewProps & {
@@ -45,7 +46,7 @@ export function NumberPad({
           flex: 1,
           margin: 4,
           height: 56,
-          borderRadius: 14,
+          borderRadius: Radius.xl,
           backgroundColor: theme.surface,
           alignItems: 'center',
           justifyContent: 'center',
@@ -70,7 +71,7 @@ export function NumberPad({
           style={{
             margin: 4,
             height: 52,
-            borderRadius: 14,
+            borderRadius: Radius.xl,
             backgroundColor: theme.primaryPressed,
             alignItems: 'center',
             justifyContent: 'center',

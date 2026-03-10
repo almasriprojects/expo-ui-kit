@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, Text, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type Column = {
@@ -42,7 +43,7 @@ export function DataTable({
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <View
         style={{
-          borderRadius: 12,
+          borderRadius: Radius.lg,
           overflow: 'hidden',
           borderWidth: 1,
           borderColor: theme.cardPressed,

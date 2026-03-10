@@ -80,7 +80,7 @@ export function ImageCarousel({
               style={{
                 width: i === activeIndex ? 20 : 6,
                 height: 6,
-                borderRadius: 3,
+                borderRadius: Radius.xs,
                 backgroundColor: i === activeIndex ? theme.primaryForeground : theme.surfaceActive,
               }}
             />

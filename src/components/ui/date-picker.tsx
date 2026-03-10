@@ -181,7 +181,7 @@ export function DatePicker({
                         style={{
                           width: 36,
                           height: 36,
-                          borderRadius: 18,
+                          borderRadius: Radius['2xl'],
                           alignItems: 'center',
                           justifyContent: 'center',
                           backgroundColor: selected ? t.primary : 'transparent',

@@ -14,6 +14,7 @@ import {
   StoryCircle,
   TypingIndicator,
 } from '@/components/ui';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function MessagingDemo() {
@@ -44,7 +45,7 @@ export function MessagingDemo() {
       <ConversationItem name="Chris Taylor" lastMessage="You: Sounds good, let me know!" time="1d" muted />
 
       <Separator label="Chat View" />
-      <View style={{ backgroundColor: t.surface, borderRadius: 16, padding: 16, gap: 8 }}>
+        <View style={{ backgroundColor: t.surface, borderRadius: Radius.xl, padding: 16, gap: 8 }}>
         <ChatBubble message="Hey! How's the component library going?" isOwn={false} timestamp="2:30 PM" />
         <ChatBubble message="Great! We just hit 140+ components 🎉" isOwn timestamp="2:31 PM" status="read" />
         <ChatBubble message="That's incredible! Can you share a preview?" isOwn={false} timestamp="2:32 PM" />

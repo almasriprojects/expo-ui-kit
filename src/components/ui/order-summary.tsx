@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type LineItem = {
@@ -28,7 +29,7 @@ export function OrderSummary({
 
   return (
     <View
-      style={[{ backgroundColor: theme.card, borderRadius: 16, padding: 16 }, style]}
+      style={[{ backgroundColor: theme.card, borderRadius: Radius.xl, padding: 16 }, style]}
       {...props}>
       <Text style={{ fontSize: 15, fontWeight: '600', marginBottom: 14, color: theme.text }}>
         {title}

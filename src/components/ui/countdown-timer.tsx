@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type CountdownTimerProps = ViewProps & {
@@ -89,7 +90,7 @@ export function CountdownTimer({
               style={{
                 width: boxSize,
                 height: boxSize,
-                borderRadius: 14,
+                borderRadius: Radius.xl,
                 backgroundColor: theme.surface,
                 alignItems: 'center',
                 justifyContent: 'center',

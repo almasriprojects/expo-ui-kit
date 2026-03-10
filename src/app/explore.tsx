@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { Screen } from '@/components/layout';
@@ -48,8 +48,6 @@ export default function ExploreScreen() {
   const t = useTheme();
   const f = useFont();
   const [selected, setSelected] = useState<AppType>('marketplace');
-  const scrollRef = useRef<ScrollView>(null);
-
   const DemoComponent = DEMOS[selected];
 
   return (
@@ -63,7 +61,6 @@ export default function ExploreScreen() {
 
       <View style={{ height: 48 }}>
         <ScrollView
-          ref={scrollRef}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 20, gap: 8, alignItems: 'center' }}>

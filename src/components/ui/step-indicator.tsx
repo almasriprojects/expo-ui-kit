@@ -2,6 +2,7 @@ import React from 'react';
 import { View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type StepIndicatorProps = ViewProps & {
@@ -32,7 +33,7 @@ export function StepIndicator({
                   style={{
                     width: 28,
                     height: 28,
-                    borderRadius: 14,
+                    borderRadius: Radius.xl,
                     alignItems: 'center',
                     justifyContent: 'center',
                     backgroundColor: isCompleted

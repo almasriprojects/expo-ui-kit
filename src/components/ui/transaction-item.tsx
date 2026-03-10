@@ -2,6 +2,7 @@ import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type PressableProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type TransactionItemProps = PressableProps & {
@@ -53,7 +54,7 @@ export function TransactionItem({
           style={{
             width: 44,
             height: 44,
-            borderRadius: 22,
+            borderRadius: Radius['2xl'],
             backgroundColor: theme.card,
             alignItems: 'center',
             justifyContent: 'center',
@@ -65,7 +66,7 @@ export function TransactionItem({
           style={{
             width: 44,
             height: 44,
-            borderRadius: 22,
+            borderRadius: Radius['2xl'],
             backgroundColor: isCredit ? theme.successSoft : theme.card,
             alignItems: 'center',
             justifyContent: 'center',

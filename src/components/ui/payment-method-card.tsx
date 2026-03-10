@@ -45,7 +45,7 @@ export function PaymentMethodCard({
           flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: theme.card,
-          borderRadius: 14,
+          borderRadius: Radius.xl,
           padding: 14,
           gap: 12,
           borderWidth: selected ? 2 : 1,
@@ -59,14 +59,14 @@ export function PaymentMethodCard({
         style={{
           width: 20,
           height: 20,
-          borderRadius: 10,
+          borderRadius: Radius.lg,
           borderWidth: 2,
           borderColor: selected ? theme.primaryPressed : theme.cardPressed,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
         {selected && (
-          <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: theme.primaryPressed }} />
+          <View style={{ width: 10, height: 10, borderRadius: Radius.full, backgroundColor: theme.primaryPressed }} />
         )}
       </View>
 

@@ -2,6 +2,7 @@ import React, { type ReactNode } from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type TimelineItem = {
@@ -40,7 +41,7 @@ export function Timeline({ items, ...props }: TimelineProps) {
                 style={{
                   width: 14,
                   height: 14,
-                  borderRadius: 7,
+                  borderRadius: Radius.md,
                   backgroundColor: config.bg,
                   borderWidth: 2,
                   borderColor: config.border,

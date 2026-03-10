@@ -2,6 +2,7 @@ import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type NotificationItemProps = Omit<PressableProps, 'style'> & {
@@ -35,7 +36,7 @@ export function NotificationItem({
           padding: 14,
           gap: 12,
           backgroundColor: read ? 'transparent' : theme.card,
-          borderRadius: 14,
+          borderRadius: Radius.xl,
         },
         style,
       ]}
@@ -44,7 +45,7 @@ export function NotificationItem({
         style={{
           width: 40,
           height: 40,
-          borderRadius: 20,
+          borderRadius: Radius['2xl'],
           backgroundColor: iconBg ?? theme.cardPressed,
           alignItems: 'center',
           justifyContent: 'center',
@@ -73,7 +74,7 @@ export function NotificationItem({
           style={{
             width: 8,
             height: 8,
-            borderRadius: 4,
+            borderRadius: Radius.xs,
             backgroundColor: theme.primaryPressed,
             marginTop: 6,
           }}
