@@ -5,6 +5,9 @@ export { ForgotPasswordScreen } from './auth/forgot-password-screen';
 export { OTPScreen } from './auth/otp-screen';
 export { ResetPasswordScreen } from './auth/reset-password-screen';
 
+// ── Auth Demo (all 5 screens with tab switcher) ──
+export { AuthDemo } from './auth-demo';
+
 // ── App Template Demos ──
 export { BookingDemo } from './booking-demo';
 export { EducationDemo } from './education-demo';

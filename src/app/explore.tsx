@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { Screen } from '@/components/layout';
+import { AuthDemo } from '@/components/templates/auth-demo';
 import { BookingDemo } from '@/components/templates/booking-demo';
 import { EducationDemo } from '@/components/templates/education-demo';
 import { FinanceDemo } from '@/components/templates/finance-demo';
@@ -17,6 +18,7 @@ import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
 const APP_TYPES = [
+  { key: 'auth', label: '🔐 Auth', desc: 'Sign in, sign up, forgot password, OTP, reset' },
   { key: 'marketplace', label: '🛒 Marketplace', desc: 'Products, cart, checkout' },
   { key: 'finance', label: '💳 Finance', desc: 'Banking, payments, budgets' },
   { key: 'social', label: '📱 Social', desc: 'Feed, profiles, stories' },
@@ -32,6 +34,7 @@ const APP_TYPES = [
 type AppType = (typeof APP_TYPES)[number]['key'];
 
 const DEMOS: Record<AppType, React.ComponentType> = {
+  auth: AuthDemo,
   marketplace: MarketplaceDemo,
   finance: FinanceDemo,
   social: SocialDemo,
@@ -47,7 +50,7 @@ const DEMOS: Record<AppType, React.ComponentType> = {
 export default function ExploreScreen() {
   const t = useTheme();
   const f = useFont();
-  const [selected, setSelected] = useState<AppType>('marketplace');
+  const [selected, setSelected] = useState<AppType>('auth');
   const DemoComponent = DEMOS[selected];
 
   return (
