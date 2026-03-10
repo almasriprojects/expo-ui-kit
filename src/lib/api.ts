@@ -4,7 +4,7 @@ type RequestOptions = RequestInit & {
   timeout?: number;
 };
 
-class ApiError extends Error {
+export class ApiError extends Error {
   status: number;
   data: unknown;
 
@@ -13,6 +13,16 @@ class ApiError extends Error {
     this.name = 'ApiError';
     this.status = status;
     this.data = data;
+  }
+}
+
+async function safeJson<T>(response: Response): Promise<T | null> {
+  const contentType = response.headers.get('content-type') ?? '';
+  if (!contentType.includes('application/json')) return null;
+  try {
+    return (await response.json()) as T;
+  } catch {
+    return null;
   }
 }
 
@@ -33,15 +43,21 @@ async function request<T>(url: string, options: RequestOptions = {}): Promise<T>
     });
 
     if (!response.ok) {
-      const data = await response.json().catch(() => null);
+      const data = await safeJson(response);
       throw new ApiError(
         `Request failed: ${response.status} ${response.statusText}`,
         response.status,
-        data
+        data,
       );
     }
 
-    return (await response.json()) as T;
+    if (response.status === 204) return undefined as unknown as T;
+
+    const data = await safeJson<T>(response);
+    if (data === null) {
+      throw new ApiError('Response is not valid JSON', response.status);
+    }
+    return data;
   } finally {
     clearTimeout(id);
   }
@@ -63,5 +79,3 @@ export const api = {
   delete: <T>(url: string, options?: RequestOptions) =>
     request<T>(url, { ...options, method: 'DELETE' }),
 };
-
-export { ApiError };

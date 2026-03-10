@@ -29,6 +29,8 @@ export { FilterBar } from './filter-bar';
 export { ColorPicker } from './color-picker';
 export { RangeSlider } from './range-slider';
 export { FileUploadArea } from './file-upload-area';
+export { Autocomplete } from './autocomplete';
+export { DateRangePicker } from './date-range-picker';
 
 // ── Form Helpers ──
 export { Form, FormField, useForm } from './form';
@@ -45,6 +47,7 @@ export { Banner } from './banner';
 export { Popover } from './popover';
 export { Snackbar } from './snackbar';
 export { Tooltip } from './tooltip';
+export { ContextMenu } from './context-menu';
 export { ToastProvider } from '../../providers/toast-provider';
 export { useToast } from '../../hooks/use-toast';
 
@@ -61,6 +64,8 @@ export { AspectRatio } from './aspect-ratio';
 export { OnboardingScreen } from './onboarding-screen';
 export { BottomBar } from './bottom-bar';
 export { CalendarStrip } from './calendar-strip';
+export { Breadcrumb } from './breadcrumb';
+export { TreeView } from './tree-view';
 
 // ── Data Display ──
 export { Card } from './card';
