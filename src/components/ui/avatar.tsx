@@ -31,12 +31,16 @@ export function Avatar({ source, initials, size = 'md' }: AvatarProps) {
         source={{ uri: source }}
         style={{ width: s.pixels, height: s.pixels, borderRadius: s.pixels / 2 }}
         contentFit="cover"
+        accessibilityRole="image"
+        accessibilityLabel={initials ?? 'Avatar'}
       />
     );
   }
 
   return (
     <View
+      accessibilityRole="image"
+      accessibilityLabel={initials ?? 'Avatar'}
       style={{
         width: s.pixels,
         height: s.pixels,

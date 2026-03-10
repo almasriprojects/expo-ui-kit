@@ -31,6 +31,9 @@ export function ChatBubble({
 
   return (
     <View
+      accessible
+      accessibilityLabel={`${isOwn ? 'You' : 'Other'}: ${message}${timestamp ? `, ${timestamp}` : ''}`}
+      accessibilityRole="text"
       style={[
         {
           flexDirection: 'row',
