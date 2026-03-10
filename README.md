@@ -71,7 +71,23 @@ src/
 └── types/                  # TypeScript type definitions
 ```
 
-## Get Started
+## Start a New App
+
+Use this repo as a template to spin up a new app with all 143 components ready to go:
+
+```bash
+git clone https://github.com/almasriprojects/expo-ui-kit.git my-new-app
+cd my-new-app
+node scripts/setup.js
+```
+
+The setup script will:
+1. Ask for your app name
+2. Update `package.json` and `app.json` automatically
+3. Replace the demo screens with a clean starter screen (with theme/font pickers)
+4. Initialize a fresh git repo
+
+Then just install and run:
 
 ```bash
 npm install
@@ -82,6 +98,17 @@ npx expo start
 - Press **a** for Android emulator
 - Press **w** for web
 - Scan the QR code with **Expo Go** on your phone
+
+## Run the Demo (Kitchen Sink)
+
+To explore all 143 components and 10 app templates before creating your app:
+
+```bash
+git clone https://github.com/almasriprojects/expo-ui-kit.git
+cd expo-ui-kit
+npm install
+npx expo start
+```
 
 ## Theming
 
@@ -161,6 +188,8 @@ The **Explore** tab showcases 10 realistic app screens:
 | `npm run android` | Run on Android |
 | `npm run web` | Run on web |
 | `npm run lint` | Run ESLint |
+| `npm run typecheck` | TypeScript type check |
+| `npm run setup` | Set up as a new app (rename, clean screens) |
 
 ## License
 

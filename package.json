@@ -49,6 +49,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
+    "setup": "node ./scripts/setup.js",
     "reset-project": "node ./scripts/reset-project.js"
   },
   "dependencies": {
