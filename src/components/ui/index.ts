@@ -261,6 +261,16 @@ export { SwipeCards } from './swipe-cards';
 // ── Domain: Auth ──
 export { BiometricButton } from './biometric-button';
 
+// ── Onboarding ──
+export { WalkthroughSlides } from './walkthrough-slides';
+export type { WalkthroughSlidesProps, WalkthroughSlide } from './walkthrough-slides';
+export { CoachMark } from './coach-mark';
+export type { CoachMarkProps, CoachMarkTarget } from './coach-mark';
+export { PermissionRequest } from './permission-request';
+export type { PermissionRequestProps } from './permission-request';
+export { WelcomeScreen } from './welcome-screen';
+export type { WelcomeScreenProps } from './welcome-screen';
+
 // ── Domain: Media ──
 export { MediaControls } from './media-controls';
 
@@ -282,6 +292,30 @@ export { BoardColumn } from './board-column';
 // ── Domain: Real Estate ──
 export { PropertyCard } from './property-card';
 export { MortgageSlider } from './mortgage-slider';
+
+// ── Settings & Account ──
+export { SettingsScreen } from './settings-screen';
+export type { SettingsScreenProps, SettingsSection, SettingsItem } from './settings-screen';
+export { ProfileHeader } from './profile-header';
+export type { ProfileHeaderProps, ProfileHeaderStats } from './profile-header';
+export { LanguageSelector } from './language-selector';
+export type { LanguageSelectorProps, LanguageOption } from './language-selector';
+export { DeleteAccountFlow } from './delete-account-flow';
+export type { DeleteAccountFlowProps } from './delete-account-flow';
+export { AboutScreen } from './about-screen';
+export type { AboutScreenProps, AboutScreenLink } from './about-screen';
+export { LegalScreen } from './legal-screen';
+export type { LegalScreenProps } from './legal-screen';
+
+// ── Maps & Location ──
+export { MapMarker } from './map-marker';
+export type { MapMarkerProps } from './map-marker';
+export { LocationSearch } from './location-search';
+export type { LocationSearchProps, LocationSearchSuggestion } from './location-search';
+export { RouteSummary } from './route-summary';
+export type { RouteSummaryProps, RouteMode } from './route-summary';
+export { NearbyList } from './nearby-list';
+export type { NearbyListProps, NearbyPlace } from './nearby-list';
 
 // ── Data & Charts ──
 export { BarChart } from './bar-chart';
