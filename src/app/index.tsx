@@ -16,7 +16,7 @@ import {
   FormsSection,
   LayoutSection,
   OverlaySection,
-} from './sections';
+} from '@/components/sections';
 
 const CATEGORIES = [
   { key: 'all', label: 'All' },
