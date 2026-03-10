@@ -2,6 +2,7 @@
 export { UIKitProvider } from './providers/ui-kit-provider';
 export { ThemeModeProvider, useThemeMode } from './providers/theme-mode-provider';
 export { AppProviders } from './providers/app-providers';
+export { ToastProvider } from './providers/toast-provider';
 
 // ── Hooks ──
 export { useTheme } from './hooks/use-theme';
@@ -9,6 +10,7 @@ export { useFont } from './hooks/use-font';
 export { useColorScheme } from './hooks/use-color-scheme';
 export { useDebounce } from './hooks/use-debounce';
 export { useKeyboard } from './hooks/use-keyboard';
+export { useToast } from './hooks/use-toast';
 
 // ── Constants & Theme ──
 export {
@@ -35,6 +37,7 @@ export type {
   FontPresetName,
   FontFamilyTokens,
 } from './constants/theme';
+export type { ThemeColorScheme, NavigationRoute } from './types';
 
 // ── Layout ──
 export { Screen, ScreenScrollView } from './components/layout/screen';
@@ -45,7 +48,7 @@ export { ThemedView } from './components/themed-view';
 export { ExternalLink } from './components/external-link';
 export { HintRow } from './components/hint-row';
 
-// ── UI Components (149) — includes ToastProvider, useToast ──
+// ── UI Components (250+) ──
 export * from './components/ui';
 
 // ── App Template Demos (10) + Auth Screens (5) ──

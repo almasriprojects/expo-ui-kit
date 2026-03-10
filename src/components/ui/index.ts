@@ -96,8 +96,6 @@ export { Popover } from './popover';
 export { Snackbar } from './snackbar';
 export { Tooltip } from './tooltip';
 export { ContextMenu } from './context-menu';
-export { ToastProvider } from '../../providers/toast-provider';
-export { useToast } from '../../hooks/use-toast';
 
 // ── Navigation & Layout ──
 export { SidebarMenu } from './sidebar-menu';
