@@ -1,12 +1,12 @@
 # Expo UI Kit
 
-A production-ready **React Native component library** built with Expo SDK 54. Features **149 UI components**, **10 app template demos**, **5 auth screen templates**, **8 color themes**, **5 font presets**, and full light/dark mode support — all driven by a single centralized theme file.
+A production-ready **React Native component library** built with Expo SDK 54. Features **249 UI components**, **10 app template demos**, **5 auth screen templates**, **8 color themes**, **5 font presets**, and full light/dark mode support — all driven by a single centralized theme file.
 
 Think of it as **shadcn/ui for React Native**.
 
 ## Highlights
 
-- **149 reusable components** — buttons, inputs, cards, modals, data tables, calendars, swipe cards, autocomplete, date range picker, tree view, context menu, breadcrumb, and much more
+- **249 reusable components** — buttons, inputs, cards, modals, charts, data tables, calendars, transitions, accessibility primitives, layout helpers, media players, and much more
 - **10 full app template demos** — Marketplace, Finance, Project Management, Food Delivery, Booking, Social, Messaging, Fitness, Education, Real Estate
 - **5 auth screen templates** — Sign In, Sign Up, Forgot Password, OTP Verification, Reset Password
 - **8 color themes** — Default, Blue, Green, Orange, Red, Rose, Violet, Yellow (derived from shadcn's oklch palette)
@@ -35,16 +35,17 @@ src/
 ├── app/                    # Expo Router screens
 │   ├── _layout.tsx         # Root layout with UIKitProvider
 │   ├── index.tsx           # Home — component showcase (kitchen sink)
-│   ├── sections/           # Demo sections (forms, controls, display, etc.)
 │   └── explore.tsx         # Explore — app template demos
 │
 ├── components/
-│   ├── ui/                 # 149 reusable UI components
+│   ├── ui/                 # 249 reusable UI components
 │   │   └── index.ts        # Barrel export
 │   ├── templates/          # 10 app demos + 5 auth screens
 │   │   ├── auth/           # Sign in, sign up, forgot password, OTP, reset
 │   │   └── index.ts        # Barrel export
+│   ├── sections/           # Kitchen-sink demo sections
 │   ├── layout/             # Screen, ScreenScrollView
+│   ├── internal/           # App-internal files (tabs, splash, web badge)
 │   ├── themed-text.tsx     # Font-aware themed Text
 │   └── themed-view.tsx     # Theme-aware View
 │
@@ -78,7 +79,7 @@ src/
 
 ## Start a New App
 
-Use this repo as a template to spin up a new app with all 149 components ready to go:
+Use this repo as a template to spin up a new app with all 249 components ready to go:
 
 ```bash
 git clone https://github.com/almasriprojects/expo-ui-kit.git my-new-app
@@ -106,7 +107,7 @@ npx expo start
 
 ## Run the Demo (Kitchen Sink)
 
-To explore all 149 components and 10 app templates before creating your app:
+To explore all 249 components and 10 app templates before creating your app:
 
 ```bash
 git clone https://github.com/almasriprojects/expo-ui-kit.git
@@ -156,19 +157,27 @@ const f = useFont();       // { regular, medium, semiBold, bold }
 
 | Category | Examples |
 |----------|---------|
-| Layout | Screen, Card, Divider, Separator, AspectRatio |
-| Typography | ThemedText, Label, SectionHeader, ReadMoreText |
-| Inputs | Input, TextArea, Checkbox, Switch, Radio, Slider, Select, DatePicker, Autocomplete |
-| Buttons | Button, IconButton, FAB, SplitButton, SpeedDial |
-| Feedback | Toast, Alert, Snackbar, Progress, Skeleton, Loading |
-| Overlays | BottomSheet, ActionSheet, Modal, ConfirmDialog, Tooltip, Popover, ContextMenu |
-| Navigation | Tabs, Breadcrumb, StepIndicator, Pagination, SegmentedControl, Accordion |
-| Data Display | DataTable, Timeline, StatCard, PricingCard, CountdownTimer, AnimatedCounter |
-| Media | Avatar, AvatarGroup, ImageCarousel, VideoThumbnail, AudioWaveform |
-| Lists | SwipeableRow, SwipeCards, Kanban, ChecklistItem, TreeView |
+| Layout Primitives | Stack, VStack, HStack, Box, Center, Spacer, Wrap, ResponsiveGrid, MasonryGrid |
+| Layout | Screen, Card, Divider, Separator, AspectRatio, ParallaxScrollView |
+| Typography | ThemedText, Highlight, Kbd, ReadMoreText, CurrencyDisplay |
+| Inputs | Input, TextArea, Checkbox, Switch, Radio, Slider, Select, DatePicker, Autocomplete, MaskedInput, CreditCardInput, SignaturePad, RichTextEditor, InlineEdit, MentionInput |
+| Buttons | Button, IconButton, FAB, SplitButton, SpeedDial, BackButton |
+| Feedback | Toast, Alert, Snackbar, Progress, Skeleton, Loading, InlineNotification, Confetti |
+| Overlays | Sheet, BottomSheet, ActionSheet, Modal, ConfirmDialog, Tooltip, Popover, ContextMenu, CommandPalette, ShareSheet |
+| Navigation | Tabs, Breadcrumb, StepIndicator, VerticalStepper, Pagination, SegmentedControl, Accordion, AppBar, BottomNavigation, SidebarMenu, FloatingHeader, SwipeableTabView |
+| Data Display | DataTable, Timeline, StatCard, Statistic, PricingCard, CountdownTimer, AnimatedCounter, DescriptionList, ComparisonTable |
+| Charts | BarChart, LineChart, AreaChart, PieChart, DonutChart, Sparkline, Gauge, HorizontalBarChart, HeatmapCalendar |
+| Media | Avatar, AvatarGroup, ImageCarousel, Carousel, ImageViewer, ProductGallery, VideoThumbnail, AudioWaveform, AudioPlayer, VideoPlayer, QRCode |
+| Lists | SwipeableRow, SwipeCards, KanbanBoard, SortableList, InfiniteScrollList, StickyHeaderList, TreeView, ChecklistItem |
 | Date & Time | DatePicker, TimePicker, DateRangePicker, CalendarStrip |
-| Commerce | ProductCard, CartItem, OrderSummary, ShippingTracker, PriceTag |
-| Social | CommentCard, PostCard, StoryCircle, FollowButton, ChatBubble |
+| Commerce | ProductCard, CartItem, OrderSummary, ShippingTracker, PriceTag, Receipt, CouponCard, SizeSelector, ColorSwatchSelector, TipSelector, SubscriptionCard, InventoryBadge |
+| Social | CommentCard, PostCard, StoryCircle, FollowButton, ChatBubble, ReactionBar, Poll, EmojiPicker, VoiceMessageBubble, ReadReceipt, ActivityFeed |
+| Maps & Location | MapMarker, LocationSearch, RouteSummary, NearbyList |
+| Settings & Account | SettingsScreen, ProfileHeader, LanguageSelector, DeleteAccountFlow, AboutScreen, LegalScreen |
+| Onboarding | WalkthroughSlides, CoachMark, PermissionRequest, WelcomeScreen |
+| Status & Screens | NotificationCenter, BadgeCounter, ConnectionStatus, MaintenanceScreen, UpdateRequiredScreen, SuccessScreen, ErrorScreen |
+| Transitions | FadeTransition, SlideTransition, CollapseTransition, ScaleTransition |
+| Accessibility | VisuallyHidden, ScreenReaderAnnounce, ReducedMotionWrapper |
 | Auth | SignInScreen, SignUpScreen, ForgotPasswordScreen, OTPScreen, ResetPasswordScreen |
 | Error Handling | ErrorBoundary |
 
