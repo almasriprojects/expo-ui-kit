@@ -1,56 +1,167 @@
-# Welcome to your Expo app 👋
+# Expo UI Kit
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A production-ready **React Native component library** built with Expo SDK 54. Features **143 UI components**, **10 app template demos**, **8 color themes**, **5 font presets**, and full light/dark mode support — all driven by a single centralized theme file.
 
-## Get started
+Think of it as **shadcn/ui for React Native**.
 
-1. Install dependencies
+## Highlights
 
-   ```bash
-   npm install
-   ```
+- **143 reusable components** — buttons, inputs, cards, modals, charts, data tables, calendars, swipe cards, and much more
+- **10 full app template demos** — Marketplace, Finance, Project Management, Food Delivery, Booking, Social, Messaging, Fitness, Education, Real Estate
+- **8 color themes** — Default, Blue, Green, Orange, Red, Rose, Violet, Yellow (derived from shadcn's oklch palette)
+- **5 font presets** — System, Inter, Poppins, Nunito Sans, DM Sans
+- **Zero hardcoded colors** — every component reads from a centralized token system
+- **Light & dark mode** — automatic or manual toggle, persisted via AsyncStorage
+- **Kitchen-sink showcase** — the Home tab displays every component categorized like gluestack.io
 
-2. Start the app
+## Tech Stack
 
-   ```bash
-   npx expo start
-   ```
+| Layer | Technology |
+|-------|-----------|
+| Framework | Expo SDK 54 + Expo Router |
+| Styling | Inline styles via theme tokens (NativeWind available) |
+| Animations | React Native Reanimated |
+| Gestures | React Native Gesture Handler |
+| Fonts | expo-google-fonts (Inter, Poppins, Nunito Sans, DM Sans) |
+| Storage | AsyncStorage (theme/font persistence) |
+| Language | TypeScript (strict) |
 
-In the output, you'll find options to open the app in a
+## Project Structure
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+src/
+├── app/                    # Expo Router screens
+│   ├── _layout.tsx         # Root layout, font loading, providers
+│   ├── index.tsx           # Home — component showcase (kitchen sink)
+│   └── explore.tsx         # Explore — app template demos
+│
+├── components/
+│   ├── ui/                 # 143 reusable UI components
+│   │   └── index.ts        # Barrel export
+│   ├── templates/          # 10 full app demo screens
+│   │   └── index.ts        # Barrel export
+│   ├── layout/             # Screen, ScreenScrollView, SafeAreaLayout
+│   ├── themed-text.tsx     # Font-aware themed Text
+│   └── themed-view.tsx     # Theme-aware View
+│
+├── constants/
+│   └── theme.ts            # ALL design tokens: colors, fonts, spacing, radii, shadows
+│
+├── hooks/
+│   ├── use-theme.ts        # Access current color tokens
+│   ├── use-font.ts         # Access current font tokens
+│   ├── use-color-scheme.ts # System color scheme
+│   ├── use-debounce.ts     # Debounced values
+│   ├── use-keyboard.ts     # Keyboard state
+│   └── use-toast.ts        # Toast notifications
+│
+├── providers/
+│   ├── theme-mode-provider.tsx  # Theme mode, color preset, font preset
+│   └── app-providers.tsx        # SafeArea + all providers
+│
+├── lib/
+│   ├── api.ts              # Typed HTTP client
+│   └── storage.ts          # AsyncStorage wrapper
+│
+├── utils/
+│   ├── format.ts           # Date/string formatting
+│   ├── platform.ts         # Platform detection
+│   └── haptics.ts          # Haptic feedback
+│
+└── types/                  # TypeScript type definitions
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Get Started
 
-### Other setup steps
+```bash
+npm install
+npx expo start
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+- Press **i** for iOS simulator
+- Press **a** for Android emulator
+- Press **w** for web
+- Scan the QR code with **Expo Go** on your phone
 
-## Learn more
+## Theming
 
-To learn more about developing your project with Expo, look at the following resources:
+All design tokens live in a single file: `src/constants/theme.ts`.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Change Colors
 
-## Join the community
+Pick a preset or create your own in `ThemePresets`:
 
-Join our community of developers creating universal apps.
+```tsx
+import { useThemeMode } from '@/providers/theme-mode-provider';
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+const { setThemeName } = useThemeMode();
+setThemeName('blue'); // 'default' | 'blue' | 'green' | 'orange' | 'red' | 'rose' | 'violet' | 'yellow'
+```
+
+### Change Fonts
+
+```tsx
+const { setFontPreset } = useThemeMode();
+setFontPreset('poppins'); // 'system' | 'inter' | 'poppins' | 'nunito' | 'dmSans'
+```
+
+### Access Tokens in Components
+
+```tsx
+import { useTheme } from '@/hooks/use-theme';
+import { useFont } from '@/hooks/use-font';
+import { resolveFontFamily } from '@/constants/theme';
+
+const t = useTheme();     // { primary, text, background, card, border, ... }
+const f = useFont();       // { regular, medium, semiBold, bold }
+
+<Text style={{ color: t.primary, fontFamily: resolveFontFamily(f, '600') }}>
+  Hello
+</Text>
+```
+
+## Component Categories
+
+| Category | Examples |
+|----------|---------|
+| Layout | Screen, Card, Divider, Spacer, Grid |
+| Typography | ThemedText, Label, SectionHeader |
+| Inputs | Input, TextArea, Checkbox, Switch, Radio, Slider, Select, DatePicker |
+| Buttons | Button, IconButton, FAB, SegmentedControl |
+| Feedback | Toast, Alert, Snackbar, ProgressBar, Skeleton |
+| Overlays | BottomSheet, ActionSheet, Dialog, Tooltip, Popover |
+| Navigation | Tabs, Breadcrumb, Stepper, Pagination |
+| Data Display | DataTable, Timeline, StatCard, PricingCard, Chart |
+| Media | Avatar, ImageCarousel, VideoPlayer, Gallery |
+| Lists | SwipeableRow, DraggableList, Kanban, ChecklistItem |
+| Commerce | ProductCard, CartItem, OrderSummary, ShippingTracker |
+| Social | CommentThread, ReactionBar, StoryAvatar, ShareSheet |
+
+## App Template Demos
+
+The **Explore** tab showcases 10 realistic app screens:
+
+1. **Marketplace** — product grid, filters, cart
+2. **Finance** — portfolio, transactions, cards
+3. **Project Management** — kanban, tasks, team
+4. **Food Delivery** — restaurants, menu, order tracking
+5. **Booking** — calendar, listings, reservations
+6. **Social** — feed, stories, profiles
+7. **Messaging** — chat, conversations, media
+8. **Fitness** — workouts, stats, progress
+9. **Education** — courses, lessons, quizzes
+10. **Real Estate** — listings, maps, details
+
+## Scripts
+
+| Command | Description |
+|---------|------------|
+| `npm start` | Start Expo dev server |
+| `npm run ios` | Run on iOS |
+| `npm run android` | Run on Android |
+| `npm run web` | Run on web |
+| `npm run lint` | Run ESLint |
+
+## License
+
+MIT
