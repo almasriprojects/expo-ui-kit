@@ -1,6 +1,9 @@
 import React, { type ReactNode, useEffect } from 'react';
+import { LogBox } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+LogBox.ignoreLogs(['SafeAreaView has been deprecated']);
 
 import {
   DMSans_400Regular,
