@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import {
   AnimatedCounter,
+  Autocomplete,
   AvatarGroup,
   Banner,
+  Breadcrumb,
   Button,
   CalendarStrip,
   ChecklistItem,
   CircularProgress,
   CodeBlock,
   ColorPicker,
+  ContextMenu,
   CopyButton,
+  DateRangePicker,
   FileUploadArea,
   FilterBar,
   FloatingLabelInput,
@@ -29,14 +33,17 @@ import {
   StatusIndicator,
   TagInput,
   ToggleGroup,
+  TreeView,
   VerificationBadge,
 } from '@/components/ui';
 import { useTheme } from '@/hooks/use-theme';
+import { useToast } from '@/hooks/use-toast';
 
 import { Demo, SectionHeader } from './demo-helpers';
 
 export function AdvancedSection() {
   const t = useTheme();
+  const toast = useToast();
 
   const [floatingVal, setFloatingVal] = useState('');
   const [multiVal, setMultiVal] = useState<string[]>(['react']);
@@ -49,6 +56,9 @@ export function AdvancedSection() {
   const [currentPage, setCurrentPage] = useState(2);
   const [todo1, setTodo1] = useState(true);
   const [todo2, setTodo2] = useState(false);
+  const [autoVal, setAutoVal] = useState('');
+  const [rangeStart, setRangeStart] = useState<Date | undefined>();
+  const [rangeEnd, setRangeEnd] = useState<Date | undefined>();
 
   return (
     <>
@@ -231,6 +241,111 @@ return <Text style={{ color: t.text }}>Hello</Text>;`}
           <ChecklistItem title="Setup project" checked={todo1} onToggle={setTodo1} priority="high" />
           <ChecklistItem title="Build components" checked={todo2} onToggle={setTodo2} priority="medium" />
         </View>
+      </Demo>
+
+      <Demo title="Autocomplete">
+        <Autocomplete
+          label="Country"
+          placeholder="Search countries..."
+          options={[
+            { label: 'United States', value: 'us' },
+            { label: 'United Kingdom', value: 'uk' },
+            { label: 'United Arab Emirates', value: 'ae' },
+            { label: 'Canada', value: 'ca' },
+            { label: 'Germany', value: 'de' },
+            { label: 'France', value: 'fr' },
+            { label: 'Japan', value: 'jp' },
+            { label: 'Australia', value: 'au' },
+          ]}
+          value={autoVal}
+          onValueChange={setAutoVal}
+        />
+      </Demo>
+
+      <Demo title="DateRangePicker">
+        <DateRangePicker
+          label="Trip Dates"
+          startDate={rangeStart}
+          endDate={rangeEnd}
+          onRangeChange={(start, end) => {
+            setRangeStart(start);
+            setRangeEnd(end);
+          }}
+          minDate={new Date()}
+        />
+      </Demo>
+
+      <Demo title="TreeView">
+        <TreeView
+          data={[
+            {
+              key: 'src',
+              label: 'src',
+              icon: '📁',
+              children: [
+                {
+                  key: 'components',
+                  label: 'components',
+                  icon: '📁',
+                  children: [
+                    { key: 'button', label: 'Button.tsx', icon: '📄' },
+                    { key: 'input', label: 'Input.tsx', icon: '📄' },
+                    { key: 'modal', label: 'Modal.tsx', icon: '📄' },
+                  ],
+                },
+                {
+                  key: 'hooks',
+                  label: 'hooks',
+                  icon: '📁',
+                  children: [
+                    { key: 'useTheme', label: 'useTheme.ts', icon: '📄' },
+                    { key: 'useFont', label: 'useFont.ts', icon: '📄' },
+                  ],
+                },
+                { key: 'index', label: 'index.ts', icon: '📄' },
+              ],
+            },
+            { key: 'readme', label: 'README.md', icon: '📝' },
+            { key: 'pkg', label: 'package.json', icon: '📦' },
+          ]}
+          defaultExpanded={['src']}
+          onNodePress={(node) => toast.show({ message: `Opened ${node.label}`, variant: 'info' })}
+        />
+      </Demo>
+
+      <Demo title="ContextMenu">
+        <ContextMenu
+          items={[
+            { key: 'copy', label: 'Copy', icon: '📋' },
+            { key: 'edit', label: 'Edit', icon: '✏️' },
+            { key: 'share', label: 'Share', icon: '🔗' },
+            { key: 'delete', label: 'Delete', icon: '🗑️', destructive: true },
+          ]}
+          onItemPress={(item) => toast.show({ message: `${item.label} pressed`, variant: 'info' })}>
+          <View
+            style={{
+              backgroundColor: t.surface,
+              padding: 20,
+              borderRadius: 12,
+              borderWidth: 1,
+              borderColor: t.border,
+              alignItems: 'center',
+            }}>
+            <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>Long press me</Text>
+            <Text style={{ fontSize: 12, color: t.textTertiary, marginTop: 4 }}>Hold to see the context menu</Text>
+          </View>
+        </ContextMenu>
+      </Demo>
+
+      <Demo title="Breadcrumb">
+        <Breadcrumb
+          items={[
+            { label: 'Home', onPress: () => {} },
+            { label: 'Components', onPress: () => {} },
+            { label: 'Advanced', onPress: () => {} },
+            { label: 'Breadcrumb' },
+          ]}
+        />
       </Demo>
     </>
   );

@@ -1,17 +1,19 @@
 # Expo UI Kit
 
-A production-ready **React Native component library** built with Expo SDK 54. Features **143 UI components**, **10 app template demos**, **8 color themes**, **5 font presets**, and full light/dark mode support — all driven by a single centralized theme file.
+A production-ready **React Native component library** built with Expo SDK 54. Features **149 UI components**, **10 app template demos**, **5 auth screen templates**, **8 color themes**, **5 font presets**, and full light/dark mode support — all driven by a single centralized theme file.
 
 Think of it as **shadcn/ui for React Native**.
 
 ## Highlights
 
-- **143 reusable components** — buttons, inputs, cards, modals, charts, data tables, calendars, swipe cards, and much more
+- **149 reusable components** — buttons, inputs, cards, modals, data tables, calendars, swipe cards, autocomplete, date range picker, tree view, context menu, breadcrumb, and much more
 - **10 full app template demos** — Marketplace, Finance, Project Management, Food Delivery, Booking, Social, Messaging, Fitness, Education, Real Estate
+- **5 auth screen templates** — Sign In, Sign Up, Forgot Password, OTP Verification, Reset Password
 - **8 color themes** — Default, Blue, Green, Orange, Red, Rose, Violet, Yellow (derived from shadcn's oklch palette)
 - **5 font presets** — System, Inter, Poppins, Nunito Sans, DM Sans
 - **Zero hardcoded colors** — every component reads from a centralized token system
 - **Light & dark mode** — automatic or manual toggle, persisted via AsyncStorage
+- **ErrorBoundary** — built-in crash protection wrapping the entire app
 - **Kitchen-sink showcase** — the Home tab displays every component categorized like gluestack.io
 
 ## Tech Stack
@@ -31,16 +33,18 @@ Think of it as **shadcn/ui for React Native**.
 ```
 src/
 ├── app/                    # Expo Router screens
-│   ├── _layout.tsx         # Root layout, font loading, providers
+│   ├── _layout.tsx         # Root layout with UIKitProvider
 │   ├── index.tsx           # Home — component showcase (kitchen sink)
+│   ├── sections/           # Demo sections (forms, controls, display, etc.)
 │   └── explore.tsx         # Explore — app template demos
 │
 ├── components/
-│   ├── ui/                 # 143 reusable UI components
+│   ├── ui/                 # 149 reusable UI components
 │   │   └── index.ts        # Barrel export
-│   ├── templates/          # 10 full app demo screens
+│   ├── templates/          # 10 app demos + 5 auth screens
+│   │   ├── auth/           # Sign in, sign up, forgot password, OTP, reset
 │   │   └── index.ts        # Barrel export
-│   ├── layout/             # Screen, ScreenScrollView, SafeAreaLayout
+│   ├── layout/             # Screen, ScreenScrollView
 │   ├── themed-text.tsx     # Font-aware themed Text
 │   └── themed-view.tsx     # Theme-aware View
 │
@@ -56,12 +60,13 @@ src/
 │   └── use-toast.ts        # Toast notifications
 │
 ├── providers/
-│   ├── theme-mode-provider.tsx  # Theme mode, color preset, font preset
-│   └── app-providers.tsx        # SafeArea + all providers
+│   ├── ui-kit-provider.tsx    # Top-level provider (SafeArea, Gestures, Theme, Toast, ErrorBoundary)
+│   ├── theme-mode-provider.tsx # Theme mode, color preset, font preset
+│   └── toast-provider.tsx     # Toast notification system
 │
 ├── lib/
-│   ├── api.ts              # Typed HTTP client
-│   └── storage.ts          # AsyncStorage wrapper
+│   ├── api.ts              # Typed HTTP client with safe JSON parsing
+│   └── storage.ts          # AsyncStorage wrapper with dev warnings
 │
 ├── utils/
 │   ├── format.ts           # Date/string formatting
@@ -73,7 +78,7 @@ src/
 
 ## Start a New App
 
-Use this repo as a template to spin up a new app with all 143 components ready to go:
+Use this repo as a template to spin up a new app with all 149 components ready to go:
 
 ```bash
 git clone https://github.com/almasriprojects/expo-ui-kit.git my-new-app
@@ -101,7 +106,7 @@ npx expo start
 
 ## Run the Demo (Kitchen Sink)
 
-To explore all 143 components and 10 app templates before creating your app:
+To explore all 149 components and 10 app templates before creating your app:
 
 ```bash
 git clone https://github.com/almasriprojects/expo-ui-kit.git
@@ -151,18 +156,21 @@ const f = useFont();       // { regular, medium, semiBold, bold }
 
 | Category | Examples |
 |----------|---------|
-| Layout | Screen, Card, Divider, Spacer, Grid |
-| Typography | ThemedText, Label, SectionHeader |
-| Inputs | Input, TextArea, Checkbox, Switch, Radio, Slider, Select, DatePicker |
-| Buttons | Button, IconButton, FAB, SegmentedControl |
-| Feedback | Toast, Alert, Snackbar, ProgressBar, Skeleton |
-| Overlays | BottomSheet, ActionSheet, Dialog, Tooltip, Popover |
-| Navigation | Tabs, Breadcrumb, Stepper, Pagination |
-| Data Display | DataTable, Timeline, StatCard, PricingCard, Chart |
-| Media | Avatar, ImageCarousel, VideoPlayer, Gallery |
-| Lists | SwipeableRow, DraggableList, Kanban, ChecklistItem |
-| Commerce | ProductCard, CartItem, OrderSummary, ShippingTracker |
-| Social | CommentThread, ReactionBar, StoryAvatar, ShareSheet |
+| Layout | Screen, Card, Divider, Separator, AspectRatio |
+| Typography | ThemedText, Label, SectionHeader, ReadMoreText |
+| Inputs | Input, TextArea, Checkbox, Switch, Radio, Slider, Select, DatePicker, Autocomplete |
+| Buttons | Button, IconButton, FAB, SplitButton, SpeedDial |
+| Feedback | Toast, Alert, Snackbar, Progress, Skeleton, Loading |
+| Overlays | BottomSheet, ActionSheet, Modal, ConfirmDialog, Tooltip, Popover, ContextMenu |
+| Navigation | Tabs, Breadcrumb, StepIndicator, Pagination, SegmentedControl, Accordion |
+| Data Display | DataTable, Timeline, StatCard, PricingCard, CountdownTimer, AnimatedCounter |
+| Media | Avatar, AvatarGroup, ImageCarousel, VideoThumbnail, AudioWaveform |
+| Lists | SwipeableRow, SwipeCards, Kanban, ChecklistItem, TreeView |
+| Date & Time | DatePicker, TimePicker, DateRangePicker, CalendarStrip |
+| Commerce | ProductCard, CartItem, OrderSummary, ShippingTracker, PriceTag |
+| Social | CommentCard, PostCard, StoryCircle, FollowButton, ChatBubble |
+| Auth | SignInScreen, SignUpScreen, ForgotPasswordScreen, OTPScreen, ResetPasswordScreen |
+| Error Handling | ErrorBoundary |
 
 ## App Template Demos
 

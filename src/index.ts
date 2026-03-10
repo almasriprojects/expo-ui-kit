@@ -45,7 +45,7 @@ export { ThemedView } from './components/themed-view';
 export { ExternalLink } from './components/external-link';
 export { HintRow } from './components/hint-row';
 
-// ── UI Components (143) — includes ToastProvider, useToast ──
+// ── UI Components (149) — includes ToastProvider, useToast ──
 export * from './components/ui';
 
 // ── App Template Demos (10) + Auth Screens (5) ──
