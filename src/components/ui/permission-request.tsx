@@ -1,17 +1,25 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type PermissionRequestProps = {
+  /** Emoji icon displayed at the top of the request */
   icon: string;
+  /** Title of the permission being requested */
   title: string;
+  /** Description explaining why the permission is needed */
   description: string;
+  /** Callback invoked when the user grants the permission */
   onAllow: () => void;
+  /** Callback invoked when the user denies the permission */
   onDeny: () => void;
+  /** Label text for the allow button */
   allowLabel?: string;
+  /** Label text for the deny button */
   denyLabel?: string;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -55,11 +63,11 @@ export function PermissionRequest({
           marginBottom: 16,
         }}
       >
-        <Text style={{ fontSize: 28 }}>{icon}</Text>
+        <Text style={{ fontSize: FontSize['3xl'].fontSize }}>{icon}</Text>
       </View>
       <Text
         style={{
-          fontSize: 18,
+          fontSize: FontSize.xl.fontSize,
           fontWeight: '700',
           color: t.text,
           textAlign: 'center',
@@ -70,7 +78,7 @@ export function PermissionRequest({
       </Text>
       <Text
         style={{
-          fontSize: 14,
+          fontSize: FontSize.md.fontSize,
           color: t.textSecondary,
           textAlign: 'center',
           lineHeight: 20,
@@ -94,7 +102,7 @@ export function PermissionRequest({
           accessibilityRole="button"
           accessibilityLabel={denyLabel}
         >
-          <Text style={{ fontSize: 15, fontWeight: '600', color: t.textSecondary }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.textSecondary }}>
             {denyLabel}
           </Text>
         </Pressable>
@@ -111,7 +119,7 @@ export function PermissionRequest({
           accessibilityRole="button"
           accessibilityLabel={allowLabel}
         >
-          <Text style={{ fontSize: 15, fontWeight: '600', color: t.primaryForeground }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primaryForeground }}>
             {allowLabel}
           </Text>
         </Pressable>

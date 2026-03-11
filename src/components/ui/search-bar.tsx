@@ -3,12 +3,15 @@ import { Pressable, TextInput, type TextInputProps, View } from 'react-native';
 import { Search, X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SearchBarProps = TextInputProps & {
+export type SearchBarProps = TextInputProps & {
+  /** Callback invoked when the clear button is pressed */
   onClear?: () => void;
+  /** Whether to show a cancel button beside the search input */
   showCancel?: boolean;
+  /** Callback invoked when the cancel button is pressed */
   onCancel?: () => void;
 };
 
@@ -17,7 +20,7 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
     const t = useTheme();
 
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[3] }}>
         <View
           style={{
             flex: 1,
@@ -25,9 +28,9 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
             alignItems: 'center',
             backgroundColor: t.surface,
             borderRadius: Radius.xl,
-            paddingHorizontal: 12,
-            paddingVertical: 10,
-            gap: 8,
+            paddingHorizontal: Spacing[3],
+            paddingVertical: Spacing[2.5],
+            gap: Spacing[2],
           }}>
           <Search size={16} color={t.textSecondary} />
           <TextInput
@@ -36,7 +39,7 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
             placeholderTextColor={t.textTertiary}
             placeholder="Search..."
             style={[
-              { flex: 1, fontSize: 16, color: t.text },
+              { flex: 1, fontSize: FontSize.lg.fontSize, color: t.text },
               typeof style === 'object' ? style : undefined,
             ]}
             returnKeyType="search"
@@ -52,7 +55,7 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
         </View>
         {showCancel && (
           <Pressable onPress={onCancel}>
-            <ThemedText style={{ fontSize: 14, color: t.primary }}>Cancel</ThemedText>
+            <ThemedText style={{ fontSize: FontSize.md.fontSize, color: t.primary }}>Cancel</ThemedText>
           </Pressable>
         )}
       </View>

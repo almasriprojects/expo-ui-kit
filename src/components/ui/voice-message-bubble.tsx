@@ -2,15 +2,21 @@ import React, { useMemo } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Play, Pause } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type VoiceMessageBubbleProps = {
+  /** Total duration of the voice message in seconds */
   duration: number;
+  /** Whether the voice message is currently playing */
   isPlaying?: boolean;
+  /** Callback invoked when the play/pause button is pressed */
   onPlayPause?: () => void;
+  /** Playback progress as a fraction (0–1) */
   progress?: number;
+  /** Whether this message was sent by the current user */
   isOwn?: boolean;
+  /** Custom styles applied to the bubble container */
   style?: ViewStyle;
 };
 
@@ -105,7 +111,7 @@ export function VoiceMessageBubble({
 
       <Text
         style={{
-          fontSize: 12,
+          fontSize: FontSize.sm.fontSize,
           color: isOwn ? t.primaryForeground : t.textSecondary,
           fontVariant: ['tabular-nums'],
           opacity: isOwn ? 0.9 : 1,

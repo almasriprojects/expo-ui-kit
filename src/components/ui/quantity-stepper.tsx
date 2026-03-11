@@ -2,22 +2,30 @@ import React from 'react';
 import { Pressable, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type QuantityStepperProps = ViewProps & {
+export type QuantityStepperProps = ViewProps & {
+  /** Current numeric value */
   value: number;
+  /** Callback invoked when the value changes */
   onValueChange: (value: number) => void;
+  /** Minimum allowed value */
   min?: number;
+  /** Maximum allowed value */
   max?: number;
+  /** Increment/decrement step size */
   step?: number;
+  /** Label text displayed above the stepper */
   label?: string;
+  /** Size variant of the stepper controls */
   size?: 'sm' | 'md' | 'lg';
 };
 
 const sizes = {
-  sm: { btn: 28, text: 13, gap: 12 },
-  md: { btn: 36, text: 16, gap: 16 },
-  lg: { btn: 44, text: 20, gap: 20 },
+  sm: { btn: 28, text: FontSize.sm.fontSize, gap: 12 },
+  md: { btn: 36, text: FontSize.md.fontSize, gap: 16 },
+  lg: { btn: 44, text: FontSize.xl.fontSize, gap: 20 },
 };
 
 export function QuantityStepper({
@@ -38,7 +46,7 @@ export function QuantityStepper({
   return (
     <View {...props}>
       {label && (
-        <ThemedText style={{ fontSize: 14, fontWeight: '600', marginBottom: 8, color: theme.text }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', marginBottom: 8, color: theme.text }}>
           {label}
         </ThemedText>
       )}
@@ -49,7 +57,7 @@ export function QuantityStepper({
           style={{
             width: s.btn,
             height: s.btn,
-            borderRadius: s.btn / 2,
+            borderRadius: Radius.full,
             backgroundColor: canDecrease ? theme.surface : theme.cardPressed,
             alignItems: 'center',
             justifyContent: 'center',
@@ -70,7 +78,7 @@ export function QuantityStepper({
           style={{
             width: s.btn,
             height: s.btn,
-            borderRadius: s.btn / 2,
+            borderRadius: Radius.full,
             backgroundColor: canIncrease ? theme.primaryPressed : theme.cardPressed,
             alignItems: 'center',
             justifyContent: 'center',

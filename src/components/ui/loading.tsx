@@ -2,11 +2,15 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type LoadingProps = {
+export type LoadingProps = {
+  /** Optional message displayed below the loading indicator */
   message?: string;
+  /** Size of the activity indicator */
   size?: 'small' | 'large';
+  /** Whether the loader should fill the entire screen */
   fullScreen?: boolean;
 };
 
@@ -24,7 +28,7 @@ export function Loading({ message, size = 'large', fullScreen = false }: Loading
       }}>
       <ActivityIndicator size={size} color={t.primary} />
       {message && (
-        <ThemedText style={{ fontSize: 14, color: t.textSecondary }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>
           {message}
         </ThemedText>
       )}

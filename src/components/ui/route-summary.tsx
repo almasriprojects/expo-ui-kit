@@ -1,24 +1,30 @@
 import React from 'react';
 import { Text, View, type ViewProps } from 'react-native';
+import { Bike, Bus, Car, Footprints, type LucideProps } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type RouteMode = 'driving' | 'walking' | 'transit' | 'cycling';
 
 export type RouteSummaryProps = ViewProps & {
+  /** Starting location name */
   origin: string;
+  /** Ending location name */
   destination: string;
+  /** Estimated travel duration string */
   duration: string;
+  /** Total distance string */
   distance: string;
+  /** Travel mode determining the icon displayed */
   mode?: RouteMode;
 };
 
-const MODE_ICONS: Record<RouteMode, string> = {
-  driving: '🚗',
-  walking: '🚶',
-  transit: '🚌',
-  cycling: '🚴',
+const MODE_ICONS: Record<RouteMode, React.ComponentType<LucideProps>> = {
+  driving: Car,
+  walking: Footprints,
+  transit: Bus,
+  cycling: Bike,
 };
 
 export function RouteSummary({
@@ -79,7 +85,7 @@ export function RouteSummary({
         </View>
         <View style={{ flex: 1, gap: 8 }}>
           <Text
-            style={{ fontSize: 15, fontWeight: '600', color: t.text }}
+            style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}
             numberOfLines={1}>
             {origin}
           </Text>
@@ -94,7 +100,7 @@ export function RouteSummary({
             }}
           />
           <Text
-            style={{ fontSize: 15, fontWeight: '600', color: t.text }}
+            style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}
             numberOfLines={1}>
             {destination}
           </Text>
@@ -111,13 +117,13 @@ export function RouteSummary({
           gap: 16,
         }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-          <Text style={{ fontSize: 18 }}>{MODE_ICONS[mode]}</Text>
-          <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>
+          {React.createElement(MODE_ICONS[mode], { size: FontSize.xl.fontSize, color: t.primary })}
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
             {duration}
           </Text>
         </View>
-        <Text style={{ fontSize: 14, color: t.textSecondary }}>•</Text>
-        <Text style={{ fontSize: 14, color: t.textSecondary }}>{distance}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>•</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>{distance}</Text>
       </View>
     </View>
   );

@@ -3,14 +3,19 @@ import { Pressable, type ViewProps } from 'react-native';
 import { X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { Radius, Spacing, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ChipProps = ViewProps & {
+export type ChipProps = ViewProps & {
+  /** Text displayed inside the chip */
   label: string;
+  /** Whether the chip is in a selected state */
   selected?: boolean;
+  /** Callback invoked when the chip is pressed */
   onPress?: () => void;
+  /** Callback invoked when the delete icon is pressed */
   onDelete?: () => void;
+  /** Whether the chip is disabled */
   disabled?: boolean;
 };
 
@@ -29,13 +34,14 @@ export function Chip({
     <Pressable
       onPress={onPress}
       disabled={disabled}
+      accessibilityRole={onPress ? 'button' : undefined}
       style={[
         {
           flexDirection: 'row',
           alignItems: 'center',
-          gap: 6,
-          paddingHorizontal: 12,
-          paddingVertical: 6,
+          gap: Spacing[1.5],
+          paddingHorizontal: Spacing[3],
+          paddingVertical: Spacing[1.5],
           borderRadius: Radius.full,
           borderWidth: 1,
         },
@@ -48,14 +54,14 @@ export function Chip({
       {...props}>
       <ThemedText
         style={{
-          fontSize: 14,
+          fontSize: FontSize.md.fontSize,
           fontWeight: selected ? '600' : '500',
           color: selected ? t.primaryForeground : t.text,
         }}>
         {label}
       </ThemedText>
       {onDelete && (
-        <Pressable onPress={onDelete} hitSlop={8} style={{ marginLeft: 2, opacity: selected ? 0.8 : 1 }}>
+        <Pressable onPress={onDelete} hitSlop={8} style={{ marginLeft: Spacing[0.5], opacity: selected ? 0.8 : 1 }}>
           <X size={12} color={selected ? t.primaryForeground : t.textSecondary} />
         </Pressable>
       )}

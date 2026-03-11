@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 
 type Country = {
   name: string;
@@ -36,11 +36,16 @@ const COUNTRIES: Country[] = [
   { name: 'Egypt', code: 'EG', dial: '+20', flag: '🇪🇬' },
 ];
 
-type PhoneInputProps = Omit<TextInputProps, 'value' | 'onChangeText'> & {
+export type PhoneInputProps = Omit<TextInputProps, 'value' | 'onChangeText'> & {
+  /** Current formatted phone number value */
   value: string;
+  /** Callback invoked with the formatted value and selected country on change */
   onValueChange: (value: string, country: Country) => void;
+  /** Label text displayed above the input */
   label?: string;
+  /** Error message displayed below the input */
   error?: string;
+  /** ISO country code for the default selected country */
   defaultCountry?: string;
 };
 
@@ -62,7 +67,7 @@ export const PhoneInput = forwardRef<TextInput, PhoneInputProps>(
     return (
       <View>
         {label && (
-          <ThemedText style={{ fontSize: 14, fontWeight: '600', color: theme.text, marginBottom: 6 }}>
+          <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: theme.text, marginBottom: 6 }}>
             {label}
           </ThemedText>
         )}
@@ -87,10 +92,10 @@ export const PhoneInput = forwardRef<TextInput, PhoneInputProps>(
               borderRightColor: theme.border,
               gap: 4,
             }}>
-            <Text style={{ fontSize: 18, color: theme.text }}>{country.flag}</Text>
+            <Text style={{ fontSize: FontSize.xl.fontSize, color: theme.text }}>{country.flag}</Text>
             <ChevronDown size={13} color={theme.textSecondary} />
           </Pressable>
-          <ThemedText style={{ paddingLeft: 10, color: theme.textSecondary, fontSize: 14 }}>
+          <ThemedText style={{ paddingLeft: 10, color: theme.textSecondary, fontSize: FontSize.md.fontSize }}>
             {country.dial}
           </ThemedText>
           <TextInput
@@ -108,14 +113,14 @@ export const PhoneInput = forwardRef<TextInput, PhoneInputProps>(
               flex: 1,
               paddingHorizontal: 8,
               paddingVertical: 12,
-              fontSize: 15,
+              fontSize: FontSize.md.fontSize,
               color: theme.text,
             }}
             {...props}
           />
         </View>
         {error && (
-          <ThemedText style={{ fontSize: 12, color: theme.error, marginTop: 4, fontWeight: '500' }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.error, marginTop: 4, fontWeight: '500' }}>
             {error}
           </ThemedText>
         )}
@@ -137,7 +142,7 @@ export const PhoneInput = forwardRef<TextInput, PhoneInputProps>(
                   style={{
                     width: 40,
                     height: 4,
-                    borderRadius: 2,
+                    borderRadius: Radius['2xs'],
                     backgroundColor: theme.surfaceActive,
                   }}
                 />
@@ -159,9 +164,9 @@ export const PhoneInput = forwardRef<TextInput, PhoneInputProps>(
                       backgroundColor:
                         c.code === country.code ? theme.primarySoft : 'transparent',
                     }}>
-                    <Text style={{ fontSize: 20, color: theme.text }}>{c.flag}</Text>
-                    <ThemedText style={{ flex: 1, fontSize: 15, color: theme.text }}>{c.name}</ThemedText>
-                    <ThemedText style={{ fontSize: 14, color: theme.textSecondary }}>
+                    <Text style={{ fontSize: FontSize.xl.fontSize, color: theme.text }}>{c.flag}</Text>
+                    <ThemedText style={{ flex: 1, fontSize: FontSize.md.fontSize, color: theme.text }}>{c.name}</ThemedText>
+                    <ThemedText style={{ fontSize: FontSize.md.fontSize, color: theme.textSecondary }}>
                       {c.dial}
                     </ThemedText>
                   </Pressable>

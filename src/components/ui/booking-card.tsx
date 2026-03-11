@@ -1,19 +1,30 @@
 import React from 'react';
 import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'react-native';
 
+import { Calendar, Clock, MapPin } from 'lucide-react-native';
+
 import { ThemedText } from '@/components/themed-text';
-import { Radius, type ThemeTokens } from '@/constants/theme';
+import { Radius, type ThemeTokens, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BookingCardProps = Omit<PressableProps, 'style'> & {
+export type BookingCardProps = Omit<PressableProps, 'style'> & {
+  /** Custom styles for the card container */
   style?: ViewStyle;
+  /** Name or description of the booking */
   title: string;
+  /** Formatted date string */
   date: string;
+  /** Formatted time string */
   time: string;
+  /** Venue or address of the booking */
   location?: string;
+  /** Current booking status */
   status?: 'confirmed' | 'pending' | 'cancelled' | 'completed';
+  /** Formatted price string */
   price?: string;
+  /** Booking reference or confirmation number */
   reference?: string;
+  /** Emoji or character icon for the booking */
   icon?: string;
 };
 
@@ -63,12 +74,12 @@ export function BookingCard({
         }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           <View style={{ width: 8, height: 8, borderRadius: Radius.full, backgroundColor: s.text }} />
-          <ThemedText style={{ fontSize: 12, fontWeight: '600', color: s.text }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: s.text }}>
             {s.label}
           </ThemedText>
         </View>
         {reference && (
-          <ThemedText style={{ fontSize: 11, color: t.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.xs.fontSize, color: t.textSecondary }}>
             #{reference}
           </ThemedText>
         )}
@@ -86,32 +97,32 @@ export function BookingCard({
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text style={{ fontSize: 20, color: t.text }}>{icon}</Text>
+              <Text style={{ fontSize: FontSize.xl.fontSize, color: t.text }}>{icon}</Text>
             </View>
           )}
           <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 15, fontWeight: '600', marginBottom: 4, color: t.text }}>
+            <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', marginBottom: 4, color: t.text }}>
               {title}
             </Text>
             <View style={{ gap: 3 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>📅</ThemedText>
-                <ThemedText style={{ fontSize: 13, color: t.textSecondary }}>{date}</ThemedText>
+                <Calendar size={FontSize.sm.fontSize} color={t.textSecondary} />
+                <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{date}</ThemedText>
               </View>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>🕐</ThemedText>
-                <ThemedText style={{ fontSize: 13, color: t.textSecondary }}>{time}</ThemedText>
+                <Clock size={FontSize.sm.fontSize} color={t.textSecondary} />
+                <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{time}</ThemedText>
               </View>
               {location && (
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                  <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>📍</ThemedText>
-                  <ThemedText style={{ fontSize: 13, color: t.textSecondary }}>{location}</ThemedText>
+                  <MapPin size={FontSize.sm.fontSize} color={t.textSecondary} />
+                  <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{location}</ThemedText>
                 </View>
               )}
             </View>
           </View>
           {price && (
-            <Text style={{ fontSize: 16, fontWeight: '700', color: t.text }}>{price}</Text>
+            <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text }}>{price}</Text>
           )}
         </View>
       </View>

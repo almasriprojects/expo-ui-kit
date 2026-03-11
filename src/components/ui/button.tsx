@@ -8,17 +8,22 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { Radius, Shadows, type ThemeTokens } from '@/constants/theme';
+import { Radius, Shadows, Spacing, type ThemeTokens, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
-type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
-type ButtonProps = PressableProps & {
+export type ButtonProps = PressableProps & {
+  /** Button label text */
   title: string;
+  /** Visual style variant */
   variant?: ButtonVariant;
+  /** Size preset controlling padding and font size */
   size?: ButtonSize;
+  /** Whether the button shows a loading spinner */
   loading?: boolean;
+  /** Whether the button stretches to fill its container */
   fullWidth?: boolean;
 };
 
@@ -26,29 +31,29 @@ const sizeMap: Record<ButtonSize, { container: ViewStyle; text: TextStyle }> = {
   sm: {
     container: {
       minHeight: 36,
-      paddingHorizontal: 14,
-      paddingVertical: 8,
+      paddingHorizontal: Spacing[3.5],
+      paddingVertical: Spacing[2],
       borderRadius: Radius.lg,
     },
-    text: { fontSize: 13, lineHeight: 18 },
+    text: { fontSize: FontSize.sm.fontSize, lineHeight: 18 },
   },
   md: {
     container: {
       minHeight: 44,
-      paddingHorizontal: 20,
-      paddingVertical: 10,
+      paddingHorizontal: Spacing[5],
+      paddingVertical: Spacing[2.5],
       borderRadius: Radius.lg,
     },
-    text: { fontSize: 15, lineHeight: 20 },
+    text: { fontSize: FontSize.md.fontSize, lineHeight: 20 },
   },
   lg: {
     container: {
       minHeight: 52,
-      paddingHorizontal: 28,
-      paddingVertical: 14,
+      paddingHorizontal: Spacing[7],
+      paddingVertical: Spacing[3.5],
       borderRadius: Radius.xl,
     },
-    text: { fontSize: 17, lineHeight: 22 },
+    text: { fontSize: FontSize.lg.fontSize, lineHeight: 22 },
   },
 };
 
@@ -138,7 +143,7 @@ export function Button({
           flexDirection: 'row' as const,
           alignItems: 'center' as const,
           justifyContent: 'center' as const,
-          gap: 8,
+          gap: Spacing[2],
         },
         sizing.container,
         containerStyle,

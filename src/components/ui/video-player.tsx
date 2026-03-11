@@ -4,18 +4,27 @@ import { Play, Pause, Maximize } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Slider } from './slider';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type VideoPlayerProps = {
+  /** Title of the video */
   title?: string;
+  /** Total duration of the video in seconds */
   duration: number;
+  /** Current playback position in seconds */
   currentTime?: number;
+  /** Whether the video is currently playing */
   isPlaying?: boolean;
+  /** Callback invoked when the play/pause button is pressed */
   onPlayPause?: () => void;
+  /** Callback invoked when the user seeks to a position */
   onSeek?: (time: number) => void;
+  /** Callback invoked when the fullscreen button is pressed */
   onFullscreen?: () => void;
+  /** Aspect ratio of the video player container */
   aspectRatio?: number;
+  /** URL of the poster/thumbnail image */
   posterUri?: string;
 };
 
@@ -94,7 +103,7 @@ export function VideoPlayer({
       <View style={{ padding: 12, backgroundColor: t.surface }}>
         {title && (
           <ThemedText
-            style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 8 }}
+            style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: 8 }}
             numberOfLines={1}>
             {title}
           </ThemedText>
@@ -113,7 +122,7 @@ export function VideoPlayer({
             alignItems: 'center',
             marginTop: 8,
           }}>
-          <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
             {formatTime(currentTime)} / {formatTime(duration)}
           </ThemedText>
           <Pressable

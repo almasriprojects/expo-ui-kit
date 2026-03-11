@@ -2,20 +2,28 @@ import { Image } from 'expo-image';
 import React from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type AboutScreenLink = {
+  /** Display label for the link */
   label: string;
+  /** Callback invoked when the link is pressed */
   onPress: () => void;
 };
 
 export type AboutScreenProps = {
+  /** Name of the application */
   appName: string;
+  /** Version string (e.g. "1.0.0") */
   version: string;
+  /** Build number string */
   buildNumber?: string;
+  /** URL of the app icon image */
   icon?: string;
+  /** Array of navigational links displayed on the screen */
   links?: AboutScreenLink[];
+  /** Copyright text displayed at the bottom */
   copyright?: string;
 };
 
@@ -64,7 +72,7 @@ export function AboutScreen({
               ...Shadows.md,
             }}
           >
-            <Text style={{ fontSize: 36, color: t.primaryForeground }}>
+            <Text style={{ fontSize: FontSize['4xl'].fontSize, color: t.primaryForeground }}>
               {appName.slice(0, 1).toUpperCase()}
             </Text>
           </View>
@@ -74,7 +82,7 @@ export function AboutScreen({
       {/* App name */}
       <Text
         style={{
-          fontSize: 24,
+          fontSize: FontSize['2xl'].fontSize,
           fontWeight: '700',
           color: t.text,
           textAlign: 'center',
@@ -87,7 +95,7 @@ export function AboutScreen({
 
       {/* Version info */}
       <View style={{ alignItems: 'center', marginBottom: 32 }}>
-        <Text style={{ fontSize: 16, color: t.textSecondary }}>
+        <Text style={{ fontSize: FontSize.lg.fontSize, color: t.textSecondary }}>
           Version {version}
           {buildNumber != null ? ` (${buildNumber})` : ''}
         </Text>
@@ -120,10 +128,10 @@ export function AboutScreen({
               accessibilityRole="button"
               accessibilityLabel={link.label}
             >
-              <Text style={{ fontSize: 16, fontWeight: '500', color: t.text }}>
+              <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '500', color: t.text }}>
                 {link.label}
               </Text>
-              <Text style={{ fontSize: 18, color: t.textSecondary }}>›</Text>
+              <Text style={{ fontSize: FontSize.xl.fontSize, color: t.textSecondary }}>›</Text>
             </Pressable>
           ))}
         </View>
@@ -133,7 +141,7 @@ export function AboutScreen({
       {copyright != null && copyright.length > 0 && (
         <Text
           style={{
-            fontSize: 13,
+            fontSize: FontSize.sm.fontSize,
             color: t.textTertiary,
             textAlign: 'center',
             marginTop: 32,

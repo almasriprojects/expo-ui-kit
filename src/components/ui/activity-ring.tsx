@@ -2,19 +2,26 @@ import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type Ring = {
+export type Ring = {
+  /** Progress percentage from 0 to 100 */
   progress: number;
+  /** Color of the ring stroke */
   color: string;
+  /** Optional label displayed in the legend */
   label?: string;
 };
 
-type ActivityRingProps = {
+export type ActivityRingProps = {
+  /** Array of ring data to render concentrically */
   rings: Ring[];
+  /** Overall diameter of the ring chart in pixels */
   size?: number;
+  /** Thickness of each ring stroke */
   strokeWidth?: number;
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -73,8 +80,8 @@ export function ActivityRing({
                 <View
                   style={{ width: 10, height: 10, borderRadius: Radius.full, backgroundColor: ring.color }}
                 />
-                <Text style={{ fontSize: 12, color: t.textSecondary }}>{ring.label}</Text>
-                <Text style={{ fontSize: 12, fontWeight: '700', color: t.text }}>
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{ring.label}</Text>
+                <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.text }}>
                   {Math.round(ring.progress)}%
                 </Text>
               </View>

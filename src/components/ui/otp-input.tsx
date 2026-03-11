@@ -2,14 +2,19 @@ import React, { useRef, useState } from 'react';
 import { TextInput, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type OTPInputProps = ViewProps & {
+export type OTPInputProps = ViewProps & {
+  /** Number of OTP digit boxes */
   length?: number;
+  /** Current OTP string value */
   value: string;
+  /** Callback invoked when the OTP value changes */
   onValueChange: (value: string) => void;
+  /** Label text displayed above the input */
   label?: string;
+  /** Error message displayed below the input */
   error?: string;
 };
 
@@ -31,7 +36,7 @@ export function OTPInput({
   return (
     <View style={typeof style === 'object' ? style : undefined} {...props}>
       {label && (
-        <ThemedText style={{ fontSize: 14, fontWeight: '500', marginBottom: 8 }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', marginBottom: 8 }}>
           {label}
         </ThemedText>
       )}
@@ -57,7 +62,7 @@ export function OTPInput({
                       ? t.borderStrong
                       : t.border,
               }}>
-              <ThemedText style={{ fontSize: 20, fontWeight: '600' }}>
+              <ThemedText style={{ fontSize: FontSize.xl.fontSize, fontWeight: '600' }}>
                 {digit}
               </ThemedText>
             </View>
@@ -86,7 +91,7 @@ export function OTPInput({
       />
 
       {error && (
-        <ThemedText style={{ fontSize: 12, color: t.error, textAlign: 'center', marginTop: 8 }}>
+        <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.error, textAlign: 'center', marginTop: 8 }}>
           {error}
         </ThemedText>
       )}

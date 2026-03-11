@@ -78,8 +78,8 @@ export function OTPScreen({
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: 'center',
-          padding: Spacing.four,
-          gap: Spacing.four,
+          padding: Spacing[6],
+          gap: Spacing[6],
         }}
         keyboardShouldPersistTaps="handled">
 

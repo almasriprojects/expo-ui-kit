@@ -1,21 +1,32 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
-import { Check } from 'lucide-react-native';
+import { Check, Clock, MapPin, Users } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type EventCardProps = {
+export type EventCardProps = {
+  /** Event title text */
   title: string;
+  /** Optional event description */
   description?: string;
+  /** Date string displayed on the card */
   date: string;
+  /** Time string displayed on the card */
   time: string;
+  /** Event location text */
   location?: string;
+  /** Number of attendees to display */
   attendees?: number;
+  /** Accent color for the card header strip */
   color?: string;
+  /** Callback fired when the card is pressed */
   onPress?: () => void;
+  /** Callback fired when the RSVP button is pressed */
   onRSVP?: () => void;
+  /** Current RSVP status */
   rsvpStatus?: 'going' | 'maybe' | 'none';
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -62,27 +73,33 @@ export function EventCard({
               borderRadius: Radius.lg,
               paddingVertical: 8,
             }}>
-            <Text style={{ fontSize: 11, fontWeight: '600', color: accentColor, textTransform: 'uppercase' }}>
+            <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '600', color: accentColor, textTransform: 'uppercase' }}>
               {date.split(' ')[0]}
             </Text>
-            <Text style={{ fontSize: 22, fontWeight: '800', color: accentColor }}>
+            <Text style={{ fontSize: FontSize['2xl'].fontSize, fontWeight: '800', color: accentColor }}>
               {date.split(' ')[1] ?? date}
             </Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 16, fontWeight: '600', color: t.text }}>{title}</Text>
+            <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: t.text }}>{title}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 4 }}>
-              <Text style={{ fontSize: 13, color: t.textSecondary }}>🕐 {time}</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                <Clock size={FontSize.sm.fontSize} color={t.textSecondary} />
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{time}</Text>
+              </View>
             </View>
             {location && (
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 2 }}>
-                <Text style={{ fontSize: 13, color: t.textSecondary }}>📍 {location}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+                  <MapPin size={FontSize.sm.fontSize} color={t.textSecondary} />
+                  <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{location}</Text>
+                </View>
               </View>
             )}
           </View>
         </View>
         {description && (
-          <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 10, lineHeight: 19 }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 10, lineHeight: 19 }}>
             {description}
           </Text>
         )}
@@ -98,9 +115,12 @@ export function EventCard({
               borderTopColor: t.border,
             }}>
             {attendees != null && (
-              <Text style={{ fontSize: 13, color: t.textSecondary }}>
-                👥 {attendees} attending
-              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <Users size={FontSize.sm.fontSize} color={t.textSecondary} />
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
+                  {attendees} attending
+                </Text>
+              </View>
             )}
             {onRSVP && (
               <Pressable
@@ -113,7 +133,7 @@ export function EventCard({
                 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
                   {rsvpStatus === 'going' && <Check size={13} color={t.textOnColor} />}
-                  <Text style={{ fontSize: 13, fontWeight: '600', color: t.textOnColor }}>
+                  <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textOnColor }}>
                     {rsvpStatus === 'going' ? 'Going' : rsvpStatus === 'maybe' ? 'Maybe' : 'RSVP'}
                   </Text>
                 </View>

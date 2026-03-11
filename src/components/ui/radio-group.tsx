@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type RadioOption = {
@@ -34,12 +34,12 @@ export function RadioGroup({
   return (
     <View style={typeof style === 'object' ? style : undefined} {...props}>
       {label && (
-        <ThemedText style={{ fontSize: 14, fontWeight: '600', marginBottom: 8, color: t.text }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', marginBottom: Spacing[2], color: t.text }}>
           {label}
         </ThemedText>
       )}
       <View
-        style={horizontal ? { flexDirection: 'row', flexWrap: 'wrap', gap: 16 } : { gap: 12 }}
+        style={horizontal ? { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing[4] } : { gap: Spacing[3] }}
         accessibilityRole="radiogroup"
         accessibilityLabel={label}>
         {options.map((option) => {
@@ -54,7 +54,7 @@ export function RadioGroup({
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                gap: 12,
+                gap: Spacing[3],
                 opacity: disabled ? 0.5 : 1,
               }}>
               <View
@@ -78,7 +78,7 @@ export function RadioGroup({
                   />
                 )}
               </View>
-              <ThemedText style={{ fontSize: 15, fontWeight: '500', color: t.text }}>{option.label}</ThemedText>
+              <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: t.text }}>{option.label}</ThemedText>
             </Pressable>
           );
         })}

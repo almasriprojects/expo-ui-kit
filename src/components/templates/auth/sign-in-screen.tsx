@@ -53,8 +53,8 @@ export function SignInScreen({
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: 'center',
-          padding: Spacing.four,
-          gap: Spacing.three,
+          padding: Spacing[6],
+          gap: Spacing[4],
         }}
         keyboardShouldPersistTaps="handled">
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { Fonts, Radius } from '@/constants/theme';
+import { FontSize, Fonts, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type KbdProps = {
+  /** Keyboard shortcut text to display */
   children: string;
 };
 
@@ -26,7 +27,7 @@ export function Kbd({ children }: KbdProps) {
       <Text
         style={{
           fontFamily: Fonts?.mono ?? 'monospace',
-          fontSize: 12,
+          fontSize: FontSize.sm.fontSize,
           color: t.text,
           fontWeight: '500',
         }}>

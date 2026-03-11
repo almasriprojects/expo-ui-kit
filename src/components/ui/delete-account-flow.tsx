@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { AlertTriangle } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Button } from './button';
 import { RadioGroup } from './radio-group';
@@ -23,8 +23,11 @@ const DEFAULT_REASONS = [
 ];
 
 export type DeleteAccountFlowProps = {
+  /** Callback fired when the user confirms account deletion */
   onDelete: () => void;
+  /** Callback fired when the user cancels the flow */
   onCancel: () => void;
+  /** List of selectable reasons for leaving */
   reasons?: string[];
 };
 
@@ -88,7 +91,7 @@ export function DeleteAccountFlow({
             </View>
             <Text
               style={{
-                fontSize: 22,
+                fontSize: FontSize['2xl'].fontSize,
                 fontWeight: '700',
                 color: t.text,
                 textAlign: 'center',
@@ -100,7 +103,7 @@ export function DeleteAccountFlow({
             </Text>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
                 textAlign: 'center',
                 marginBottom: 24,
@@ -127,8 +130,8 @@ export function DeleteAccountFlow({
                     marginBottom: i < consequences.length - 1 ? 12 : 0,
                   }}
                 >
-                  <Text style={{ fontSize: 14, color: t.error }}>•</Text>
-                  <Text style={{ flex: 1, fontSize: 15, color: t.text, lineHeight: 22 }}>
+                  <Text style={{ fontSize: FontSize.md.fontSize, color: t.error }}>•</Text>
+                  <Text style={{ flex: 1, fontSize: FontSize.md.fontSize, color: t.text, lineHeight: 22 }}>
                     {item}
                   </Text>
                 </View>
@@ -142,7 +145,7 @@ export function DeleteAccountFlow({
           <View accessibilityRole="none">
             <Text
               style={{
-                fontSize: 18,
+                fontSize: FontSize.xl.fontSize,
                 fontWeight: '700',
                 color: t.text,
                 marginBottom: 8,
@@ -153,7 +156,7 @@ export function DeleteAccountFlow({
             </Text>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
                 marginBottom: 20,
                 lineHeight: 20,
@@ -175,7 +178,7 @@ export function DeleteAccountFlow({
           <View accessibilityRole="none">
             <Text
               style={{
-                fontSize: 18,
+                fontSize: FontSize.xl.fontSize,
                 fontWeight: '700',
                 color: t.text,
                 marginBottom: 8,
@@ -186,7 +189,7 @@ export function DeleteAccountFlow({
             </Text>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
                 marginBottom: 16,
                 lineHeight: 20,
@@ -204,7 +207,7 @@ export function DeleteAccountFlow({
                 paddingHorizontal: 16,
                 paddingVertical: 12,
                 borderRadius: Radius.lg,
-                fontSize: 16,
+                fontSize: FontSize.lg.fontSize,
                 backgroundColor: t.surface,
                 color: t.text,
                 borderWidth: 1.5,

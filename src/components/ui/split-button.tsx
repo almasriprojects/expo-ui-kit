@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import { Modal, Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SplitButtonOption = {
+export type SplitButtonOption = {
+  /** Display label for the dropdown option */
   label: string;
+  /** Callback invoked when the option is selected */
   onPress: () => void;
 };
 
-type SplitButtonProps = {
+export type SplitButtonProps = {
+  /** Label for the primary button action */
   title: string;
+  /** Callback invoked when the primary button is pressed */
   onPress: () => void;
+  /** Dropdown options displayed when the chevron is pressed */
   options: SplitButtonOption[];
+  /** Visual style variant of the button */
   variant?: 'primary' | 'outline';
+  /** Custom styles applied to the button container */
   style?: ViewStyle;
 };
 
@@ -48,7 +55,7 @@ export function SplitButton({
           ...borderStyle,
           borderRightWidth: 0,
         }}>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: mainText }}>{title}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: mainText }}>{title}</Text>
       </Pressable>
       <View style={{ width: 1, backgroundColor: isPrimary ? t.primaryPressed : t.primary, opacity: 0.3 }} />
       <Pressable
@@ -64,7 +71,7 @@ export function SplitButton({
           ...borderStyle,
           borderLeftWidth: 0,
         }}>
-        <Text style={{ fontSize: 12, color: mainText }}>▾</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: mainText }}>▾</Text>
       </Pressable>
 
       <Modal visible={menuOpen} transparent animationType="fade" onRequestClose={() => setMenuOpen(false)}>
@@ -91,7 +98,7 @@ export function SplitButton({
                   borderBottomWidth: i < options.length - 1 ? 1 : 0,
                   borderBottomColor: t.border,
                 }}>
-                <Text style={{ fontSize: 15, color: t.text }}>{opt.label}</Text>
+                <Text style={{ fontSize: FontSize.md.fontSize, color: t.text }}>{opt.label}</Text>
               </Pressable>
             ))}
           </View>

@@ -1,19 +1,26 @@
 import React, { type ReactNode, useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type SortableListItem = {
+  /** Unique key identifier for the list item */
   key: string;
+  /** Display label for the list item */
   label: string;
 };
 
 export type SortableListProps = {
+  /** Array of sortable list items */
   data: SortableListItem[];
+  /** Callback invoked with the reordered data array */
   onReorder: (data: SortableListItem[]) => void;
+  /** Custom render function for each list item */
   renderItem?: (item: SortableListItem) => ReactNode;
+  /** Accessibility label for the sortable list */
   accessibilityLabel?: string;
+  /** Accessibility hint for the sortable list */
   accessibilityHint?: string;
 };
 
@@ -83,7 +90,7 @@ export function SortableList({
             accessibilityHint="Long press to reorder">
             <Text
               style={{
-                fontSize: 18,
+                fontSize: FontSize.xl.fontSize,
                 color: t.textSecondary,
                 marginRight: 12,
               }}
@@ -93,7 +100,7 @@ export function SortableList({
             {renderItem ? (
               renderItem(item)
             ) : (
-              <Text style={{ fontSize: 15, color: t.text, flex: 1 }}>{item.label}</Text>
+              <Text style={{ fontSize: FontSize.md.fontSize, color: t.text, flex: 1 }}>{item.label}</Text>
             )}
           </Pressable>
         ))}

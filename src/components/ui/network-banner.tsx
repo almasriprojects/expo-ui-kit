@@ -4,10 +4,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
-type NetworkBannerProps = {
+export type NetworkBannerProps = {
+  /** Whether the device is currently offline */
   isOffline: boolean;
+  /** Custom message to display in the banner */
   message?: string;
+  /** Custom styles applied to the banner container */
   style?: ViewStyle;
 };
 
@@ -35,7 +39,7 @@ export function NetworkBanner({
         },
         style,
       ]}>
-      <Text style={{ fontSize: 13, fontWeight: '600', color: t.textOnColor }}>
+      <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textOnColor }}>
         {message ?? 'No internet connection'}
       </Text>
     </Animated.View>

@@ -3,14 +3,17 @@ import { View, type ViewProps } from 'react-native';
 import { AlertCircle, AlertTriangle, CheckCircle, Info } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, type ThemeTokens } from '@/constants/theme';
+import { Radius, Spacing, type ThemeTokens, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type AlertVariant = 'default' | 'success' | 'warning' | 'error' | 'info';
+export type AlertVariant = 'default' | 'success' | 'warning' | 'error' | 'info';
 
-type AlertProps = ViewProps & {
+export type AlertProps = ViewProps & {
+  /** Optional heading text for the alert */
   title?: string;
+  /** Body text of the alert */
   message: string;
+  /** Visual style variant indicating severity */
   variant?: AlertVariant;
 };
 
@@ -52,8 +55,8 @@ export function Alert({
       style={[
         {
           flexDirection: 'row',
-          gap: 12,
-          padding: 16,
+          gap: Spacing[3],
+          padding: Spacing[4],
           borderRadius: Radius.xl,
           borderWidth: 1,
           backgroundColor: v.bg,
@@ -65,11 +68,11 @@ export function Alert({
       {React.createElement(icons[variant], { size: 20, color: v.border })}
       <View style={{ flex: 1 }}>
         {title && (
-          <ThemedText style={{ fontSize: 14, fontWeight: '600', marginBottom: 2, color: v.title }}>
+          <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', marginBottom: Spacing[0.5], color: v.title }}>
             {title}
           </ThemedText>
         )}
-        <ThemedText style={{ fontSize: 14, color: t.textSecondary }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>
           {message}
         </ThemedText>
       </View>

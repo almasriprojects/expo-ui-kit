@@ -2,13 +2,20 @@ import React, { useCallback, useState } from 'react';
 import { Pressable, Text, type TextStyle, type ViewStyle } from 'react-native';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
-type ReadMoreTextProps = {
+export type ReadMoreTextProps = {
+  /** Text content to display with truncation */
   text: string;
+  /** Maximum number of visible lines before truncation */
   numberOfLines?: number;
+  /** Label for the "read more" toggle */
   showMoreLabel?: string;
+  /** Label for the "show less" toggle */
   showLessLabel?: string;
+  /** Custom styles applied to the text element */
   textStyle?: TextStyle;
+  /** Custom styles applied to the outer container */
   style?: ViewStyle;
 };
 
@@ -38,13 +45,13 @@ export function ReadMoreText({
       <Text
         onTextLayout={onTextLayout}
         numberOfLines={expanded ? undefined : numberOfLines}
-        style={[{ fontSize: 14, lineHeight: 21, color: t.text }, textStyle]}>
+        style={[{ fontSize: FontSize.md.fontSize, lineHeight: 21, color: t.text }, textStyle]}>
         {text}
       </Text>
       {needsToggle && (
         <Text
           style={{
-            fontSize: 13,
+            fontSize: FontSize.sm.fontSize,
             fontWeight: '600',
             color: t.primary,
             marginTop: 4,

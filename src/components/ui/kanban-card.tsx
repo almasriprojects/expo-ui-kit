@@ -1,23 +1,35 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
-import { Paperclip, MessageCircle } from 'lucide-react-native';
+import { Calendar, Paperclip, MessageCircle } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 
-type KanbanCardProps = {
+export type KanbanCardProps = {
+  /** Card title text */
   title: string;
+  /** Optional description text */
   description?: string;
+  /** Priority level indicator */
   priority?: 'low' | 'medium' | 'high' | 'urgent';
+  /** Colored label tags on the card */
   labels?: { text: string; color: string }[];
+  /** Assignee name (first letter used for avatar fallback) */
   assignee?: string;
+  /** Assignee avatar image URI */
   assigneeAvatar?: string;
+  /** Due date text displayed on the card */
   dueDate?: string;
+  /** Number of comments on the card */
   comments?: number;
+  /** Number of attachments on the card */
   attachments?: number;
+  /** Subtask completion progress */
   subtasks?: { done: number; total: number };
+  /** Callback fired when the card is pressed */
   onPress?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -28,7 +40,7 @@ const priorityTokens: Record<string, { token: 'statusLow' | 'statusMedium' | 'st
   urgent: { token: 'statusUrgent', label: 'Urgent' },
 };
 
-export function KanbanCard({
+function KanbanCardBase({
   title,
   description,
   priority,
@@ -70,14 +82,14 @@ export function KanbanCard({
                 paddingVertical: 2,
                 borderRadius: Radius.sm,
               }}>
-              <Text style={{ fontSize: 10, fontWeight: '600', color: l.color }}>{l.text}</Text>
+              <Text style={{ fontSize: FontSize['2xs'].fontSize, fontWeight: '600', color: l.color }}>{l.text}</Text>
             </View>
           ))}
         </View>
       )}
-      <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{title}</Text>
+      <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{title}</Text>
       {description && (
-        <Text numberOfLines={2} style={{ fontSize: 12, color: t.textSecondary, marginTop: 4, lineHeight: 17 }}>
+        <Text numberOfLines={2} style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 4, lineHeight: 17 }}>
           {description}
         </Text>
       )}
@@ -99,7 +111,7 @@ export function KanbanCard({
               }}
             />
           </View>
-          <Text style={{ fontSize: 11, color: t.textTertiary, marginTop: 4 }}>
+          <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary, marginTop: 4 }}>
             {subtasks.done}/{subtasks.total} subtasks
           </Text>
         </View>
@@ -117,18 +129,21 @@ export function KanbanCard({
             />
           )}
           {dueDate && (
-            <Text style={{ fontSize: 11, color: t.textTertiary }}>📅 {dueDate}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+              <Calendar size={FontSize.xs.fontSize} color={t.textTertiary} />
+              <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{dueDate}</Text>
+            </View>
           )}
           {comments > 0 && (
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
               <MessageCircle size={11} color={t.textTertiary} />
-              <Text style={{ fontSize: 11, color: t.textTertiary }}>{comments}</Text>
+              <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{comments}</Text>
             </View>
           )}
           {attachments > 0 && (
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
               <Paperclip size={11} color={t.textTertiary} />
-              <Text style={{ fontSize: 11, color: t.textTertiary }}>{attachments}</Text>
+              <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{attachments}</Text>
             </View>
           )}
         </View>
@@ -137,3 +152,5 @@ export function KanbanCard({
     </Pressable>
   );
 }
+
+export const KanbanCard = React.memo(KanbanCardBase);

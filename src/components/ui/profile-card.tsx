@@ -1,19 +1,27 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 import { StatusIndicator } from './status-indicator';
 
-type ProfileCardProps = {
+export type ProfileCardProps = {
+  /** Display name of the user */
   name: string;
+  /** Secondary text displayed below the name */
   subtitle?: string;
+  /** URL of the user's avatar image */
   avatar?: string;
+  /** Online status indicator for the user */
   status?: 'online' | 'offline' | 'busy' | 'away';
+  /** Array of stat items displayed below the profile info */
   stats?: { label: string; value: string }[];
+  /** Callback invoked when the card is pressed */
   onPress?: () => void;
+  /** Primary action button displayed at the bottom */
   action?: { label: string; onPress: () => void };
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -62,9 +70,9 @@ export function ProfileCard({
         )}
       </View>
 
-      <Text style={{ fontSize: 18, fontWeight: '700', color: t.text }}>{name}</Text>
+      <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', color: t.text }}>{name}</Text>
       {subtitle && (
-        <Text style={{ fontSize: 14, color: t.textSecondary, marginTop: 2 }}>{subtitle}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary, marginTop: 2 }}>{subtitle}</Text>
       )}
 
       {stats && stats.length > 0 && (
@@ -79,8 +87,8 @@ export function ProfileCard({
           }}>
           {stats.map((stat, i) => (
             <View key={i} style={{ alignItems: 'center' }}>
-              <Text style={{ fontSize: 18, fontWeight: '700', color: t.text }}>{stat.value}</Text>
-              <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 2 }}>{stat.label}</Text>
+              <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', color: t.text }}>{stat.value}</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>{stat.label}</Text>
             </View>
           ))}
         </View>
@@ -96,7 +104,7 @@ export function ProfileCard({
             borderRadius: Radius.full,
             backgroundColor: t.primary,
           }}>
-          <Text style={{ fontSize: 14, fontWeight: '600', color: t.primaryForeground }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primaryForeground }}>
             {action.label}
           </Text>
         </Pressable>

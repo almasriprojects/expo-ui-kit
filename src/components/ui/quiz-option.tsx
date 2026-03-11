@@ -2,17 +2,25 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Check, X } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type QuizOptionProps = {
+export type QuizOptionProps = {
+  /** Text label of the quiz answer option */
   label: string;
+  /** Zero-based index used for the letter prefix */
   index: number;
+  /** Whether this option is currently selected */
   selected?: boolean;
+  /** Whether this option is the correct answer */
   correct?: boolean;
+  /** Whether this option is an incorrect answer */
   incorrect?: boolean;
+  /** Whether the option is disabled */
   disabled?: boolean;
+  /** Callback invoked when the option is pressed */
   onPress: () => void;
+  /** Custom styles applied to the option container */
   style?: ViewStyle;
 };
 
@@ -96,7 +104,7 @@ export function QuizOption({
             <X size={14} color={t.textOnColor} />
           )
         ) : (
-          <Text style={{ fontSize: 14, fontWeight: '700', color: letterColor }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: letterColor }}>
             {letters[index] ?? index + 1}
           </Text>
         )}
@@ -104,7 +112,7 @@ export function QuizOption({
       <Text
         style={{
           flex: 1,
-          fontSize: 15,
+          fontSize: FontSize.md.fontSize,
           fontWeight: selected || showResult ? '600' : '400',
           color: t.text,
         }}>

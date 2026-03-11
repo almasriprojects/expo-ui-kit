@@ -7,13 +7,18 @@ import {
   View,
 } from 'react-native';
 
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Button } from './button';
 
 export type LegalScreenProps = {
+  /** Title displayed at the top of the legal document */
   title: string;
+  /** Full text content of the legal document */
   content: string;
+  /** Callback invoked when the user accepts the legal terms */
   onAccept?: () => void;
+  /** Label text for the accept button */
   acceptLabel?: string;
 };
 
@@ -41,7 +46,7 @@ export function LegalScreen({
       >
         <Text
           style={{
-            fontSize: 24,
+            fontSize: FontSize['2xl'].fontSize,
             fontWeight: '700',
             color: t.text,
             marginBottom: 20,
@@ -52,7 +57,7 @@ export function LegalScreen({
         </Text>
         <Text
           style={{
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             color: t.text,
             lineHeight: 24,
           }}

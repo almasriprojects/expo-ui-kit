@@ -2,15 +2,21 @@ import * as Clipboard from 'expo-clipboard';
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type CouponCardProps = {
+  /** Coupon code string */
   code: string;
+  /** Description of the coupon offer */
   description: string;
+  /** Expiration date label */
   expiresAt?: string;
+  /** Discount amount or percentage text */
   discount: string;
+  /** Callback fired when the code is copied */
   onCopy?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -63,7 +69,7 @@ export function CouponCard({
             }}>
             <Text
               style={{
-                fontSize: 13,
+                fontSize: FontSize.sm.fontSize,
                 fontWeight: '700',
                 color: t.primaryForeground,
               }}>
@@ -72,7 +78,7 @@ export function CouponCard({
           </View>
           <Text
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               color: t.text,
               lineHeight: 20,
             }}>
@@ -86,7 +92,7 @@ export function CouponCard({
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: FontSize.md.fontSize,
                 fontWeight: '700',
                 color: t.text,
                 letterSpacing: 1,
@@ -107,7 +113,7 @@ export function CouponCard({
               accessibilityLabel={`Copy code ${code}`}>
               <Text
                 style={{
-                  fontSize: 13,
+                  fontSize: FontSize.sm.fontSize,
                   fontWeight: '600',
                   color: t.primary,
                 }}>
@@ -118,7 +124,7 @@ export function CouponCard({
           {expiresAt && (
             <Text
               style={{
-                fontSize: 12,
+                fontSize: FontSize.sm.fontSize,
                 color: t.textSecondary,
               }}>
               Expires {expiresAt}

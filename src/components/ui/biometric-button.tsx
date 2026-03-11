@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { Platform, Pressable, Text, type ViewStyle } from 'react-native';
 import { Lock, User } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BiometricButtonProps = {
+export type BiometricButtonProps = {
+  /** Callback invoked to trigger biometric authentication */
   onAuthenticate: () => void | Promise<void>;
+  /** Custom label text for the button */
   label?: string;
+  /** Layout variant of the button */
   variant?: 'default' | 'compact';
+  /** Custom styles for the button container */
   style?: ViewStyle;
 };
 
@@ -80,7 +84,7 @@ export function BiometricButton({
         style,
       ]}>
       <IconComponent size={22} color={t.text} />
-      <Text style={{ fontSize: 16, fontWeight: '600', color: t.text }}>
+      <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: t.text }}>
         {loading ? 'Authenticating...' : label ?? defaultLabel}
       </Text>
     </Pressable>

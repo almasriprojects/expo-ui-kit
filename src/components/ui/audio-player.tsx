@@ -4,18 +4,27 @@ import { Play, Pause, SkipBack, SkipForward } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Slider } from './slider';
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type AudioPlayerProps = {
+  /** Track title */
   title?: string;
+  /** Artist or creator name */
   artist?: string;
+  /** Total duration of the track in seconds */
   duration: number;
+  /** Current playback position in seconds */
   currentTime?: number;
+  /** Whether the audio is currently playing */
   isPlaying?: boolean;
+  /** Callback invoked to toggle play/pause */
   onPlayPause?: () => void;
+  /** Callback invoked when the user seeks to a position */
   onSeek?: (time: number) => void;
+  /** Callback invoked to skip to the previous track */
   onSkipBack?: () => void;
+  /** Callback invoked to skip to the next track */
   onSkipForward?: () => void;
 };
 
@@ -66,14 +75,14 @@ export function AudioPlayer({
         <View style={{ marginBottom: 12 }}>
           {title && (
             <ThemedText
-              style={{ fontSize: 16, fontWeight: '600', color: t.text }}
+              style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: t.text }}
               numberOfLines={1}>
               {title}
             </ThemedText>
           )}
           {artist && (
             <ThemedText
-              style={{ fontSize: 14, color: t.textSecondary, marginTop: 2 }}
+              style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary, marginTop: 2 }}
               numberOfLines={1}>
               {artist}
             </ThemedText>
@@ -136,10 +145,10 @@ export function AudioPlayer({
             justifyContent: 'space-between',
             marginTop: 4,
           }}>
-          <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
             {formatTime(currentTime)}
           </ThemedText>
-          <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
             {formatTime(duration)}
           </ThemedText>
         </View>

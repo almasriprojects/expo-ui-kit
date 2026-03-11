@@ -2,16 +2,22 @@ import React, { type ReactNode } from 'react';
 import { View } from 'react-native';
 import { AlertCircle } from 'lucide-react-native';
 
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 import { Button } from './button';
 import { ThemedText } from '@/components/themed-text';
 
 export type ErrorScreenProps = {
+  /** Heading text for the error screen */
   title?: string;
+  /** Descriptive error message */
   message?: string;
+  /** Callback fired when the retry button is pressed */
   onRetry?: () => void;
+  /** Custom label for the retry button */
   retryLabel?: string;
+  /** Custom icon element displayed above the title */
   icon?: ReactNode;
 };
 
@@ -40,7 +46,7 @@ export function ErrorScreen({
       </View>
       <ThemedText
         style={{
-          fontSize: 24,
+          fontSize: FontSize['2xl'].fontSize,
           fontWeight: '700',
           color: t.text,
           textAlign: 'center',
@@ -50,7 +56,7 @@ export function ErrorScreen({
       </ThemedText>
       <ThemedText
         style={{
-          fontSize: 16,
+          fontSize: FontSize.lg.fontSize,
           color: t.textSecondary,
           textAlign: 'center',
           lineHeight: 24,

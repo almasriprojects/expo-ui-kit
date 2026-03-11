@@ -7,12 +7,15 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type EmojiCategory = {
+  /** Unique key identifying the category */
   key: string;
+  /** Display label for the category tab */
   label: string;
+  /** Array of emoji characters in this category */
   emojis: string[];
 };
 
@@ -26,8 +29,11 @@ const DEFAULT_CATEGORIES: EmojiCategory[] = [
 ];
 
 export type EmojiPickerProps = {
+  /** Callback fired when an emoji is selected */
   onSelect: (emoji: string) => void;
+  /** Custom emoji categories to display */
   categories?: EmojiCategory[];
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -83,7 +89,7 @@ export function EmojiPicker({
             accessibilityRole="tab"
             accessibilityLabel={cat.label}
             accessibilityState={{ selected: activeCategory === cat.key }}>
-            <Text style={{ fontSize: 13, color: t.text, fontWeight: activeCategory === cat.key ? '600' : '400' }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.text, fontWeight: activeCategory === cat.key ? '600' : '400' }}>
               {cat.label}
             </Text>
           </Pressable>
@@ -114,7 +120,7 @@ export function EmojiPicker({
             }}
             accessibilityRole="button"
             accessibilityLabel={`Select ${emoji}`}>
-            <Text style={{ fontSize: 24 }}>{emoji}</Text>
+            <Text style={{ fontSize: FontSize['2xl'].fontSize }}>{emoji}</Text>
           </Pressable>
         ))}
       </ScrollView>

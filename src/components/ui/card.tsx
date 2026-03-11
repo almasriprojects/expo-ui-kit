@@ -1,14 +1,20 @@
 import React, { type ReactNode } from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, Spacing, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type CardProps = ViewProps & {
+export type CardProps = ViewProps & {
+  /** Optional heading text for the card */
   title?: string;
+  /** Optional descriptive text below the title */
   subtitle?: string;
+  /** Content rendered inside the card */
   children?: ReactNode;
+  /** Visual style variant */
   variant?: 'elevated' | 'outlined' | 'filled';
+  /** Accessibility label for the card container */
+  accessibilityLabel?: string;
 };
 
 export function Card({
@@ -16,6 +22,7 @@ export function Card({
   subtitle,
   children,
   variant = 'elevated',
+  accessibilityLabel,
   style,
   ...props
 }: CardProps) {
@@ -41,22 +48,24 @@ export function Card({
 
   return (
     <View
+      accessibilityRole={title ? 'summary' : undefined}
+      accessibilityLabel={accessibilityLabel}
       style={[
         {
           borderRadius: Radius.xl,
-          padding: 20,
+          padding: Spacing[5],
         },
         variantStyles[variant],
         typeof style === 'object' ? style : undefined,
       ]}
       {...props}>
       {title && (
-        <Text style={{ fontSize: 18, fontWeight: '700', marginBottom: 4, color: t.text }}>
+        <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', marginBottom: Spacing[1], color: t.text }}>
           {title}
         </Text>
       )}
       {subtitle && (
-        <Text style={{ fontSize: 14, color: t.textSecondary, marginBottom: 16 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary, marginBottom: Spacing[4] }}>
           {subtitle}
         </Text>
       )}

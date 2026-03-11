@@ -4,18 +4,27 @@ import { Text, View, type ViewProps } from 'react-native';
 import { useTheme } from '@/hooks/use-theme';
 
 import { Checkbox } from './checkbox';
+import { FontSize } from '@/constants/theme';
 
 export type CheckboxGroupOption = {
+  /** Display text for the option */
   label: string;
+  /** Underlying value of the option */
   value: string;
 };
 
 export type CheckboxGroupProps = ViewProps & {
+  /** Group label displayed above the options */
   label?: string;
+  /** Array of checkbox options */
   options: CheckboxGroupOption[];
+  /** Currently selected values */
   values: string[];
+  /** Callback invoked when selected values change */
   onValuesChange: (values: string[]) => void;
+  /** Whether to show a "Select All" checkbox */
   selectAll?: boolean;
+  /** Error message displayed below the group */
   error?: string;
 };
 
@@ -53,7 +62,7 @@ export function CheckboxGroup({
   return (
     <View style={[{ gap: 12 }, style]} {...props}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
           {label}
         </Text>
       )}
@@ -77,7 +86,7 @@ export function CheckboxGroup({
         ))}
       </View>
       {error && (
-        <Text style={{ fontSize: 12, color: t.error, fontWeight: '500' }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, fontWeight: '500' }}>
           {error}
         </Text>
       )}

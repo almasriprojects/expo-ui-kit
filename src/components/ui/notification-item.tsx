@@ -3,21 +3,29 @@ import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'reac
 import { Bell } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type NotificationItemProps = Omit<PressableProps, 'style'> & {
+export type NotificationItemProps = Omit<PressableProps, 'style'> & {
+  /** Custom styles applied to the notification container */
   style?: ViewStyle;
+  /** Title text of the notification */
   title: string;
+  /** Body message of the notification */
   message: string;
+  /** Formatted timestamp string */
   time: string;
+  /** Custom icon rendered in the leading circle */
   icon?: ReactNode;
+  /** Background color for the icon circle */
   iconBg?: string;
+  /** Whether the notification has been read */
   read?: boolean;
+  /** URL of the sender's avatar image */
   avatar?: string;
 };
 
-export function NotificationItem({
+function NotificationItemBase({
   title,
   message,
   time,
@@ -56,16 +64,16 @@ export function NotificationItem({
       <View style={{ flex: 1 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <Text
-            style={{ fontSize: 14, fontWeight: read ? '400' : '600', flex: 1, marginRight: 8, color: theme.text }}
+            style={{ fontSize: FontSize.md.fontSize, fontWeight: read ? '400' : '600', flex: 1, marginRight: 8, color: theme.text }}
             numberOfLines={1}>
             {title}
           </Text>
-          <ThemedText style={{ fontSize: 11, color: theme.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.xs.fontSize, color: theme.textSecondary }}>
             {time}
           </ThemedText>
         </View>
         <ThemedText
-          style={{ fontSize: 13, color: theme.textSecondary, marginTop: 3, lineHeight: 18 }}
+          style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, marginTop: 3, lineHeight: 18 }}
           numberOfLines={2}>
           {message}
         </ThemedText>
@@ -84,3 +92,5 @@ export function NotificationItem({
     </Pressable>
   );
 }
+
+export const NotificationItem = React.memo(NotificationItemBase);

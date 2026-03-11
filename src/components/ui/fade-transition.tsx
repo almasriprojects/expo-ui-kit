@@ -7,6 +7,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { Animation } from '@/constants/theme';
+
 export type FadeTransitionProps = {
   visible: boolean;
   duration?: number;
@@ -14,7 +16,7 @@ export type FadeTransitionProps = {
   style?: ViewStyle;
 };
 
-const DEFAULT_DURATION = 300;
+const DEFAULT_DURATION = Animation.duration.normal;
 
 export function FadeTransition({
   visible,

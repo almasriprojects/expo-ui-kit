@@ -7,20 +7,27 @@ import {
 } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { SearchBar } from './search-bar';
 
 export type LanguageOption = {
+  /** Language code (e.g. "en", "fr") */
   code: string;
+  /** Display name of the language */
   name: string;
+  /** Emoji flag for the language */
   flag?: string;
 };
 
 export type LanguageSelectorProps = {
+  /** Available language options */
   languages: LanguageOption[];
+  /** Currently selected language code */
   selected: string;
+  /** Callback fired when a language is selected */
   onSelect: (code: string) => void;
+  /** Whether to show the search bar */
   searchable?: boolean;
 };
 
@@ -79,14 +86,14 @@ export function LanguageSelector({
               accessibilityState={{ checked: isSelected }}
             >
               {item.flag != null && (
-                <Text style={{ fontSize: 20 }} accessibilityElementsHidden>
+                <Text style={{ fontSize: FontSize.xl.fontSize }} accessibilityElementsHidden>
                   {item.flag}
                 </Text>
               )}
               <Text
                 style={{
                   flex: 1,
-                  fontSize: 16,
+                  fontSize: FontSize.lg.fontSize,
                   fontWeight: isSelected ? '600' : '500',
                   color: t.text,
                 }}
@@ -101,7 +108,7 @@ export function LanguageSelector({
         }}
         ListEmptyComponent={
           <View style={{ padding: 24, alignItems: 'center' }}>
-            <Text style={{ fontSize: 15, color: t.textSecondary }}>
+            <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>
               No languages found
             </Text>
           </View>

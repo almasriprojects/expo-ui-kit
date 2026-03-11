@@ -2,15 +2,21 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type InlineNotificationProps = {
+  /** Visual variant determining colors and icon */
   variant?: 'info' | 'success' | 'warning' | 'error';
+  /** Optional bold title text */
   title?: string;
+  /** Notification message text */
   message: string;
+  /** Label for the optional action button */
   actionLabel?: string;
+  /** Callback fired when the action button is pressed */
   onAction?: () => void;
+  /** Callback fired when the dismiss button is pressed */
   onDismiss?: () => void;
 };
 
@@ -67,7 +73,7 @@ export function InlineNotification({
         {title && (
           <Text
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               fontWeight: '600',
               color: styles.icon,
               marginBottom: 2,
@@ -75,7 +81,7 @@ export function InlineNotification({
             {title}
           </Text>
         )}
-        <Text style={{ fontSize: 14, color: t.textSecondary }}>{message}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>{message}</Text>
       </View>
       {actionLabel && onAction && (
         <Pressable
@@ -90,7 +96,7 @@ export function InlineNotification({
           }}>
           <Text
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               fontWeight: '600',
               color: t.textOnColor,
             }}>

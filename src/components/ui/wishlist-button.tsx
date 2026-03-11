@@ -3,15 +3,21 @@ import { Pressable, Text, type ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring } from 'react-native-reanimated';
 import { Heart } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type WishlistButtonProps = {
+export type WishlistButtonProps = {
+  /** Whether the item is currently in the wishlist */
   active: boolean;
+  /** Callback invoked when the wishlist state is toggled */
   onToggle: (active: boolean) => void;
+  /** Visual variant of the button */
   variant?: 'icon' | 'pill';
+  /** Size variant of the button */
   size?: 'sm' | 'md' | 'lg';
+  /** Wishlist count displayed in pill variant */
   count?: number;
+  /** Custom styles applied to the button container */
   style?: ViewStyle;
 };
 
@@ -62,7 +68,7 @@ export function WishlistButton({
           fill={active ? t.error : 'none'}
         />
         {count != null && (
-          <Text style={{ fontSize: 13, fontWeight: '600', color: active ? t.error : t.textSecondary }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: active ? t.error : t.textSecondary }}>
             {count}
           </Text>
         )}

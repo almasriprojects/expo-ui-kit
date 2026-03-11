@@ -6,16 +6,20 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Radius } from '@/constants/theme';
+import { Animation, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type SkeletonAvatarProps = {
+  /** Diameter of the skeleton avatar circle in pixels */
   size?: number;
 };
 
 export type SkeletonImageProps = {
+  /** Width of the skeleton image placeholder */
   width?: number | string;
+  /** Height of the skeleton image placeholder in pixels */
   height?: number;
+  /** Border radius of the skeleton image */
   borderRadius?: number;
 };
 
@@ -23,7 +27,7 @@ function usePulseAnimation() {
   const opacity = useSharedValue(0.3);
 
   useEffect(() => {
-    opacity.value = withRepeat(withTiming(0.7, { duration: 800 }), -1, true);
+    opacity.value = withRepeat(withTiming(0.7, { duration: Animation.duration.slower }), -1, true);
   }, [opacity]);
 
   return useAnimatedStyle(() => ({

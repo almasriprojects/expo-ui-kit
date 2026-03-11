@@ -2,18 +2,27 @@ import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Folder, Paperclip } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type FileUploadAreaProps = {
+export type FileUploadAreaProps = {
+  /** Callback fired when the upload area is pressed */
   onPress: () => void;
+  /** Label text displayed in the upload area */
   label?: string;
+  /** Hint text shown below the label */
   hint?: string;
+  /** Custom icon element displayed in the upload area */
   icon?: ReactNode;
+  /** Name of the currently uploaded file */
   fileName?: string;
+  /** Formatted size of the uploaded file */
   fileSize?: string;
+  /** Error message displayed below the area */
   error?: string;
+  /** Whether the upload area is disabled */
   disabled?: boolean;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -59,15 +68,15 @@ export function FileUploadArea({
           <Paperclip size={20} color={t.primary} />
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }} numberOfLines={1}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }} numberOfLines={1}>
             {fileName}
           </Text>
           {fileSize && (
-            <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 2 }}>{fileSize}</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>{fileSize}</Text>
           )}
         </View>
         <Pressable onPress={onPress}>
-          <Text style={{ fontSize: 13, fontWeight: '600', color: t.error }}>Remove</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.error }}>Remove</Text>
         </Pressable>
       </View>
     );
@@ -93,13 +102,13 @@ export function FileUploadArea({
         <View style={{ marginBottom: 8 }}>
           {icon ?? <Folder size={32} color={t.primary} />}
         </View>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>{label}</Text>
-        <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 4, textAlign: 'center' }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{label}</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 4, textAlign: 'center' }}>
           {hint}
         </Text>
       </Pressable>
       {error && (
-        <Text style={{ fontSize: 12, color: t.error, marginTop: 6, fontWeight: '500' }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, marginTop: 6, fontWeight: '500' }}>
           {error}
         </Text>
       )}

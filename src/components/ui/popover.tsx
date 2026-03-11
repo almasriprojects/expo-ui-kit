@@ -4,9 +4,12 @@ import { Modal, Pressable, View } from 'react-native';
 import { Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PopoverProps = {
+export type PopoverProps = {
+  /** Element that triggers the popover when pressed */
   trigger: ReactNode;
+  /** Content rendered inside the popover */
   children: ReactNode;
+  /** Width of the popover panel in pixels */
   width?: number;
 };
 
@@ -30,6 +33,7 @@ export function Popover({ trigger, children, width = 220 }: PopoverProps) {
             }}>
             <Pressable onPress={(e) => e.stopPropagation()}>
               <View
+                accessibilityRole="menu"
                 style={{
                   width,
                   backgroundColor: t.background,

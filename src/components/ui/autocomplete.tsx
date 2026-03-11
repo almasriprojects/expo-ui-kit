@@ -8,21 +8,30 @@ import {
 } from 'react-native';
 import { X } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type AutocompleteOption = {
+  /** Display text shown in the dropdown */
   label: string;
+  /** Underlying value of the option */
   value: string;
 };
 
 export type AutocompleteProps = {
+  /** Label text displayed above the input */
   label?: string;
+  /** Placeholder text when no value is entered */
   placeholder?: string;
+  /** List of selectable options */
   options: AutocompleteOption[];
+  /** Currently selected value */
   value: string;
+  /** Callback invoked when the selected value changes */
   onValueChange: (value: string) => void;
+  /** Whether the autocomplete is disabled */
   disabled?: boolean;
+  /** Error message displayed below the input */
   error?: string;
 };
 
@@ -88,7 +97,7 @@ export function Autocomplete({
   return (
     <View accessibilityRole="combobox" style={{ gap: 6 }}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
           {label}
         </Text>
       )}
@@ -117,7 +126,7 @@ export function Autocomplete({
             editable={!disabled}
             style={{
               flex: 1,
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               color: t.text,
               padding: 0,
             }}
@@ -153,7 +162,7 @@ export function Autocomplete({
             }}>
             {filteredOptions.length === 0 ? (
               <View style={{ padding: 16 }}>
-                <Text style={{ fontSize: 15, color: t.textTertiary }}>
+                <Text style={{ fontSize: FontSize.md.fontSize, color: t.textTertiary }}>
                   No results
                 </Text>
               </View>
@@ -176,7 +185,7 @@ export function Autocomplete({
                       }}>
                       <Text
                         style={{
-                          fontSize: 16,
+                          fontSize: FontSize.lg.fontSize,
                           fontWeight: selected ? '600' : '400',
                           color: selected ? t.primary : t.text,
                         }}>
@@ -191,7 +200,7 @@ export function Autocomplete({
         )}
       </View>
       {error && (
-        <Text style={{ fontSize: 12, color: t.error, fontWeight: '500' }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, fontWeight: '500' }}>
           {error}
         </Text>
       )}

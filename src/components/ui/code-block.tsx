@@ -1,15 +1,20 @@
 import React from 'react';
 import { ScrollView, Text, View, type ViewStyle } from 'react-native';
 
-import { Fonts, Radius, Shadows } from '@/constants/theme';
+import { Fonts, Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { CopyButton } from './copy-button';
 
-type CodeBlockProps = {
+export type CodeBlockProps = {
+  /** Source code string to display */
   code: string;
+  /** Programming language label */
   language?: string;
+  /** Whether to display line numbers */
   showLineNumbers?: boolean;
+  /** Whether to show the copy-to-clipboard button */
   showCopy?: boolean;
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -46,7 +51,7 @@ export function CodeBlock({
             borderBottomWidth: 1,
             borderBottomColor: t.borderOnColor,
           }}>
-          <Text style={{ fontSize: 11, fontWeight: '500', color: t.codeLabelText, textTransform: 'uppercase' }}>
+          <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '500', color: t.codeLabelText, textTransform: 'uppercase' }}>
             {language ?? ''}
           </Text>
           {showCopy && <CopyButton text={code} variant="inline" />}
@@ -60,7 +65,7 @@ export function CodeBlock({
                 <Text
                   key={i}
                   style={{
-                    fontSize: 13,
+                    fontSize: FontSize.sm.fontSize,
                     lineHeight: 20,
                     fontFamily: Fonts?.mono ?? 'monospace',
                     color: t.codeLineNumber,
@@ -75,7 +80,7 @@ export function CodeBlock({
               <Text
                 key={i}
                 style={{
-                  fontSize: 13,
+                  fontSize: FontSize.sm.fontSize,
                   lineHeight: 20,
                   fontFamily: Fonts?.mono ?? 'monospace',
                   color: t.codeText,

@@ -1,14 +1,19 @@
 import React, { useRef, useState } from 'react';
 import { TextInput, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PinInputProps = {
+export type PinInputProps = {
+  /** Number of PIN digit boxes */
   length?: number;
+  /** Callback invoked with the complete PIN string */
   onComplete: (pin: string) => void;
+  /** Whether to mask entered digits */
   secure?: boolean;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
+  /** Whether to display an error state on the inputs */
   error?: boolean;
 };
 
@@ -77,7 +82,7 @@ export function PinInput({
               secureTextEntry={secure && filled}
               selectTextOnFocus
               style={{
-                fontSize: 24,
+                fontSize: FontSize['2xl'].fontSize,
                 fontWeight: '700',
                 color: t.text,
                 textAlign: 'center',

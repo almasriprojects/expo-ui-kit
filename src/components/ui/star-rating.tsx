@@ -4,14 +4,22 @@ import { Star } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
-type StarRatingProps = ViewProps & {
+export type StarRatingProps = ViewProps & {
+  /** Current rating value */
   value: number;
+  /** Callback invoked when a star is pressed to change the rating */
   onValueChange?: (rating: number) => void;
+  /** Maximum number of stars */
   maxStars?: number;
+  /** Size variant of the stars */
   size?: 'sm' | 'md' | 'lg';
+  /** Whether the rating is read-only */
   readonly?: boolean;
+  /** Whether to display the numeric label next to the stars */
   showLabel?: boolean;
+  /** Label text displayed above the rating */
   label?: string;
 };
 
@@ -33,7 +41,7 @@ export function StarRating({
   return (
     <View {...props}>
       {label && (
-        <ThemedText style={{ fontSize: 14, fontWeight: '600', marginBottom: 6, color: t.text }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', marginBottom: 6, color: t.text }}>
           {label}
         </ThemedText>
       )}
@@ -57,7 +65,7 @@ export function StarRating({
           );
         })}
         {showLabel && (
-          <ThemedText style={{ fontSize: 14, marginLeft: 8, color: t.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.md.fontSize, marginLeft: 8, color: t.textSecondary }}>
             {value.toFixed(1)}
           </ThemedText>
         )}

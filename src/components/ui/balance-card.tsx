@@ -2,15 +2,21 @@ import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BalanceCardProps = {
+export type BalanceCardProps = {
+  /** Formatted balance amount string */
   balance: string;
+  /** Currency code displayed alongside the balance */
   currency?: string;
+  /** Descriptive label above the balance */
   label?: string;
+  /** Trend indicator showing value change and direction */
   trend?: { value: string; positive: boolean };
+  /** Quick action buttons displayed at the bottom */
   actions?: { label: string; icon: ReactNode; onPress: () => void }[];
+  /** Custom styles for the card container */
   style?: ViewStyle;
 };
 
@@ -35,14 +41,14 @@ export function BalanceCard({
         },
         style,
       ]}>
-      <Text style={{ fontSize: 13, fontWeight: '500', color: t.primaryForeground, opacity: 0.7 }}>
+      <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: t.primaryForeground, opacity: 0.7 }}>
         {label}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 4, marginTop: 6 }}>
-        <Text style={{ fontSize: 14, fontWeight: '500', color: t.primaryForeground, opacity: 0.7 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: t.primaryForeground, opacity: 0.7 }}>
           {currency}
         </Text>
-        <Text style={{ fontSize: 36, fontWeight: '800', color: t.primaryForeground }}>
+        <Text style={{ fontSize: FontSize['4xl'].fontSize, fontWeight: '800', color: t.primaryForeground }}>
           {balance}
         </Text>
       </View>
@@ -53,10 +59,10 @@ export function BalanceCard({
           ) : (
             <ArrowDown size={13} color={t.primaryForeground} />
           )}
-          <Text style={{ fontSize: 13, fontWeight: '600', color: t.primaryForeground }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.primaryForeground }}>
             {trend.value}
           </Text>
-          <Text style={{ fontSize: 12, color: t.primaryForeground, opacity: 0.6 }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.primaryForeground, opacity: 0.6 }}>
             this month
           </Text>
         </View>
@@ -76,7 +82,7 @@ export function BalanceCard({
                 backgroundColor: t.surfaceOnColorSubtle,
               }}>
               {a.icon}
-              <Text style={{ fontSize: 11, fontWeight: '600', color: t.primaryForeground }}>
+              <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '600', color: t.primaryForeground }}>
                 {a.label}
               </Text>
             </Pressable>

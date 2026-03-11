@@ -6,14 +6,22 @@ import {
 } from 'react-native-reanimated';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
-type AnimatedCounterProps = {
+export type AnimatedCounterProps = {
+  /** Target numeric value to animate to */
   value: number;
+  /** Text displayed before the number */
   prefix?: string;
+  /** Text displayed after the number */
   suffix?: string;
+  /** Animation duration in milliseconds */
   duration?: number;
+  /** Number of decimal places to display */
   decimals?: number;
+  /** Custom styles for the number text */
   textStyle?: TextStyle;
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -54,7 +62,7 @@ export function AnimatedCounter({
       {prefix ? (
         <Text
           style={[
-            { fontSize: 20, fontWeight: '600', color: t.textSecondary },
+            { fontSize: FontSize.xl.fontSize, fontWeight: '600', color: t.textSecondary },
             textStyle,
           ]}>
           {prefix}
@@ -62,7 +70,7 @@ export function AnimatedCounter({
       ) : null}
       <Text
         style={[
-          { fontSize: 32, fontWeight: '800', color: t.text, fontVariant: ['tabular-nums'] },
+          { fontSize: FontSize['3xl'].fontSize, fontWeight: '800', color: t.text, fontVariant: ['tabular-nums'] },
           textStyle,
         ]}>
         {displayValue}
@@ -70,7 +78,7 @@ export function AnimatedCounter({
       {suffix ? (
         <Text
           style={[
-            { fontSize: 16, fontWeight: '600', color: t.textSecondary, marginLeft: 2 },
+            { fontSize: FontSize.lg.fontSize, fontWeight: '600', color: t.textSecondary, marginLeft: 2 },
             textStyle,
           ]}>
           {suffix}

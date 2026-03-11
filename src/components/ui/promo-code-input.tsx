@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View, type ViewStyle } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PromoCodeInputProps = {
+export type PromoCodeInputProps = {
+  /** Callback invoked when a promo code is applied or removed */
   onApply: (code: string) => void;
+  /** Currently applied promo code string */
   appliedCode?: string;
+  /** Discount description shown next to the applied code */
   discount?: string;
+  /** Error message displayed below the input */
   error?: string;
+  /** Whether the apply action is in a loading state */
   loading?: boolean;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -45,13 +51,13 @@ export function PromoCodeInput({
         ]}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
           <Check size={14} color={t.success} />
-          <Text style={{ fontSize: 14, fontWeight: '700', color: t.success }}>{appliedCode}</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.success }}>{appliedCode}</Text>
           {discount && (
-            <Text style={{ fontSize: 13, color: t.success }}>({discount})</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.success }}>({discount})</Text>
           )}
         </View>
         <Pressable onPress={() => onApply('')}>
-          <Text style={{ fontSize: 13, fontWeight: '600', color: t.error }}>Remove</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.error }}>Remove</Text>
         </Pressable>
       </View>
     );
@@ -80,7 +86,7 @@ export function PromoCodeInput({
             flex: 1,
             paddingHorizontal: 14,
             paddingVertical: 12,
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             fontWeight: '600',
             color: t.text,
             letterSpacing: 1,
@@ -96,7 +102,7 @@ export function PromoCodeInput({
           }}>
           <Text
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               fontWeight: '700',
               color: code.trim() ? t.primaryForeground : t.textTertiary,
             }}>
@@ -105,7 +111,7 @@ export function PromoCodeInput({
         </Pressable>
       </View>
       {error && (
-        <Text style={{ fontSize: 12, color: t.error, marginTop: 6, fontWeight: '500' }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, marginTop: 6, fontWeight: '500' }}>
           {error}
         </Text>
       )}

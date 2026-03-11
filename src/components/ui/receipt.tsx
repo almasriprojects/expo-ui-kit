@@ -1,22 +1,32 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
-import { Fonts, Radius } from '@/constants/theme';
+import { Fonts, FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ReceiptItem = {
+  /** Label for the receipt line item */
   label: string;
+  /** Numeric amount for the line item */
   amount: number;
 };
 
 export type ReceiptProps = {
+  /** Array of purchased items */
   items: ReceiptItem[];
+  /** Subtotal before tax */
   subtotal: number;
+  /** Tax amount */
   tax?: number;
+  /** Final total amount */
   total: number;
+  /** Payment method description (e.g. "Visa ****1234") */
   paymentMethod?: string;
+  /** Formatted date string for the transaction */
   date?: string;
+  /** Currency symbol used for formatting amounts */
   currency?: string;
+  /** Custom styles applied to the receipt container */
   style?: ViewStyle;
 };
 
@@ -54,7 +64,7 @@ export function Receipt({
       {date && (
         <Text
           style={{
-            fontSize: 12,
+            fontSize: FontSize.sm.fontSize,
             color: t.textSecondary,
             marginBottom: 12,
             fontFamily: mono,
@@ -74,7 +84,7 @@ export function Receipt({
             }}>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.text,
                 flex: 1,
                 fontFamily: mono,
@@ -84,7 +94,7 @@ export function Receipt({
             </Text>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.text,
                 fontFamily: mono,
               }}>
@@ -113,10 +123,10 @@ export function Receipt({
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{ fontSize: 13, color: t.textSecondary, fontFamily: mono }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: mono }}>
             Subtotal
           </Text>
-          <Text style={{ fontSize: 13, color: t.textSecondary, fontFamily: mono }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: mono }}>
             {formatAmount(subtotal, currency)}
           </Text>
         </View>
@@ -127,11 +137,11 @@ export function Receipt({
               justifyContent: 'space-between',
             }}>
             <Text
-              style={{ fontSize: 13, color: t.textSecondary, fontFamily: mono }}>
+              style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: mono }}>
               Tax
             </Text>
             <Text
-              style={{ fontSize: 13, color: t.textSecondary, fontFamily: mono }}>
+              style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: mono }}>
               {formatAmount(tax, currency)}
             </Text>
           </View>
@@ -147,7 +157,7 @@ export function Receipt({
           }}>
           <Text
             style={{
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               fontWeight: '700',
               color: t.text,
               fontFamily: mono,
@@ -156,7 +166,7 @@ export function Receipt({
           </Text>
           <Text
             style={{
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               fontWeight: '700',
               color: t.text,
               fontFamily: mono,
@@ -169,7 +179,7 @@ export function Receipt({
       {paymentMethod && (
         <Text
           style={{
-            fontSize: 12,
+            fontSize: FontSize.sm.fontSize,
             color: t.textTertiary,
             marginTop: 12,
             fontFamily: mono,

@@ -1,24 +1,33 @@
 import React, { type ReactNode } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type KanbanItem = {
+  /** Unique key for the item */
   key: string;
+  /** Content rendered inside the card */
   content: ReactNode;
 };
 
 export type KanbanColumn = {
+  /** Unique key for the column */
   key: string;
+  /** Column header title */
   title: string;
+  /** Array of items in the column */
   items: KanbanItem[];
 };
 
 export type KanbanBoardProps = {
+  /** Array of column definitions with items */
   columns: KanbanColumn[];
+  /** Callback fired when an item card is pressed */
   onItemPress?: (columnKey: string, itemKey: string) => void;
+  /** Accessibility label for the board */
   accessibilityLabel?: string;
+  /** Accessibility hint for the board */
   accessibilityHint?: string;
 };
 
@@ -50,7 +59,7 @@ export function KanbanBoard({
           }}>
           <Text
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               fontWeight: '700',
               color: t.text,
               marginBottom: 12,

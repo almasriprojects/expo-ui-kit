@@ -2,22 +2,35 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Bath, Bed, Heart, Home, Ruler } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PropertyCardProps = {
+export type PropertyCardProps = {
+  /** Name or title of the property listing */
   title: string;
+  /** Street address of the property */
   address: string;
+  /** Formatted price string */
   price: string;
+  /** Price period unit (e.g. "month", "night") */
   priceUnit?: string;
+  /** Number of bedrooms */
   beds: number;
+  /** Number of bathrooms */
   baths: number;
+  /** Square footage as a formatted string */
   sqft: string;
+  /** Property type label (e.g. "Condo", "House") */
   type?: string;
+  /** Whether this listing is featured */
   featured?: boolean;
+  /** Callback invoked when the card is pressed */
   onPress?: () => void;
+  /** Callback invoked when the favorite button is pressed */
   onFavorite?: () => void;
+  /** Whether the property is currently favorited */
   favorited?: boolean;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -66,7 +79,7 @@ export function PropertyCard({
               paddingVertical: 3,
               borderRadius: Radius.sm,
             }}>
-            <Text style={{ fontSize: 10, fontWeight: '700', color: t.primaryForeground }}>FEATURED</Text>
+            <Text style={{ fontSize: FontSize['2xs'].fontSize, fontWeight: '700', color: t.primaryForeground }}>FEATURED</Text>
           </View>
         )}
         {type && (
@@ -80,7 +93,7 @@ export function PropertyCard({
               paddingVertical: 3,
               borderRadius: Radius.sm,
             }}>
-            <Text style={{ fontSize: 10, fontWeight: '600', color: t.textOnColor }}>{type}</Text>
+            <Text style={{ fontSize: FontSize['2xs'].fontSize, fontWeight: '600', color: t.textOnColor }}>{type}</Text>
           </View>
         )}
         {onFavorite && (
@@ -107,15 +120,15 @@ export function PropertyCard({
       </View>
       <View style={{ padding: 14 }}>
         <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 4 }}>
-          <Text style={{ fontSize: 20, fontWeight: '800', color: t.text }}>{price}</Text>
+          <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '800', color: t.text }}>{price}</Text>
           {priceUnit && (
-            <Text style={{ fontSize: 13, color: t.textSecondary }}>/{priceUnit}</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>/{priceUnit}</Text>
           )}
         </View>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: t.text, marginTop: 4 }} numberOfLines={1}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginTop: 4 }} numberOfLines={1}>
           {title}
         </Text>
-        <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}>{address}</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>{address}</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -127,18 +140,18 @@ export function PropertyCard({
           }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <Bed size={13} color={t.textSecondary} />
-            <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{beds}</Text>
-            <Text style={{ fontSize: 12, color: t.textSecondary }}>beds</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>{beds}</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>beds</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <Bath size={13} color={t.textSecondary} />
-            <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{baths}</Text>
-            <Text style={{ fontSize: 12, color: t.textSecondary }}>baths</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>{baths}</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>baths</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <Ruler size={13} color={t.textSecondary} />
-            <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{sqft}</Text>
-            <Text style={{ fontSize: 12, color: t.textSecondary }}>sqft</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>{sqft}</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>sqft</Text>
           </View>
         </View>
       </View>

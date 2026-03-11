@@ -1,12 +1,17 @@
 import React, { type ReactNode } from 'react';
 import { Text, View } from 'react-native';
 
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type EmptyStateProps = {
+export type EmptyStateProps = {
+  /** Title text displayed prominently */
   title: string;
+  /** Optional description text below the title */
   description?: string;
+  /** Optional icon element displayed above the title */
   icon?: ReactNode;
+  /** Optional action element (e.g. button) below the description */
   action?: ReactNode;
 };
 
@@ -24,13 +29,13 @@ export function EmptyState({ title, description, icon, action }: EmptyStateProps
         gap: 12,
       }}>
       {icon && <View style={{ marginBottom: 8 }}>{icon}</View>}
-      <Text style={{ fontSize: 20, fontWeight: '700', textAlign: 'center', color: t.text }}>
+      <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', textAlign: 'center', color: t.text }}>
         {title}
       </Text>
       {description && (
         <Text
           style={{
-            fontSize: 14,
+            fontSize: FontSize.md.fontSize,
             textAlign: 'center',
             color: t.textSecondary,
             lineHeight: 20,

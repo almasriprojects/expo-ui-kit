@@ -5,20 +5,30 @@ import {
   Pressable,
   ScrollView,
   View,
+  type ViewStyle,
 } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ModalProps = {
+export type ModalProps = {
+  /** Whether the modal is visible */
   visible: boolean;
+  /** Callback invoked when the modal is dismissed */
   onClose: () => void;
+  /** Title text displayed at the top of the modal */
   title?: string;
+  /** Description text displayed below the title */
   description?: string;
+  /** Content rendered inside the modal body */
   children?: ReactNode;
+  /** Action buttons rendered at the bottom of the modal */
   actions?: ReactNode;
+  /** Maximum width preset for the modal */
   size?: 'sm' | 'md' | 'lg';
+  /** Custom styles applied to the modal content container */
+  contentStyle?: ViewStyle;
 };
 
 const maxWidths = { sm: 320, md: 400, lg: 480 };
@@ -31,6 +41,7 @@ export function Modal({
   children,
   actions,
   size = 'md',
+  contentStyle,
 }: ModalProps) {
   const t = useTheme();
   const screenWidth = Dimensions.get('window').width;
@@ -45,29 +56,31 @@ export function Modal({
           backgroundColor: t.overlay,
           alignItems: 'center',
           justifyContent: 'center',
-          paddingHorizontal: 24,
+          paddingHorizontal: Spacing[6],
         }}>
         <Pressable
           onPress={(e) => e.stopPropagation()}
-          style={{
+          accessibilityRole="alert"
+          accessibilityLabel={title}
+          style={[{
             width,
             backgroundColor: t.background,
             borderRadius: Radius['2xl'],
-            padding: 24,
+            padding: Spacing[6],
             ...Shadows.xl,
-          }}>
+          }, contentStyle]}>
           {title && (
             <ThemedText
-              style={{ fontSize: 18, fontWeight: '700', marginBottom: 4, color: t.text }}>
+              style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', marginBottom: Spacing[1], color: t.text }}>
               {title}
             </ThemedText>
           )}
           {description && (
             <ThemedText
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
-                marginBottom: 16,
+                marginBottom: Spacing[4],
                 lineHeight: 20,
               }}>
               {description}
@@ -75,7 +88,7 @@ export function Modal({
           )}
           {children && (
             <ScrollView
-              style={{ maxHeight: 300, marginBottom: 16 }}
+              style={{ maxHeight: 300, marginBottom: Spacing[4] }}
               showsVerticalScrollIndicator={false}>
               {children}
             </ScrollView>
@@ -85,7 +98,7 @@ export function Modal({
               style={{
                 flexDirection: 'row',
                 justifyContent: 'flex-end',
-                gap: 12,
+                gap: Spacing[3],
               }}>
               {actions}
             </View>

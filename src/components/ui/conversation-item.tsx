@@ -1,24 +1,34 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 
-type ConversationItemProps = {
+export type ConversationItemProps = {
+  /** Name of the conversation participant */
   name: string;
+  /** URL of the participant's avatar image */
   avatar?: string;
+  /** Preview of the most recent message */
   lastMessage: string;
+  /** Formatted timestamp of the last message */
   time: string;
+  /** Number of unread messages */
   unread?: number;
+  /** Whether the participant is currently online */
   online?: boolean;
+  /** Whether notifications are muted for this conversation */
   muted?: boolean;
+  /** Whether the participant is currently typing */
   typing?: boolean;
+  /** Callback invoked when the conversation is pressed */
   onPress?: () => void;
+  /** Custom styles for the item container */
   style?: ViewStyle;
 };
 
-export function ConversationItem({
+function ConversationItemBase({
   name,
   avatar,
   lastMessage,
@@ -66,10 +76,10 @@ export function ConversationItem({
       </View>
       <View style={{ flex: 1 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text style={{ fontSize: 15, fontWeight: hasUnread ? '700' : '500', color: t.text }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: hasUnread ? '700' : '500', color: t.text }}>
             {name}
           </Text>
-          <Text style={{ fontSize: 11, color: hasUnread ? t.primary : t.textTertiary }}>
+          <Text style={{ fontSize: FontSize.xs.fontSize, color: hasUnread ? t.primary : t.textTertiary }}>
             {time}
           </Text>
         </View>
@@ -78,7 +88,7 @@ export function ConversationItem({
             numberOfLines={1}
             style={{
               flex: 1,
-              fontSize: 13,
+              fontSize: FontSize.sm.fontSize,
               color: typing ? t.primary : hasUnread ? t.text : t.textSecondary,
               fontWeight: hasUnread ? '500' : '400',
               fontStyle: typing ? 'italic' : 'normal',
@@ -97,7 +107,7 @@ export function ConversationItem({
                 justifyContent: 'center',
                 paddingHorizontal: 5,
               }}>
-              <Text style={{ fontSize: 11, fontWeight: '700', color: t.textOnColor }}>
+              <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '700', color: t.textOnColor }}>
                 {unread > 99 ? '99+' : unread}
               </Text>
             </View>
@@ -107,3 +117,5 @@ export function ConversationItem({
     </Pressable>
   );
 }
+
+export const ConversationItem = React.memo(ConversationItemBase);

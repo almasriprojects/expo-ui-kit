@@ -2,15 +2,21 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Fonts, Radius, Shadows } from '@/constants/theme';
+import { Fonts, Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ColorPickerProps = {
+export type ColorPickerProps = {
+  /** Array of hex color strings to choose from */
   colors: string[];
+  /** Currently selected color hex string */
   value: string;
+  /** Callback invoked when a color is selected */
   onValueChange: (color: string) => void;
+  /** Label text displayed above the color grid */
   label?: string;
+  /** Size preset for the color dots */
   size?: 'sm' | 'md' | 'lg';
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -30,7 +36,7 @@ export function ColorPicker({
   return (
     <View style={style}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 10 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: 10 }}>
           {label}
         </Text>
       )}
@@ -71,7 +77,7 @@ export function ColorPicker({
               borderColor: t.border,
             }}
           />
-          <Text style={{ fontSize: 13, color: t.textSecondary, fontFamily: Fonts?.mono ?? 'monospace' }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: Fonts?.mono ?? 'monospace' }}>
             {value.toUpperCase()}
           </Text>
         </View>

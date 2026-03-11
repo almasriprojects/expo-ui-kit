@@ -1,12 +1,15 @@
 import React, { forwardRef, useState } from 'react';
 import { Pressable, Text, TextInput, type TextInputProps, View } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PasswordInputProps = TextInputProps & {
+export type PasswordInputProps = TextInputProps & {
+  /** Label text displayed above the input */
   label?: string;
+  /** Error message displayed below the input */
   error?: string;
+  /** Hint text shown below the input when there is no error */
   hint?: string;
 };
 
@@ -18,7 +21,7 @@ export const PasswordInput = forwardRef<TextInput, PasswordInputProps>(
     return (
       <View style={{ gap: 6 }}>
         {label && (
-          <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
             {label}
           </Text>
         )}
@@ -44,7 +47,7 @@ export const PasswordInput = forwardRef<TextInput, PasswordInputProps>(
                 flex: 1,
                 paddingHorizontal: 16,
                 paddingVertical: 12,
-                fontSize: 16,
+                fontSize: FontSize.lg.fontSize,
                 color: t.text,
               },
               typeof style === 'object' ? style : undefined,
@@ -58,16 +61,16 @@ export const PasswordInput = forwardRef<TextInput, PasswordInputProps>(
               paddingHorizontal: 12,
               paddingVertical: 8,
             }}>
-            <Text style={{ fontSize: 14, fontWeight: '600', color: t.primary }}>
+            <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primary }}>
               {secure ? 'Show' : 'Hide'}
             </Text>
           </Pressable>
         </View>
         {error && (
-          <Text style={{ fontSize: 12, color: t.error, fontWeight: '500' }}>{error}</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, fontWeight: '500' }}>{error}</Text>
         )}
         {hint && !error && (
-          <Text style={{ fontSize: 12, color: t.textTertiary }}>{hint}</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>{hint}</Text>
         )}
       </View>
     );

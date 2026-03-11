@@ -2,21 +2,30 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type PieChartDataItem = {
+  /** Label for the chart segment */
   label: string;
+  /** Numeric value determining the segment size */
   value: number;
+  /** Fill color for the segment */
   color: string;
 };
 
 export type PieChartProps = {
+  /** Array of data items representing chart segments */
   data: PieChartDataItem[];
+  /** Diameter of the pie chart in pixels */
   size?: number;
+  /** Width of the chart ring stroke */
   strokeWidth?: number;
+  /** Whether to display the color legend below the chart */
   showLegend?: boolean;
+  /** Accessibility label for the chart container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the chart container */
   accessibilityHint?: string;
 };
 
@@ -84,7 +93,7 @@ export function PieChart({
                   backgroundColor: item.color,
                 }}
               />
-              <Text style={{ fontSize: 12, color: t.textSecondary }}>{item.label}</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{item.label}</Text>
             </View>
           ))}
         </View>

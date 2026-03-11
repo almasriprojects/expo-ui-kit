@@ -1,12 +1,15 @@
 import React, { forwardRef } from 'react';
 import { Text, TextInput, type TextInputProps, View } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type InputProps = TextInputProps & {
+export type InputProps = TextInputProps & {
+  /** Label text displayed above the input */
   label?: string;
+  /** Error message displayed below the input */
   error?: string;
+  /** Hint text displayed below the input when no error */
   hint?: string;
 };
 
@@ -15,9 +18,9 @@ export const Input = forwardRef<TextInput, InputProps>(
     const t = useTheme();
 
     return (
-      <View style={{ gap: 6 }}>
+      <View style={{ gap: Spacing[1.5] }}>
         {label && (
-          <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
             {label}
           </Text>
         )}
@@ -30,10 +33,10 @@ export const Input = forwardRef<TextInput, InputProps>(
           style={[
             {
               minHeight: 48,
-              paddingHorizontal: 16,
-              paddingVertical: 12,
+              paddingHorizontal: Spacing[4],
+              paddingVertical: Spacing[3],
               borderRadius: Radius.lg,
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               backgroundColor: t.surface,
               color: t.text,
               borderWidth: 1.5,
@@ -44,12 +47,12 @@ export const Input = forwardRef<TextInput, InputProps>(
           {...props}
         />
         {error && (
-          <Text style={{ fontSize: 12, color: t.error, fontWeight: '500' }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, fontWeight: '500' }}>
             {error}
           </Text>
         )}
         {hint && !error && (
-          <Text style={{ fontSize: 12, color: t.textTertiary }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>
             {hint}
           </Text>
         )}

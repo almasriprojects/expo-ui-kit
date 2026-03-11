@@ -3,17 +3,22 @@ import { Pressable, View, type ViewProps } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type Tab = {
+export type Tab = {
+  /** Unique key identifier for the tab */
   key: string;
+  /** Label text displayed on the tab */
   label: string;
+  /** Content rendered when the tab is active */
   content: React.ReactNode;
 };
 
-type TabsProps = ViewProps & {
+export type TabsProps = ViewProps & {
+  /** Array of tab definitions */
   tabs: Tab[];
+  /** Key of the initially active tab */
   defaultTab?: string;
 };
 
@@ -29,7 +34,7 @@ export function Tabs({ tabs, defaultTab, ...props }: TabsProps) {
           flexDirection: 'row',
           backgroundColor: theme.surface,
           borderRadius: Radius.xl,
-          padding: 4,
+          padding: Spacing[1],
         }}
         accessibilityRole="tablist">
         {tabs.map((tab) => {
@@ -44,7 +49,7 @@ export function Tabs({ tabs, defaultTab, ...props }: TabsProps) {
               style={[
                 {
                   flex: 1,
-                  paddingVertical: 8,
+                  paddingVertical: Spacing[2],
                   borderRadius: Radius.md,
                   alignItems: 'center',
                 },
@@ -55,7 +60,7 @@ export function Tabs({ tabs, defaultTab, ...props }: TabsProps) {
               ]}>
               <ThemedText
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   fontWeight: '600',
                   color: theme.text,
                   opacity: active ? 1 : 0.55,
@@ -67,7 +72,7 @@ export function Tabs({ tabs, defaultTab, ...props }: TabsProps) {
         })}
       </View>
       {activeTab && (
-        <Animated.View key={activeKey} entering={FadeIn.duration(150)} style={{ marginTop: 16 }}>
+        <Animated.View key={activeKey} entering={FadeIn.duration(150)} style={{ marginTop: Spacing[4] }}>
           {activeTab.content}
         </Animated.View>
       )}

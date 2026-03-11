@@ -9,9 +9,12 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
 export type ConnectionStatusProps = {
+  /** Whether the device is currently connected to the internet */
   isConnected: boolean;
+  /** Custom message to display instead of the default */
   message?: string;
 };
 
@@ -52,13 +55,13 @@ export function ConnectionStatus({
   if (!visible) return null;
 
   const offlineContent = (
-    <Text style={{ fontSize: 13, fontWeight: '600', color: t.textOnColor }}>
+    <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textOnColor }}>
       {message ?? 'No internet connection'}
     </Text>
   );
 
   const onlineContent = (
-    <Text style={{ fontSize: 13, fontWeight: '600', color: t.textOnColor }}>
+    <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textOnColor }}>
       {message ?? 'Back online'}
     </Text>
   );

@@ -2,16 +2,21 @@ import React from 'react';
 import { View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, type ThemeTokens } from '@/constants/theme';
+import { FontSize, Radius, Spacing, type ThemeTokens } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type ProgressVariant = 'default' | 'success' | 'warning' | 'error';
 
-type ProgressProps = ViewProps & {
+export type ProgressProps = ViewProps & {
+  /** Current progress value */
   value: number;
+  /** Maximum progress value */
   max?: number;
+  /** Whether to display a percentage label */
   showLabel?: boolean;
+  /** Color variant of the progress bar */
   variant?: ProgressVariant;
+  /** Height size of the progress bar */
   size?: 'sm' | 'md' | 'lg';
 };
 
@@ -44,13 +49,13 @@ export function Progress({
   const height = sizeHeights[size];
 
   return (
-    <View style={[{ gap: 6 }, typeof style === 'object' ? style : undefined]} {...props}>
+    <View style={[{ gap: Spacing[1.5] }, typeof style === 'object' ? style : undefined]} {...props}>
       {showLabel && (
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
             Progress
           </ThemedText>
-          <ThemedText style={{ fontSize: 12, fontWeight: '600', color: t.text }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>
             {Math.round(percentage)}%
           </ThemedText>
         </View>

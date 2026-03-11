@@ -1,18 +1,26 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
-import { Star } from 'lucide-react-native';
+import { MapPin, Star } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type MapCardProps = {
+export type MapCardProps = {
+  /** Name of the location */
   title: string;
+  /** Street address of the location */
   address: string;
+  /** Distance from the user's current position */
   distance?: string;
+  /** Star rating of the location */
   rating?: number;
+  /** Category label for the location (e.g. "Restaurant") */
   category?: string;
+  /** Callback invoked when the card is pressed */
   onPress?: () => void;
+  /** Callback invoked when the directions button is pressed */
   onDirections?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -51,20 +59,20 @@ export function MapCard({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ fontSize: 40, marginBottom: 4 }}>📍</Text>
-        <Text style={{ fontSize: 12, color: t.textTertiary }}>Map Preview</Text>
+        <MapPin size={FontSize['4xl'].fontSize} color={t.textTertiary} style={{ marginBottom: 4 }} />
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>Map Preview</Text>
       </View>
 
       <View style={{ padding: 16 }}>
         <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <View style={{ flex: 1, marginRight: 12 }}>
-            <Text style={{ fontSize: 16, fontWeight: '700', color: t.text }}>{title}</Text>
+            <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text }}>{title}</Text>
             {category && (
-              <Text style={{ fontSize: 12, color: t.primary, fontWeight: '500', marginTop: 2 }}>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.primary, fontWeight: '500', marginTop: 2 }}>
                 {category}
               </Text>
             )}
-            <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 4, lineHeight: 18 }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 4, lineHeight: 18 }}>
               {address}
             </Text>
           </View>
@@ -73,11 +81,11 @@ export function MapCard({
               {rating && (
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
                   <Star size={12} color={t.warning} fill={t.warning} />
-                  <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>{rating}</Text>
+                  <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>{rating}</Text>
                 </View>
               )}
               {distance && (
-                <Text style={{ fontSize: 12, color: t.textSecondary }}>{distance}</Text>
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{distance}</Text>
               )}
             </View>
           )}
@@ -93,7 +101,7 @@ export function MapCard({
               backgroundColor: t.primary,
               alignItems: 'center',
             }}>
-            <Text style={{ fontSize: 14, fontWeight: '600', color: t.primaryForeground }}>
+            <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primaryForeground }}>
               Get Directions
             </Text>
           </Pressable>

@@ -2,10 +2,12 @@ import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { AlertTriangle } from 'lucide-react-native';
 
-import { Fonts, Radius, Shadows } from '@/constants/theme';
+import { FontSize, Fonts, Radius, Shadows } from '@/constants/theme';
 
-type Props = {
+export type ErrorBoundaryProps = {
+  /** Child components to wrap with the error boundary */
   children: ReactNode;
+  /** Custom fallback UI rendered when an error is caught */
   fallback?: ReactNode;
 };
 
@@ -14,8 +16,8 @@ type State = {
   error: Error | null;
 };
 
-export class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+export class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null };
   }
@@ -59,7 +61,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </View>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: FontSize.xl.fontSize,
                 fontWeight: '700',
                 color: '#fff',
                 textAlign: 'center',
@@ -69,7 +71,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </Text>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: '#999',
                 textAlign: 'center',
                 marginBottom: 20,
@@ -89,7 +91,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 }}>
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: FontSize.sm.fontSize,
                     color: '#ef4444',
                     fontFamily: Fonts?.mono ?? 'monospace',
                   }}>
@@ -108,7 +110,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 paddingVertical: 14,
                 alignItems: 'center',
               }}>
-              <Text style={{ fontSize: 15, fontWeight: '600', color: '#000' }}>
+              <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: '#000' }}>
                 Try Again
               </Text>
             </Pressable>

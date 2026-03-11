@@ -11,14 +11,19 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, Spacing, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BottomSheetProps = ViewProps & {
+export type BottomSheetProps = ViewProps & {
+  /** Controls the visibility of the bottom sheet */
   visible: boolean;
+  /** Callback invoked when the sheet is dismissed */
   onClose: () => void;
+  /** Optional title displayed at the top of the sheet */
   title?: string;
+  /** Content rendered inside the sheet */
   children?: ReactNode;
+  /** Fixed height for the sheet in pixels */
   snapHeight?: number;
 };
 
@@ -51,7 +56,7 @@ export function BottomSheet({
               borderTopLeftRadius: Radius['3xl'],
               borderTopRightRadius: Radius['3xl'],
               backgroundColor: t.card,
-              paddingBottom: insets.bottom + 16,
+              paddingBottom: insets.bottom + Spacing[4],
               maxHeight: '85%',
               ...Shadows.xl,
             },
@@ -59,7 +64,7 @@ export function BottomSheet({
           ]}
           {...props}>
           {/* Handle */}
-          <View style={{ alignItems: 'center', paddingTop: 12, paddingBottom: 8 }}>
+          <View style={{ alignItems: 'center', paddingTop: Spacing[3], paddingBottom: Spacing[2] }}>
             <View
               style={{
                 width: 40,
@@ -74,10 +79,10 @@ export function BottomSheet({
           {title && (
             <Text
               style={{
-                fontSize: 20,
+                fontSize: FontSize.xl.fontSize,
                 fontWeight: '700',
-                paddingHorizontal: 24,
-                paddingBottom: 20,
+                paddingHorizontal: Spacing[6],
+                paddingBottom: Spacing[5],
                 color: t.text,
               }}>
               {title}
@@ -86,8 +91,8 @@ export function BottomSheet({
 
           {/* Content */}
           <ScrollView
-            style={{ paddingHorizontal: 24 }}
-            contentContainerStyle={{ paddingBottom: 8 }}
+            style={{ paddingHorizontal: Spacing[6] }}
+            contentContainerStyle={{ paddingBottom: Spacing[2] }}
             showsVerticalScrollIndicator={false}
             bounces={false}
             keyboardShouldPersistTaps="handled">

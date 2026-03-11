@@ -2,18 +2,27 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type SubscriptionCardProps = {
+  /** Name of the subscription plan */
   name: string;
+  /** Formatted price string */
   price: string;
+  /** Billing period label (e.g. "/month") */
   period?: string;
+  /** List of features included in the plan */
   features: string[];
+  /** Whether this is the user's current plan */
   isCurrent?: boolean;
+  /** Whether to highlight this plan as popular */
   isPopular?: boolean;
+  /** Callback invoked when the plan is selected */
   onSelect: () => void;
+  /** Label for the call-to-action button */
   ctaLabel?: string;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -65,7 +74,7 @@ export function SubscriptionCard({
             }}>
             <Text
               style={{
-                fontSize: 12,
+                fontSize: FontSize.sm.fontSize,
                 fontWeight: '700',
                 color: t.primaryForeground,
               }}>
@@ -78,7 +87,7 @@ export function SubscriptionCard({
       <View style={{ marginTop: isPopular ? 16 : 0, gap: 12 }}>
         <Text
           style={{
-            fontSize: 18,
+            fontSize: FontSize.xl.fontSize,
             fontWeight: '700',
             color: t.text,
           }}>
@@ -88,7 +97,7 @@ export function SubscriptionCard({
         <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 4 }}>
           <Text
             style={{
-              fontSize: 28,
+              fontSize: FontSize['3xl'].fontSize,
               fontWeight: '800',
               color: t.text,
             }}>
@@ -97,7 +106,7 @@ export function SubscriptionCard({
           {period && (
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
               }}>
               /{period}
@@ -117,7 +126,7 @@ export function SubscriptionCard({
               <Check size={16} color={t.success} />
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   color: t.text,
                   flex: 1,
                 }}>
@@ -145,7 +154,7 @@ export function SubscriptionCard({
           accessibilityState={{ disabled: isCurrent }}>
           <Text
             style={{
-              fontSize: 15,
+              fontSize: FontSize.md.fontSize,
               fontWeight: '600',
               color: isCurrent ? t.textSecondary : t.primaryForeground,
             }}>

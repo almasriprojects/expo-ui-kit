@@ -129,6 +129,16 @@ export type { ScaleTransitionProps } from './scale-transition';
 export { Confetti } from './confetti';
 export type { ConfettiProps } from './confetti';
 
+// ── Utility ──
+export { Label } from './label';
+export type { LabelProps } from './label';
+export { Portal } from './portal';
+export type { PortalProps } from './portal';
+export { ScrollArea } from './scroll-area';
+export type { ScrollAreaProps } from './scroll-area';
+export { Toggle } from './toggle';
+export type { ToggleProps } from './toggle';
+
 // ── Layout Primitives ──
 export { Stack, VStack, HStack } from './stack';
 export type { StackProps } from './stack';

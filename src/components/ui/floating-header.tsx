@@ -12,14 +12,19 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { Shadows } from '@/constants/theme';
+import { FontSize, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type FloatingHeaderProps = {
+  /** Title text displayed in the header */
   title: string;
+  /** Scrollable content below the header */
   children: ReactNode;
+  /** Custom header content replacing the default title */
   headerContent?: ReactNode;
+  /** Accessibility label for the container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the container */
   accessibilityHint?: string;
 };
 
@@ -90,7 +95,7 @@ export function FloatingHeader({
           {headerContent ?? (
             <Text
               style={{
-                fontSize: 20,
+                fontSize: FontSize.xl.fontSize,
                 fontWeight: '700',
                 color: t.text,
               }}

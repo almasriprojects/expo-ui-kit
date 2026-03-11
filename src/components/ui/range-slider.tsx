@@ -3,19 +3,29 @@ import { Text, View, type ViewStyle } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useSharedValue } from 'react-native-reanimated';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type RangeSliderProps = {
+export type RangeSliderProps = {
+  /** Minimum bound of the slider range */
   min: number;
+  /** Maximum bound of the slider range */
   max: number;
+  /** Current low value of the selected range */
   low: number;
+  /** Current high value of the selected range */
   high: number;
+  /** Callback invoked when the selected range changes */
   onValueChange: (low: number, high: number) => void;
+  /** Step increment for snapping values */
   step?: number;
+  /** Text prefix displayed before values (e.g. "$") */
   prefix?: string;
+  /** Text suffix displayed after values (e.g. "km") */
   suffix?: string;
+  /** Label text displayed above the slider */
   label?: string;
+  /** Custom styles applied to the slider container */
   style?: ViewStyle;
 };
 
@@ -84,15 +94,15 @@ export function RangeSlider({
   return (
     <View style={style}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 8 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: 8 }}>
           {label}
         </Text>
       )}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: t.primary }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primary }}>
           {prefix}{low}{suffix}
         </Text>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: t.primary }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primary }}>
           {prefix}{high}{suffix}
         </Text>
       </View>
@@ -156,8 +166,8 @@ export function RangeSlider({
         </View>
       </GestureHandlerRootView>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 4 }}>
-        <Text style={{ fontSize: 11, color: t.textTertiary }}>{prefix}{min}{suffix}</Text>
-        <Text style={{ fontSize: 11, color: t.textTertiary }}>{prefix}{max}{suffix}</Text>
+        <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{prefix}{min}{suffix}</Text>
+        <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{prefix}{max}{suffix}</Text>
       </View>
     </View>
   );

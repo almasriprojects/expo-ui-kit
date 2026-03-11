@@ -1,30 +1,41 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
-import { CheckCircle, Lock } from 'lucide-react-native';
+import { BookOpen, CheckCircle, Clock, Lock } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type LessonCardProps = {
+export type LessonCardProps = {
+  /** Title of the lesson */
   title: string;
+  /** Optional subtitle or description for the lesson */
   subtitle?: string;
+  /** Duration label for the lesson (e.g. "5 min") */
   duration: string;
+  /** Completion progress percentage (0–100) */
   progress?: number;
-  icon?: string;
+  /** Icon displayed in the lesson avatar */
+  icon?: React.ReactNode;
+  /** Whether the lesson is locked and inaccessible */
   locked?: boolean;
+  /** Whether the lesson has been completed */
   completed?: boolean;
+  /** Whether this is the currently active lesson */
   current?: boolean;
+  /** Numeric lesson number displayed in the avatar */
   lessonNumber?: number;
+  /** Callback invoked when the lesson card is pressed */
   onPress?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
-export function LessonCard({
+function LessonCardBase({
   title,
   subtitle,
   duration,
   progress,
-  icon = '📖',
+  icon,
   locked = false,
   completed = false,
   current = false,
@@ -73,23 +84,26 @@ export function LessonCard({
         ) : lessonNumber ? (
           <Text
             style={{
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               fontWeight: '800',
               color: current ? t.primaryForeground : t.textSecondary,
             }}>
             {lessonNumber}
           </Text>
         ) : (
-          <Text style={{ fontSize: 18 }}>{icon}</Text>
+          icon ?? <BookOpen size={FontSize.xl.fontSize} color={t.textSecondary} />
         )}
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{title}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{title}</Text>
         {subtitle && (
-          <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 1 }}>{subtitle}</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 1 }}>{subtitle}</Text>
         )}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 6 }}>
-          <Text style={{ fontSize: 11, color: t.textTertiary }}>🕐 {duration}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+            <Clock size={FontSize.xs.fontSize} color={t.textTertiary} />
+            <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{duration}</Text>
+          </View>
           {progress != null && progress > 0 && progress < 100 && (
             <View style={{ flex: 1, maxWidth: 80 }}>
               <View
@@ -113,8 +127,10 @@ export function LessonCard({
         </View>
       </View>
       {!locked && (
-        <Text style={{ fontSize: 14, color: t.textTertiary }}>›</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textTertiary }}>›</Text>
       )}
     </Pressable>
   );
 }
+
+export const LessonCard = React.memo(LessonCardBase);

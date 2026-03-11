@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ContextMenuItem = {
+  /** Unique identifier for the menu item */
   key: string;
+  /** Display text for the menu item */
   label: string;
+  /** Icon component rendered before the label */
   icon?: React.ComponentType<{ size?: number; color?: string }>;
+  /** Whether the item is styled as a destructive action */
   destructive?: boolean;
+  /** Whether the item is disabled */
   disabled?: boolean;
 };
 
 export type ContextMenuProps = {
+  /** List of menu items to display */
   items: ContextMenuItem[];
+  /** Callback invoked when a menu item is pressed */
   onItemPress: (item: ContextMenuItem) => void;
+  /** Content that triggers the context menu on long press */
   children: React.ReactNode;
 };
 
@@ -79,7 +87,7 @@ export function ContextMenu({ items, onItemPress, children }: ContextMenuProps) 
                   <Text
                     style={{
                       flex: 1,
-                      fontSize: 15,
+                      fontSize: FontSize.md.fontSize,
                       fontWeight: '500',
                       color: item.disabled
                         ? t.textTertiary

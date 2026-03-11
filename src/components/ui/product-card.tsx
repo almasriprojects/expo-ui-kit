@@ -4,23 +4,33 @@ import { Image } from 'expo-image';
 import { Star } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ProductCardProps = Omit<PressableProps, 'style'> & {
+export type ProductCardProps = Omit<PressableProps, 'style'> & {
+  /** Name of the product */
   title: string;
+  /** Current price of the product */
   price: number;
+  /** Original price shown with strikethrough for discounts */
   originalPrice?: number;
+  /** URL of the product image */
   image?: string;
+  /** Star rating of the product */
   rating?: number;
+  /** Number of customer reviews */
   reviewCount?: number;
+  /** Badge label overlaid on the image (e.g. "SALE") */
   badge?: string;
+  /** Currency code displayed after the price */
   currency?: string;
+  /** Currency symbol displayed before the price */
   symbol?: string;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
-export function ProductCard({
+function ProductCardBase({
   title,
   price,
   originalPrice,
@@ -66,7 +76,7 @@ export function ProductCard({
               paddingVertical: 4,
               borderRadius: Radius.md,
             }}>
-            <ThemedText style={{ color: t.primaryForeground, fontSize: 11, fontWeight: '700' }}>
+            <ThemedText style={{ color: t.primaryForeground, fontSize: FontSize.xs.fontSize, fontWeight: '700' }}>
               {badge}
             </ThemedText>
           </View>
@@ -74,18 +84,18 @@ export function ProductCard({
       </View>
 
       <View style={{ padding: 12, gap: 4 }}>
-        <Text style={{ fontSize: 14, fontWeight: '500', color: t.text }} numberOfLines={2}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: t.text }} numberOfLines={2}>
           {title}
         </Text>
 
         {rating != null && (
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <Star size={12} color={t.warning} fill={t.warning} />
-            <Text style={{ fontSize: 12, fontWeight: '500', color: t.text }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: t.text }}>
               {rating.toFixed(1)}
             </Text>
             {reviewCount != null && (
-              <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>
+              <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
                 ({reviewCount})
               </ThemedText>
             )}
@@ -93,12 +103,12 @@ export function ProductCard({
         )}
 
         <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 6, marginTop: 2 }}>
-          <Text style={{ fontSize: 16, fontWeight: '700', color: t.text }}>
+          <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text }}>
             {symbol}{price.toFixed(2)}
           </Text>
           {hasDiscount && (
             <ThemedText
-              style={{ fontSize: 12, color: t.textSecondary, textDecorationLine: 'line-through' }}>
+              style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, textDecorationLine: 'line-through' }}>
               {symbol}{originalPrice.toFixed(2)}
             </ThemedText>
           )}
@@ -107,3 +117,5 @@ export function ProductCard({
     </Pressable>
   );
 }
+
+export const ProductCard = React.memo(ProductCardBase);

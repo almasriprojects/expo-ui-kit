@@ -10,26 +10,34 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Copy, Mail, MessageCircle, MoreHorizontal } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { BrandColors, FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ShareOption = {
+  /** Unique key identifier for the share option */
   key: string;
+  /** Display label for the share option */
   label: string;
+  /** Icon element rendered inside the option circle */
   icon: ReactNode;
 };
 
 export type ShareSheetProps = {
+  /** Whether the share sheet is visible */
   visible: boolean;
+  /** Callback invoked when the share sheet is dismissed */
   onClose: () => void;
+  /** Custom share options to display */
   options?: ShareOption[];
+  /** Callback invoked when a share option is selected */
   onSelect: (key: string) => void;
+  /** Custom styles applied to the sheet container */
   style?: ViewStyle;
 };
 
 function BrandCircle({ letter, color }: { letter: string; color: string }) {
   return (
-    <Text style={{ fontSize: 16, fontWeight: '800', color }}>{letter}</Text>
+    <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '800', color }}>{letter}</Text>
   );
 }
 
@@ -48,8 +56,8 @@ export function ShareSheet({
     { key: 'messages', label: 'Messages', icon: <MessageCircle size={24} color={t.text} /> },
     { key: 'mail', label: 'Mail', icon: <Mail size={24} color={t.text} /> },
     { key: 'twitter', label: 'Twitter', icon: <BrandCircle letter="X" color={t.text} /> },
-    { key: 'facebook', label: 'Facebook', icon: <BrandCircle letter="f" color="#1877F2" /> },
-    { key: 'whatsapp', label: 'WhatsApp', icon: <BrandCircle letter="W" color="#25D366" /> },
+    { key: 'facebook', label: 'Facebook', icon: <BrandCircle letter="f" color={BrandColors.facebook.bg} /> },
+    { key: 'whatsapp', label: 'WhatsApp', icon: <BrandCircle letter="W" color={BrandColors.whatsapp.bg} /> },
     { key: 'more', label: 'More', icon: <MoreHorizontal size={24} color={t.text} /> },
   ];
 
@@ -123,7 +131,7 @@ export function ShareSheet({
               </View>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: FontSize.sm.fontSize,
                   color: t.textSecondary,
                   textAlign: 'center',
                 }}

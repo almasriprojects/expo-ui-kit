@@ -2,18 +2,26 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 
-type StoryCircleProps = {
+export type StoryCircleProps = {
+  /** URL of the avatar image */
   source?: string;
+  /** Name displayed below the circle */
   name?: string;
+  /** Whether the user has an unviewed story */
   hasStory?: boolean;
+  /** Whether the story has been seen */
   seen?: boolean;
+  /** Whether this is the current user's own story slot */
   isOwn?: boolean;
+  /** Callback invoked when the circle is pressed */
   onPress?: () => void;
+  /** Size variant of the story circle */
   size?: 'sm' | 'md' | 'lg';
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -106,13 +114,13 @@ export function StoryCircle({
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{ fontSize: 12, fontWeight: '700', color: t.primaryForeground }}>+</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.primaryForeground }}>+</Text>
           </View>
         )}
       </View>
       {name && (
         <Text
-          style={{ fontSize: size === 'sm' ? 10 : 11, color: t.text, textAlign: 'center' }}
+          style={{ fontSize: size === 'sm' ? FontSize['2xs'].fontSize : FontSize.xs.fontSize, color: t.text, textAlign: 'center' }}
           numberOfLines={1}>
           {name}
         </Text>

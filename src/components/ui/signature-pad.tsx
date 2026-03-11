@@ -10,10 +10,15 @@ import { useTheme } from '@/hooks/use-theme';
 import { Button } from './button';
 
 export type SignaturePadProps = ViewProps & {
+  /** Callback invoked with the SVG path data when saved */
   onSave?: (paths: string) => void;
+  /** Callback invoked when the signature is cleared */
   onClear?: () => void;
+  /** Height of the drawing area in pixels */
   height?: number;
+  /** Color of the signature stroke */
   strokeColor?: string;
+  /** Width of the signature stroke in pixels */
   strokeWidth?: number;
 };
 

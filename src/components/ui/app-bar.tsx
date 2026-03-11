@@ -4,12 +4,18 @@ import { ArrowLeft } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize, Spacing } from '@/constants/theme';
 
 export type AppBarProps = ViewProps & {
+  /** Primary title displayed in the app bar */
   title: string;
+  /** Secondary text shown below the title */
   subtitle?: string;
+  /** Callback invoked when the back button is pressed */
   onBack?: () => void;
+  /** Content rendered on the right side of the bar */
   rightActions?: React.ReactNode;
+  /** Whether the app bar background is transparent */
   transparent?: boolean;
 };
 
@@ -33,9 +39,9 @@ export function AppBar({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingTop: insets.top + 12,
-          paddingBottom: 12,
-          paddingHorizontal: 16,
+          paddingTop: insets.top + Spacing[3],
+          paddingBottom: Spacing[3],
+          paddingHorizontal: Spacing[4],
           backgroundColor: transparent ? 'transparent' : t.background,
           borderBottomWidth: transparent ? 0 : 1,
           borderBottomColor: t.border,
@@ -51,8 +57,8 @@ export function AppBar({
             onPressOut={() => setPressed(false)}
             hitSlop={12}
             style={{
-              marginRight: 12,
-              padding: 4,
+              marginRight: Spacing[3],
+              padding: Spacing[1],
               opacity: pressed ? 0.7 : 1,
             }}
             accessibilityRole="button"
@@ -63,7 +69,7 @@ export function AppBar({
         <View style={{ flex: 1, minWidth: 0 }}>
           <Text
             style={{
-              fontSize: 17,
+              fontSize: FontSize.lg.fontSize,
               fontWeight: '600',
               color: t.text,
             }}
@@ -73,9 +79,9 @@ export function AppBar({
           {subtitle && (
             <Text
               style={{
-                fontSize: 13,
+                fontSize: FontSize.sm.fontSize,
                 color: t.textSecondary,
-                marginTop: 2,
+                marginTop: Spacing[0.5],
               }}
               numberOfLines={1}>
               {subtitle}
@@ -84,7 +90,7 @@ export function AppBar({
         </View>
       </View>
       {rightActions && (
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[2] }}>
           {rightActions}
         </View>
       )}

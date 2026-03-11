@@ -1,17 +1,24 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Slider } from './slider';
 
-type MortgageSliderProps = {
+export type MortgageSliderProps = {
+  /** Current loan amount in dollars */
   loanAmount: number;
+  /** Callback invoked when the loan amount slider changes */
   onLoanAmountChange: (value: number) => void;
+  /** Current loan term in years */
   loanTerm: number;
+  /** Callback invoked when the loan term slider changes */
   onLoanTermChange: (value: number) => void;
+  /** Annual interest rate as a percentage */
   interestRate: number;
+  /** Maximum allowable loan amount */
   maxLoan?: number;
+  /** Custom styles applied to the calculator container */
   style?: ViewStyle;
 };
 
@@ -49,14 +56,14 @@ export function MortgageSlider({
         },
         style,
       ]}>
-      <Text style={{ fontSize: 16, fontWeight: '700', color: t.text, marginBottom: 20 }}>
+      <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text, marginBottom: 20 }}>
         Mortgage Calculator
       </Text>
 
       <View style={{ marginBottom: 20 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-          <Text style={{ fontSize: 13, color: t.textSecondary }}>Loan Amount</Text>
-          <Text style={{ fontSize: 14, fontWeight: '700', color: t.text }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>Loan Amount</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.text }}>
             ${loanAmount.toLocaleString()}
           </Text>
         </View>
@@ -71,8 +78,8 @@ export function MortgageSlider({
 
       <View style={{ marginBottom: 20 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
-          <Text style={{ fontSize: 13, color: t.textSecondary }}>Loan Term</Text>
-          <Text style={{ fontSize: 14, fontWeight: '700', color: t.text }}>{loanTerm} years</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>Loan Term</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.text }}>{loanTerm} years</Text>
         </View>
         <Slider
           value={loanTerm}
@@ -84,8 +91,8 @@ export function MortgageSlider({
       </View>
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-        <Text style={{ fontSize: 13, color: t.textSecondary }}>Interest Rate</Text>
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{interestRate}%</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>Interest Rate</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{interestRate}%</Text>
       </View>
 
       <View
@@ -96,20 +103,20 @@ export function MortgageSlider({
           marginTop: 16,
           alignItems: 'center',
         }}>
-        <Text style={{ fontSize: 12, color: t.primary, fontWeight: '500' }}>Monthly Payment</Text>
-        <Text style={{ fontSize: 30, fontWeight: '800', color: t.primary, marginTop: 4 }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.primary, fontWeight: '500' }}>Monthly Payment</Text>
+        <Text style={{ fontSize: FontSize['3xl'].fontSize, fontWeight: '800', color: t.primary, marginTop: 4 }}>
           ${Math.round(monthly).toLocaleString()}
         </Text>
         <View style={{ flexDirection: 'row', gap: 20, marginTop: 10 }}>
           <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 11, color: t.textSecondary }}>Total Paid</Text>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>
+            <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textSecondary }}>Total Paid</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>
               ${Math.round(totalPaid).toLocaleString()}
             </Text>
           </View>
           <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 11, color: t.textSecondary }}>Total Interest</Text>
-            <Text style={{ fontSize: 13, fontWeight: '600', color: t.error }}>
+            <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textSecondary }}>Total Interest</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.error }}>
               ${Math.round(totalInterest).toLocaleString()}
             </Text>
           </View>

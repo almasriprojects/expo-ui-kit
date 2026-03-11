@@ -2,19 +2,29 @@ import React, { type ReactElement } from 'react';
 import { SectionList, type ListRenderItemInfo, Text, View } from 'react-native';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
 export type ThemedSection<T> = {
+  /** Title displayed as the section header */
   title: string;
+  /** Array of items in this section */
   data: T[];
 };
 
 export type ThemedSectionListProps<T> = {
+  /** Array of sections to display */
   sections: ThemedSection<T>[];
+  /** Render function for each list item */
   renderItem: (info: ListRenderItemInfo<T>) => ReactElement | null;
+  /** Custom render function for section headers */
   renderSectionHeader?: (info: { section: ThemedSection<T> }) => ReactElement | null;
+  /** Component displayed when the list is empty */
   ListEmptyComponent?: ReactElement | null;
+  /** Function to extract a unique key for each item */
   keyExtractor?: (item: T, index: number) => string;
+  /** Accessibility label for the list */
   accessibilityLabel?: string;
+  /** Accessibility hint for the list */
   accessibilityHint?: string;
 };
 
@@ -40,7 +50,7 @@ export function ThemedSectionList<T>({
       }}>
       <Text
         style={{
-          fontSize: 13,
+          fontSize: FontSize.sm.fontSize,
           fontWeight: '700',
           color: t.textSecondary,
           textTransform: 'uppercase',

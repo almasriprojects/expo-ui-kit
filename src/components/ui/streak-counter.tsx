@@ -2,13 +2,17 @@ import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 import { Flame } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type StreakCounterProps = {
+export type StreakCounterProps = {
+  /** Current streak count */
   count: number;
+  /** Label text displayed below the count */
   label?: string;
+  /** Array of 7 booleans indicating completed weekdays (Mon–Sun) */
   weekdays?: boolean[];
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -37,10 +41,10 @@ export function StreakCounter({
         style,
       ]}>
       <Flame size={36} color={t.orange} />
-      <Text style={{ fontSize: 40, fontWeight: '900', color: t.text, marginTop: 4 }}>
+      <Text style={{ fontSize: FontSize['4xl'].fontSize, fontWeight: '900', color: t.text, marginTop: 4 }}>
         {count}
       </Text>
-      <Text style={{ fontSize: 14, fontWeight: '600', color: t.textSecondary, marginTop: 2 }}>
+      <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.textSecondary, marginTop: 2 }}>
         {label}
       </Text>
       {weekdays && (
@@ -62,7 +66,7 @@ export function StreakCounter({
                   <View style={{ width: 8, height: 8, borderRadius: Radius.full, backgroundColor: t.surfaceActive }} />
                 )}
               </View>
-              <Text style={{ fontSize: 10, fontWeight: '500', color: t.textTertiary }}>{DAYS[i]}</Text>
+              <Text style={{ fontSize: FontSize['2xs'].fontSize, fontWeight: '500', color: t.textTertiary }}>{DAYS[i]}</Text>
             </View>
           ))}
         </View>

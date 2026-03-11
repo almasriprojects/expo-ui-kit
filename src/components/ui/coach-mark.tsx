@@ -7,24 +7,36 @@ import {
   View,
 } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type CoachMarkTarget = {
+  /** X coordinate of the target element */
   x: number;
+  /** Y coordinate of the target element */
   y: number;
+  /** Width of the target element */
   width: number;
+  /** Height of the target element */
   height: number;
 };
 
 export type CoachMarkProps = {
+  /** Controls the visibility of the coach mark */
   visible: boolean;
+  /** Position and dimensions of the highlighted target */
   target: CoachMarkTarget;
+  /** Tooltip heading text */
   title: string;
+  /** Tooltip body text */
   description: string;
+  /** Current step number in the tour */
   step?: number;
+  /** Total number of steps in the tour */
   totalSteps?: number;
+  /** Callback invoked to advance to the next step */
   onNext?: () => void;
+  /** Callback invoked to dismiss the coach mark */
   onDismiss?: () => void;
 };
 
@@ -127,7 +139,7 @@ export function CoachMark({
             {totalSteps != null && step != null && (
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: FontSize.sm.fontSize,
                   fontWeight: '600',
                   color: t.textSecondary,
                   marginBottom: 8,
@@ -138,7 +150,7 @@ export function CoachMark({
             )}
             <Text
               style={{
-                fontSize: 17,
+                fontSize: FontSize.lg.fontSize,
                 fontWeight: '700',
                 color: t.text,
                 marginBottom: 8,
@@ -148,7 +160,7 @@ export function CoachMark({
             </Text>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
                 lineHeight: 20,
                 marginBottom: 16,
@@ -169,7 +181,7 @@ export function CoachMark({
                   accessibilityRole="button"
                   accessibilityLabel="Dismiss coach mark"
                 >
-                  <Text style={{ fontSize: 15, fontWeight: '600', color: t.textSecondary }}>
+                  <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.textSecondary }}>
                     Dismiss
                   </Text>
                 </Pressable>
@@ -186,7 +198,7 @@ export function CoachMark({
                   accessibilityRole="button"
                   accessibilityLabel="Next"
                 >
-                  <Text style={{ fontSize: 15, fontWeight: '600', color: t.primaryForeground }}>
+                  <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primaryForeground }}>
                     Next
                   </Text>
                 </Pressable>

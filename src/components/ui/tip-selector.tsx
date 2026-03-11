@@ -7,16 +7,23 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type TipSelectorProps = {
+  /** Preset tip percentage options */
   options?: number[];
+  /** Order subtotal used to calculate tip amounts */
   subtotal: number;
+  /** Currently selected tip percentage */
   selected?: number;
+  /** Custom tip amount entered by the user */
   customTip?: number;
+  /** Callback invoked with the tip percentage and calculated amount */
   onTipChange: (percentage: number, amount: number) => void;
+  /** Currency symbol used for formatting */
   currency?: string;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -101,7 +108,7 @@ export function TipSelector({
               accessibilityLabel={`${pct}% tip, ${currency}${amount.toFixed(2)}`}>
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   fontWeight: '600',
                   color: isSelected ? t.primaryForeground : t.text,
                 }}>
@@ -125,7 +132,7 @@ export function TipSelector({
           accessibilityLabel="Custom tip amount">
           <Text
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               fontWeight: '600',
               color: isCustomSelected ? t.primaryForeground : t.text,
             }}>
@@ -136,7 +143,7 @@ export function TipSelector({
 
       {showCustom && (
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <Text style={{ fontSize: 14, color: t.textSecondary }}>{currency}</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>{currency}</Text>
           <TextInput
             value={customInput}
             onChangeText={setCustomInput}
@@ -153,7 +160,7 @@ export function TipSelector({
               backgroundColor: t.surface,
               borderWidth: 1.5,
               borderColor: t.border,
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               color: t.text,
             }}
             accessibilityLabel="Custom tip amount"
@@ -165,7 +172,7 @@ export function TipSelector({
       {tipAmount > 0 && (
         <Text
           style={{
-            fontSize: 14,
+            fontSize: FontSize.md.fontSize,
             color: t.textSecondary,
           }}
           accessibilityLiveRegion="polite">

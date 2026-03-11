@@ -7,19 +7,29 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
 
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export type GaugeProps = {
+  /** Current gauge value */
   value: number;
+  /** Minimum value of the gauge range */
   min?: number;
+  /** Maximum value of the gauge range */
   max?: number;
+  /** Label text displayed below the value */
   label?: string;
+  /** Diameter of the gauge in pixels */
   size?: number;
+  /** Color of the filled gauge arc */
   color?: string;
+  /** Whether to display the numeric value */
   showValue?: boolean;
+  /** Accessibility label for the gauge container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the gauge container */
   accessibilityHint?: string;
 };
 
@@ -110,7 +120,7 @@ export function Gauge({
             {label && (
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: FontSize.sm.fontSize,
                   color: t.textSecondary,
                   marginTop: 2,
                 }}>

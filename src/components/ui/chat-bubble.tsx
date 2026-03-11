@@ -2,15 +2,21 @@ import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ChatBubbleProps = {
+export type ChatBubbleProps = {
+  /** Text content of the message */
   message: string;
+  /** Formatted time the message was sent */
   timestamp?: string;
+  /** Whether the message was sent by the current user */
   isOwn?: boolean;
+  /** Delivery status of the message */
   status?: 'sent' | 'delivered' | 'read';
+  /** Avatar element displayed next to incoming messages */
   avatar?: React.ReactNode;
+  /** Custom styles for the bubble container */
   style?: ViewStyle;
 };
 
@@ -65,7 +71,7 @@ export function ChatBubble({
         }}>
         <Text
           style={{
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             color: isOwn ? t.primaryForeground : t.text,
             lineHeight: 21,
           }}>
@@ -82,7 +88,7 @@ export function ChatBubble({
           {timestamp && (
             <Text
               style={{
-                fontSize: 10,
+                fontSize: FontSize['2xs'].fontSize,
                 color: isOwn ? t.textOnColorMuted : t.textTertiary,
               }}>
               {timestamp}

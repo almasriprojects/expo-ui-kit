@@ -114,6 +114,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 marginBottom: 8,
               }}>
               <Pressable
+                accessibilityRole="alert"
+                accessibilityLabel={toast.message}
                 onPress={() => dismiss(toast.id)}
                 style={{
                   backgroundColor: config.bg,

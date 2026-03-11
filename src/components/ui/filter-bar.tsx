@@ -1,20 +1,28 @@
 import React from 'react';
 import { Pressable, ScrollView, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type FilterOption = {
+export type FilterOption = {
+  /** Unique value identifier for the filter */
   value: string;
+  /** Display label for the filter chip */
   label: string;
+  /** Optional emoji or text icon */
   icon?: string;
+  /** Badge count shown on the chip */
   count?: number;
 };
 
-type FilterBarProps = {
+export type FilterBarProps = {
+  /** Available filter options */
   options: FilterOption[];
+  /** Currently selected filter value */
   value: string;
+  /** Callback fired when a filter is selected */
   onValueChange: (value: string) => void;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -45,10 +53,10 @@ export function FilterBar({ options, value, onValueChange, style }: FilterBarPro
                 borderColor: t.border,
                 ...(active ? Shadows.sm : {}),
               }}>
-              {option.icon && <Text style={{ fontSize: 14 }}>{option.icon}</Text>}
+              {option.icon && <Text style={{ fontSize: FontSize.md.fontSize }}>{option.icon}</Text>}
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   fontWeight: active ? '600' : '500',
                   color: active ? t.primaryForeground : t.text,
                 }}>
@@ -66,7 +74,7 @@ export function FilterBar({ options, value, onValueChange, style }: FilterBarPro
                   }}>
                   <Text
                     style={{
-                      fontSize: 11,
+                      fontSize: FontSize.xs.fontSize,
                       fontWeight: '700',
                       color: active ? t.primaryForeground : t.textSecondary,
                     }}>

@@ -7,6 +7,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { Animation } from '@/constants/theme';
+
 export type SlideDirection = 'up' | 'down' | 'left' | 'right';
 
 export type SlideTransitionProps = {
@@ -18,7 +20,7 @@ export type SlideTransitionProps = {
   style?: ViewStyle;
 };
 
-const DEFAULT_DURATION = 300;
+const DEFAULT_DURATION = Animation.duration.normal;
 const DEFAULT_DISTANCE = 50;
 
 function getTranslateForDirection(

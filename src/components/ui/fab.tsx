@@ -1,12 +1,15 @@
 import React, { type ReactNode, useState } from 'react';
 import { Pressable, Text, type PressableProps } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type FABProps = PressableProps & {
+export type FABProps = PressableProps & {
+  /** Icon element rendered inside the button */
   icon?: ReactNode;
+  /** Optional text label displayed next to the icon */
   label?: string;
+  /** Screen position of the floating button */
   position?: 'bottom-right' | 'bottom-center' | 'bottom-left';
 };
 
@@ -68,7 +71,7 @@ export function FAB({
       {...props}>
       {icon}
       {label && (
-        <Text style={{ color: t.primaryForeground, fontWeight: '600', fontSize: 15 }}>
+        <Text style={{ color: t.primaryForeground, fontWeight: '600', fontSize: FontSize.md.fontSize }}>
           {label}
         </Text>
       )}

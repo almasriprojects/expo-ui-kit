@@ -2,13 +2,17 @@ import React from 'react';
 import { Pressable, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SegmentedControlProps = ViewProps & {
+export type SegmentedControlProps = ViewProps & {
+  /** Array of segment label strings */
   segments: string[];
+  /** Index of the currently selected segment */
   selectedIndex: number;
+  /** Callback invoked when a segment is selected */
   onIndexChange: (index: number) => void;
+  /** Whether the entire control is disabled */
   disabled?: boolean;
 };
 
@@ -58,7 +62,7 @@ export function SegmentedControl({
             ]}>
             <ThemedText
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 fontWeight: '600',
                 color: t.text,
                 opacity: selected ? 1 : 0.55,

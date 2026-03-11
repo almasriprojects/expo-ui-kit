@@ -1,13 +1,17 @@
 import React from 'react';
 import { Pressable, Text, TextInput, View, type ViewProps } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type RichTextEditorProps = ViewProps & {
+  /** Current rich text content (markdown-style) */
   value: string;
+  /** Callback invoked when the text content changes */
   onChangeText: (text: string) => void;
+  /** Placeholder text shown when the editor is empty */
   placeholder?: string;
+  /** Minimum height of the text editing area in pixels */
   minHeight?: number;
 };
 
@@ -94,7 +98,7 @@ export function RichTextEditor({
           minHeight,
           padding: 14,
           borderRadius: Radius.lg,
-          fontSize: 16,
+          fontSize: FontSize.lg.fontSize,
           backgroundColor: t.surface,
           color: t.text,
           borderWidth: 1.5,
@@ -129,7 +133,7 @@ function ToolbarButton({
         justifyContent: 'center',
         backgroundColor: pressed ? theme.surfacePressed : 'transparent',
       })}>
-      <Text style={{ fontSize: 16, fontWeight: '700', color: theme.text }}>
+      <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: theme.text }}>
         {label}
       </Text>
     </Pressable>

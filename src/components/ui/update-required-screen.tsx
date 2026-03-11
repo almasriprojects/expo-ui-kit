@@ -6,12 +6,18 @@ import { useTheme } from '@/hooks/use-theme';
 
 import { Button } from './button';
 import { ThemedText } from '@/components/themed-text';
+import { FontSize } from '@/constants/theme';
 
 export type UpdateRequiredScreenProps = {
+  /** Title text displayed on the update screen */
   title?: string;
+  /** Descriptive message explaining the required update */
   message?: string;
+  /** URL to open the app store for updating */
   updateUrl?: string;
+  /** Callback invoked when the update button is pressed */
   onUpdate?: () => void;
+  /** Custom icon element replacing the default icon */
   icon?: ReactNode;
 };
 
@@ -48,7 +54,7 @@ export function UpdateRequiredScreen({
       </View>
       <ThemedText
         style={{
-          fontSize: 24,
+          fontSize: FontSize['2xl'].fontSize,
           fontWeight: '700',
           color: t.text,
           textAlign: 'center',
@@ -58,7 +64,7 @@ export function UpdateRequiredScreen({
       </ThemedText>
       <ThemedText
         style={{
-          fontSize: 16,
+          fontSize: FontSize.lg.fontSize,
           color: t.textSecondary,
           textAlign: 'center',
           lineHeight: 24,

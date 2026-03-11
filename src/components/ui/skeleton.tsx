@@ -7,12 +7,15 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Radius as R } from '@/constants/theme';
+import { Animation, Radius as R } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SkeletonProps = ViewProps & {
+export type SkeletonProps = ViewProps & {
+  /** Width of the skeleton placeholder */
   width?: number | string;
+  /** Height of the skeleton placeholder */
   height?: number | string;
+  /** Border radius preset for the skeleton shape */
   rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';
 };
 
@@ -20,7 +23,7 @@ const roundedValues = {
   none: 0,
   sm: R.sm,
   md: R.md,
-  lg: R.xl,
+  lg: R.lg,
   full: R.full,
 };
 
@@ -36,7 +39,7 @@ export function Skeleton({
 
   useEffect(() => {
     opacity.value = withRepeat(
-      withTiming(0.7, { duration: 800 }),
+      withTiming(0.7, { duration: Animation.duration.slower }),
       -1,
       true
     );

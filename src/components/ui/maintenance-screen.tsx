@@ -1,22 +1,28 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { type ReactNode } from 'react';
+import { View } from 'react-native';
+import { Wrench } from 'lucide-react-native';
 
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 import { ThemedText } from '@/components/themed-text';
 
 export type MaintenanceScreenProps = {
+  /** Heading displayed on the maintenance screen */
   title?: string;
+  /** Descriptive message explaining the maintenance */
   message?: string;
+  /** Estimated time until the service is restored */
   estimatedTime?: string;
-  icon?: string;
+  /** Icon shown above the title */
+  icon?: ReactNode;
 };
 
 export function MaintenanceScreen({
   title = 'Under Maintenance',
   message = 'We are currently performing scheduled maintenance. Please check back soon.',
   estimatedTime,
-  icon = '🔧',
+  icon,
 }: MaintenanceScreenProps) {
   const t = useTheme();
 
@@ -31,10 +37,12 @@ export function MaintenanceScreen({
       }}
       accessibilityLabel={title}
       accessibilityRole="summary">
-      <Text style={{ fontSize: 64, marginBottom: 24 }}>{icon}</Text>
+      <View style={{ marginBottom: 24 }}>
+        {icon ?? <Wrench size={40} color={t.textSecondary} />}
+      </View>
       <ThemedText
         style={{
-          fontSize: 24,
+          fontSize: FontSize['2xl'].fontSize,
           fontWeight: '700',
           color: t.text,
           textAlign: 'center',
@@ -44,7 +52,7 @@ export function MaintenanceScreen({
       </ThemedText>
       <ThemedText
         style={{
-          fontSize: 16,
+          fontSize: FontSize.lg.fontSize,
           color: t.textSecondary,
           textAlign: 'center',
           lineHeight: 24,
@@ -55,7 +63,7 @@ export function MaintenanceScreen({
       {estimatedTime && (
         <ThemedText
           style={{
-            fontSize: 14,
+            fontSize: FontSize.md.fontSize,
             color: t.textTertiary,
             textAlign: 'center',
           }}>

@@ -6,21 +6,30 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type HorizontalBarChartDataItem = {
+  /** Label text for the bar */
   label: string;
+  /** Numeric value determining bar width */
   value: number;
+  /** Custom color for the bar */
   color?: string;
 };
 
 export type HorizontalBarChartProps = {
+  /** Array of data items to render as bars */
   data: HorizontalBarChartDataItem[];
+  /** Overall height of the chart in pixels */
   height?: number;
+  /** Whether to display numeric values next to bars */
   showValues?: boolean;
+  /** Custom maximum value for scaling bars */
   maxValue?: number;
+  /** Accessibility label for the chart container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the chart container */
   accessibilityHint?: string;
 };
 
@@ -55,7 +64,7 @@ function BarRow({ item, maxValue, barColor, trackColor, labelColor, showValues }
       <Text
         numberOfLines={1}
         style={{
-          fontSize: 12,
+          fontSize: FontSize.sm.fontSize,
           color: labelColor,
           width: 80,
           flexShrink: 0,
@@ -90,7 +99,7 @@ function BarRow({ item, maxValue, barColor, trackColor, labelColor, showValues }
       {showValues && (
         <Text
           style={{
-            fontSize: 12,
+            fontSize: FontSize.sm.fontSize,
             fontWeight: '600',
             color: labelColor,
             width: 40,

@@ -3,22 +3,31 @@ import { Pressable, Text, View, type PressableProps } from 'react-native';
 import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TransactionItemProps = PressableProps & {
+export type TransactionItemProps = PressableProps & {
+  /** Title of the transaction */
   title: string;
+  /** Secondary text (e.g. merchant name) */
   subtitle?: string;
+  /** Transaction amount */
   amount: number;
+  /** Currency code displayed after the amount */
   currency?: string;
+  /** Currency symbol displayed before the amount */
   symbol?: string;
+  /** Formatted date string of the transaction */
   date?: string;
+  /** Custom icon element rendered on the left */
   icon?: ReactNode;
+  /** Current status of the transaction */
   status?: 'completed' | 'pending' | 'failed';
+  /** Whether the transaction is a credit or debit */
   type?: 'credit' | 'debit';
 };
 
-export function TransactionItem({
+function TransactionItemBase({
   title,
   subtitle,
   amount,
@@ -80,21 +89,21 @@ export function TransactionItem({
         </View>
       )}
       <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 15, fontWeight: '500', color: theme.text }}>{title}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: theme.text }}>{title}</Text>
         {(subtitle || date) && (
-          <ThemedText style={{ fontSize: 13, color: theme.textSecondary, marginTop: 2 }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, marginTop: 2 }}>
             {subtitle ?? date}
           </ThemedText>
         )}
       </View>
       <View style={{ alignItems: 'flex-end' }}>
-        <ThemedText style={{ fontSize: 15, fontWeight: '600', color: amountColor }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: amountColor }}>
           {isCredit ? '+' : '-'}{symbol}{Math.abs(amount).toFixed(2)}
         </ThemedText>
         {status !== 'completed' && (
           <ThemedText
             style={{
-              fontSize: 11,
+              fontSize: FontSize.xs.fontSize,
               fontWeight: '500',
               color: statusColors[status],
               marginTop: 2,
@@ -106,3 +115,5 @@ export function TransactionItem({
     </Pressable>
   );
 }
+
+export const TransactionItem = React.memo(TransactionItemBase);

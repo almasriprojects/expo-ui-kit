@@ -1,21 +1,30 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
-import { Fonts, Radius, Shadows } from '@/constants/theme';
+import { Fonts, FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ShippingStep = {
+export type ShippingStep = {
+  /** Title of the shipping step */
   title: string;
+  /** Optional description for the step */
   description?: string;
+  /** Timestamp string for when the step occurred */
   time?: string;
+  /** Whether this step has been completed */
   completed: boolean;
+  /** Whether this is the current active step */
   current?: boolean;
 };
 
-type ShippingTrackerProps = {
+export type ShippingTrackerProps = {
+  /** Array of shipping steps to display */
   steps: ShippingStep[];
+  /** Package tracking number */
   trackingNumber?: string;
+  /** Estimated delivery date string */
   estimatedDelivery?: string;
+  /** Custom styles applied to the tracker container */
   style?: ViewStyle;
 };
 
@@ -44,16 +53,16 @@ export function ShippingTracker({
         <View style={{ marginBottom: 20 }}>
           {trackingNumber && (
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 4 }}>
-              <Text style={{ fontSize: 12, color: t.textSecondary }}>Tracking</Text>
-              <Text style={{ fontSize: 12, fontWeight: '600', color: t.primary, fontFamily: Fonts?.mono ?? 'monospace' }}>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>Tracking</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.primary, fontFamily: Fonts?.mono ?? 'monospace' }}>
                 {trackingNumber}
               </Text>
             </View>
           )}
           {estimatedDelivery && (
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={{ fontSize: 12, color: t.textSecondary }}>Est. Delivery</Text>
-              <Text style={{ fontSize: 12, fontWeight: '600', color: t.text }}>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>Est. Delivery</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>
                 {estimatedDelivery}
               </Text>
             </View>
@@ -95,18 +104,18 @@ export function ShippingTracker({
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Text
                   style={{
-                    fontSize: 14,
+                    fontSize: FontSize.md.fontSize,
                     fontWeight: step.current || step.completed ? '600' : '400',
                     color: step.current || step.completed ? t.text : t.textTertiary,
                   }}>
                   {step.title}
                 </Text>
                 {step.time && (
-                  <Text style={{ fontSize: 11, color: t.textTertiary }}>{step.time}</Text>
+                  <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{step.time}</Text>
                 )}
               </View>
               {step.description && (
-                <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 2, lineHeight: 17 }}>
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2, lineHeight: 17 }}>
                   {step.description}
                 </Text>
               )}

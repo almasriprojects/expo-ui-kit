@@ -1,15 +1,21 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type HeatmapCalendarProps = {
+  /** Map of date strings (YYYY-MM-DD) to activity values */
   data: Record<string, number>;
+  /** Reference date to calculate the calendar range from */
   startDate?: Date;
+  /** Number of weeks to display */
   weeks?: number;
+  /** Array of colors from lowest to highest activity */
   colorScale?: string[];
+  /** Accessibility label for the calendar container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the calendar container */
   accessibilityHint?: string;
 };
 
@@ -56,7 +62,7 @@ export function HeatmapCalendar({
       {DAY_LABELS.map((l, i) => (
         <View key={i} style={{ height: cellSize, justifyContent: 'center' }}>
           {l ? (
-            <Text style={{ fontSize: 9, color: t.textTertiary }}>{l}</Text>
+            <Text style={{ fontSize: FontSize['2xs'].fontSize, color: t.textTertiary }}>{l}</Text>
           ) : (
             <View />
           )}
@@ -105,7 +111,7 @@ export function HeatmapCalendar({
                 left: col * (cellSize + gap),
                 width: 40,
               }}>
-              <Text style={{ fontSize: 9, color: t.textTertiary }}>{month}</Text>
+              <Text style={{ fontSize: FontSize['2xs'].fontSize, color: t.textTertiary }}>{month}</Text>
             </View>
           ))}
         </View>

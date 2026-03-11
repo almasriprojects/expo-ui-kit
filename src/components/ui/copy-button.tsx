@@ -3,13 +3,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Check, Copy } from 'lucide-react-native';
 
-import { Fonts, Radius } from '@/constants/theme';
+import { Fonts, Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type CopyButtonProps = {
+export type CopyButtonProps = {
+  /** Text content to copy to clipboard */
   text: string;
+  /** Optional label displayed on the button */
   label?: string;
+  /** Visual variant of the copy button */
   variant?: 'button' | 'inline' | 'field';
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -59,7 +63,7 @@ export function CopyButton({
             flex: 1,
             paddingHorizontal: 14,
             paddingVertical: 12,
-            fontSize: 14,
+            fontSize: FontSize.md.fontSize,
             color: t.text,
             fontFamily: Fonts?.mono ?? 'monospace',
           }}
@@ -75,7 +79,7 @@ export function CopyButton({
             borderLeftColor: t.border,
             backgroundColor: copied ? t.successSoft : t.surface,
           }}>
-          <Text style={{ fontSize: 13, fontWeight: '600', color: copied ? t.success : t.primary }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: copied ? t.success : t.primary }}>
             {copied ? 'Copied!' : 'Copy'}
           </Text>
         </Pressable>
@@ -86,7 +90,7 @@ export function CopyButton({
   if (variant === 'inline') {
     return (
       <Pressable onPress={handleCopy} style={[{ flexDirection: 'row', alignItems: 'center', gap: 6 }, style]}>
-        <Text style={{ fontSize: 14, color: t.text }}>{text}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.text }}>{text}</Text>
         {copied ? (
           <Check size={12} color={t.success} strokeWidth={3} />
         ) : (
@@ -119,7 +123,7 @@ export function CopyButton({
       ) : (
         <Copy size={14} color={t.text} />
       )}
-      <Text style={{ fontSize: 14, fontWeight: '600', color: copied ? t.success : t.text }}>
+      <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: copied ? t.success : t.text }}>
         {copied ? 'Copied!' : label ?? 'Copy'}
       </Text>
     </Pressable>

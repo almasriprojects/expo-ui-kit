@@ -12,13 +12,17 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ImageViewerProps = {
+  /** Whether the viewer modal is visible */
   visible: boolean;
+  /** Callback fired when the viewer is closed */
   onClose: () => void;
+  /** URI of the image to display */
   uri: string;
+  /** Optional caption text shown below the image */
   caption?: string;
 };
 
@@ -209,7 +213,7 @@ export function ImageViewer({
               }}>
               <ThemedText
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   color: t.textOnColorSecondary,
                   textAlign: 'center',
                 }}>

@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 import { Flame } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type CountdownBadgeProps = {
+export type CountdownBadgeProps = {
+  /** Target date for the countdown */
   targetDate: Date;
+  /** Optional label displayed alongside the countdown */
   label?: string;
+  /** Visual variant of the badge */
   variant?: 'pill' | 'card';
+  /** Callback fired when the countdown reaches zero */
   onComplete?: () => void;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -55,7 +60,7 @@ export function CountdownBadge({
     return (
       <View style={style}>
         {label && (
-          <Text style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 12, textAlign: 'center' }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: 12, textAlign: 'center' }}>
             {label}
           </Text>
         )}
@@ -71,10 +76,10 @@ export function CountdownBadge({
                 alignItems: 'center',
                 minWidth: 56,
               }}>
-              <Text style={{ fontSize: 22, fontWeight: '800', color: t.text }}>
+              <Text style={{ fontSize: FontSize['2xl'].fontSize, fontWeight: '800', color: t.text }}>
                 {String(unit.value).padStart(2, '0')}
               </Text>
-              <Text style={{ fontSize: 10, fontWeight: '600', color: t.textSecondary, marginTop: 2 }}>
+              <Text style={{ fontSize: FontSize['2xs'].fontSize, fontWeight: '600', color: t.textSecondary, marginTop: 2 }}>
                 {unit.label}
               </Text>
             </View>
@@ -105,9 +110,9 @@ export function CountdownBadge({
       ]}>
       <Flame size={12} color={t.error} />
       {label && (
-        <Text style={{ fontSize: 12, fontWeight: '600', color: t.error }}>{label}</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.error }}>{label}</Text>
       )}
-      <Text style={{ fontSize: 13, fontWeight: '700', color: t.error, fontVariant: ['tabular-nums'] }}>
+      <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.error, fontVariant: ['tabular-nums'] }}>
         {parts.join(' ')}
       </Text>
     </View>

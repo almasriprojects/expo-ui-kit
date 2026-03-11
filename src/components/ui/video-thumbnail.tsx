@@ -2,16 +2,23 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Play } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type VideoThumbnailProps = {
+export type VideoThumbnailProps = {
+  /** Title of the video */
   title?: string;
+  /** Formatted duration string (e.g. "3:45") */
   duration?: string;
+  /** View count string (e.g. "1.2M views") */
   views?: string;
+  /** Channel or creator name */
   channel?: string;
+  /** Aspect ratio of the thumbnail */
   aspectRatio?: number;
+  /** Callback invoked when the thumbnail is pressed */
   onPress?: () => void;
+  /** Custom styles applied to the thumbnail container */
   style?: ViewStyle;
 };
 
@@ -70,25 +77,25 @@ export function VideoThumbnail({
               paddingVertical: 2,
               borderRadius: Radius.sm,
             }}>
-            <Text style={{ fontSize: 11, fontWeight: '600', color: t.textOnColor }}>{duration}</Text>
+            <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '600', color: t.textOnColor }}>{duration}</Text>
           </View>
         )}
       </View>
       {title && (
         <View style={{ padding: 12 }}>
-          <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }} numberOfLines={2}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }} numberOfLines={2}>
             {title}
           </Text>
           {(channel || views) && (
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 4 }}>
               {channel && (
-                <Text style={{ fontSize: 12, color: t.textSecondary }}>{channel}</Text>
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{channel}</Text>
               )}
               {channel && views && (
-                <Text style={{ fontSize: 12, color: t.textTertiary }}>·</Text>
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>·</Text>
               )}
               {views && (
-                <Text style={{ fontSize: 12, color: t.textSecondary }}>{views}</Text>
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{views}</Text>
               )}
             </View>
           )}

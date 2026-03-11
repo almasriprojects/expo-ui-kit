@@ -7,10 +7,14 @@ import { useTheme } from '@/hooks/use-theme';
 type IconButtonSize = 'sm' | 'md' | 'lg';
 type IconButtonVariant = 'default' | 'primary' | 'ghost' | 'outline';
 
-type IconButtonProps = PressableProps & {
+export type IconButtonProps = PressableProps & {
+  /** Icon element rendered inside the button */
   icon: ReactNode;
+  /** Accessibility label for the button */
   label?: string;
+  /** Size variant of the button */
   size?: IconButtonSize;
+  /** Visual style variant of the button */
   variant?: IconButtonVariant;
 };
 

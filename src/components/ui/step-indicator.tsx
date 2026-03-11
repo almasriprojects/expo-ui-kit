@@ -3,11 +3,13 @@ import { View, type ViewProps } from 'react-native';
 import { Check } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type StepIndicatorProps = ViewProps & {
+export type StepIndicatorProps = ViewProps & {
+  /** Array of step label strings */
   steps: string[];
+  /** Zero-based index of the current step */
   currentStep: number;
 };
 
@@ -50,7 +52,7 @@ export function StepIndicator({
                   ) : (
                     <ThemedText
                       style={{
-                        fontSize: 12,
+                        fontSize: FontSize.sm.fontSize,
                         fontWeight: '700',
                         color: isCurrent ? theme.primaryForeground : theme.textSecondary,
                       }}>
@@ -81,7 +83,7 @@ export function StepIndicator({
           <View key={i} style={{ flex: 1, alignItems: 'center' }}>
             <ThemedText
               style={{
-                fontSize: 11,
+                fontSize: FontSize.xs.fontSize,
                 fontWeight: i <= currentStep ? '600' : '400',
                 color: i <= currentStep ? theme.text : theme.textSecondary,
                 textAlign: 'center',

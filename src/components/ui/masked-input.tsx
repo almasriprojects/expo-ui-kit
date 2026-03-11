@@ -1,15 +1,21 @@
 import React, { useCallback, useState } from 'react';
 import { Text, TextInput, View, type ViewProps } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type MaskedInputProps = ViewProps & {
+  /** Mask pattern where '#' represents a digit placeholder */
   mask: string;
+  /** Current raw (unmasked) input value */
   value: string;
+  /** Callback invoked with both the raw and formatted values on change */
   onChangeText: (raw: string, formatted: string) => void;
+  /** Label text displayed above the input */
   label?: string;
+  /** Error message displayed below the input */
   error?: string;
+  /** Placeholder text shown when the input is empty */
   placeholder?: string;
 };
 
@@ -59,7 +65,7 @@ export function MaskedInput({
   return (
     <View style={[{ gap: 6 }, style]} {...props}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
           {label}
         </Text>
       )}
@@ -77,7 +83,7 @@ export function MaskedInput({
           paddingHorizontal: 16,
           paddingVertical: 12,
           borderRadius: Radius.lg,
-          fontSize: 16,
+          fontSize: FontSize.lg.fontSize,
           backgroundColor: t.surface,
           color: t.text,
           borderWidth: 1.5,
@@ -85,7 +91,7 @@ export function MaskedInput({
         }}
       />
       {error && (
-        <Text style={{ fontSize: 12, color: t.error, fontWeight: '500' }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, fontWeight: '500' }}>
           {error}
         </Text>
       )}

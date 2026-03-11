@@ -2,17 +2,25 @@ import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { CheckCircle } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ProgressCardProps = {
+export type ProgressCardProps = {
+  /** Title text for the progress item */
   title: string;
+  /** Secondary text displayed below the title */
   subtitle?: string;
+  /** Completion percentage (0–100) */
   progress: number;
+  /** Icon element displayed in the leading area */
   icon?: ReactNode;
+  /** Label for the completed portion (e.g. "3 of 5") */
   completedLabel?: string;
+  /** Label for the total (e.g. "5 tasks") */
   totalLabel?: string;
+  /** Callback invoked when the card is pressed */
   onPress?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -60,12 +68,12 @@ export function ProgressCard({
           </View>
         )}
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>{title}</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{title}</Text>
           {subtitle && (
-            <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 2 }}>{subtitle}</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>{subtitle}</Text>
           )}
         </View>
-        <Text style={{ fontSize: 14, fontWeight: '700', color: isComplete ? t.success : t.primary }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: isComplete ? t.success : t.primary }}>
           {Math.round(clampedProgress)}%
         </Text>
       </View>
@@ -89,8 +97,8 @@ export function ProgressCard({
         </View>
         {(completedLabel || totalLabel) && (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 }}>
-            <Text style={{ fontSize: 11, color: t.textSecondary }}>{completedLabel}</Text>
-            <Text style={{ fontSize: 11, color: t.textSecondary }}>{totalLabel}</Text>
+            <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textSecondary }}>{completedLabel}</Text>
+            <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textSecondary }}>{totalLabel}</Text>
           </View>
         )}
       </View>

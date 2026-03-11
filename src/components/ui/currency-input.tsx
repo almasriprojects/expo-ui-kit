@@ -3,14 +3,20 @@ import { TextInput, type TextInputProps, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 
-type CurrencyInputProps = Omit<TextInputProps, 'value' | 'onChangeText'> & {
+export type CurrencyInputProps = Omit<TextInputProps, 'value' | 'onChangeText'> & {
+  /** Current numeric value */
   value: number;
+  /** Callback fired when the value changes */
   onValueChange: (value: number) => void;
+  /** Currency code displayed on the right (e.g. "USD") */
   currency?: string;
+  /** Currency symbol displayed on the left (e.g. "$") */
   symbol?: string;
+  /** Label text shown above the input */
   label?: string;
+  /** Error message shown below the input */
   error?: string;
 };
 
@@ -47,7 +53,7 @@ export const CurrencyInput = forwardRef<TextInput, CurrencyInputProps>(
     return (
       <View>
         {label && (
-          <ThemedText style={{ fontSize: 14, fontWeight: '600', color: theme.text, marginBottom: 6 }}>
+          <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: theme.text, marginBottom: 6 }}>
             {label}
           </ThemedText>
         )}
@@ -68,7 +74,7 @@ export const CurrencyInput = forwardRef<TextInput, CurrencyInputProps>(
               borderRightWidth: 1,
               borderRightColor: theme.border,
             }}>
-            <ThemedText style={{ fontSize: 16, fontWeight: '600', color: theme.textSecondary }}>
+            <ThemedText style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: theme.textSecondary }}>
               {symbol}
             </ThemedText>
           </View>
@@ -83,19 +89,19 @@ export const CurrencyInput = forwardRef<TextInput, CurrencyInputProps>(
               flex: 1,
               paddingHorizontal: 14,
               paddingVertical: 12,
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               color: theme.text,
             }}
             {...props}
           />
           <View style={{ paddingRight: 14 }}>
-            <ThemedText style={{ fontSize: 12, color: theme.textSecondary, fontWeight: '500' }}>
+            <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, fontWeight: '500' }}>
               {currency}
             </ThemedText>
           </View>
         </View>
         {error && (
-          <ThemedText style={{ fontSize: 12, color: theme.error, marginTop: 4, fontWeight: '500' }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.error, marginTop: 4, fontWeight: '500' }}>
             {error}
           </ThemedText>
         )}

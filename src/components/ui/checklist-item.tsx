@@ -6,15 +6,21 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ChecklistItemProps = {
+export type ChecklistItemProps = {
+  /** Primary text of the checklist item */
   title: string;
+  /** Optional secondary description */
   subtitle?: string;
+  /** Whether the item is checked off */
   checked: boolean;
+  /** Callback invoked when the checked state changes */
   onToggle: (checked: boolean) => void;
+  /** Priority level shown as a colored dot */
   priority?: 'low' | 'medium' | 'high';
+  /** Custom styles for the item container */
   style?: ViewStyle;
 };
 
@@ -69,11 +75,11 @@ export function ChecklistItem({
         )}
       </View>
       <View style={{ flex: 1 }}>
-        <Animated.Text style={[{ fontSize: 15, fontWeight: '500' }, strikeStyle]}>
+        <Animated.Text style={[{ fontSize: FontSize.md.fontSize, fontWeight: '500' }, strikeStyle]}>
           {title}
         </Animated.Text>
         {subtitle && (
-          <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 2 }}>{subtitle}</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>{subtitle}</Text>
         )}
       </View>
       {priority && (

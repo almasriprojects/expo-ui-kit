@@ -2,18 +2,25 @@ import React, { useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BannerVariant = 'info' | 'success' | 'warning' | 'error';
+export type BannerVariant = 'info' | 'success' | 'warning' | 'error';
 
-type BannerProps = {
+export type BannerProps = {
+  /** Body text of the banner */
   message: string;
+  /** Optional heading displayed above the message */
   title?: string;
+  /** Visual style variant indicating severity */
   variant?: BannerVariant;
+  /** Whether the banner can be dismissed by the user */
   dismissible?: boolean;
+  /** Custom icon emoji or character */
   icon?: string;
+  /** Optional action button with label and handler */
   action?: { label: string; onPress: () => void };
+  /** Custom styles for the banner container */
   style?: ViewStyle;
 };
 
@@ -53,8 +60,8 @@ export function Banner({
         {
           flexDirection: 'row',
           alignItems: 'flex-start',
-          gap: 12,
-          padding: 14,
+          gap: Spacing[3],
+          padding: Spacing[3.5],
           borderRadius: Radius.xl,
           backgroundColor: c.bg,
           borderLeftWidth: 4,
@@ -73,7 +80,7 @@ export function Banner({
           marginTop: 1,
         }}>
         {icon ? (
-          <Text style={{ fontSize: 12, fontWeight: '700', color: t.textOnColor }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.textOnColor }}>
             {icon}
           </Text>
         ) : (
@@ -82,16 +89,16 @@ export function Banner({
       </View>
       <View style={{ flex: 1 }}>
         {title && (
-          <Text style={{ fontSize: 14, fontWeight: '700', color: t.text, marginBottom: 2 }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.text, marginBottom: Spacing[0.5] }}>
             {title}
           </Text>
         )}
-        <Text style={{ fontSize: 13, color: t.text, lineHeight: 19 }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.text, lineHeight: FontSize.sm.lineHeight }}>
           {message}
         </Text>
         {action && (
-          <Pressable onPress={action.onPress} style={{ marginTop: 8 }}>
-            <Text style={{ fontSize: 13, fontWeight: '700', color: c.accent }}>
+          <Pressable onPress={action.onPress} style={{ marginTop: Spacing[2] }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: c.accent }}>
               {action.label}
             </Text>
           </Pressable>

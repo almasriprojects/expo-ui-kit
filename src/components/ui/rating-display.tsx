@@ -5,12 +5,18 @@ import { Star } from 'lucide-react-native';
 import { Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type RatingDisplayProps = {
+export type RatingDisplayProps = {
+  /** Numeric rating value */
   rating: number;
+  /** Maximum number of stars to display */
   maxRating?: number;
+  /** Number of reviews to show alongside the rating */
   reviews?: number;
+  /** Size variant of the stars and text */
   size?: 'sm' | 'md' | 'lg';
+  /** Visual presentation variant */
   variant?: 'stars' | 'badge' | 'compact';
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 

@@ -2,14 +2,19 @@ import React from 'react';
 import { View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { CardGradients, Radius } from '@/constants/theme';
+import { CardGradients, Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BankCardDisplayProps = ViewProps & {
+export type BankCardDisplayProps = ViewProps & {
+  /** Full or partial card number */
   cardNumber: string;
+  /** Name of the card holder */
   holderName: string;
+  /** Expiration date string (e.g. "12/25") */
   expiry: string;
+  /** Card network brand */
   brand?: 'visa' | 'mastercard' | 'amex' | 'generic';
+  /** Visual color variant of the card */
   variant?: 'dark' | 'blue' | 'gradient';
 };
 
@@ -66,7 +71,7 @@ export function BankCardDisplay({
             opacity: 0.3,
           }}
         />
-        <ThemedText style={{ color: theme.primaryForeground, fontSize: 14, fontWeight: '700', letterSpacing: 2 }}>
+        <ThemedText style={{ color: theme.primaryForeground, fontSize: FontSize.md.fontSize, fontWeight: '700', letterSpacing: 2 }}>
           {brandLogos[brand]}
         </ThemedText>
       </View>
@@ -75,7 +80,7 @@ export function BankCardDisplay({
       <ThemedText
         style={{
           color: theme.primaryForeground,
-          fontSize: 18,
+          fontSize: FontSize.xl.fontSize,
           fontWeight: '500',
           letterSpacing: 3,
           fontVariant: ['tabular-nums'],
@@ -86,18 +91,18 @@ export function BankCardDisplay({
       {/* Bottom row */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <View>
-          <ThemedText style={{ color: theme.primaryForeground, opacity: 0.6, fontSize: 10, fontWeight: '500', textTransform: 'uppercase', marginBottom: 4 }}>
+          <ThemedText style={{ color: theme.primaryForeground, opacity: 0.6, fontSize: FontSize['2xs'].fontSize, fontWeight: '500', textTransform: 'uppercase', marginBottom: 4 }}>
             Card Holder
           </ThemedText>
-          <ThemedText style={{ color: theme.primaryForeground, fontSize: 13, fontWeight: '600', textTransform: 'uppercase' }}>
+          <ThemedText style={{ color: theme.primaryForeground, fontSize: FontSize.sm.fontSize, fontWeight: '600', textTransform: 'uppercase' }}>
             {holderName}
           </ThemedText>
         </View>
         <View style={{ alignItems: 'flex-end' }}>
-          <ThemedText style={{ color: theme.primaryForeground, opacity: 0.6, fontSize: 10, fontWeight: '500', marginBottom: 4 }}>
+          <ThemedText style={{ color: theme.primaryForeground, opacity: 0.6, fontSize: FontSize['2xs'].fontSize, fontWeight: '500', marginBottom: 4 }}>
             Expires
           </ThemedText>
-          <ThemedText style={{ color: theme.primaryForeground, fontSize: 13, fontWeight: '600' }}>
+          <ThemedText style={{ color: theme.primaryForeground, fontSize: FontSize.sm.fontSize, fontWeight: '600' }}>
             {expiry}
           </ThemedText>
         </View>

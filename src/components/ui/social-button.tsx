@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { BrandColors, Radius, Shadows } from '@/constants/theme';
+import { BrandColors, FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type SocialProvider = 'google' | 'apple' | 'facebook' | 'twitter' | 'github';
 
-type SocialButtonProps = {
+export type SocialButtonProps = {
+  /** Social authentication provider */
   provider: SocialProvider;
+  /** Callback invoked when the button is pressed */
   onPress: () => void;
+  /** Custom label text overriding the default provider name */
   label?: string;
+  /** Visual style variant of the button */
   variant?: 'filled' | 'outline';
+  /** Custom styles applied to the button container */
   style?: ViewStyle;
 };
 
@@ -69,7 +74,7 @@ export function SocialButton({
         }}>
         <Text
           style={{
-            fontSize: provider === 'google' ? 18 : 16,
+            fontSize: provider === 'google' ? FontSize.xl.fontSize : FontSize.lg.fontSize,
             fontWeight: '700',
             color: isOutline ? t.text : config.text,
           }}>
@@ -78,7 +83,7 @@ export function SocialButton({
       </View>
       <Text
         style={{
-          fontSize: 16,
+          fontSize: FontSize.lg.fontSize,
           fontWeight: '600',
           color: isOutline ? t.text : config.text,
         }}>

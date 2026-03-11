@@ -2,13 +2,17 @@ import React from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, Spacing, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type CheckboxProps = ViewProps & {
+export type CheckboxProps = ViewProps & {
+  /** Whether the checkbox is checked */
   checked: boolean;
+  /** Callback invoked when the checked state changes */
   onCheckedChange: (checked: boolean) => void;
+  /** Label text displayed next to the checkbox */
   label?: string;
+  /** Whether the checkbox is disabled */
   disabled?: boolean;
 };
 
@@ -30,7 +34,7 @@ export function Checkbox({
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 12,
+        gap: Spacing[3],
         opacity: disabled ? 0.5 : 1,
       }}
       {...props}>
@@ -50,7 +54,7 @@ export function Checkbox({
         )}
       </View>
       {label && (
-        <Text style={{ fontSize: 15, fontWeight: '500', color: t.text }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: t.text }}>
           {label}
         </Text>
       )}

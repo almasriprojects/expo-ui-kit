@@ -2,20 +2,28 @@ import React, { useState, useCallback } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { ChevronDown, ChevronRight } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type TreeNode = {
+  /** Unique key identifier for the node */
   key: string;
+  /** Display label for the node */
   label: string;
+  /** Emoji icon displayed before the label */
   icon?: string;
+  /** Child nodes nested under this node */
   children?: TreeNode[];
 };
 
 export type TreeViewProps = {
+  /** Array of root-level tree nodes */
   data: TreeNode[];
+  /** Keys of nodes that should be expanded by default */
   defaultExpanded?: string[];
+  /** Callback invoked when a leaf node is pressed */
   onNodePress?: (node: TreeNode) => void;
+  /** Custom styles applied to the tree container */
   style?: ViewStyle;
 };
 
@@ -68,17 +76,17 @@ function TreeNodeRow({
             <ChevronRight size={14} color={theme.textSecondary} />
           )
         ) : (
-          <Text style={{ fontSize: 8, color: theme.textSecondary }}>•</Text>
+          <Text style={{ fontSize: FontSize['2xs'].fontSize, color: theme.textSecondary }}>•</Text>
         )}
       </View>
       {node.icon != null && (
-        <Text style={{ fontSize: 14, marginRight: 6, color: theme.textSecondary }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, marginRight: 6, color: theme.textSecondary }}>
           {node.icon}
         </Text>
       )}
       <Text
         style={{
-          fontSize: 15,
+          fontSize: FontSize.md.fontSize,
           color: theme.text,
           flex: 1,
         }}

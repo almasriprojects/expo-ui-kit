@@ -3,9 +3,12 @@ import { View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
-type SeparatorProps = ViewProps & {
+export type SeparatorProps = ViewProps & {
+  /** Optional text label displayed in the center of the divider */
   label?: string;
+  /** Direction of the separator line */
   orientation?: 'horizontal' | 'vertical';
 };
 
@@ -36,7 +39,7 @@ export function Separator({
         ]}
         {...props}>
         <View style={[{ flex: 1, height: 1 }, lineStyle]} />
-        <ThemedText style={{ fontSize: 12, color: t.textSecondary, textTransform: 'uppercase', letterSpacing: 1 }}>
+        <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, textTransform: 'uppercase', letterSpacing: 1 }}>
           {label}
         </ThemedText>
         <View style={[{ flex: 1, height: 1 }, lineStyle]} />

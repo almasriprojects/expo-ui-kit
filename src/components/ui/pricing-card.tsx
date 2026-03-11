@@ -2,19 +2,29 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PricingCardProps = {
+export type PricingCardProps = {
+  /** Name of the pricing plan */
   title: string;
+  /** Formatted price string */
   price: string;
+  /** Billing period label (e.g. "/month") */
   period?: string;
+  /** Short description of the plan */
   description?: string;
+  /** List of feature strings included in the plan */
   features: string[];
+  /** Whether to visually highlight this plan as recommended */
   highlighted?: boolean;
+  /** Badge label displayed at the top (e.g. "Most Popular") */
   badge?: string;
+  /** Label for the call-to-action button */
   buttonLabel?: string;
+  /** Callback invoked when the CTA button is pressed */
   onPress?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -57,7 +67,7 @@ export function PricingCard({
           }}>
           <Text
             style={{
-              fontSize: 11,
+              fontSize: FontSize.xs.fontSize,
               fontWeight: '700',
               color: highlighted ? t.textOnColor : t.primary,
               textTransform: 'uppercase',
@@ -69,7 +79,7 @@ export function PricingCard({
 
       <Text
         style={{
-          fontSize: 18,
+          fontSize: FontSize.xl.fontSize,
           fontWeight: '600',
           color: highlighted ? t.textOnColorSecondary : t.textSecondary,
         }}>
@@ -79,7 +89,7 @@ export function PricingCard({
       <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 2, marginTop: 8 }}>
         <Text
           style={{
-            fontSize: 36,
+            fontSize: FontSize['4xl'].fontSize,
             fontWeight: '800',
             color: highlighted ? t.textOnColor : t.text,
           }}>
@@ -87,7 +97,7 @@ export function PricingCard({
         </Text>
         <Text
           style={{
-            fontSize: 14,
+            fontSize: FontSize.md.fontSize,
             color: highlighted ? t.textOnColorTertiary : t.textTertiary,
           }}>
           {period}
@@ -97,7 +107,7 @@ export function PricingCard({
       {description && (
         <Text
           style={{
-            fontSize: 13,
+            fontSize: FontSize.sm.fontSize,
             color: highlighted ? t.textOnColorTertiary : t.textSecondary,
             marginTop: 8,
             lineHeight: 19,
@@ -122,7 +132,7 @@ export function PricingCard({
             </View>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: highlighted ? t.textOnColorSecondary : t.text,
                 flex: 1,
               }}>
@@ -143,7 +153,7 @@ export function PricingCard({
         }}>
         <Text
           style={{
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             fontWeight: '700',
             color: highlighted ? t.primary : t.primaryForeground,
           }}>

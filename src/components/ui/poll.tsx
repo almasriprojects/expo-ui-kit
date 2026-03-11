@@ -1,21 +1,30 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type PollOption = {
+  /** Unique identifier for the poll option */
   key: string;
+  /** Display label for the option */
   label: string;
+  /** Number of votes this option has received */
   votes: number;
 };
 
 export type PollProps = {
+  /** Poll question text */
   question: string;
+  /** Array of poll options */
   options: PollOption[];
+  /** Total number of votes across all options */
   totalVotes: number;
+  /** Key of the currently selected option */
   selectedKey?: string;
+  /** Callback invoked when the user votes for an option */
   onVote: (key: string) => void;
+  /** Custom styles applied to the poll container */
   style?: ViewStyle;
 };
 
@@ -45,7 +54,7 @@ export function Poll({
       accessibilityRole="summary">
       <Text
         style={{
-          fontSize: 16,
+          fontSize: FontSize.lg.fontSize,
           fontWeight: '600',
           color: t.text,
           marginBottom: 12,
@@ -82,7 +91,7 @@ export function Poll({
                 }}>
                 <Text
                   style={{
-                    fontSize: 15,
+                    fontSize: FontSize.md.fontSize,
                     color: t.text,
                     fontWeight: isSelected ? '600' : '400',
                   }}>
@@ -90,7 +99,7 @@ export function Poll({
                 </Text>
                 <Text
                   style={{
-                    fontSize: 13,
+                    fontSize: FontSize.sm.fontSize,
                     color: t.textSecondary,
                     fontVariant: ['tabular-nums'],
                   }}>
@@ -120,7 +129,7 @@ export function Poll({
 
       <Text
         style={{
-          fontSize: 12,
+          fontSize: FontSize.sm.fontSize,
           color: t.textTertiary,
           marginTop: 4,
           fontVariant: ['tabular-nums'],

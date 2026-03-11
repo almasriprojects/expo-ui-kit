@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type CountdownTimerProps = ViewProps & {
+export type CountdownTimerProps = ViewProps & {
+  /** Target date for the countdown */
   targetDate: Date;
+  /** Callback fired when the countdown reaches zero */
   onComplete?: () => void;
+  /** Optional label displayed above the timer */
   label?: string;
+  /** Visual size variant of the timer */
   variant?: 'default' | 'compact' | 'large';
 };
 
@@ -62,11 +66,11 @@ export function CountdownTimer({
     return (
       <View {...props}>
         {label && (
-          <ThemedText style={{ fontSize: 12, color: theme.textSecondary, marginBottom: 4 }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, marginBottom: 4 }}>
             {label}
           </ThemedText>
         )}
-        <Text style={{ fontSize: 18, fontWeight: '700', fontVariant: ['tabular-nums'], color: theme.text }}>
+        <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', fontVariant: ['tabular-nums'], color: theme.text }}>
           {parts}
         </Text>
       </View>
@@ -79,7 +83,7 @@ export function CountdownTimer({
   return (
     <View {...props}>
       {label && (
-        <ThemedText style={{ fontSize: 13, color: theme.textSecondary, marginBottom: 10, textAlign: 'center' }}>
+        <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, marginBottom: 10, textAlign: 'center' }}>
           {label}
         </ThemedText>
       )}
@@ -107,7 +111,7 @@ export function CountdownTimer({
             </View>
             <ThemedText
               style={{
-                fontSize: 10,
+                fontSize: FontSize['2xs'].fontSize,
                 fontWeight: '600',
                 color: theme.textSecondary,
                 marginTop: 4,

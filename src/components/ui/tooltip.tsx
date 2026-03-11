@@ -3,12 +3,15 @@ import { Pressable, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TooltipProps = {
+export type TooltipProps = {
+  /** Text content displayed inside the tooltip */
   content: string;
+  /** Element that triggers the tooltip on press */
   children: ReactNode;
+  /** Position of the tooltip relative to the trigger */
   position?: 'top' | 'bottom';
 };
 
@@ -32,20 +35,22 @@ export function Tooltip({
         <Animated.View
           entering={FadeIn.duration(150)}
           exiting={FadeOut.duration(100)}
+          accessibilityRole="text"
+          accessibilityLabel={content}
           style={{
             position: 'absolute',
             zIndex: 50,
-            paddingHorizontal: 12,
-            paddingVertical: 8,
+            paddingHorizontal: Spacing[3],
+            paddingVertical: Spacing[2],
             borderRadius: Radius.md,
             backgroundColor: t.text,
             alignSelf: 'center',
-            ...(position === 'top' ? { bottom: '100%', marginBottom: 8 } : { top: '100%', marginTop: 8 }),
+            ...(position === 'top' ? { bottom: '100%', marginBottom: Spacing[2] } : { top: '100%', marginTop: Spacing[2] }),
             ...Shadows.md,
           }}>
           <ThemedText
             style={{
-              fontSize: 12,
+              fontSize: FontSize.sm.fontSize,
               color: t.textInverse,
               textAlign: 'center',
             }}>

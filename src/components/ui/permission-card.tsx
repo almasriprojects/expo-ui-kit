@@ -2,16 +2,23 @@ import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { CheckCircle } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PermissionCardProps = {
+export type PermissionCardProps = {
+  /** Icon element displayed in the top circle */
   icon: ReactNode;
+  /** Title of the permission being requested */
   title: string;
+  /** Description explaining why the permission is needed */
   description: string;
+  /** Whether the permission has already been granted */
   granted?: boolean;
+  /** Callback invoked when the user allows the permission */
   onAllow: () => void;
+  /** Callback invoked when the user denies the permission */
   onDeny?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -52,12 +59,12 @@ export function PermissionCard({
         }}>
         {granted ? <CheckCircle size={28} color={t.success} /> : icon}
       </View>
-      <Text style={{ fontSize: 17, fontWeight: '700', color: t.text, textAlign: 'center' }}>
+      <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text, textAlign: 'center' }}>
         {title}
       </Text>
       <Text
         style={{
-          fontSize: 13,
+          fontSize: FontSize.sm.fontSize,
           color: t.textSecondary,
           textAlign: 'center',
           marginTop: 6,
@@ -78,7 +85,7 @@ export function PermissionCard({
             paddingVertical: 6,
             borderRadius: Radius.full,
           }}>
-          <Text style={{ fontSize: 13, fontWeight: '600', color: t.success }}>Granted</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.success }}>Granted</Text>
         </View>
       ) : (
         <View style={{ flexDirection: 'row', gap: 10, marginTop: 18, width: '100%' }}>
@@ -92,7 +99,7 @@ export function PermissionCard({
                 backgroundColor: t.surface,
                 alignItems: 'center',
               }}>
-              <Text style={{ fontSize: 14, fontWeight: '600', color: t.textSecondary }}>
+              <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.textSecondary }}>
                 Not Now
               </Text>
             </Pressable>
@@ -106,7 +113,7 @@ export function PermissionCard({
               backgroundColor: t.primary,
               alignItems: 'center',
             }}>
-            <Text style={{ fontSize: 14, fontWeight: '600', color: t.primaryForeground }}>
+            <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.primaryForeground }}>
               Allow
             </Text>
           </Pressable>

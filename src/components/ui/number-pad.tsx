@@ -1,16 +1,21 @@
 import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
-import { Check } from 'lucide-react-native';
+import { Check, Delete } from 'lucide-react-native';
 
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type NumberPadProps = ViewProps & {
+export type NumberPadProps = ViewProps & {
+  /** Callback invoked when a digit key is pressed */
   onKeyPress: (key: string) => void;
+  /** Callback invoked when the delete key is pressed */
   onDelete?: () => void;
+  /** Callback invoked when the confirm button is pressed */
   onConfirm?: () => void;
+  /** Whether to show a decimal point key */
   showDecimal?: boolean;
+  /** Custom label or icon for the confirm button */
   confirmLabel?: ReactNode;
 };
 
@@ -52,9 +57,13 @@ export function NumberPad({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ fontSize: isDel ? 18 : 22, fontWeight: '500', color: theme.text }}>
-          {isDel ? '⌫' : key}
-        </Text>
+        {isDel ? (
+          <Delete size={FontSize.xl.fontSize} color={theme.text} />
+        ) : (
+          <Text style={{ fontSize: FontSize['2xl'].fontSize, fontWeight: '500', color: theme.text }}>
+            {key}
+          </Text>
+        )}
       </Pressable>
     );
   };
@@ -66,7 +75,7 @@ export function NumberPad({
           {row.map((key) => renderKey(key))}
         </View>
       ))}
-      {onConfirm && (
+      {onConfirm ? (
         <Pressable
           onPress={onConfirm}
           style={{
@@ -77,9 +86,15 @@ export function NumberPad({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          {confirmLabel ?? <Check size={20} color={theme.primaryForeground} />}
+          {confirmLabel ? (
+            typeof confirmLabel === 'string' ? (
+              <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: theme.primaryForeground }}>{confirmLabel}</Text>
+            ) : confirmLabel
+          ) : (
+            <Check size={20} color={theme.primaryForeground} />
+          )}
         </Pressable>
-      )}
+      ) : null}
     </View>
   );
 }

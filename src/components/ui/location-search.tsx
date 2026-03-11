@@ -8,20 +8,30 @@ import {
   type ViewProps,
 } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { MapPin } from 'lucide-react-native';
+
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type LocationSearchSuggestion = {
+  /** Display label for the suggestion */
   label: string;
+  /** Optional secondary text for the suggestion */
   subtitle?: string;
 };
 
 export type LocationSearchProps = ViewProps & {
+  /** Current search input value */
   value: string;
+  /** Callback invoked when the search text changes */
   onChangeText: (text: string) => void;
+  /** List of recent search strings shown when input is empty */
   recentSearches?: string[];
+  /** Location suggestions shown while the user types */
   suggestions?: LocationSearchSuggestion[];
+  /** Callback invoked when a suggestion or recent search is selected */
   onSelect: (label: string) => void;
+  /** Placeholder text for the search input */
   placeholder?: string;
 };
 
@@ -74,16 +84,16 @@ export function LocationSearch({
         accessibilityRole="button"
         accessibilityLabel={item.subtitle ? `${item.label}, ${item.subtitle}` : item.label}
         accessibilityHint="Select this location">
-        <Text style={{ fontSize: 18 }}>📍</Text>
+        <MapPin size={FontSize.xl.fontSize} color={t.textSecondary} />
         <View style={{ flex: 1 }}>
           <Text
-            style={{ fontSize: 15, fontWeight: '500', color: t.text }}
+            style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: t.text }}
             numberOfLines={1}>
             {item.label}
           </Text>
           {item.subtitle && (
             <Text
-              style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}
+              style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}
               numberOfLines={1}>
               {item.subtitle}
             </Text>
@@ -113,7 +123,7 @@ export function LocationSearch({
           borderWidth: 1,
           borderColor: t.border,
         }}>
-        <Text style={{ fontSize: 18 }}>📍</Text>
+        <MapPin size={FontSize.xl.fontSize} color={t.textSecondary} />
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -121,7 +131,7 @@ export function LocationSearch({
           placeholderTextColor={t.textTertiary}
           style={{
             flex: 1,
-            fontSize: 16,
+            fontSize: FontSize.lg.fontSize,
             color: t.text,
             paddingVertical: 12,
           }}

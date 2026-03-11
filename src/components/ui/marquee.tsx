@@ -10,10 +10,14 @@ import Animated, {
 
 import { useTheme } from '@/hooks/use-theme';
 
-type MarqueeProps = {
+export type MarqueeProps = {
+  /** Text content that scrolls horizontally */
   text: string;
+  /** Scroll speed in pixels per second */
   speed?: number;
+  /** Custom styles applied to the outer container */
   style?: ViewStyle;
+  /** Custom styles applied to the scrolling text */
   textStyle?: { fontSize?: number; fontWeight?: string; color?: string };
 };
 

@@ -2,20 +2,28 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Check } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ColorSwatchOption = {
+  /** Display name of the color */
   label: string;
+  /** Unique identifier for the color option */
   value: string;
+  /** Hex color code for the swatch */
   hex: string;
 };
 
 export type ColorSwatchSelectorProps = {
+  /** Array of color options to display */
   colors: ColorSwatchOption[];
+  /** Value of the currently selected color */
   selected?: string;
+  /** Callback invoked when a color swatch is selected */
   onSelect: (value: string) => void;
+  /** Whether to show color labels below swatches */
   showLabels?: boolean;
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -83,7 +91,7 @@ export function ColorSwatchSelector({
             {showLabels && (
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: FontSize.sm.fontSize,
                   color: t.textSecondary,
                   maxWidth: 56,
                   textAlign: 'center',

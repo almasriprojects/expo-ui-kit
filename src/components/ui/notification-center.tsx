@@ -3,26 +3,37 @@ import { FlatList, Pressable, Text, View } from 'react-native';
 import { X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 import { IconButton } from './icon-button';
 import { SwipeableRow } from './swipeable-row';
 
 export type NotificationItem = {
+  /** Unique identifier for the notification */
   key: string;
+  /** Title text of the notification */
   title: string;
+  /** Body message of the notification */
   message: string;
+  /** Formatted timestamp string */
   time: string;
+  /** Whether the notification has been read */
   read: boolean;
+  /** Category used for filtering notifications */
   category?: string;
+  /** Emoji icon displayed alongside the notification */
   icon?: string;
 };
 
 export type NotificationCenterProps = {
+  /** Array of notification items to display */
   notifications: NotificationItem[];
+  /** Category names used for tab-based filtering */
   categories?: string[];
+  /** Callback invoked when a notification is pressed */
   onNotificationPress?: (key: string) => void;
+  /** Callback invoked when a notification is dismissed */
   onDismiss?: (key: string) => void;
 };
 
@@ -68,7 +79,7 @@ export function NotificationCenter({
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{ fontSize: 18 }}>{item.icon}</Text>
+            <Text style={{ fontSize: FontSize.xl.fontSize }}>{item.icon}</Text>
           </View>
         ) : null}
         <View style={{ flex: 1 }}>
@@ -80,7 +91,7 @@ export function NotificationCenter({
             }}>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 fontWeight: item.read ? '400' : '700',
                 flex: 1,
                 marginRight: 8,
@@ -89,13 +100,13 @@ export function NotificationCenter({
               numberOfLines={1}>
               {item.title}
             </Text>
-            <ThemedText style={{ fontSize: 11, color: t.textSecondary }}>
+            <ThemedText style={{ fontSize: FontSize.xs.fontSize, color: t.textSecondary }}>
               {item.time}
             </ThemedText>
           </View>
           <ThemedText
             style={{
-              fontSize: 13,
+              fontSize: FontSize.sm.fontSize,
               color: t.textSecondary,
               marginTop: 3,
               lineHeight: 18,
@@ -163,7 +174,7 @@ export function NotificationCenter({
               }}>
               <ThemedText
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   fontWeight: selected ? '600' : '400',
                   color: selected ? t.primary : t.textSecondary,
                 }}>
@@ -179,7 +190,7 @@ export function NotificationCenter({
         renderItem={renderNotification}
         ListEmptyComponent={
           <View style={{ padding: 24, alignItems: 'center' }}>
-            <ThemedText style={{ fontSize: 14, color: t.textSecondary }}>
+            <ThemedText style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>
               No notifications
             </ThemedText>
           </View>

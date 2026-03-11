@@ -8,17 +8,22 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Animation, Radius, Shadows, Spacing, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type AccordionItem = {
+export type AccordionItem = {
+  /** Unique identifier for the accordion item */
   key: string;
+  /** Header title displayed in the accordion row */
   title: string;
+  /** Content rendered when the accordion item is expanded */
   content: React.ReactNode;
 };
 
-type AccordionProps = ViewProps & {
+export type AccordionProps = ViewProps & {
+  /** List of accordion items to render */
   items: AccordionItem[];
+  /** Whether multiple items can be open simultaneously */
   allowMultiple?: boolean;
 };
 
@@ -35,7 +40,7 @@ function AccordionRow({
   const rotation = useSharedValue(isOpen ? 1 : 0);
 
   React.useEffect(() => {
-    rotation.value = withTiming(isOpen ? 1 : 0, { duration: 200 });
+    rotation.value = withTiming(isOpen ? 1 : 0, { duration: Animation.duration.normal });
   }, [isOpen, rotation]);
 
   const chevronStyle = useAnimatedStyle(() => ({
@@ -60,13 +65,13 @@ function AccordionRow({
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          paddingHorizontal: 20,
-          paddingVertical: 16,
+          paddingHorizontal: Spacing[5],
+          paddingVertical: Spacing[4],
         }}>
         <Text
           style={{
             flex: 1,
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             fontWeight: '600',
             color: t.text,
           }}>
@@ -75,7 +80,7 @@ function AccordionRow({
         <Animated.View style={chevronStyle}>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: FontSize.xl.fontSize,
               fontWeight: '600',
               color: t.textSecondary,
             }}>
@@ -86,20 +91,20 @@ function AccordionRow({
 
       {isOpen && (
         <Animated.View
-          entering={FadeIn.duration(150)}
+          entering={FadeIn.duration(Animation.duration.fast)}
           exiting={FadeOut.duration(100)}>
           <View
             style={{
               height: 1,
               backgroundColor: t.border,
-              marginHorizontal: 20,
+              marginHorizontal: Spacing[5],
             }}
           />
-          <View style={{ paddingHorizontal: 20, paddingVertical: 16 }}>
+          <View style={{ paddingHorizontal: Spacing[5], paddingVertical: Spacing[4] }}>
             {typeof item.content === 'string' ? (
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   lineHeight: 22,
                   color: t.textSecondary,
                 }}>
@@ -137,7 +142,7 @@ export function Accordion({
 
   return (
     <View
-      style={[{ gap: 10 }, typeof style === 'object' ? style : undefined]}
+      style={[{ gap: Spacing[2.5] }, typeof style === 'object' ? style : undefined]}
       {...props}>
       {items.map((item) => (
         <AccordionRow

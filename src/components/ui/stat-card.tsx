@@ -3,15 +3,21 @@ import { Text, View, type ViewProps } from 'react-native';
 import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, type ThemeTokens } from '@/constants/theme';
+import { FontSize, Radius, type ThemeTokens } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type StatCardProps = ViewProps & {
+export type StatCardProps = ViewProps & {
+  /** Title label for the statistic */
   title: string;
+  /** Primary value displayed prominently */
   value: string | number;
+  /** Secondary text displayed below the value */
   subtitle?: string;
+  /** Icon element rendered in the top area */
   icon?: ReactNode;
+  /** Trend indicator with value and optional label */
   trend?: { value: number; label?: string };
+  /** Color variant of the card */
   variant?: 'default' | 'primary' | 'success' | 'warning' | 'error';
 };
 
@@ -56,7 +62,7 @@ export function StatCard({
       ]}
       {...props}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <ThemedText style={{ fontSize: 13, color: t.textSecondary, fontWeight: '500' }}>
+        <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontWeight: '500' }}>
           {title}
         </ThemedText>
         {icon && (
@@ -73,7 +79,7 @@ export function StatCard({
           </View>
         )}
       </View>
-      <Text style={{ fontSize: 28, fontWeight: '700', marginTop: 8, color: t.text }}>
+      <Text style={{ fontSize: FontSize['3xl'].fontSize, fontWeight: '700', marginTop: 8, color: t.text }}>
         {value}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4, gap: 6 }}>
@@ -95,7 +101,7 @@ export function StatCard({
               )}
               <ThemedText
                 style={{
-                  fontSize: 12,
+                  fontSize: FontSize.sm.fontSize,
                   fontWeight: '600',
                   color: trendUp ? t.success : t.error,
                 }}>
@@ -105,7 +111,7 @@ export function StatCard({
           </View>
         )}
         {(subtitle || trend?.label) && (
-          <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>
+          <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
             {trend?.label ?? subtitle}
           </ThemedText>
         )}

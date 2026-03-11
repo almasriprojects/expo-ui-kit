@@ -1,15 +1,21 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BoardColumnProps = {
+export type BoardColumnProps = {
+  /** Column header title */
   title: string;
+  /** Number of items displayed in the count badge */
   count: number;
+  /** Accent color for the column indicator dot */
   color?: string;
+  /** Callback invoked when the add button is pressed */
   onAdd?: () => void;
+  /** Column content (typically kanban cards) */
   children: React.ReactNode;
+  /** Custom styles for the column container */
   style?: ViewStyle;
 };
 
@@ -44,7 +50,7 @@ export function BoardColumn({
         }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
           <View style={{ width: 10, height: 10, borderRadius: Radius.full, backgroundColor: accentColor }} />
-          <Text style={{ fontSize: 14, fontWeight: '700', color: t.text }}>{title}</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.text }}>{title}</Text>
           <View
             style={{
               minWidth: 22,
@@ -55,7 +61,7 @@ export function BoardColumn({
               justifyContent: 'center',
               paddingHorizontal: 5,
             }}>
-            <Text style={{ fontSize: 11, fontWeight: '600', color: t.textSecondary }}>{count}</Text>
+            <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '600', color: t.textSecondary }}>{count}</Text>
           </View>
         </View>
         {onAdd && (
@@ -69,7 +75,7 @@ export function BoardColumn({
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{ fontSize: 16, color: t.textSecondary }}>+</Text>
+            <Text style={{ fontSize: FontSize.lg.fontSize, color: t.textSecondary }}>+</Text>
           </Pressable>
         )}
       </View>

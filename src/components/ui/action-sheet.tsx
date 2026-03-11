@@ -2,21 +2,30 @@ import React from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, Spacing, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ActionSheetOption = {
+export type ActionSheetOption = {
+  /** Display text for the option */
   label: string;
+  /** Callback invoked when the option is pressed */
   onPress: () => void;
+  /** Whether the option is styled as a destructive action */
   destructive?: boolean;
 };
 
-type ActionSheetProps = {
+export type ActionSheetProps = {
+  /** Controls the visibility of the action sheet */
   visible: boolean;
+  /** Callback invoked when the sheet is dismissed */
   onClose: () => void;
+  /** Optional title displayed at the top of the sheet */
   title?: string;
+  /** Optional descriptive message below the title */
   message?: string;
+  /** List of selectable action options */
   options: ActionSheetOption[];
+  /** Label for the cancel button */
   cancelLabel?: string;
 };
 
@@ -38,24 +47,24 @@ export function ActionSheet({
         onPress={onClose}>
         <View
           style={{
-            paddingBottom: insets.bottom + 8,
-            paddingHorizontal: 12,
+            paddingBottom: insets.bottom + Spacing[2],
+            paddingHorizontal: Spacing[3],
           }}>
           {/* Options group */}
           <View
             style={{
               borderRadius: Radius['2xl'],
               overflow: 'hidden',
-              marginBottom: 8,
+              marginBottom: Spacing[2],
               backgroundColor: t.card,
               ...Shadows.lg,
             }}>
             {(title || message) && (
               <View
                 style={{
-                  paddingHorizontal: 20,
+                  paddingHorizontal: Spacing[5],
                   paddingTop: 18,
-                  paddingBottom: 14,
+                  paddingBottom: Spacing[3.5],
                   alignItems: 'center',
                   borderBottomWidth: 1,
                   borderBottomColor: t.border,
@@ -63,7 +72,7 @@ export function ActionSheet({
                 {title && (
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: FontSize.md.fontSize,
                       fontWeight: '700',
                       textAlign: 'center',
                       color: t.text,
@@ -74,9 +83,9 @@ export function ActionSheet({
                 {message && (
                   <Text
                     style={{
-                      fontSize: 13,
+                      fontSize: FontSize.sm.fontSize,
                       textAlign: 'center',
-                      marginTop: 4,
+                      marginTop: Spacing[1],
                       color: t.textSecondary,
                       lineHeight: 18,
                     }}>
@@ -98,12 +107,12 @@ export function ActionSheet({
                   accessibilityRole="button"
                   accessibilityLabel={option.label}
                   style={{
-                    paddingVertical: 16,
+                    paddingVertical: Spacing[4],
                     alignItems: 'center',
                   }}>
                   <Text
                     style={{
-                      fontSize: 18,
+                      fontSize: FontSize.xl.fontSize,
                       fontWeight: option.destructive ? '600' : '400',
                       color: option.destructive ? t.error : t.primary,
                     }}>
@@ -121,14 +130,14 @@ export function ActionSheet({
             accessibilityLabel={cancelLabel}
             style={{
               borderRadius: Radius['2xl'],
-              paddingVertical: 16,
+              paddingVertical: Spacing[4],
               alignItems: 'center',
               backgroundColor: t.card,
               ...Shadows.md,
             }}>
             <Text
               style={{
-                fontSize: 18,
+                fontSize: FontSize.xl.fontSize,
                 fontWeight: '700',
                 color: t.primary,
               }}>

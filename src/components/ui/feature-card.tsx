@@ -1,14 +1,19 @@
 import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type FeatureCardProps = {
+export type FeatureCardProps = {
+  /** Feature title text */
   title: string;
+  /** Feature description text */
   description: string;
+  /** Emoji or text icon displayed in the card */
   icon: string;
+  /** Background color for the icon container */
   iconBg?: string;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -44,12 +49,12 @@ export function FeatureCard({
           justifyContent: 'center',
           marginBottom: 14,
         }}>
-        <Text style={{ fontSize: 22 }}>{icon}</Text>
+        <Text style={{ fontSize: FontSize['2xl'].fontSize }}>{icon}</Text>
       </View>
-      <Text style={{ fontSize: 16, fontWeight: '700', color: t.text, marginBottom: 6 }}>
+      <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text, marginBottom: 6 }}>
         {title}
       </Text>
-      <Text style={{ fontSize: 13, color: t.textSecondary, lineHeight: 19 }}>
+      <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, lineHeight: 19 }}>
         {description}
       </Text>
     </View>

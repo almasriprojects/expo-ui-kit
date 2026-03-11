@@ -4,12 +4,18 @@ import { ArrowDown, ArrowUp } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
 export type StatisticProps = {
+  /** Primary numeric or string value */
   value: string | number;
+  /** Descriptive label for the statistic */
   label: string;
+  /** Trend indicator with value and direction */
   trend?: { value: number; direction: 'up' | 'down' };
+  /** Text prefix displayed before the value */
   prefix?: string;
+  /** Text suffix displayed after the value */
   suffix?: string;
 };
 
@@ -32,14 +38,14 @@ export function Statistic({
       accessibilityLabel={`${label}: ${displayValue}${trend ? `, ${trend.direction} ${trend.value}%` : ''}`}>
       <ThemedText
         style={{
-          fontSize: 28,
+          fontSize: FontSize['3xl'].fontSize,
           fontWeight: '700',
           color: t.text,
         }}>
         {displayValue}
       </ThemedText>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-        <ThemedText style={{ fontSize: 14, color: t.textSecondary }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>
           {label}
         </ThemedText>
         {trend && (
@@ -51,7 +57,7 @@ export function Statistic({
             )}
             <ThemedText
               style={{
-                fontSize: 13,
+                fontSize: FontSize.sm.fontSize,
                 fontWeight: '600',
                 color: trend.direction === 'up' ? t.success : t.error,
               }}>

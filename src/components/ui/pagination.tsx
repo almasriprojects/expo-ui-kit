@@ -1,14 +1,19 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PaginationProps = {
+export type PaginationProps = {
+  /** Total number of pages */
   total: number;
+  /** Zero-based index of the current page */
   current: number;
+  /** Callback invoked when a page is selected */
   onPageChange: (page: number) => void;
+  /** Visual variant of the pagination control */
   variant?: 'dots' | 'numbers';
+  /** Custom styles applied to the pagination container */
   style?: ViewStyle;
 };
 
@@ -63,13 +68,13 @@ export function Pagination({
           justifyContent: 'center',
           opacity: current === 0 ? 0.3 : 1,
         }}>
-        <Text style={{ fontSize: 16, fontWeight: '600', color: t.text }}>‹</Text>
+        <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: t.text }}>‹</Text>
       </Pressable>
 
       {start > 0 && (
         <>
           <PageButton page={0} active={false} onPress={() => onPageChange(0)} />
-          {start > 1 && <Text style={{ color: t.textTertiary, fontSize: 14 }}>…</Text>}
+          {start > 1 && <Text style={{ color: t.textTertiary, fontSize: FontSize.md.fontSize }}>…</Text>}
         </>
       )}
 
@@ -84,7 +89,7 @@ export function Pagination({
 
       {end < total && (
         <>
-          {end < total - 1 && <Text style={{ color: t.textTertiary, fontSize: 14 }}>…</Text>}
+          {end < total - 1 && <Text style={{ color: t.textTertiary, fontSize: FontSize.md.fontSize }}>…</Text>}
           <PageButton page={total - 1} active={false} onPress={() => onPageChange(total - 1)} />
         </>
       )}
@@ -100,7 +105,7 @@ export function Pagination({
           justifyContent: 'center',
           opacity: current === total - 1 ? 0.3 : 1,
         }}>
-        <Text style={{ fontSize: 16, fontWeight: '600', color: t.text }}>›</Text>
+        <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: t.text }}>›</Text>
       </Pressable>
     </View>
   );
@@ -121,7 +126,7 @@ function PageButton({ page, active, onPress }: { page: number; active: boolean; 
       }}>
       <Text
         style={{
-          fontSize: 14,
+          fontSize: FontSize.md.fontSize,
           fontWeight: active ? '700' : '500',
           color: active ? t.primaryForeground : t.text,
         }}>

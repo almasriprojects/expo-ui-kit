@@ -8,13 +8,17 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Circle, Polygon } from 'react-native-svg';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type MapMarkerProps = ViewProps & {
+  /** Text label displayed below the marker */
   label?: string;
+  /** Fill color of the marker pin */
   color?: string;
+  /** Size of the marker in pixels */
   size?: number;
+  /** Whether to show a pulsing animation around the marker */
   pulse?: boolean;
 };
 
@@ -115,7 +119,7 @@ export function MapMarker({
           }}>
           <Text
             style={{
-              fontSize: 12,
+              fontSize: FontSize.sm.fontSize,
               fontWeight: '600',
               color: t.text,
               maxWidth: 120,

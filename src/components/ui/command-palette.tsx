@@ -9,21 +9,30 @@ import {
   View,
 } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type CommandItem = {
+  /** Unique identifier for the command */
   key: string;
+  /** Display text for the command */
   label: string;
+  /** SF Symbol name for the command icon */
   icon?: string;
+  /** Group heading the command belongs to */
   group?: string;
+  /** Callback invoked when the command is selected */
   onSelect: () => void;
 };
 
 export type CommandPaletteProps = {
+  /** Controls the visibility of the palette */
   visible: boolean;
+  /** Callback invoked when the palette is dismissed */
   onClose: () => void;
+  /** List of available commands */
   items: CommandItem[];
+  /** Placeholder text for the search input */
   placeholder?: string;
 };
 
@@ -116,7 +125,7 @@ export function CommandPalette({
               placeholderTextColor={t.textTertiary}
               style={{
                 flex: 1,
-                fontSize: 16,
+                fontSize: FontSize.lg.fontSize,
                 color: t.text,
                 paddingVertical: 4,
               }}
@@ -142,7 +151,7 @@ export function CommandPalette({
                 }}>
                 <Text
                   style={{
-                    fontSize: 14,
+                    fontSize: FontSize.md.fontSize,
                     color: t.textSecondary,
                   }}>
                   No results found
@@ -154,7 +163,7 @@ export function CommandPalette({
                 {group ? (
                   <Text
                     style={{
-                      fontSize: 12,
+                      fontSize: FontSize.sm.fontSize,
                       fontWeight: '600',
                       color: t.textTertiary,
                       paddingHorizontal: 16,
@@ -188,7 +197,7 @@ export function CommandPalette({
                     ) : null}
                     <Text
                       style={{
-                        fontSize: 15,
+                        fontSize: FontSize.md.fontSize,
                         color: t.text,
                         fontWeight: '500',
                       }}>

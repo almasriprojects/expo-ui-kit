@@ -1,15 +1,21 @@
 import React, { useRef } from 'react';
 import { Pressable, ScrollView, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type CalendarStripProps = {
+export type CalendarStripProps = {
+  /** Currently selected date */
   selectedDate: Date;
+  /** Callback invoked when a date is selected */
   onDateSelect: (date: Date) => void;
+  /** Number of days to display in the strip */
   daysToShow?: number;
+  /** First date shown in the strip */
   startDate?: Date;
+  /** Array of date strings (YYYY-MM-DD) to mark with a dot */
   markedDates?: string[];
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -48,7 +54,7 @@ export function CalendarStrip({
 
   return (
     <View style={style}>
-      <Text style={{ fontSize: 16, fontWeight: '700', color: t.text, marginBottom: 12 }}>
+      <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text, marginBottom: 12 }}>
         {MONTH_NAMES[selectedDate.getMonth()]} {selectedDate.getFullYear()}
       </Text>
       <ScrollView
@@ -77,7 +83,7 @@ export function CalendarStrip({
               }}>
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: FontSize.xs.fontSize,
                   fontWeight: '500',
                   color: selected ? t.primaryForeground : t.textSecondary,
                 }}>
@@ -85,7 +91,7 @@ export function CalendarStrip({
               </Text>
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: FontSize.xl.fontSize,
                   fontWeight: '700',
                   color: selected ? t.primaryForeground : t.text,
                 }}>

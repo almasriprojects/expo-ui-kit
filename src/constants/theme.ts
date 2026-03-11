@@ -346,6 +346,7 @@ export const THEME_LIST: { key: ThemeName; label: string; description: string; p
 // ─── Border Radius ───────────────────────────────────────────────────────────
 
 export const Radius = {
+  '2xs': 2,
   xs: 4,
   sm: 6,
   md: 8,
@@ -396,6 +397,24 @@ export const Shadows = {
   } as ViewStyle,
 } as const;
 
+// ─── Animation ────────────────────────────────────────────────────────────────
+
+export const Animation = {
+  duration: {
+    instant: 50,
+    fast: 150,
+    normal: 250,
+    slow: 400,
+    slower: 800,
+  },
+  spring: {
+    default: { damping: 15, stiffness: 120 },
+    bouncy: { damping: 10, stiffness: 150 },
+    stiff: { damping: 20, stiffness: 200 },
+    gentle: { damping: 18, stiffness: 80 },
+  },
+} as const;
+
 // ─── Typography ──────────────────────────────────────────────────────────────
 
 export const Fonts = Platform.select({
@@ -420,6 +439,7 @@ export const Fonts = Platform.select({
 });
 
 export const FontSize = {
+  '2xs': { fontSize: 10, lineHeight: 14 },
   xs: { fontSize: 11, lineHeight: 14 },
   sm: { fontSize: 13, lineHeight: 18 },
   md: { fontSize: 15, lineHeight: 22 },
@@ -501,13 +521,22 @@ export function resolveFontFamily(
 // ─── Spacing ─────────────────────────────────────────────────────────────────
 
 export const Spacing = {
-  half: 2,
-  one: 4,
-  two: 8,
-  three: 16,
-  four: 24,
-  five: 32,
-  six: 64,
+  0.5: 2,
+  1: 4,
+  1.5: 6,
+  2: 8,
+  2.5: 10,
+  3: 12,
+  3.5: 14,
+  4: 16,
+  5: 20,
+  6: 24,
+  7: 28,
+  8: 32,
+  9: 36,
+  10: 40,
+  12: 48,
+  16: 64,
 } as const;
 
 export const MaxContentWidth = 800;
@@ -527,6 +556,7 @@ export const BrandColors = {
   apple: { bg: '#000000', text: '#ffffff' },
   facebook: { bg: '#1877f2', text: '#ffffff' },
   twitter: { bg: '#000000', text: '#ffffff' },
+  whatsapp: { bg: '#25D366', text: '#ffffff' },
   github: { bg: '#24292f', text: '#ffffff' },
 } as const;
 

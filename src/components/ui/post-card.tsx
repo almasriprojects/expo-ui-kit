@@ -2,26 +2,41 @@ import React, { useState } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Heart, MessageCircle, ExternalLink, Image as ImageIcon } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 import { VerificationBadge } from './verification-badge';
 
-type PostCardProps = {
+export type PostCardProps = {
+  /** Name of the post author */
   author: string;
+  /** URL of the author's avatar image */
   avatar?: string;
+  /** Whether the author is verified */
   verified?: boolean;
+  /** Formatted timestamp of the post */
   time: string;
+  /** Text content of the post */
   text?: string;
+  /** Whether the post includes an image placeholder */
   image?: boolean;
+  /** Number of likes on the post */
   likes: number;
+  /** Number of comments on the post */
   comments: number;
+  /** Number of shares on the post */
   shares?: number;
+  /** Whether the current user has liked the post */
   liked?: boolean;
+  /** Callback invoked when the like button is pressed */
   onLike?: () => void;
+  /** Callback invoked when the comment button is pressed */
   onComment?: () => void;
+  /** Callback invoked when the share button is pressed */
   onShare?: () => void;
+  /** Callback invoked when the author's profile is pressed */
   onProfile?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -71,16 +86,16 @@ export function PostCard({
         </Pressable>
         <View style={{ flex: 1 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-            <Text style={{ fontSize: 14, fontWeight: '700', color: t.text }}>{author}</Text>
+            <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.text }}>{author}</Text>
             {verified && <VerificationBadge size="sm" />}
           </View>
-          <Text style={{ fontSize: 11, color: t.textTertiary }}>{time}</Text>
+          <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{time}</Text>
         </View>
-        <Text style={{ fontSize: 18, color: t.textTertiary }}>···</Text>
+        <Text style={{ fontSize: FontSize.xl.fontSize, color: t.textTertiary }}>···</Text>
       </View>
 
       {text && (
-        <Text style={{ fontSize: 14, color: t.text, lineHeight: 21, paddingHorizontal: 14, paddingBottom: image ? 10 : 0 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.text, lineHeight: 21, paddingHorizontal: 14, paddingBottom: image ? 10 : 0 }}>
           {text}
         </Text>
       )}
@@ -99,7 +114,7 @@ export function PostCard({
       )}
 
       <View style={{ flexDirection: 'row', paddingHorizontal: 14, paddingVertical: 4 }}>
-        <Text style={{ fontSize: 12, color: t.textTertiary }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>
           {likeCount > 0 ? `${likeCount} likes` : ''}{comments > 0 ? `  ·  ${comments} comments` : ''}
         </Text>
       </View>
@@ -115,19 +130,19 @@ export function PostCard({
           onPress={handleLike}
           style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10 }}>
           <Heart size={16} color={isLiked ? t.error : t.textSecondary} fill={isLiked ? t.error : 'none'} />
-          <Text style={{ fontSize: 13, fontWeight: '500', color: isLiked ? t.error : t.textSecondary }}>Like</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: isLiked ? t.error : t.textSecondary }}>Like</Text>
         </Pressable>
         <Pressable
           onPress={onComment}
           style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10 }}>
           <MessageCircle size={16} color={t.textSecondary} />
-          <Text style={{ fontSize: 13, fontWeight: '500', color: t.textSecondary }}>Comment</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: t.textSecondary }}>Comment</Text>
         </Pressable>
         <Pressable
           onPress={onShare}
           style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 10 }}>
           <ExternalLink size={16} color={t.textSecondary} />
-          <Text style={{ fontSize: 13, fontWeight: '500', color: t.textSecondary }}>Share</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: t.textSecondary }}>Share</Text>
         </Pressable>
       </View>
     </View>

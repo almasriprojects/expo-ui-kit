@@ -1,17 +1,23 @@
 import React, { type ReactNode, useState } from 'react';
 import { Pressable, Text, View, type PressableProps } from 'react-native';
 
+import { FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ListItemProps = PressableProps & {
+export type ListItemProps = PressableProps & {
+  /** Primary text displayed in the list item */
   title: string;
+  /** Secondary text displayed below the title */
   subtitle?: string;
+  /** Content rendered on the left side of the item */
   left?: ReactNode;
+  /** Content rendered on the right side of the item */
   right?: ReactNode;
+  /** Whether to show a chevron indicator on the right */
   showChevron?: boolean;
 };
 
-export function ListItem({
+function ListItemBase({
   title,
   subtitle,
   left,
@@ -26,6 +32,7 @@ export function ListItem({
 
   return (
     <Pressable
+      accessibilityRole={props.onPress ? 'button' : undefined}
       onPressIn={(e) => {
         setPressed(true);
         onPressInProp?.(e);
@@ -37,25 +44,27 @@ export function ListItem({
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 12,
-        paddingVertical: 12,
-        paddingHorizontal: 4,
+        gap: Spacing[3],
+        paddingVertical: Spacing[3],
+        paddingHorizontal: Spacing[1],
         opacity: pressed ? 0.7 : 1,
       }}
       {...props}>
       {left && <View>{left}</View>}
       <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 16, color: t.text }}>{title}</Text>
+        <Text style={{ fontSize: FontSize.lg.fontSize, color: t.text }}>{title}</Text>
         {subtitle && (
-          <Text style={{ fontSize: 14, marginTop: 2, color: t.textSecondary }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, marginTop: Spacing[0.5], color: t.textSecondary }}>
             {subtitle}
           </Text>
         )}
       </View>
       {right && <View>{right}</View>}
       {showChevron && !right && (
-        <Text style={{ fontSize: 18, color: t.textSecondary }}>›</Text>
+        <Text style={{ fontSize: FontSize.xl.fontSize, color: t.textSecondary }}>›</Text>
       )}
     </Pressable>
   );
 }
+
+export const ListItem = React.memo(ListItemBase);

@@ -1,28 +1,37 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ToggleOption = {
+export type ToggleOption = {
+  /** Unique value identifier for the option */
   value: string;
+  /** Display label for the option */
   label: string;
+  /** Optional emoji icon displayed before the label */
   icon?: string;
 };
 
-type ToggleGroupProps = {
+export type ToggleGroupProps = {
+  /** Array of toggle options */
   options: ToggleOption[];
+  /** Currently selected value(s) */
   value: string | string[];
+  /** Callback invoked when the selection changes */
   onValueChange: (value: string | string[]) => void;
+  /** Whether multiple options can be selected */
   multiple?: boolean;
+  /** Size variant of the toggle buttons */
   size?: 'sm' | 'md' | 'lg';
+  /** Custom styles applied to the group container */
   style?: ViewStyle;
 };
 
 const sizes = {
-  sm: { px: 10, py: 6, fontSize: 12 },
-  md: { px: 14, py: 10, fontSize: 14 },
-  lg: { px: 18, py: 12, fontSize: 16 },
+  sm: { px: 10, py: 6, fontSize: FontSize.sm.fontSize },
+  md: { px: 14, py: 10, fontSize: FontSize.md.fontSize },
+  lg: { px: 18, py: 12, fontSize: FontSize.lg.fontSize },
 };
 
 export function ToggleGroup({

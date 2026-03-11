@@ -8,25 +8,38 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Animation, FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type SidebarMenuItem = {
+  /** Unique key for the menu item */
   key: string;
+  /** Display label for the menu item */
   label: string;
+  /** SF Symbol name for the menu icon */
   icon?: string;
+  /** Callback invoked when the item is pressed */
   onPress: () => void;
+  /** Badge count displayed on the item */
   badge?: number;
 };
 
 export type SidebarMenuProps = {
+  /** Whether the sidebar is visible */
   visible: boolean;
+  /** Callback invoked when the sidebar is dismissed */
   onClose: () => void;
+  /** Custom content rendered at the top of the sidebar */
   header?: ReactNode;
+  /** Custom content rendered at the bottom of the sidebar */
   footer?: ReactNode;
+  /** Array of menu items to display */
   items: SidebarMenuItem[];
+  /** Key of the currently active menu item */
   activeKey?: string;
+  /** Accessibility label for the sidebar container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the sidebar container */
   accessibilityHint?: string;
 };
 
@@ -48,7 +61,7 @@ export function SidebarMenu({
 
   React.useEffect(() => {
     translateX.value = withTiming(visible ? 0 : -drawerW, {
-      duration: 280,
+      duration: Animation.duration.normal,
     });
   }, [visible, drawerW, translateX]);
 
@@ -57,7 +70,7 @@ export function SidebarMenu({
   }));
 
   const overlayStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(visible ? 1 : 0, { duration: 200 }),
+    opacity: withTiming(visible ? 1 : 0, { duration: Animation.duration.normal }),
     pointerEvents: visible ? 'auto' : 'none',
   }));
 
@@ -163,7 +176,7 @@ export function SidebarMenu({
                   <Text
                     style={{
                       flex: 1,
-                      fontSize: 16,
+                      fontSize: FontSize.lg.fontSize,
                       fontWeight: isActive ? '600' : '500',
                       color: isActive ? t.primary : t.text,
                     }}
@@ -184,7 +197,7 @@ export function SidebarMenu({
                     >
                       <Text
                         style={{
-                          fontSize: 12,
+                          fontSize: FontSize.sm.fontSize,
                           fontWeight: '600',
                           color: t.textOnColor,
                         }}

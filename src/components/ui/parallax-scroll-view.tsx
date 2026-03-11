@@ -9,16 +9,23 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 
 export type ParallaxScrollViewProps = {
+  /** Image source URI or custom React node for the header */
   headerImage: { uri: string } | React.ReactNode;
+  /** Height of the parallax header area in pixels */
   headerHeight?: number;
+  /** Content rendered below the parallax header */
   children: ReactNode;
+  /** Title text overlaid on the header image */
   title?: string;
+  /** Accessibility label for the scroll view container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the scroll view container */
   accessibilityHint?: string;
 };
 
@@ -137,7 +144,7 @@ export function ParallaxScrollView({
             >
               <Text
                 style={{
-                  fontSize: 24,
+                  fontSize: FontSize['2xl'].fontSize,
                   fontWeight: '700',
                   color: t.text,
                   textShadowColor: t.overlay,

@@ -9,20 +9,28 @@ import {
 } from 'react-native';
 import { Image } from 'expo-image';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type MentionUser = {
+  /** Unique identifier for the user */
   id: string;
+  /** Display name of the user */
   name: string;
+  /** URL of the user's avatar image */
   avatar?: string;
 };
 
 export type MentionInputProps = {
+  /** Current text input value */
   value: string;
+  /** Callback invoked when the text changes */
   onChangeText: (text: string) => void;
+  /** List of users available for mentioning */
   users: MentionUser[];
+  /** Placeholder text for the input field */
   placeholder?: string;
+  /** Custom styles applied to the input container */
   style?: ViewStyle;
 };
 
@@ -97,7 +105,7 @@ export function MentionInput({
           backgroundColor: t.surface,
           borderWidth: 1,
           borderColor: t.border,
-          fontSize: 15,
+          fontSize: FontSize.md.fontSize,
           color: t.text,
         }}
         accessibilityLabel={placeholder}
@@ -156,7 +164,7 @@ export function MentionInput({
                     }}>
                     <Text
                       style={{
-                        fontSize: 12,
+                        fontSize: FontSize.sm.fontSize,
                         fontWeight: '600',
                         color: t.primaryForeground,
                       }}>
@@ -164,7 +172,7 @@ export function MentionInput({
                     </Text>
                   </View>
                 )}
-                <Text style={{ fontSize: 15, color: t.text }}>{item.name}</Text>
+                <Text style={{ fontSize: FontSize.md.fontSize, color: t.text }}>{item.name}</Text>
               </Pressable>
             )}
           />

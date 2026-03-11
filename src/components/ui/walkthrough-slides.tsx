@@ -9,19 +9,26 @@ import {
   type NativeScrollEvent,
 } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type WalkthroughSlide = {
+  /** Unique key identifier for the slide */
   key: string;
+  /** Title text for the slide */
   title: string;
+  /** Subtitle text displayed below the title */
   subtitle: string;
+  /** Emoji icon displayed on the slide */
   icon: string;
 };
 
 export type WalkthroughSlidesProps = {
+  /** Array of walkthrough slide data */
   slides: WalkthroughSlide[];
+  /** Callback invoked when the user completes the walkthrough */
   onComplete: () => void;
+  /** Callback invoked when the user skips the walkthrough */
   onSkip?: () => void;
 };
 
@@ -62,7 +69,7 @@ export function WalkthroughSlides({
           accessibilityRole="button"
           accessibilityLabel="Skip walkthrough"
         >
-          <Text style={{ fontSize: 15, fontWeight: '600', color: t.textSecondary }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.textSecondary }}>
             Skip
           </Text>
         </Pressable>
@@ -109,7 +116,7 @@ export function WalkthroughSlides({
             </Text>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
                 textAlign: 'center',
                 lineHeight: 22,
@@ -149,7 +156,7 @@ export function WalkthroughSlides({
           accessibilityRole="button"
           accessibilityLabel={isLast ? 'Get Started' : 'Next slide'}
         >
-          <Text style={{ fontSize: 17, fontWeight: '700', color: t.primaryForeground }}>
+          <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.primaryForeground }}>
             {isLast ? 'Get Started' : 'Next'}
           </Text>
         </Pressable>

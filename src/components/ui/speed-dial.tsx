@@ -3,19 +3,26 @@ import { Pressable, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Plus, X } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SpeedDialAction = {
+export type SpeedDialAction = {
+  /** Label text displayed alongside the action */
   label: string;
+  /** Emoji icon for the action button */
   icon: string;
+  /** Callback invoked when the action is pressed */
   onPress: () => void;
+  /** Custom background color for the action button */
   color?: string;
 };
 
-type SpeedDialProps = {
+export type SpeedDialProps = {
+  /** Array of actions displayed when the dial is open */
   actions: SpeedDialAction[];
+  /** Custom icon for the closed state FAB */
   icon?: React.ReactNode;
+  /** Custom icon for the open state FAB */
   openIcon?: React.ReactNode;
 };
 
@@ -54,7 +61,7 @@ export function SpeedDial({
                   borderRadius: Radius.lg,
                   ...Shadows.md,
                 }}>
-                <Text style={{ fontSize: 13, fontWeight: '600', color: t.text }}>
+                <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>
                   {action.label}
                 </Text>
               </View>
@@ -68,7 +75,7 @@ export function SpeedDial({
                   justifyContent: 'center',
                   ...Shadows.md,
                 }}>
-                <Text style={{ fontSize: 18 }}>{action.icon}</Text>
+                <Text style={{ fontSize: FontSize.xl.fontSize }}>{action.icon}</Text>
               </View>
             </Pressable>
           ))}
@@ -76,6 +83,8 @@ export function SpeedDial({
       )}
 
       <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={open ? 'Close speed dial' : 'Open speed dial'}
         onPress={() => setOpen((v) => !v)}
         style={{
           width: 56,

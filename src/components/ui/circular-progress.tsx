@@ -3,15 +3,24 @@ import { Text, View, type ViewStyle } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
-type CircularProgressProps = {
+export type CircularProgressProps = {
+  /** Progress percentage from 0 to 100 */
   progress: number;
+  /** Diameter of the circular progress in pixels */
   size?: number;
+  /** Thickness of the progress ring */
   strokeWidth?: number;
+  /** Color of the progress arc */
   color?: string;
+  /** Color of the background track */
   trackColor?: string;
+  /** Label text displayed below the circle */
   label?: string;
+  /** Whether to show the percentage value in the center */
   showValue?: boolean;
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -74,7 +83,7 @@ export function CircularProgress({
         )}
       </View>
       {label && (
-        <Text style={{ fontSize: 13, fontWeight: '500', color: t.textSecondary, marginTop: 8 }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: t.textSecondary, marginTop: 8 }}>
           {label}
         </Text>
       )}

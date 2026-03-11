@@ -7,13 +7,17 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SwitchProps = ViewProps & {
+export type SwitchProps = ViewProps & {
+  /** Whether the switch is toggled on */
   value: boolean;
+  /** Callback invoked when the switch value changes */
   onValueChange: (value: boolean) => void;
+  /** Label text displayed beside the switch */
   label?: string;
+  /** Whether the switch is disabled */
   disabled?: boolean;
 };
 
@@ -36,7 +40,7 @@ export function Switch({
   }));
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }} {...props}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[3] }} {...props}>
       <Pressable
         accessibilityRole="switch"
         accessibilityLabel={label}
@@ -63,7 +67,7 @@ export function Switch({
         />
       </Pressable>
       {label && (
-        <ThemedText style={{ fontSize: 15, fontWeight: '500', color: t.text, opacity: disabled ? 0.5 : 1 }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: t.text, opacity: disabled ? 0.5 : 1 }}>
           {label}
         </ThemedText>
       )}

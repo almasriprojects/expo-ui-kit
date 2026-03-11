@@ -1,20 +1,30 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
-import { Star, UtensilsCrossed } from 'lucide-react-native';
+import { Clock, Star, UtensilsCrossed } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type RestaurantCardProps = {
+export type RestaurantCardProps = {
+  /** Name of the restaurant */
   name: string;
+  /** Cuisine type (e.g. "Italian", "Japanese") */
   cuisine: string;
+  /** Star rating of the restaurant */
   rating: number;
+  /** Number of customer reviews */
   reviewCount?: number;
+  /** Estimated delivery time string */
   deliveryTime: string;
+  /** Delivery fee string (e.g. "Free", "$2.99") */
   deliveryFee?: string;
+  /** Promotional badge text overlaid on the image */
   promo?: string;
+  /** URL of the restaurant image */
   image?: string;
+  /** Callback invoked when the card is pressed */
   onPress?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -65,27 +75,30 @@ export function RestaurantCard({
               paddingVertical: 3,
               borderRadius: Radius.sm,
             }}>
-            <Text style={{ fontSize: 11, fontWeight: '700', color: t.textOnColor }}>{promo}</Text>
+            <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '700', color: t.textOnColor }}>{promo}</Text>
           </View>
         )}
       </View>
       <View style={{ padding: 14 }}>
-        <Text style={{ fontSize: 16, fontWeight: '700', color: t.text }}>{name}</Text>
-        <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}>{cuisine}</Text>
+        <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text }}>{name}</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>{cuisine}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 10 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <Star size={13} color={t.warning} fill={t.warning} />
-            <Text style={{ fontSize: 13, fontWeight: '700', color: t.text }}>{rating.toFixed(1)}</Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.text }}>{rating.toFixed(1)}</Text>
             {reviewCount != null && (
-              <Text style={{ fontSize: 12, color: t.textTertiary }}>({reviewCount})</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>({reviewCount})</Text>
             )}
           </View>
-          <Text style={{ fontSize: 12, color: t.textTertiary }}>·</Text>
-          <Text style={{ fontSize: 13, color: t.textSecondary }}>🕐 {deliveryTime}</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>·</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+            <Clock size={FontSize.sm.fontSize} color={t.textSecondary} />
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{deliveryTime}</Text>
+          </View>
           {deliveryFee && (
             <>
-              <Text style={{ fontSize: 12, color: t.textTertiary }}>·</Text>
-              <Text style={{ fontSize: 13, color: t.textSecondary }}>{deliveryFee}</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>·</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{deliveryFee}</Text>
             </>
           )}
         </View>

@@ -6,12 +6,15 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type FloatingLabelInputProps = Omit<TextInputProps, 'placeholder'> & {
+export type FloatingLabelInputProps = Omit<TextInputProps, 'placeholder'> & {
+  /** Label text that floats above the input when focused */
   label: string;
+  /** Error message displayed below the input */
   error?: string;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -83,7 +86,7 @@ export function FloatingLabelInput({
             paddingHorizontal: 14,
             paddingTop: 22,
             paddingBottom: 8,
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             color: t.text,
           }}
           placeholderTextColor={t.textTertiary}
@@ -91,7 +94,7 @@ export function FloatingLabelInput({
         />
       </View>
       {error && (
-        <Animated.Text style={{ fontSize: 12, color: t.error, marginTop: 4, marginLeft: 4 }}>
+        <Animated.Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, marginTop: 4, marginLeft: 4 }}>
           {error}
         </Animated.Text>
       )}

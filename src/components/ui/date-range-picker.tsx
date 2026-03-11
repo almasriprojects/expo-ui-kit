@@ -5,11 +5,17 @@ import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type DateRangePickerProps = {
+  /** Label text shown above the picker */
   label?: string;
+  /** Start date of the selected range */
   startDate?: Date;
+  /** End date of the selected range */
   endDate?: Date;
+  /** Callback fired when the date range changes */
   onRangeChange: (start: Date | undefined, end: Date | undefined) => void;
+  /** Earliest selectable date */
   minDate?: Date;
+  /** Latest selectable date */
   maxDate?: Date;
 };
 
@@ -222,7 +228,7 @@ export function DateRangePicker({
                 padding: 8,
                 opacity: canGoPrev ? 1 : 0.4,
               }}>
-              <Text style={{ fontSize: 18, color: t.text, fontWeight: '600' }}>‹</Text>
+              <Text style={{ fontSize: FontSize.xl.fontSize, color: t.text, fontWeight: '600' }}>‹</Text>
             </Pressable>
 
             <Text style={{ ...FontSize.md, fontWeight: '600', color: t.text }}>
@@ -236,7 +242,7 @@ export function DateRangePicker({
                 padding: 8,
                 opacity: canGoNext ? 1 : 0.4,
               }}>
-              <Text style={{ fontSize: 18, color: t.text, fontWeight: '600' }}>›</Text>
+              <Text style={{ fontSize: FontSize.xl.fontSize, color: t.text, fontWeight: '600' }}>›</Text>
             </Pressable>
           </View>
 

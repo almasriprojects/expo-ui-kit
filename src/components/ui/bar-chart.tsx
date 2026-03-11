@@ -6,21 +6,30 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type BarChartDataItem = {
+  /** Label displayed below the bar */
   label: string;
+  /** Numeric value determining bar height */
   value: number;
+  /** Custom color for the bar */
   color?: string;
 };
 
 export type BarChartProps = {
+  /** Array of data items to render as bars */
   data: BarChartDataItem[];
+  /** Overall height of the chart in pixels */
   height?: number;
+  /** Whether to show labels below each bar */
   showLabels?: boolean;
+  /** Whether to show numeric values above each bar */
   showValues?: boolean;
+  /** Accessibility label for the chart container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the chart container */
   accessibilityHint?: string;
 };
 
@@ -86,7 +95,7 @@ export function BarChart({
               key={`label-${item.label}-${index}`}
               numberOfLines={1}
               style={{
-                fontSize: 11,
+                fontSize: FontSize.xs.fontSize,
                 color: t.textSecondary,
                 flex: 1,
                 textAlign: 'center',
@@ -131,7 +140,7 @@ function BarItem({ item, maxValue, height, barWidth, themeColor, showValues, lab
         <Text
           numberOfLines={1}
           style={{
-            fontSize: 11,
+            fontSize: FontSize.xs.fontSize,
             fontWeight: '600',
             color: labelColor,
             marginBottom: 2,

@@ -1,20 +1,28 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type GuestType = {
+export type GuestType = {
+  /** Guest category label (e.g. "Adults") */
   label: string;
+  /** Additional description below the label */
   sublabel?: string;
+  /** Current guest count */
   count: number;
+  /** Minimum allowed count */
   min?: number;
+  /** Maximum allowed count */
   max?: number;
 };
 
-type GuestSelectorProps = {
+export type GuestSelectorProps = {
+  /** Array of guest categories with counts */
   guests: GuestType[];
+  /** Callback fired when a guest count changes */
   onChange: (index: number, count: number) => void;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -38,9 +46,9 @@ export function GuestSelector({ guests, onChange, style }: GuestSelectorProps) {
                 paddingVertical: 14,
               }}>
               <View>
-                <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>{g.label}</Text>
+                <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{g.label}</Text>
                 {g.sublabel && (
-                  <Text style={{ fontSize: 12, color: t.textSecondary, marginTop: 1 }}>
+                  <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 1 }}>
                     {g.sublabel}
                   </Text>
                 )}
@@ -59,11 +67,11 @@ export function GuestSelector({ guests, onChange, style }: GuestSelectorProps) {
                     justifyContent: 'center',
                     opacity: g.count <= min ? 0.4 : 1,
                   }}>
-                  <Text style={{ fontSize: 18, fontWeight: '300', color: t.text, marginTop: -1 }}>−</Text>
+                  <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '300', color: t.text, marginTop: -1 }}>−</Text>
                 </Pressable>
                 <Text
                   style={{
-                    fontSize: 16,
+                    fontSize: FontSize.lg.fontSize,
                     fontWeight: '600',
                     color: t.text,
                     minWidth: 20,
@@ -84,7 +92,7 @@ export function GuestSelector({ guests, onChange, style }: GuestSelectorProps) {
                     justifyContent: 'center',
                     opacity: g.count >= max ? 0.4 : 1,
                   }}>
-                  <Text style={{ fontSize: 18, fontWeight: '300', color: t.text, marginTop: -1 }}>+</Text>
+                  <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '300', color: t.text, marginTop: -1 }}>+</Text>
                 </Pressable>
               </View>
             </View>

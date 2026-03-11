@@ -2,19 +2,26 @@ import React from 'react';
 import { ScrollView, Text, View, type ViewProps } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type Column = {
+export type Column = {
+  /** Unique key matching a field in the data records */
   key: string;
+  /** Header text displayed for the column */
   header: string;
+  /** Fixed width for the column in pixels */
   width?: number;
+  /** Text alignment within the column */
   align?: 'left' | 'center' | 'right';
 };
 
-type DataTableProps = ViewProps & {
+export type DataTableProps = ViewProps & {
+  /** Column definitions for the table */
   columns: Column[];
+  /** Array of row data records */
   data: Record<string, string | number | React.ReactNode>[];
+  /** Whether to alternate row background colors */
   striped?: boolean;
 };
 
@@ -53,7 +60,7 @@ export function DataTable({
         <View style={{ flexDirection: 'row', backgroundColor: theme.surface }}>
           {columns.map((col) => (
             <View key={col.key} style={cellStyle(col)}>
-              <ThemedText style={{ fontSize: 12, fontWeight: '600', color: theme.textSecondary }}>
+              <ThemedText style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: theme.textSecondary }}>
                 {col.header}
               </ThemedText>
             </View>
@@ -76,7 +83,7 @@ export function DataTable({
                 {typeof row[col.key] === 'object' ? (
                   row[col.key] as React.ReactNode
                 ) : (
-                  <Text style={{ fontSize: 13, color: theme.text }}>
+                  <Text style={{ fontSize: FontSize.sm.fontSize, color: theme.text }}>
                     {String(row[col.key] ?? '')}
                   </Text>
                 )}

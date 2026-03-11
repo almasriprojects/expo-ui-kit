@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View, type ViewStyle } from 'react-native';
 import { X } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TagInputProps = {
+export type TagInputProps = {
+  /** Array of current tag strings */
   tags: string[];
+  /** Callback invoked when tags are added or removed */
   onTagsChange: (tags: string[]) => void;
+  /** Placeholder text for the tag input field */
   placeholder?: string;
+  /** Label text displayed above the input */
   label?: string;
+  /** Maximum number of tags allowed */
   maxTags?: number;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -41,7 +47,7 @@ export function TagInput({
   return (
     <View style={style}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 6 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: 6 }}>
           {label}
         </Text>
       )}
@@ -70,7 +76,7 @@ export function TagInput({
               paddingVertical: 5,
               borderRadius: Radius.full,
             }}>
-            <Text style={{ fontSize: 13, fontWeight: '500', color: t.primary }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: t.primary }}>
               {tag}
             </Text>
             <Pressable onPress={() => removeTag(i)} hitSlop={4}>
@@ -88,7 +94,7 @@ export function TagInput({
           style={{
             flex: 1,
             minWidth: 80,
-            fontSize: 14,
+            fontSize: FontSize.md.fontSize,
             color: t.text,
             paddingVertical: 2,
           }}

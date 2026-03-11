@@ -2,21 +2,30 @@ import React, { type ReactNode } from 'react';
 import { Image } from 'expo-image';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ActivityFeedItem = {
+  /** Unique identifier for the feed item */
   key: string;
+  /** URL of the avatar image */
   avatar?: string;
+  /** Primary text of the activity item */
   title: string;
+  /** Secondary descriptive text */
   subtitle?: string;
+  /** Timestamp or relative time string */
   time: string;
+  /** Custom icon displayed when no avatar is provided */
   icon?: ReactNode;
 };
 
 export type ActivityFeedProps = {
+  /** List of activity feed items to display */
   items: ActivityFeedItem[];
+  /** Callback invoked when an item is pressed */
   onItemPress?: (key: string) => void;
+  /** Custom styles for the feed container */
   style?: ViewStyle;
 };
 
@@ -68,14 +77,14 @@ export function ActivityFeed({
                   }}>
                   {item.icon ? (
                     typeof item.icon === 'string' ? (
-                      <Text style={{ fontSize: 18 }}>{item.icon}</Text>
+                      <Text style={{ fontSize: FontSize.xl.fontSize }}>{item.icon}</Text>
                     ) : (
                       item.icon
                     )
                   ) : (
                     <Text
                       style={{
-                        fontSize: 14,
+                        fontSize: FontSize.md.fontSize,
                         fontWeight: '600',
                         color: t.primaryForeground,
                       }}>
@@ -107,7 +116,7 @@ export function ActivityFeed({
                 }}>
                 <Text
                   style={{
-                    fontSize: 15,
+                    fontSize: FontSize.md.fontSize,
                     fontWeight: '500',
                     color: t.text,
                     flex: 1,
@@ -116,7 +125,7 @@ export function ActivityFeed({
                 </Text>
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: FontSize.sm.fontSize,
                     color: t.textTertiary,
                     marginLeft: 8,
                   }}>
@@ -126,7 +135,7 @@ export function ActivityFeed({
               {item.subtitle && (
                 <Text
                   style={{
-                    fontSize: 13,
+                    fontSize: FontSize.sm.fontSize,
                     color: t.textSecondary,
                     marginTop: 2,
                   }}>

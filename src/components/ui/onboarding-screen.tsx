@@ -8,20 +8,28 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type OnboardingSlide = {
+export type OnboardingSlide = {
+  /** Emoji icon displayed on the slide */
   icon: string;
+  /** Title text for the slide */
   title: string;
+  /** Description text for the slide */
   description: string;
 };
 
-type OnboardingScreenProps = {
+export type OnboardingScreenProps = {
+  /** Array of onboarding slide data */
   slides: OnboardingSlide[];
+  /** Callback invoked when the user completes onboarding */
   onComplete: () => void;
+  /** Callback invoked when the user skips onboarding */
   onSkip?: () => void;
+  /** Label for the final completion button */
   completeLabel?: string;
+  /** Custom styles applied to the screen container */
   style?: ViewStyle;
 };
 
@@ -52,7 +60,7 @@ export function OnboardingScreen({
         <Pressable
           onPress={onSkip}
           style={{ position: 'absolute', top: 16, right: 20, zIndex: 10 }}>
-          <Text style={{ fontSize: 15, fontWeight: '600', color: t.textSecondary }}>Skip</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.textSecondary }}>Skip</Text>
         </Pressable>
       )}
 
@@ -88,7 +96,7 @@ export function OnboardingScreen({
             </Text>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
                 textAlign: 'center',
                 lineHeight: 22,
@@ -125,7 +133,7 @@ export function OnboardingScreen({
             alignItems: 'center',
             ...Shadows.md,
           }}>
-          <Text style={{ fontSize: 17, fontWeight: '700', color: t.primaryForeground }}>
+          <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.primaryForeground }}>
             {isLast ? completeLabel : 'Next'}
           </Text>
         </Pressable>

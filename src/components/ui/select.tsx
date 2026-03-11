@@ -10,20 +10,28 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Check, ChevronDown } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SelectOption = {
+export type SelectOption = {
+  /** Display label for the option */
   label: string;
+  /** Unique value identifier for the option */
   value: string;
 };
 
-type SelectProps = ViewProps & {
+export type SelectProps = ViewProps & {
+  /** Available options to choose from */
   options: SelectOption[];
+  /** Currently selected option value */
   value?: string;
+  /** Callback invoked when the selected value changes */
   onValueChange: (value: string) => void;
+  /** Placeholder text shown when no option is selected */
   placeholder?: string;
+  /** Label text displayed above the selector */
   label?: string;
+  /** Whether the selector is disabled */
   disabled?: boolean;
 };
 
@@ -45,7 +53,7 @@ export function Select({
   return (
     <View style={typeof style === 'object' ? style : undefined} {...props}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 6 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: Spacing[1.5] }}>
           {label}
         </Text>
       )}
@@ -59,8 +67,8 @@ export function Select({
           alignItems: 'center',
           justifyContent: 'space-between',
           minHeight: 48,
-          paddingHorizontal: 16,
-          paddingVertical: 12,
+          paddingHorizontal: Spacing[4],
+          paddingVertical: Spacing[3],
           borderRadius: Radius.lg,
           backgroundColor: t.surface,
           borderWidth: 1.5,
@@ -69,7 +77,7 @@ export function Select({
         }}>
         <Text
           style={{
-            fontSize: 16,
+            fontSize: FontSize.lg.fontSize,
             color: selectedLabel ? t.text : t.textTertiary,
           }}>
           {selectedLabel ?? placeholder}
@@ -87,11 +95,11 @@ export function Select({
               borderTopLeftRadius: Radius['3xl'],
               borderTopRightRadius: Radius['3xl'],
               maxHeight: '55%',
-              paddingBottom: insets.bottom + 16,
+              paddingBottom: insets.bottom + Spacing[4],
               ...Shadows.xl,
             }}>
             {/* Handle */}
-            <View style={{ alignItems: 'center', paddingVertical: 12 }}>
+            <View style={{ alignItems: 'center', paddingVertical: Spacing[3] }}>
               <View
                 style={{
                   width: 40,
@@ -106,11 +114,11 @@ export function Select({
             {label && (
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: FontSize.lg.fontSize,
                   fontWeight: '700',
                   color: t.text,
                   textAlign: 'center',
-                  paddingBottom: 12,
+                  paddingBottom: Spacing[3],
                 }}>
                 {label}
               </Text>
@@ -121,7 +129,7 @@ export function Select({
               data={options}
               keyExtractor={(item) => item.value}
               ItemSeparatorComponent={() => (
-                <View style={{ height: 1, backgroundColor: t.border, marginHorizontal: 20 }} />
+                <View style={{ height: 1, backgroundColor: t.border, marginHorizontal: Spacing[5] }} />
               )}
               renderItem={({ item }) => {
                 const selected = item.value === value;
@@ -134,8 +142,8 @@ export function Select({
                     accessibilityRole="button"
                     accessibilityLabel={item.label}
                     style={{
-                      paddingHorizontal: 24,
-                      paddingVertical: 16,
+                      paddingHorizontal: Spacing[6],
+                      paddingVertical: Spacing[4],
                       flexDirection: 'row',
                       alignItems: 'center',
                       justifyContent: 'space-between',
@@ -143,7 +151,7 @@ export function Select({
                     }}>
                     <Text
                       style={{
-                        fontSize: 17,
+                        fontSize: FontSize.lg.fontSize,
                         fontWeight: selected ? '600' : '400',
                         color: selected ? t.primary : t.text,
                       }}>

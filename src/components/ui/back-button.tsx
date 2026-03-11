@@ -3,12 +3,15 @@ import { Pressable } from 'react-native';
 import { ArrowLeft } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type BackButtonProps = {
+  /** Callback invoked when the button is pressed */
   onPress: () => void;
+  /** Optional text label displayed next to the arrow */
   label?: string;
+  /** Custom color for the icon and label */
   color?: string;
 };
 
@@ -34,7 +37,7 @@ export function BackButton({ onPress, label, color }: BackButtonProps) {
       accessibilityLabel={accessibilityLabel}>
       <ArrowLeft size={20} color={btnColor} />
       {label && (
-        <ThemedText style={{ fontSize: 16, fontWeight: '500', color: btnColor }}>
+        <ThemedText style={{ fontSize: FontSize.lg.fontSize, fontWeight: '500', color: btnColor }}>
           {label}
         </ThemedText>
       )}

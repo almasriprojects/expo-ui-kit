@@ -4,9 +4,12 @@ import { Check, X } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
 export type ComparisonTableProps = {
+  /** Column definitions with optional highlight */
   columns: { key: string; title: string; highlight?: boolean }[];
+  /** Row data mapping features to column values */
   rows: { feature: string; values: Record<string, string | boolean> }[];
 };
 
@@ -34,7 +37,7 @@ export function ComparisonTable({ columns, rows }: ComparisonTableProps) {
             }}>
             <ThemedText
               style={{
-                fontSize: 13,
+                fontSize: FontSize.sm.fontSize,
                 fontWeight: '600',
                 color: t.textSecondary,
               }}>
@@ -52,7 +55,7 @@ export function ComparisonTable({ columns, rows }: ComparisonTableProps) {
               }}>
               <ThemedText
                 style={{
-                  fontSize: 13,
+                  fontSize: FontSize.sm.fontSize,
                   fontWeight: '600',
                   color: t.text,
                 }}>
@@ -77,7 +80,7 @@ export function ComparisonTable({ columns, rows }: ComparisonTableProps) {
               }}>
               <ThemedText
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   color: t.text,
                 }}
                 numberOfLines={2}>
@@ -108,7 +111,7 @@ export function ComparisonTable({ columns, rows }: ComparisonTableProps) {
                   ) : (
                     <ThemedText
                       style={{
-                        fontSize: 14,
+                        fontSize: FontSize.md.fontSize,
                         color: t.text,
                         fontWeight: '400',
                       }}>

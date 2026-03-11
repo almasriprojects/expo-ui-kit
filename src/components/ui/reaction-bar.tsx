@@ -1,18 +1,24 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ReactionItem = {
+  /** Emoji character for the reaction */
   emoji: string;
+  /** Number of users who reacted with this emoji */
   count: number;
+  /** Whether the current user has reacted with this emoji */
   reacted: boolean;
 };
 
 export type ReactionBarProps = {
+  /** Array of reaction items to display */
   reactions: ReactionItem[];
+  /** Callback invoked when a reaction emoji is toggled */
   onReact: (emoji: string) => void;
+  /** Custom styles applied to the bar container */
   style?: ViewStyle;
 };
 
@@ -48,9 +54,9 @@ export function ReactionBar({ reactions, onReact, style }: ReactionBarProps) {
           accessibilityRole="button"
           accessibilityLabel={`${emoji} ${count} ${reacted ? 'reacted' : ''}`}
           accessibilityState={{ selected: reacted }}>
-          <Text style={{ fontSize: 16 }}>{emoji}</Text>
+          <Text style={{ fontSize: FontSize.lg.fontSize }}>{emoji}</Text>
           {count > 0 && (
-            <Text style={{ fontSize: 13, color: t.textSecondary, fontVariant: ['tabular-nums'] }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontVariant: ['tabular-nums'] }}>
               {count}
             </Text>
           )}

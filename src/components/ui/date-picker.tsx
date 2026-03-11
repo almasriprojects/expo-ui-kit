@@ -1,16 +1,24 @@
 import React, { useMemo, useState } from 'react';
 import { Modal, Pressable, View, type ViewProps } from 'react-native';
 
+import { Calendar } from 'lucide-react-native';
+
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type DatePickerProps = ViewProps & {
+export type DatePickerProps = ViewProps & {
+  /** Currently selected date */
   value?: Date;
+  /** Callback fired when a date is selected */
   onValueChange: (date: Date) => void;
+  /** Label text shown above the picker */
   label?: string;
+  /** Placeholder text when no date is selected */
   placeholder?: string;
+  /** Earliest selectable date */
   minDate?: Date;
+  /** Latest selectable date */
   maxDate?: Date;
 };
 
@@ -79,7 +87,7 @@ export function DatePicker({
   return (
     <View style={typeof style === 'object' ? style : undefined} {...props}>
       {label && (
-        <ThemedText style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 6 }}>
+        <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: 6 }}>
           {label}
         </ThemedText>
       )}
@@ -99,12 +107,12 @@ export function DatePicker({
         }}>
         <ThemedText
           style={{
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             color: formatted ? t.text : t.textTertiary,
           }}>
           {formatted ?? placeholder}
         </ThemedText>
-        <ThemedText style={{ fontSize: 16 }}>📅</ThemedText>
+        <Calendar size={FontSize.lg.fontSize} color={t.textSecondary} />
       </Pressable>
 
       <Modal visible={open} transparent animationType="fade">
@@ -135,13 +143,13 @@ export function DatePicker({
                 marginBottom: 16,
               }}>
               <Pressable onPress={() => changeMonth(-1)} hitSlop={8}>
-                <ThemedText style={{ fontSize: 20, fontWeight: '600', color: t.text }}>‹</ThemedText>
+                <ThemedText style={{ fontSize: FontSize.xl.fontSize, fontWeight: '600', color: t.text }}>‹</ThemedText>
               </Pressable>
-              <ThemedText style={{ fontSize: 16, fontWeight: '700', color: t.text }}>
+              <ThemedText style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text }}>
                 {MONTHS[month]} {year}
               </ThemedText>
               <Pressable onPress={() => changeMonth(1)} hitSlop={8}>
-                <ThemedText style={{ fontSize: 20, fontWeight: '600', color: t.text }}>›</ThemedText>
+                <ThemedText style={{ fontSize: FontSize.xl.fontSize, fontWeight: '600', color: t.text }}>›</ThemedText>
               </Pressable>
             </View>
 
@@ -150,7 +158,7 @@ export function DatePicker({
                 <View key={d} style={{ flex: 1, alignItems: 'center' }}>
                   <ThemedText
                     style={{
-                      fontSize: 12,
+                      fontSize: FontSize.sm.fontSize,
                       fontWeight: '600',
                       color: t.textSecondary,
                     }}>
@@ -191,7 +199,7 @@ export function DatePicker({
                         }}>
                         <ThemedText
                           style={{
-                            fontSize: 14,
+                            fontSize: FontSize.md.fontSize,
                             fontWeight: selected || today ? '600' : '400',
                             color: selected ? t.primaryForeground : t.text,
                           }}>
@@ -217,7 +225,7 @@ export function DatePicker({
                 paddingVertical: 10,
                 marginTop: 8,
               }}>
-              <ThemedText style={{ color: t.primary, fontWeight: '600', fontSize: 14 }}>
+              <ThemedText style={{ color: t.primary, fontWeight: '600', fontSize: FontSize.md.fontSize }}>
                 Today
               </ThemedText>
             </Pressable>

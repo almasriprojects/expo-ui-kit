@@ -3,14 +3,19 @@ import { Image } from 'expo-image';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
 import { X } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type ImagePickerButtonProps = ViewProps & {
+  /** URI of the currently selected image */
   uri?: string;
+  /** Callback fired with the selected image URI */
   onPick: (uri: string) => void;
+  /** Callback fired when the image is removed */
   onRemove?: () => void;
+  /** Placeholder text when no image is selected */
   placeholder?: string;
+  /** Size of the picker button in pixels */
   size?: number;
 };
 
@@ -86,7 +91,7 @@ export function ImagePickerButton({
             }}>
             <Text
               style={{
-                fontSize: 13,
+                fontSize: FontSize.sm.fontSize,
                 color: t.textTertiary,
                 textAlign: 'center',
               }}>

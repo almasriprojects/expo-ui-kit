@@ -2,11 +2,13 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type InventoryBadgeProps = {
+  /** Current stock status */
   status: 'in-stock' | 'low-stock' | 'out-of-stock';
+  /** Remaining item count (used for low-stock display) */
   count?: number;
 };
 
@@ -56,7 +58,7 @@ export function InventoryBadge({ status, count }: InventoryBadgeProps) {
       accessibilityLabel={label}>
       <ThemedText
         style={{
-          fontSize: 12,
+          fontSize: FontSize.sm.fontSize,
           fontWeight: '600',
           color: textColor,
         }}>

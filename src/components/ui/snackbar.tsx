@@ -4,16 +4,23 @@ import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows, type ThemeTokens } from '@/constants/theme';
+import { FontSize, Radius, Shadows, Spacing, type ThemeTokens } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SnackbarProps = {
+export type SnackbarProps = {
+  /** Whether the snackbar is visible */
   visible: boolean;
+  /** Message text displayed in the snackbar */
   message: string;
+  /** Label for the optional action button */
   actionLabel?: string;
+  /** Callback invoked when the action button is pressed */
   onAction?: () => void;
+  /** Callback invoked when the snackbar is dismissed */
   onDismiss: () => void;
+  /** Auto-dismiss duration in milliseconds */
   duration?: number;
+  /** Color variant of the snackbar */
   variant?: 'default' | 'success' | 'error';
 };
 
@@ -64,8 +71,8 @@ export function Snackbar({
         style={{
           backgroundColor: getVariantBg(variant, t),
           borderRadius: Radius.xl,
-          paddingHorizontal: 16,
-          paddingVertical: 14,
+          paddingHorizontal: Spacing[4],
+          paddingVertical: Spacing[3.5],
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -74,17 +81,17 @@ export function Snackbar({
         <ThemedText
           style={{
             color: variant === 'default' ? t.snackbarText : t.primaryForeground,
-            fontSize: 14,
+            fontSize: FontSize.md.fontSize,
             fontWeight: '500',
             flex: 1,
-            marginRight: 12,
+            marginRight: Spacing[3],
           }}
           numberOfLines={2}>
           {message}
         </ThemedText>
         {actionLabel && onAction && (
           <Pressable onPress={onAction}>
-            <ThemedText style={{ color: t.linkText, fontSize: 14, fontWeight: '700' }}>
+            <ThemedText style={{ color: t.linkText, fontSize: FontSize.md.fontSize, fontWeight: '700' }}>
               {actionLabel}
             </ThemedText>
           </Pressable>

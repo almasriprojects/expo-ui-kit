@@ -2,21 +2,33 @@ import React from 'react';
 import { Pressable, Text, View, type PressableProps, type ViewStyle } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type AddressCardProps = Omit<PressableProps, 'style'> & {
+export type AddressCardProps = Omit<PressableProps, 'style'> & {
+  /** Custom styles for the card container */
   style?: ViewStyle;
+  /** Address category label (e.g. "Home", "Work") */
   label: string;
+  /** Full name of the address recipient */
   name: string;
+  /** Street address line */
   street: string;
+  /** City name */
   city: string;
+  /** State or region */
   state?: string;
+  /** Postal or ZIP code */
   zip?: string;
+  /** Country name */
   country?: string;
+  /** Contact phone number */
   phone?: string;
+  /** Whether this is the default address */
   isDefault?: boolean;
+  /** Whether the card is currently selected */
   selected?: boolean;
+  /** Callback invoked when the edit button is pressed */
   onEdit?: () => void;
 };
 
@@ -52,7 +64,7 @@ export function AddressCard({
       {...props}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <Text style={{ fontSize: 14, fontWeight: '600', color: theme.text }}>{label}</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: theme.text }}>{label}</Text>
           {isDefault && (
             <View
               style={{
@@ -61,7 +73,7 @@ export function AddressCard({
                 paddingVertical: 2,
                 borderRadius: Radius.sm,
               }}>
-              <ThemedText style={{ fontSize: 10, color: theme.primaryPressed, fontWeight: '600' }}>
+              <ThemedText style={{ fontSize: FontSize['2xs'].fontSize, color: theme.primaryPressed, fontWeight: '600' }}>
                 Default
               </ThemedText>
             </View>
@@ -69,21 +81,21 @@ export function AddressCard({
         </View>
         {onEdit && (
           <Pressable onPress={onEdit} hitSlop={8}>
-            <ThemedText style={{ fontSize: 13, color: theme.primaryPressed, fontWeight: '500' }}>
+            <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.primaryPressed, fontWeight: '500' }}>
               Edit
             </ThemedText>
           </Pressable>
         )}
       </View>
 
-      <Text style={{ fontSize: 14, fontWeight: '500', marginBottom: 2, color: theme.text }}>{name}</Text>
-      <ThemedText style={{ fontSize: 13, color: theme.textSecondary, lineHeight: 20 }}>
+      <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', marginBottom: 2, color: theme.text }}>{name}</Text>
+      <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, lineHeight: 20 }}>
         {street}{'\n'}
         {city}{state ? `, ${state}` : ''} {zip}{'\n'}
         {country}
       </ThemedText>
       {phone && (
-        <ThemedText style={{ fontSize: 13, color: theme.textSecondary, marginTop: 4 }}>
+        <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, marginTop: 4 }}>
           {phone}
         </ThemedText>
       )}

@@ -14,19 +14,26 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type SwipeableTab = {
+  /** Unique key identifier for the tab */
   key: string;
+  /** Title displayed in the tab bar */
   title: string;
+  /** Content rendered when the tab is active */
   content: React.ReactNode;
 };
 
 export type SwipeableTabViewProps = {
+  /** Array of tab definitions with content */
   tabs: SwipeableTab[];
+  /** Key of the tab to display initially */
   initialTab?: string;
+  /** Accessibility label for the tab view container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the tab view container */
   accessibilityHint?: string;
 };
 
@@ -97,7 +104,7 @@ export function SwipeableTabView({
           >
             <Text
               style={{
-                fontSize: 15,
+                fontSize: FontSize.md.fontSize,
                 fontWeight: index === activeIndex ? '600' : '500',
                 color: index === activeIndex ? t.primary : t.textSecondary,
               }}

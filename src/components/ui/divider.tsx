@@ -3,7 +3,8 @@ import { View, type ViewProps } from 'react-native';
 
 import { useTheme } from '@/hooks/use-theme';
 
-type DividerProps = ViewProps & {
+export type DividerProps = ViewProps & {
+  /** Orientation of the divider line */
   orientation?: 'horizontal' | 'vertical';
 };
 

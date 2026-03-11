@@ -10,20 +10,28 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Check, ChevronDown } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type MultiSelectOption = {
+export type MultiSelectOption = {
+  /** Display label for the option */
   label: string;
+  /** Unique value identifier for the option */
   value: string;
 };
 
-type MultiSelectProps = ViewProps & {
+export type MultiSelectProps = ViewProps & {
+  /** Available options to select from */
   options: MultiSelectOption[];
+  /** Currently selected option values */
   values: string[];
+  /** Callback invoked when the selection changes */
   onValuesChange: (values: string[]) => void;
+  /** Placeholder text shown when no options are selected */
   placeholder?: string;
+  /** Label text displayed above the selector */
   label?: string;
+  /** Maximum number of options that can be selected */
   max?: number;
 };
 
@@ -57,7 +65,7 @@ export function MultiSelect({
   return (
     <View style={typeof style === 'object' ? style : undefined} {...props}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text, marginBottom: 6 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginBottom: 6 }}>
           {label}
         </Text>
       )}
@@ -86,11 +94,11 @@ export function MultiSelect({
                   paddingVertical: 3,
                   borderRadius: Radius.full,
                 }}>
-                <Text style={{ fontSize: 13, fontWeight: '500', color: t.primary }}>{lbl}</Text>
+                <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '500', color: t.primary }}>{lbl}</Text>
               </View>
             ))
           ) : (
-            <Text style={{ fontSize: 16, color: t.textTertiary }}>{placeholder}</Text>
+            <Text style={{ fontSize: FontSize.lg.fontSize, color: t.textTertiary }}>{placeholder}</Text>
           )}
         </View>
         <ChevronDown size={16} color={t.textSecondary} style={{ marginLeft: 8 }} />
@@ -123,7 +131,7 @@ export function MultiSelect({
             {label && (
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: FontSize.lg.fontSize,
                   fontWeight: '700',
                   color: t.text,
                   textAlign: 'center',
@@ -136,7 +144,7 @@ export function MultiSelect({
             {max && (
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: FontSize.sm.fontSize,
                   color: t.textTertiary,
                   textAlign: 'center',
                   paddingBottom: 8,
@@ -166,7 +174,7 @@ export function MultiSelect({
                     }}>
                     <Text
                       style={{
-                        fontSize: 17,
+                        fontSize: FontSize.lg.fontSize,
                         fontWeight: selected ? '600' : '400',
                         color: selected ? t.primary : t.text,
                       }}>
@@ -201,7 +209,7 @@ export function MultiSelect({
                   backgroundColor: t.primary,
                   alignItems: 'center',
                 }}>
-                <Text style={{ fontSize: 16, fontWeight: '700', color: t.primaryForeground }}>
+                <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.primaryForeground }}>
                   Done ({values.length})
                 </Text>
               </Pressable>

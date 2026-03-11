@@ -2,17 +2,25 @@ import React from 'react';
 import { Modal, Pressable, View, Dimensions } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, Spacing, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ConfirmDialogProps = {
+export type ConfirmDialogProps = {
+  /** Controls the visibility of the dialog */
   visible: boolean;
+  /** Callback invoked when the dialog is dismissed */
   onClose: () => void;
+  /** Callback invoked when the confirm button is pressed */
   onConfirm: () => void;
+  /** Dialog heading text */
   title: string;
+  /** Optional descriptive message below the title */
   message?: string;
+  /** Label for the confirm button */
   confirmLabel?: string;
+  /** Label for the cancel button */
   cancelLabel?: string;
+  /** Whether the confirm action is destructive */
   destructive?: boolean;
 };
 
@@ -45,25 +53,25 @@ export function ConfirmDialog({
             width,
             backgroundColor: t.background,
             borderRadius: Radius['2xl'],
-            padding: 24,
+            padding: Spacing[6],
             ...Shadows.xl,
           }}>
-          <ThemedText style={{ fontSize: 17, fontWeight: '700', textAlign: 'center', color: t.text }}>
+          <ThemedText style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', textAlign: 'center', color: t.text }}>
             {title}
           </ThemedText>
           {message && (
             <ThemedText
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 color: t.textSecondary,
                 textAlign: 'center',
-                marginTop: 8,
+                marginTop: Spacing[2],
                 lineHeight: 20,
               }}>
               {message}
             </ThemedText>
           )}
-          <View style={{ flexDirection: 'row', gap: 12, marginTop: 24 }}>
+          <View style={{ flexDirection: 'row', gap: Spacing[3], marginTop: Spacing[6] }}>
             <Pressable
               onPress={onClose}
               style={{
@@ -73,7 +81,7 @@ export function ConfirmDialog({
                 backgroundColor: t.surface,
                 alignItems: 'center',
               }}>
-              <ThemedText style={{ fontSize: 15, fontWeight: '600', color: t.text }}>{cancelLabel}</ThemedText>
+              <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{cancelLabel}</ThemedText>
             </Pressable>
             <Pressable
               onPress={() => {
@@ -87,7 +95,7 @@ export function ConfirmDialog({
                 backgroundColor: destructive ? t.error : t.primaryPressed,
                 alignItems: 'center',
               }}>
-              <ThemedText style={{ color: t.primaryForeground, fontSize: 15, fontWeight: '600' }}>
+              <ThemedText style={{ color: t.primaryForeground, fontSize: FontSize.md.fontSize, fontWeight: '600' }}>
                 {confirmLabel}
               </ThemedText>
             </Pressable>

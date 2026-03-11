@@ -7,16 +7,23 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type WelcomeScreenProps = {
+  /** Emoji or text logo displayed at the top */
   logo?: string;
+  /** Main welcome title text */
   title: string;
+  /** Tagline text displayed below the title */
   tagline?: string;
+  /** Callback invoked when the "Get Started" button is pressed */
   onGetStarted: () => void;
+  /** Callback invoked when the "Sign In" link is pressed */
   onSignIn?: () => void;
+  /** Whether to render a gradient background */
   backgroundGradient?: boolean;
+  /** Custom styles applied to the screen container */
   style?: ViewStyle;
 };
 
@@ -44,7 +51,7 @@ export function WelcomeScreen({
       )}
       <Text
         style={{
-          fontSize: 28,
+          fontSize: FontSize['3xl'].fontSize,
           fontWeight: '800',
           color: t.text,
           textAlign: 'center',
@@ -56,7 +63,7 @@ export function WelcomeScreen({
       {tagline && (
         <Text
           style={{
-            fontSize: 16,
+            fontSize: FontSize.lg.fontSize,
             color: t.textSecondary,
             textAlign: 'center',
             lineHeight: 24,
@@ -79,7 +86,7 @@ export function WelcomeScreen({
         accessibilityRole="button"
         accessibilityLabel="Get Started"
       >
-        <Text style={{ fontSize: 17, fontWeight: '700', color: t.primaryForeground }}>
+        <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.primaryForeground }}>
           Get Started
         </Text>
       </Pressable>
@@ -90,7 +97,7 @@ export function WelcomeScreen({
           accessibilityRole="button"
           accessibilityLabel="Sign In"
         >
-          <Text style={{ fontSize: 15, fontWeight: '600', color: t.linkText }}>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.linkText }}>
             Sign In
           </Text>
         </Pressable>

@@ -1,26 +1,36 @@
 import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Switch } from './switch';
 
 export type SettingsItem = {
+  /** Unique key for the settings item */
   key: string;
+  /** Display label for the setting */
   label: string;
+  /** Emoji icon displayed to the left */
   icon?: string;
+  /** Type of control rendered for the setting */
   type: 'toggle' | 'navigation' | 'info';
+  /** Current value (boolean for toggles, string for info) */
   value?: boolean | string;
+  /** Callback invoked when a navigation item is pressed */
   onPress?: () => void;
+  /** Callback invoked when a toggle value changes */
   onToggle?: (value: boolean) => void;
 };
 
 export type SettingsSection = {
+  /** Title heading for the settings group */
   title: string;
+  /** Array of settings items in this section */
   items: SettingsItem[];
 };
 
 export type SettingsScreenProps = {
+  /** Array of grouped settings sections */
   sections: SettingsSection[];
 };
 
@@ -38,7 +48,7 @@ export function SettingsScreen({ sections }: SettingsScreenProps) {
         <View key={section.title} accessibilityRole="none">
           <Text
             style={{
-              fontSize: 13,
+              fontSize: FontSize.sm.fontSize,
               fontWeight: '600',
               color: t.textSecondary,
               textTransform: 'uppercase',
@@ -76,12 +86,12 @@ export function SettingsScreen({ sections }: SettingsScreenProps) {
                   }}
                 >
                   {item.icon != null && (
-                    <Text style={{ fontSize: 18 }} accessibilityElementsHidden>
+                    <Text style={{ fontSize: FontSize.xl.fontSize }} accessibilityElementsHidden>
                       {item.icon}
                     </Text>
                   )}
                   <Text
-                    style={{ flex: 1, fontSize: 16, fontWeight: '500', color: t.text }}
+                    style={{ flex: 1, fontSize: FontSize.lg.fontSize, fontWeight: '500', color: t.text }}
                     numberOfLines={1}
                   >
                     {item.label}
@@ -96,10 +106,10 @@ export function SettingsScreen({ sections }: SettingsScreenProps) {
                     </View>
                   )}
                   {item.type === 'navigation' && (
-                    <Text style={{ fontSize: 18, color: t.textSecondary }}>›</Text>
+                    <Text style={{ fontSize: FontSize.xl.fontSize, color: t.textSecondary }}>›</Text>
                   )}
                   {item.type === 'info' && item.value != null && (
-                    <Text style={{ fontSize: 14, color: t.textSecondary }}>
+                    <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>
                       {String(item.value)}
                     </Text>
                   )}

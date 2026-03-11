@@ -7,6 +7,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { Animation } from '@/constants/theme';
+
 export type ScaleTransitionProps = {
   visible: boolean;
   duration?: number;
@@ -16,7 +18,7 @@ export type ScaleTransitionProps = {
   style?: ViewStyle;
 };
 
-const DEFAULT_DURATION = 300;
+const DEFAULT_DURATION = Animation.duration.normal;
 const DEFAULT_FROM = 0.8;
 const DEFAULT_TO = 1;
 

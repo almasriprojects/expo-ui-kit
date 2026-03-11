@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
 import { Modal, Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type MenuItem = {
+export type MenuItem = {
+  /** Display text for the menu item */
   label: string;
+  /** Optional emoji or text icon */
   icon?: string;
+  /** Callback fired when the item is pressed */
   onPress: () => void;
+  /** Whether the item is styled as a destructive action */
   destructive?: boolean;
+  /** Whether the item is disabled */
   disabled?: boolean;
 };
 
-type MenuGroup = {
+export type MenuGroup = {
+  /** Array of menu items in the group */
   items: MenuItem[];
 };
 
-type DropdownMenuProps = {
+export type DropdownMenuProps = {
+  /** Element that triggers the menu when pressed */
   trigger: React.ReactNode;
+  /** Grouped sets of menu items */
   groups: MenuGroup[];
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -66,12 +75,12 @@ export function DropdownMenu({ trigger, groups, style }: DropdownMenuProps) {
                       opacity: item.disabled ? 0.4 : 1,
                     }}>
                     {item.icon && (
-                      <Text style={{ fontSize: 16 }}>{item.icon}</Text>
+                      <Text style={{ fontSize: FontSize.lg.fontSize }}>{item.icon}</Text>
                     )}
                     <Text
                       style={{
                         flex: 1,
-                        fontSize: 16,
+                        fontSize: FontSize.lg.fontSize,
                         fontWeight: '500',
                         color: item.destructive ? t.error : t.text,
                       }}>

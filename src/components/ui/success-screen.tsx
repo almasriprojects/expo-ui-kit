@@ -8,17 +8,22 @@ import Animated, {
 } from 'react-native-reanimated';
 import { CheckCircle } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 import { Button } from './button';
 import { ThemedText } from '@/components/themed-text';
 
 export type SuccessScreenProps = {
+  /** Title text displayed on the success screen */
   title?: string;
+  /** Descriptive message displayed below the title */
   message?: string;
+  /** Callback invoked when the action button is pressed */
   onAction?: () => void;
+  /** Label for the action button */
   actionLabel?: string;
+  /** Custom icon element replacing the default checkmark */
   icon?: ReactNode;
 };
 
@@ -71,7 +76,7 @@ export function SuccessScreen({
       </Animated.View>
       <ThemedText
         style={{
-          fontSize: 24,
+          fontSize: FontSize['2xl'].fontSize,
           fontWeight: '700',
           color: t.text,
           textAlign: 'center',
@@ -82,7 +87,7 @@ export function SuccessScreen({
       {message && (
         <ThemedText
           style={{
-            fontSize: 16,
+            fontSize: FontSize.lg.fontSize,
             color: t.textSecondary,
             textAlign: 'center',
             lineHeight: 24,

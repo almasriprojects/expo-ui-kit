@@ -2,19 +2,28 @@ import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Mail, MessageCircle, Phone } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 
-type ContactCardProps = {
+export type ContactCardProps = {
+  /** Full name of the contact */
   name: string;
+  /** URL of the contact's avatar image */
   avatar?: string;
+  /** Phone number of the contact */
   phone?: string;
+  /** Email address of the contact */
   email?: string;
+  /** Job title or role of the contact */
   role?: string;
+  /** Callback invoked when the call action is pressed */
   onCall?: () => void;
+  /** Callback invoked when the message action is pressed */
   onMessage?: () => void;
+  /** Callback invoked when the email action is pressed */
   onEmail?: () => void;
+  /** Custom styles for the card container */
   style?: ViewStyle;
 };
 
@@ -35,12 +44,12 @@ function ActionBtn({ icon, label, onPress, color }: { icon: ReactNode; label: st
         }}>
         {icon}
       </View>
-      <Text style={{ fontSize: 11, fontWeight: '500', color: t.textSecondary }}>{label}</Text>
+      <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '500', color: t.textSecondary }}>{label}</Text>
     </Pressable>
   );
 }
 
-export function ContactCard({
+function ContactCardBase({
   name,
   avatar,
   phone,
@@ -68,20 +77,20 @@ export function ContactCard({
         style,
       ]}>
       <Avatar source={avatar} initials={name[0]} size="lg" />
-      <Text style={{ fontSize: 18, fontWeight: '700', color: t.text, marginTop: 12 }}>{name}</Text>
+      <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', color: t.text, marginTop: 12 }}>{name}</Text>
       {role && (
-        <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}>{role}</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>{role}</Text>
       )}
       {phone && (
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 6 }}>
           <Phone size={13} color={t.textSecondary} />
-          <Text style={{ fontSize: 13, color: t.textSecondary }}>{phone}</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{phone}</Text>
         </View>
       )}
       {email && (
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 2 }}>
           <Mail size={13} color={t.textSecondary} />
-          <Text style={{ fontSize: 13, color: t.textSecondary }}>{email}</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>{email}</Text>
         </View>
       )}
       <View
@@ -100,3 +109,5 @@ export function ContactCard({
     </View>
   );
 }
+
+export const ContactCard = React.memo(ContactCardBase);

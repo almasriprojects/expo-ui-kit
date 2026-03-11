@@ -2,13 +2,17 @@ import React, { forwardRef } from 'react';
 import { TextInput, type TextInputProps, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TextareaProps = TextInputProps & {
+export type TextareaProps = TextInputProps & {
+  /** Label text displayed above the textarea */
   label?: string;
+  /** Error message displayed below the textarea */
   error?: string;
+  /** Maximum number of characters allowed */
   maxLength?: number;
+  /** Whether to display the character count */
   showCount?: boolean;
 };
 
@@ -29,9 +33,9 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     const count = value?.length ?? 0;
 
     return (
-      <View style={{ gap: 6 }}>
+      <View style={{ gap: Spacing[1.5] }}>
         {label && (
-          <ThemedText style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{label}</ThemedText>
+          <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{label}</ThemedText>
         )}
         <TextInput
           ref={ref}
@@ -42,10 +46,10 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
           maxLength={maxLength}
           style={[
             {
-              paddingHorizontal: 16,
-              paddingVertical: 12,
+              paddingHorizontal: Spacing[4],
+              paddingVertical: Spacing[3],
               borderRadius: Radius.lg,
-              fontSize: 16,
+              fontSize: FontSize.lg.fontSize,
               minHeight: 100,
               backgroundColor: t.surface,
               color: t.text,
@@ -58,12 +62,12 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
         />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           {error ? (
-            <ThemedText style={{ fontSize: 12, color: t.error }}>{error}</ThemedText>
+            <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.error }}>{error}</ThemedText>
           ) : (
             <View />
           )}
           {showCount && (
-            <ThemedText style={{ fontSize: 12, color: t.textSecondary }}>
+            <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>
               {count}{maxLength ? `/${maxLength}` : ''}
             </ThemedText>
           )}

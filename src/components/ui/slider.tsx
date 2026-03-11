@@ -8,16 +8,23 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SliderProps = ViewProps & {
+export type SliderProps = ViewProps & {
+  /** Current value of the slider */
   value: number;
+  /** Callback invoked when the slider value changes */
   onValueChange: (value: number) => void;
+  /** Minimum value of the slider */
   min?: number;
+  /** Maximum value of the slider */
   max?: number;
+  /** Step increment for snapping values */
   step?: number;
+  /** Whether to display the current value label */
   showValue?: boolean;
+  /** Label text displayed above the slider */
   label?: string;
 };
 
@@ -66,12 +73,12 @@ export function Slider({
   return (
     <View style={typeof style === 'object' ? style : undefined} {...props}>
       {(label || showValue) && (
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: Spacing[2] }}>
           {label && (
-            <ThemedText style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{label}</ThemedText>
+            <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{label}</ThemedText>
           )}
           {showValue && (
-            <ThemedText style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{value}</ThemedText>
+            <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{value}</ThemedText>
           )}
         </View>
       )}

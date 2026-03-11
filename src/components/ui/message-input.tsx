@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View, type ViewStyle } from 'react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type MessageInputProps = {
+export type MessageInputProps = {
+  /** Callback invoked with the message text when the send button is pressed */
   onSend: (message: string) => void;
+  /** Callback invoked when the attachment button is pressed */
   onAttach?: () => void;
+  /** Placeholder text for the message input */
   placeholder?: string;
+  /** Custom styles applied to the input container */
   style?: ViewStyle;
 };
 
@@ -53,7 +57,7 @@ export function MessageInput({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{ fontSize: 18, color: t.textSecondary }}>+</Text>
+          <Text style={{ fontSize: FontSize.xl.fontSize, color: t.textSecondary }}>+</Text>
         </Pressable>
       )}
 
@@ -79,7 +83,7 @@ export function MessageInput({
           multiline
           style={{
             flex: 1,
-            fontSize: 15,
+            fontSize: FontSize.md.fontSize,
             color: t.text,
             paddingVertical: 6,
             maxHeight: 100,
@@ -99,7 +103,7 @@ export function MessageInput({
           justifyContent: 'center',
           ...Shadows.sm,
         }}>
-        <Text style={{ fontSize: 16, color: hasText ? t.primaryForeground : t.textTertiary }}>
+        <Text style={{ fontSize: FontSize.lg.fontSize, color: hasText ? t.primaryForeground : t.textTertiary }}>
           ➤
         </Text>
       </Pressable>

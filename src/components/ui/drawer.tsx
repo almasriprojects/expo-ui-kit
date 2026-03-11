@@ -3,15 +3,21 @@ import { Dimensions, Modal, Pressable, ScrollView, Text, View } from 'react-nati
 import { X } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Shadows } from '@/constants/theme';
+import { FontSize, Shadows, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type DrawerProps = {
+export type DrawerProps = {
+  /** Whether the drawer is visible */
   visible: boolean;
+  /** Callback fired when the drawer is dismissed */
   onClose: () => void;
+  /** Content rendered inside the drawer */
   children?: ReactNode;
+  /** Title text displayed at the top of the drawer */
   title?: string;
+  /** Side of the screen the drawer slides from */
   side?: 'left' | 'right';
+  /** Custom width of the drawer in pixels */
   width?: number;
 };
 
@@ -39,21 +45,21 @@ export function Drawer({
             {
               width: drawerW,
               backgroundColor: t.card,
-              paddingTop: insets.top + 16,
-              paddingBottom: insets.bottom + 16,
+              paddingTop: insets.top + Spacing[4],
+              paddingBottom: insets.bottom + Spacing[4],
               ...Shadows.xl,
             },
           ]}>
           {title && (
             <View
               style={{
-                paddingHorizontal: 20,
-                paddingBottom: 16,
+                paddingHorizontal: Spacing[5],
+                paddingBottom: Spacing[4],
                 borderBottomWidth: 1,
                 borderBottomColor: t.border,
               }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Text style={{ fontSize: 20, fontWeight: '700', color: t.text }}>
+                <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', color: t.text }}>
                   {title}
                 </Text>
                 <Pressable onPress={onClose} hitSlop={12}>
@@ -64,7 +70,7 @@ export function Drawer({
           )}
           <ScrollView
             style={{ flex: 1 }}
-            contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 12 }}
+            contentContainerStyle={{ paddingHorizontal: Spacing[5], paddingTop: Spacing[3] }}
             showsVerticalScrollIndicator={false}>
             {children}
           </ScrollView>

@@ -1,19 +1,26 @@
 import React, { type ReactNode } from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type BudgetItem = {
+export type BudgetItem = {
+  /** Category name for the budget item */
   label: string;
+  /** Amount already spent */
   spent: number;
+  /** Maximum budget amount */
   budget: number;
+  /** Color of the progress bar */
   color: string;
+  /** Optional icon rendered before the label */
   icon?: ReactNode;
 };
 
-type BudgetProgressProps = {
+export type BudgetProgressProps = {
+  /** Array of budget items to display */
   items: BudgetItem[];
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -31,9 +38,9 @@ export function BudgetProgress({ items, style }: BudgetProgressProps) {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                 {item.icon && item.icon}
-                <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{item.label}</Text>
+                <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{item.label}</Text>
               </View>
-              <Text style={{ fontSize: 13, color: over ? t.error : t.textSecondary }}>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: over ? t.error : t.textSecondary }}>
                 ${item.spent.toLocaleString()}{' '}
                 <Text style={{ color: t.textTertiary }}>/ ${item.budget.toLocaleString()}</Text>
               </Text>

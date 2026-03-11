@@ -7,14 +7,19 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type FlashCardProps = {
+export type FlashCardProps = {
+  /** Text displayed on the front of the card */
   front: string;
+  /** Text displayed on the back of the card */
   back: string;
+  /** Category label shown above the front text */
   category?: string;
+  /** Difficulty indicator dot color */
   difficulty?: 'easy' | 'medium' | 'hard';
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
@@ -77,14 +82,14 @@ export function FlashCard({
           frontStyle,
         ]}>
         {category && (
-          <Text style={{ fontSize: 11, fontWeight: '600', color: t.primary, textTransform: 'uppercase', marginBottom: 12 }}>
+          <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '600', color: t.primary, textTransform: 'uppercase', marginBottom: 12 }}>
             {category}
           </Text>
         )}
-        <Text style={{ fontSize: 20, fontWeight: '700', color: t.text, textAlign: 'center' }}>
+        <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '700', color: t.text, textAlign: 'center' }}>
           {front}
         </Text>
-        <Text style={{ fontSize: 12, color: t.textTertiary, marginTop: 16 }}>Tap to flip</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary, marginTop: 16 }}>Tap to flip</Text>
         {difficulty && (
           <View
             style={{
@@ -105,10 +110,10 @@ export function FlashCard({
           { backgroundColor: t.primarySoft, borderWidth: 2, borderColor: t.primary },
           backStyle,
         ]}>
-        <Text style={{ fontSize: 11, fontWeight: '600', color: t.primary, marginBottom: 12 }}>
+        <Text style={{ fontSize: FontSize.xs.fontSize, fontWeight: '600', color: t.primary, marginBottom: 12 }}>
           ANSWER
         </Text>
-        <Text style={{ fontSize: 17, fontWeight: '600', color: t.text, textAlign: 'center', lineHeight: 25 }}>
+        <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '600', color: t.text, textAlign: 'center', lineHeight: 25 }}>
           {back}
         </Text>
       </Animated.View>

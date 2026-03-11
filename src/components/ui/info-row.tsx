@@ -1,15 +1,23 @@
 import React, { type ReactNode } from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type InfoRowProps = {
+export type InfoRowProps = {
+  /** Label text displayed on the left */
   label: string;
+  /** Value text or element displayed on the right */
   value: string | ReactNode;
+  /** Optional icon element displayed before the label */
   icon?: ReactNode;
+  /** Callback fired when the row is pressed */
   onPress?: () => void;
+  /** Whether to show a chevron indicator */
   showChevron?: boolean;
+  /** Custom color for the value text */
   valueColor?: string;
+  /** Custom styles applied to the row container */
   style?: ViewStyle;
 };
 
@@ -38,12 +46,12 @@ export function InfoRow({
       ]}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, flex: 1 }}>
         {icon && <View>{icon}</View>}
-        <Text style={{ fontSize: 15, color: t.textSecondary }}>{label}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary }}>{label}</Text>
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, flexShrink: 1 }}>
         {typeof value === 'string' ? (
           <Text
-            style={{ fontSize: 15, fontWeight: '500', color: valueColor ?? t.text }}
+            style={{ fontSize: FontSize.md.fontSize, fontWeight: '500', color: valueColor ?? t.text }}
             numberOfLines={1}>
             {value}
           </Text>
@@ -51,7 +59,7 @@ export function InfoRow({
           value
         )}
         {(showChevron || onPress) && (
-          <Text style={{ fontSize: 14, color: t.textTertiary }}>›</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, color: t.textTertiary }}>›</Text>
         )}
       </View>
     </View>

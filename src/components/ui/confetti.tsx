@@ -11,9 +11,13 @@ import Animated, {
 import { useTheme } from '@/hooks/use-theme';
 
 export type ConfettiProps = {
+  /** Whether the confetti animation is active */
   active: boolean;
+  /** Number of confetti particles */
   count?: number;
+  /** Duration of the animation in milliseconds */
   duration?: number;
+  /** Array of colors used for the confetti particles */
   colors?: string[];
 };
 

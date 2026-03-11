@@ -1,21 +1,34 @@
-import React, { type ReactNode, useRef } from 'react';
-import { Animated, Pressable, View, type ViewProps } from 'react-native';
+import React, { type ReactNode } from 'react';
+import { Pressable, View, type ViewProps } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
-type SwipeAction = {
+export type SwipeAction = {
+  /** Label text displayed on the action button */
   label: string;
+  /** Background color of the action button */
   color: string;
+  /** Callback invoked when the action is pressed */
   onPress: () => void;
+  /** Icon component rendered inside the action button */
   icon?: React.ComponentType<{ size?: number; color?: string }>;
 };
 
-type SwipeableRowProps = ViewProps & {
+export type SwipeableRowProps = ViewProps & {
+  /** Content rendered in the swipeable row */
   children: ReactNode;
+  /** Actions revealed when swiping from right to left */
   rightActions?: SwipeAction[];
+  /** Actions revealed when swiping from left to right */
   leftActions?: SwipeAction[];
 };
+
+const ACTION_WIDTH = 72;
+const SPRING_CONFIG = { damping: 20, stiffness: 200 };
 
 export function SwipeableRow({
   children,
@@ -24,31 +37,44 @@ export function SwipeableRow({
   ...props
 }: SwipeableRowProps) {
   const theme = useTheme();
-  const pan = useRef(new Animated.Value(0)).current;
-  const startX = useRef(0);
+  const translateX = useSharedValue(0);
+  const startX = useSharedValue(0);
 
-  const rightWidth = rightActions.length * 72;
-  const leftWidth = leftActions.length * 72;
+  const rightWidth = rightActions.length * ACTION_WIDTH;
+  const leftWidth = leftActions.length * ACTION_WIDTH;
 
-  const onTouchStart = (e: { nativeEvent: { pageX: number } }) => {
-    startX.current = e.nativeEvent.pageX;
+  const resetPosition = () => {
+    'worklet';
+    translateX.value = withSpring(0, SPRING_CONFIG);
   };
 
-  const onTouchMove = (e: { nativeEvent: { pageX: number } }) => {
-    const dx = e.nativeEvent.pageX - startX.current;
-    const clamped = Math.max(-rightWidth, Math.min(leftWidth, dx));
-    pan.setValue(clamped);
+  const handleActionPress = (onPress: () => void) => {
+    translateX.value = withSpring(0, SPRING_CONFIG);
+    onPress();
   };
 
-  const onTouchEnd = () => {
-    const toValue = 0;
-    Animated.spring(pan, {
-      toValue,
-      useNativeDriver: false,
-      tension: 100,
-      friction: 10,
-    }).start();
-  };
+  const panGesture = Gesture.Pan()
+    .onBegin(() => {
+      startX.value = translateX.value;
+    })
+    .onUpdate((e) => {
+      const next = startX.value + e.translationX;
+      translateX.value = Math.max(-rightWidth, Math.min(leftWidth, next));
+    })
+    .onEnd((e) => {
+      const threshold = ACTION_WIDTH / 2;
+      if (translateX.value < -threshold && rightWidth > 0) {
+        translateX.value = withSpring(-rightWidth, SPRING_CONFIG);
+      } else if (translateX.value > threshold && leftWidth > 0) {
+        translateX.value = withSpring(leftWidth, SPRING_CONFIG);
+      } else {
+        resetPosition();
+      }
+    });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translateX.value }],
+  }));
 
   const renderActions = (actions: SwipeAction[], side: 'left' | 'right') => (
     <View
@@ -65,12 +91,9 @@ export function SwipeableRow({
         return (
           <Pressable
             key={i}
-            onPress={() => {
-              action.onPress();
-              Animated.spring(pan, { toValue: 0, useNativeDriver: false }).start();
-            }}
+            onPress={() => handleActionPress(action.onPress)}
             style={{
-              width: 72,
+              width: ACTION_WIDTH,
               backgroundColor: action.color,
               alignItems: 'center',
               justifyContent: 'center',
@@ -80,7 +103,7 @@ export function SwipeableRow({
                 <ActionIcon size={18} color={theme.primaryForeground} />
               </View>
             )}
-            <ThemedText style={{ color: theme.primaryForeground, fontSize: 11, fontWeight: '600' }}>
+            <ThemedText style={{ color: theme.primaryForeground, fontSize: FontSize.xs.fontSize, fontWeight: '600' }}>
               {action.label}
             </ThemedText>
           </Pressable>
@@ -93,13 +116,11 @@ export function SwipeableRow({
     <View style={{ overflow: 'hidden' }} {...props}>
       {leftActions.length > 0 && renderActions(leftActions, 'left')}
       {rightActions.length > 0 && renderActions(rightActions, 'right')}
-      <Animated.View
-        style={{ transform: [{ translateX: pan }] }}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}>
-        {children}
-      </Animated.View>
+      <GestureDetector gesture={panGesture}>
+        <Animated.View style={animatedStyle}>
+          {children}
+        </Animated.View>
+      </GestureDetector>
     </View>
   );
 }

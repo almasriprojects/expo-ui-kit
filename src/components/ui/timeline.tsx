@@ -3,18 +3,24 @@ import { Text, View, type ViewProps } from 'react-native';
 import { Check } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TimelineItem = {
+export type TimelineItem = {
+  /** Title text for the timeline event */
   title: string;
+  /** Optional description for the event */
   description?: string;
+  /** Timestamp string for the event */
   time?: string;
+  /** Custom icon element for the timeline dot */
   icon?: ReactNode;
+  /** Status of the timeline event */
   status?: 'completed' | 'current' | 'upcoming';
 };
 
-type TimelineProps = ViewProps & {
+export type TimelineProps = ViewProps & {
+  /** Array of timeline events to display */
   items: TimelineItem[];
 };
 
@@ -70,7 +76,7 @@ export function Timeline({ items, ...props }: TimelineProps) {
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <Text
                   style={{
-                    fontSize: 14,
+                    fontSize: FontSize.md.fontSize,
                     fontWeight: status === 'upcoming' ? '400' : '600',
                     opacity: status === 'upcoming' ? 0.6 : 1,
                     flex: 1,
@@ -79,7 +85,7 @@ export function Timeline({ items, ...props }: TimelineProps) {
                   {item.title}
                 </Text>
                 {item.time && (
-                  <ThemedText style={{ fontSize: 12, color: theme.textSecondary, marginLeft: 8 }}>
+                  <ThemedText style={{ fontSize: FontSize.sm.fontSize, color: theme.textSecondary, marginLeft: 8 }}>
                     {item.time}
                   </ThemedText>
                 )}
@@ -87,7 +93,7 @@ export function Timeline({ items, ...props }: TimelineProps) {
               {item.description && (
                 <ThemedText
                   style={{
-                    fontSize: 13,
+                    fontSize: FontSize.sm.fontSize,
                     color: theme.textSecondary,
                     marginTop: 4,
                     opacity: status === 'upcoming' ? 0.5 : 1,

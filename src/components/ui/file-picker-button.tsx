@@ -2,19 +2,26 @@ import React from 'react';
 import { Pressable, Text, View, type ViewProps } from 'react-native';
 import { X } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type FilePickerFile = {
+  /** File name */
   name: string;
+  /** File size in bytes */
   size?: number;
+  /** MIME type of the file */
   type?: string;
 };
 
 export type FilePickerButtonProps = ViewProps & {
+  /** Currently selected file */
   file?: FilePickerFile;
+  /** Callback fired when the pick button is pressed */
   onPick: () => void;
+  /** Callback fired when the remove button is pressed */
   onRemove?: () => void;
+  /** Accepted file types hint text */
   accept?: string;
 };
 
@@ -63,11 +70,11 @@ export function FilePickerButton({
             <View style={{ flex: 1, minWidth: 0 }}>
               <Text
                 numberOfLines={1}
-                style={{ fontSize: 15, fontWeight: '600', color: t.text }}>
+                style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
                 {file.name}
               </Text>
               {(file.size != null || file.type) && (
-                <Text style={{ fontSize: 12, color: t.textTertiary, marginTop: 2 }}>
+                <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary, marginTop: 2 }}>
                   {[file.type, formatSize(file.size)].filter(Boolean).join(' • ')}
                 </Text>
               )}
@@ -89,11 +96,11 @@ export function FilePickerButton({
           </View>
         ) : (
           <View style={{ alignItems: 'center', justifyContent: 'center', paddingVertical: 8 }}>
-            <Text style={{ fontSize: 14, color: t.textSecondary, marginBottom: 4 }}>
+            <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary, marginBottom: 4 }}>
               Tap to upload
             </Text>
             {accept && (
-              <Text style={{ fontSize: 12, color: t.textTertiary }}>{accept}</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary }}>{accept}</Text>
             )}
           </View>
         )}

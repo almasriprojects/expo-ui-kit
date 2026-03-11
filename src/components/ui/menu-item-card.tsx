@@ -2,23 +2,33 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Flame, Leaf, UtensilsCrossed } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type MenuItemCardProps = {
+export type MenuItemCardProps = {
+  /** Name of the menu item */
   name: string;
+  /** Optional description of the menu item */
   description?: string;
+  /** Formatted price string */
   price: string;
+  /** Original price shown with strikethrough for discounts */
   originalPrice?: string;
+  /** Calorie count label */
   calories?: string;
+  /** Whether to display a "POPULAR" badge */
   popular?: boolean;
+  /** Whether to display a vegetarian indicator */
   vegetarian?: boolean;
+  /** Whether to display a spicy indicator */
   spicy?: boolean;
+  /** Callback invoked when the add button is pressed */
   onAdd?: () => void;
+  /** Custom styles applied to the card container */
   style?: ViewStyle;
 };
 
-export function MenuItemCard({
+function MenuItemCardBase({
   name,
   description,
   price,
@@ -50,29 +60,29 @@ export function MenuItemCard({
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           {popular && (
             <View style={{ backgroundColor: t.warning, paddingHorizontal: 6, paddingVertical: 1, borderRadius: Radius.sm }}>
-              <Text style={{ fontSize: 9, fontWeight: '700', color: t.textOnColor }}>POPULAR</Text>
+              <Text style={{ fontSize: FontSize['2xs'].fontSize, fontWeight: '700', color: t.textOnColor }}>POPULAR</Text>
             </View>
           )}
           {vegetarian && <Leaf size={12} color={t.success} />}
           {spicy && <Flame size={12} color={t.error} />}
         </View>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: t.text, marginTop: popular || vegetarian || spicy ? 4 : 0 }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text, marginTop: popular || vegetarian || spicy ? 4 : 0 }}>
           {name}
         </Text>
         {description && (
-          <Text numberOfLines={2} style={{ fontSize: 12, color: t.textSecondary, marginTop: 4, lineHeight: 17 }}>
+          <Text numberOfLines={2} style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 4, lineHeight: 17 }}>
             {description}
           </Text>
         )}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8 }}>
-          <Text style={{ fontSize: 15, fontWeight: '700', color: t.text }}>{price}</Text>
+          <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.text }}>{price}</Text>
           {originalPrice && (
-            <Text style={{ fontSize: 12, color: t.textTertiary, textDecorationLine: 'line-through' }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary, textDecorationLine: 'line-through' }}>
               {originalPrice}
             </Text>
           )}
           {calories && (
-            <Text style={{ fontSize: 11, color: t.textTertiary }}>{calories} cal</Text>
+            <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{calories} cal</Text>
           )}
         </View>
       </View>
@@ -93,10 +103,12 @@ export function MenuItemCard({
               justifyContent: 'center',
               ...Shadows.sm,
             }}>
-            <Text style={{ fontSize: 16, fontWeight: '700', color: t.primaryForeground }}>+</Text>
+            <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.primaryForeground }}>+</Text>
           </Pressable>
         )}
       </View>
     </View>
   );
 }
+
+export const MenuItemCard = React.memo(MenuItemCardBase);

@@ -2,10 +2,13 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type DescriptionListProps = {
+  /** Array of term-description pairs to display */
   items: { term: string; description: string }[];
+  /** Layout direction for each term-description pair */
   direction?: 'horizontal' | 'vertical';
 };
 
@@ -34,7 +37,7 @@ export function DescriptionList({
           accessibilityLabel={`${item.term}: ${item.description}`}>
           <ThemedText
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               fontWeight: '600',
               color: t.text,
               flexShrink: isHorizontal ? 0 : undefined,
@@ -43,7 +46,7 @@ export function DescriptionList({
           </ThemedText>
           <ThemedText
             style={{
-              fontSize: 14,
+              fontSize: FontSize.md.fontSize,
               color: t.textSecondary,
               flex: isHorizontal ? 1 : undefined,
             }}>

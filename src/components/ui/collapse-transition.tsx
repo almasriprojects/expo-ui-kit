@@ -7,13 +7,15 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { Animation } from '@/constants/theme';
+
 export type CollapseTransitionProps = {
   expanded: boolean;
   duration?: number;
   children: ReactNode;
 };
 
-const DEFAULT_DURATION = 300;
+const DEFAULT_DURATION = Animation.duration.normal;
 
 export function CollapseTransition({
   expanded,

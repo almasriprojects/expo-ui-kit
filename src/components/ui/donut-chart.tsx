@@ -12,18 +12,28 @@ import { useTheme } from '@/hooks/use-theme';
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 export type DonutChartDataItem = {
+  /** Display label for the segment */
   label: string;
+  /** Numeric value determining the segment size */
   value: number;
+  /** Color used to render the segment */
   color: string;
 };
 
 export type DonutChartProps = {
+  /** Array of data items representing chart segments */
   data: DonutChartDataItem[];
+  /** Diameter of the chart in pixels */
   size?: number;
+  /** Thickness of the donut ring */
   strokeWidth?: number;
+  /** Label text shown in the center of the donut */
   centerLabel?: string;
+  /** Value text shown in the center of the donut */
   centerValue?: string;
+  /** Accessibility label for the chart container */
   accessibilityLabel?: string;
+  /** Accessibility hint for the chart container */
   accessibilityHint?: string;
 };
 

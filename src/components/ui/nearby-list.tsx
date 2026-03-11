@@ -1,21 +1,29 @@
 import React from 'react';
 import { FlatList, Pressable, Text, View, type ViewProps } from 'react-native';
-import { Star } from 'lucide-react-native';
+import { MapPin, Star } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type NearbyPlace = {
+  /** Unique identifier for the place */
   key: string;
+  /** Name of the nearby place */
   name: string;
+  /** Category label (e.g. "Restaurant", "Cafe") */
   category: string;
+  /** Formatted distance string from the user */
   distance: string;
+  /** Star rating of the place */
   rating?: number;
+  /** Emoji icon representing the place type */
   icon?: string;
 };
 
 export type NearbyListProps = ViewProps & {
+  /** Array of nearby places to display */
   places: NearbyPlace[];
+  /** Callback invoked when a place item is pressed */
   onPlacePress?: (key: string) => void;
 };
 
@@ -34,7 +42,7 @@ function StarRatingDisplay({ rating }: { rating: number }) {
       {Array.from({ length: Math.max(0, emptyStars) }, (_, i) => (
         <Star key={`e${i}`} size={12} color={t.surfaceActive} />
       ))}
-      <Text style={{ fontSize: 12, color: t.textSecondary, marginLeft: 4 }}>
+      <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginLeft: 4 }}>
         {rating.toFixed(1)}
       </Text>
     </View>
@@ -81,16 +89,20 @@ export function NearbyList({
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text style={{ fontSize: 20 }}>{item.icon ?? '📍'}</Text>
+              {item.icon ? (
+                <Text style={{ fontSize: FontSize.xl.fontSize }}>{item.icon}</Text>
+              ) : (
+                <MapPin size={FontSize.xl.fontSize} color={t.textSecondary} />
+              )}
             </View>
             <View style={{ flex: 1, minWidth: 0 }}>
               <Text
-                style={{ fontSize: 15, fontWeight: '600', color: t.text }}
+                style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}
                 numberOfLines={1}>
                 {item.name}
               </Text>
               <Text
-                style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}
+                style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}
                 numberOfLines={1}>
                 {item.category}
               </Text>
@@ -107,7 +119,7 @@ export function NearbyList({
                 borderRadius: Radius.sm,
                 backgroundColor: t.surface,
               }}>
-              <Text style={{ fontSize: 12, fontWeight: '600', color: t.text }}>
+              <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.text }}>
                 {item.distance}
               </Text>
             </View>

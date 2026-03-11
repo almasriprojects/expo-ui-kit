@@ -2,10 +2,15 @@ import { PropsWithChildren, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Animated, { FadeIn, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Animation, Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
+export type CollapsibleProps = PropsWithChildren & {
+  /** Header title that toggles the collapsible section */
+  title: string;
+};
+
+export function Collapsible({ children, title }: CollapsibleProps) {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTheme();
   const rotation = useSharedValue(0);
@@ -16,7 +21,7 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
 
   const toggle = () => {
     setIsOpen((prev) => {
-      rotation.value = withTiming(!prev ? 180 : 0, { duration: 250 });
+      rotation.value = withTiming(!prev ? 180 : 0, { duration: Animation.duration.normal });
       return !prev;
     });
   };
@@ -43,9 +48,9 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
             },
             chevronStyle,
           ]}>
-          <Text style={{ fontSize: 12, color: t.textSecondary }}>▾</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}>▾</Text>
         </Animated.View>
-        <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>
           {title}
         </Text>
       </Pressable>

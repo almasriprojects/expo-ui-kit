@@ -3,18 +3,24 @@ import { View } from 'react-native';
 import { Check } from 'lucide-react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type VerticalStep = {
+  /** Title text for the step */
   title: string;
+  /** Optional description text for the step */
   description?: string;
+  /** Custom content rendered below the step title */
   content?: React.ReactNode;
+  /** Status of the step */
   status?: 'completed' | 'current' | 'upcoming';
 };
 
 export type VerticalStepperProps = {
+  /** Array of step definitions */
   steps: VerticalStep[];
+  /** Zero-based index of the current step */
   currentStep?: number;
 };
 
@@ -59,11 +65,11 @@ export function VerticalStepper({ steps, currentStep = 0 }: VerticalStepperProps
                 {isCompleted ? (
                   <Check size={14} color={t.primaryForeground} strokeWidth={3} />
                 ) : isCurrent ? (
-                  <ThemedText style={{ fontSize: 14, fontWeight: '700', color: t.primaryForeground }}>
+                  <ThemedText style={{ fontSize: FontSize.md.fontSize, fontWeight: '700', color: t.primaryForeground }}>
                     {index + 1}
                   </ThemedText>
                 ) : (
-                  <ThemedText style={{ fontSize: 11, fontWeight: '600', color: t.textSecondary }}>
+                  <ThemedText style={{ fontSize: FontSize.xs.fontSize, fontWeight: '600', color: t.textSecondary }}>
                     {index + 1}
                   </ThemedText>
                 )}
@@ -85,7 +91,7 @@ export function VerticalStepper({ steps, currentStep = 0 }: VerticalStepperProps
             <View style={{ flex: 1, marginLeft: 12, paddingBottom: 24 }}>
               <ThemedText
                 style={{
-                  fontSize: 16,
+                  fontSize: FontSize.lg.fontSize,
                   fontWeight: isCurrent ? '600' : '500',
                   color: isUpcoming ? t.textSecondary : t.text,
                 }}>
@@ -94,7 +100,7 @@ export function VerticalStepper({ steps, currentStep = 0 }: VerticalStepperProps
               {step.description && (
                 <ThemedText
                   style={{
-                    fontSize: 14,
+                    fontSize: FontSize.md.fontSize,
                     color: t.textSecondary,
                     marginTop: 2,
                   }}>

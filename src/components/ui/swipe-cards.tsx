@@ -10,18 +10,24 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type SwipeCardItem = {
+export type SwipeCardItem = {
+  /** Unique identifier for the card */
   id: string;
+  /** Content rendered inside the card */
   content: React.ReactNode;
 };
 
-type SwipeCardsProps = {
+export type SwipeCardsProps = {
+  /** Array of swipeable card items */
   items: SwipeCardItem[];
+  /** Callback invoked when a card is swiped left */
   onSwipeLeft?: (item: SwipeCardItem) => void;
+  /** Callback invoked when a card is swiped right */
   onSwipeRight?: (item: SwipeCardItem) => void;
+  /** Custom styles applied to the cards container */
   style?: ViewStyle;
 };
 
@@ -87,8 +93,8 @@ export function SwipeCards({ items, onSwipeLeft, onSwipeRight, style }: SwipeCar
     return (
       <View style={[{ alignItems: 'center', justifyContent: 'center', height: 300 }, style]}>
         <PartyPopper size={32} color={t.primary} style={{ marginBottom: 12 }} />
-        <Text style={{ fontSize: 18, fontWeight: '600', color: t.text }}>All done!</Text>
-        <Text style={{ fontSize: 14, color: t.textSecondary, marginTop: 4 }}>No more cards to show</Text>
+        <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '600', color: t.text }}>All done!</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, color: t.textSecondary, marginTop: 4 }}>No more cards to show</Text>
       </View>
     );
   }

@@ -2,19 +2,26 @@ import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type BottomNavTab = {
+  /** Unique identifier for the tab */
   key: string;
+  /** Display label below the icon */
   label: string;
+  /** Icon component rendered for the tab */
   icon: React.ComponentType<{ size?: number; color?: string }>;
+  /** Optional notification badge count */
   badge?: number;
 };
 
 export type BottomNavigationProps = {
+  /** Array of tab definitions */
   tabs: BottomNavTab[];
+  /** Key of the currently active tab */
   activeKey: string;
+  /** Callback invoked when a tab is pressed */
   onTabPress: (key: string) => void;
 };
 
@@ -80,7 +87,7 @@ export function BottomNavigation({
                   }}>
                   <Text
                     style={{
-                      fontSize: 11,
+                      fontSize: FontSize.xs.fontSize,
                       fontWeight: '600',
                       color: t.textOnColor,
                     }}
@@ -92,7 +99,7 @@ export function BottomNavigation({
             </View>
             <Text
               style={{
-                fontSize: 12,
+                fontSize: FontSize.sm.fontSize,
                 marginTop: 4,
                 color: isActive ? t.primary : t.textTertiary,
                 fontWeight: isActive ? '600' : '400',

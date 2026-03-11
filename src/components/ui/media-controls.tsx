@@ -2,19 +2,29 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Play, Pause, SkipBack, SkipForward } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { FontSize, Radius, Shadows } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type MediaControlsProps = {
+export type MediaControlsProps = {
+  /** Whether the media is currently playing */
   isPlaying?: boolean;
+  /** Current playback position in seconds */
   currentTime?: number;
+  /** Total duration of the media in seconds */
   duration?: number;
+  /** Title of the currently playing track */
   title?: string;
+  /** Artist name of the currently playing track */
   artist?: string;
+  /** Callback invoked when the play/pause button is pressed */
   onPlayPause?: () => void;
+  /** Callback invoked when the previous-track button is pressed */
   onPrevious?: () => void;
+  /** Callback invoked when the next-track button is pressed */
   onNext?: () => void;
+  /** Callback invoked when the user seeks to a specific time */
   onSeek?: (time: number) => void;
+  /** Custom styles applied to the controls container */
   style?: ViewStyle;
 };
 
@@ -55,12 +65,12 @@ export function MediaControls({
       {(title || artist) && (
         <View style={{ marginBottom: 16, alignItems: 'center' }}>
           {title && (
-            <Text style={{ fontSize: 16, fontWeight: '700', color: t.text }} numberOfLines={1}>
+            <Text style={{ fontSize: FontSize.lg.fontSize, fontWeight: '700', color: t.text }} numberOfLines={1}>
               {title}
             </Text>
           )}
           {artist && (
-            <Text style={{ fontSize: 13, color: t.textSecondary, marginTop: 2 }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, marginTop: 2 }}>
               {artist}
             </Text>
           )}
@@ -93,8 +103,8 @@ export function MediaControls({
           />
         </Pressable>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 }}>
-          <Text style={{ fontSize: 11, color: t.textTertiary }}>{formatTime(currentTime)}</Text>
-          <Text style={{ fontSize: 11, color: t.textTertiary }}>{formatTime(duration)}</Text>
+          <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{formatTime(currentTime)}</Text>
+          <Text style={{ fontSize: FontSize.xs.fontSize, color: t.textTertiary }}>{formatTime(duration)}</Text>
         </View>
       </View>
 

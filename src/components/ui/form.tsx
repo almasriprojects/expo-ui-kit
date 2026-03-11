@@ -9,13 +9,19 @@ import React, {
 } from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 
+import { FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type ValidationRule = {
+export type ValidationRule = {
+  /** Whether the field is required; can be a boolean or a custom message */
   required?: boolean | string;
+  /** Minimum length constraint with validation message */
   minLength?: { value: number; message: string };
+  /** Maximum length constraint with validation message */
   maxLength?: { value: number; message: string };
+  /** Regex pattern constraint with validation message */
   pattern?: { value: RegExp; message: string };
+  /** Custom validation function returning an error message or undefined */
   custom?: (value: string) => string | undefined;
 };
 
@@ -39,9 +45,12 @@ export function useForm() {
   return ctx;
 }
 
-type FormProps = {
+export type FormProps = {
+  /** Form content including FormField components */
   children: ReactNode;
+  /** Callback fired with form values on submission */
   onSubmit: (values: FormValues) => void;
+  /** Custom styles applied to the form container */
   style?: ViewStyle;
 };
 
@@ -98,10 +107,14 @@ export function Form({ children, onSubmit, style }: FormProps) {
   );
 }
 
-type FormFieldProps = {
+export type FormFieldProps = {
+  /** Unique field name used as a key in form values */
   name: string;
+  /** Label text displayed above the field */
   label?: string;
+  /** Validation rules for the field */
   rules?: ValidationRule;
+  /** Render function receiving field state props */
   children: (props: {
     value: string;
     onChangeText: (text: string) => void;
@@ -120,9 +133,9 @@ export function FormField({ name, label, rules: fieldRules, children }: FormFiel
   }, [name, form]);
 
   return (
-    <View style={{ gap: 6 }}>
+    <View style={{ gap: Spacing[1.5] }}>
       {label && (
-        <Text style={{ fontSize: 14, fontWeight: '600', color: t.text }}>{label}</Text>
+        <Text style={{ fontSize: FontSize.md.fontSize, fontWeight: '600', color: t.text }}>{label}</Text>
       )}
       {children({
         value: form.values[name] ?? '',
@@ -130,7 +143,7 @@ export function FormField({ name, label, rules: fieldRules, children }: FormFiel
         error: form.getError(name),
       })}
       {form.getError(name) && (
-        <Text style={{ fontSize: 12, color: t.error, fontWeight: '500' }}>
+        <Text style={{ fontSize: FontSize.sm.fontSize, color: t.error, fontWeight: '500' }}>
           {form.getError(name)}
         </Text>
       )}

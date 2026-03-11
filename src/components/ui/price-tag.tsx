@@ -1,15 +1,21 @@
 import React from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type PriceTagProps = ViewProps & {
+export type PriceTagProps = ViewProps & {
+  /** Numeric price amount */
   amount: number;
+  /** Currency code displayed after the amount */
   currency?: string;
+  /** Currency symbol displayed before the amount */
   symbol?: string;
+  /** Original price for showing a discount strikethrough */
   originalAmount?: number;
+  /** Billing period label (e.g. "month", "year") */
   period?: string;
+  /** Size variant controlling the font size */
   size?: 'sm' | 'md' | 'lg';
 };
 
@@ -66,7 +72,7 @@ export function PriceTag({
               paddingVertical: 3,
               borderRadius: Radius.sm,
             }}>
-            <Text style={{ fontSize: 12, fontWeight: '700', color: t.error }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.error }}>
               -{discount}%
             </Text>
           </View>

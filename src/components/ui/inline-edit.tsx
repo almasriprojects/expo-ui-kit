@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Pressable, Text, TextInput, type TextStyle, type ViewProps } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type InlineEditProps = ViewProps & {
+  /** Current text value */
   value: string;
+  /** Callback fired with the new value when editing completes */
   onSave: (value: string) => void;
+  /** Placeholder text shown when value is empty */
   placeholder?: string;
+  /** Custom text styles for the display and input */
   textStyle?: TextStyle;
 };
 
@@ -56,7 +60,7 @@ export function InlineEdit({
         accessibilityHint="Press enter or tap outside to save"
         style={[
           {
-            fontSize: 16,
+            fontSize: FontSize.lg.fontSize,
             color: t.text,
             paddingVertical: 4,
             paddingHorizontal: 8,
@@ -93,13 +97,13 @@ export function InlineEdit({
       {...props}>
       <Text
         style={[
-          { fontSize: 16, color: value ? t.text : t.textTertiary },
+          { fontSize: FontSize.lg.fontSize, color: value ? t.text : t.textTertiary },
           textStyle,
         ]}
         numberOfLines={1}>
         {value || placeholder}
       </Text>
-      <Text style={{ fontSize: 14, color: t.textTertiary }}>✎</Text>
+      <Text style={{ fontSize: FontSize.md.fontSize, color: t.textTertiary }}>✎</Text>
     </Pressable>
   );
 }

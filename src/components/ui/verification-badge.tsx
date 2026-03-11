@@ -2,13 +2,17 @@ import React from 'react';
 import { Text, View, type ViewStyle } from 'react-native';
 import { Check, Crown, Star } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type VerificationBadgeProps = {
+export type VerificationBadgeProps = {
+  /** Badge variant determining the icon and color */
   variant?: 'verified' | 'official' | 'premium';
+  /** Size variant of the badge */
   size?: 'sm' | 'md' | 'lg';
+  /** Optional text label displayed beside the badge */
   label?: string;
+  /** Custom styles applied to the badge container */
   style?: ViewStyle;
 };
 
@@ -64,7 +68,7 @@ export function VerificationBadge({
           }}>
           <VariantIcon variant={variant} iconSize={iconSize} color={t.textOnColor} />
         </View>
-        <Text style={{ fontSize: 12, fontWeight: '600', color: bg }}>{label}</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: bg }}>{label}</Text>
       </View>
     );
   }

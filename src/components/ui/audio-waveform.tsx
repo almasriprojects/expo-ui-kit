@@ -2,15 +2,21 @@ import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { Play, Pause } from 'lucide-react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type AudioWaveformProps = {
+export type AudioWaveformProps = {
+  /** Formatted duration string (e.g. "1:30") */
   duration: string;
+  /** Whether the audio is currently playing */
   isPlaying?: boolean;
+  /** Playback progress from 0 to 1 */
   progress?: number;
+  /** Callback invoked to toggle play/pause */
   onPlayPause?: () => void;
+  /** Number of waveform bars to render */
   barCount?: number;
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -70,7 +76,7 @@ export function AudioWaveform({
         ))}
       </View>
 
-      <Text style={{ fontSize: 12, color: t.textSecondary, fontVariant: ['tabular-nums'], minWidth: 36 }}>
+      <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontVariant: ['tabular-nums'], minWidth: 36 }}>
         {duration}
       </Text>
     </View>

@@ -1,14 +1,19 @@
 import React, { type ReactNode } from 'react';
 import { Text, View } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { Radius, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type BadgeCounterProps = {
+  /** Number to display in the badge */
   count?: number;
+  /** Maximum count before showing "max+" */
   max?: number;
+  /** Whether to show a dot instead of a number */
   dot?: boolean;
+  /** Custom background color for the badge */
   color?: string;
+  /** Content to wrap with the badge counter */
   children: ReactNode;
 };
 
@@ -51,7 +56,7 @@ export function BadgeCounter({
           {!dot && (
             <Text
               style={{
-                fontSize: 11,
+                fontSize: FontSize.xs.fontSize,
                 fontWeight: '700',
                 color: t.textOnColor,
               }}>

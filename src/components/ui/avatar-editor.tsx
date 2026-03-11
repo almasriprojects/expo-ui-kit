@@ -1,16 +1,23 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
+import { Camera } from 'lucide-react-native';
 
-import { Radius, Shadows } from '@/constants/theme';
+import { Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { Avatar } from './avatar';
 
-type AvatarEditorProps = {
+export type AvatarEditorProps = {
+  /** URL of the current avatar image */
   source?: string;
+  /** Initials displayed when no image is set */
   initials?: string;
+  /** Size preset for the avatar */
   size?: 'md' | 'lg' | 'xl';
+  /** Callback invoked when the edit button is pressed */
   onEdit: () => void;
+  /** Callback invoked to remove the current photo */
   onRemove?: () => void;
+  /** Custom styles for the outer container */
   style?: ViewStyle;
 };
 
@@ -50,12 +57,12 @@ export function AvatarEditor({
             justifyContent: 'center',
             ...Shadows.sm,
           }}>
-          <Text style={{ fontSize: editDim * 0.4, color: t.primaryForeground }}>📷</Text>
+          <Camera size={editDim * 0.4} color={t.primaryForeground} />
         </Pressable>
       </View>
       {onRemove && source && (
         <Pressable onPress={onRemove}>
-          <Text style={{ fontSize: 13, fontWeight: '600', color: t.error }}>Remove photo</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.error }}>Remove photo</Text>
         </Pressable>
       )}
     </View>

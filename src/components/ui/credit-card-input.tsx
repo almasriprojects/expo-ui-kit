@@ -1,19 +1,24 @@
 import React, { useCallback, useState } from 'react';
 import { Text, TextInput, View, type ViewProps } from 'react-native';
 
-import { BrandColors, Radius, Shadows } from '@/constants/theme';
+import { BrandColors, Radius, Shadows, FontSize } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 import { MaskedInput } from './masked-input';
 
 export type CreditCardData = {
+  /** Card number digits */
   number: string;
+  /** Card expiry date in MM/YY format */
   expiry: string;
+  /** Card security code */
   cvv: string;
+  /** Detected card type (visa, mastercard, amex, unknown) */
   type: string;
 };
 
 export type CreditCardInputProps = ViewProps & {
+  /** Callback fired when any card field changes */
   onCardChange?: (card: CreditCardData) => void;
 };
 
@@ -30,7 +35,7 @@ function CardIcon({ type, color }: { type: string; color: string }) {
   if (type === 'visa') {
     return (
       <View style={{ width: size, height: size * 0.65, justifyContent: 'center' }}>
-        <Text style={{ fontSize: 18, fontWeight: '800', color }}>VISA</Text>
+        <Text style={{ fontSize: FontSize.xl.fontSize, fontWeight: '800', color }}>VISA</Text>
       </View>
     );
   }
@@ -45,7 +50,7 @@ function CardIcon({ type, color }: { type: string; color: string }) {
   if (type === 'amex') {
     return (
       <View style={{ width: size, height: size * 0.65, justifyContent: 'center' }}>
-        <Text style={{ fontSize: 12, fontWeight: '800', color }}>AMEX</Text>
+        <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '800', color }}>AMEX</Text>
       </View>
     );
   }
@@ -121,7 +126,7 @@ export function CreditCardInput({
           ...Shadows.md,
         }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <Text style={{ fontSize: 12, fontWeight: '600', color: t.textSecondary }}>Card number</Text>
+          <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textSecondary }}>Card number</Text>
           <CardIcon type={cardType} color={iconColor} />
         </View>
         <MaskedInput
@@ -133,7 +138,7 @@ export function CreditCardInput({
         />
         <View style={{ flexDirection: 'row', gap: 12 }}>
           <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 12, fontWeight: '600', color: t.textSecondary, marginBottom: 6 }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textSecondary, marginBottom: 6 }}>
               Expiry
             </Text>
             <TextInput
@@ -152,7 +157,7 @@ export function CreditCardInput({
                 paddingHorizontal: 16,
                 paddingVertical: 12,
                 borderRadius: Radius.lg,
-                fontSize: 16,
+                fontSize: FontSize.lg.fontSize,
                 backgroundColor: t.background,
                 color: t.text,
                 borderWidth: 1.5,
@@ -161,7 +166,7 @@ export function CreditCardInput({
             />
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 12, fontWeight: '600', color: t.textSecondary, marginBottom: 6 }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textSecondary, marginBottom: 6 }}>
               CVV
             </Text>
             <TextInput
@@ -178,7 +183,7 @@ export function CreditCardInput({
                 paddingHorizontal: 16,
                 paddingVertical: 12,
                 borderRadius: Radius.lg,
-                fontSize: 16,
+                fontSize: FontSize.lg.fontSize,
                 backgroundColor: t.background,
                 color: t.text,
                 borderWidth: 1.5,

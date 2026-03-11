@@ -1,19 +1,26 @@
 import React from 'react';
 import { Pressable, Text, View, type ViewStyle } from 'react-native';
 
-import { Radius } from '@/constants/theme';
+import { FontSize, Radius } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export type SizeOption = {
+  /** Display label for the size (e.g. "S", "M", "L") */
   label: string;
+  /** Unique value identifier for the size */
   value: string;
+  /** Whether this size is currently in stock */
   available?: boolean;
 };
 
 export type SizeSelectorProps = {
+  /** Array of available size options */
   sizes: SizeOption[];
+  /** Currently selected size value */
   selected?: string;
+  /** Callback invoked when a size is selected */
   onSelect: (value: string) => void;
+  /** Custom styles applied to the container */
   style?: ViewStyle;
 };
 
@@ -64,7 +71,7 @@ export function SizeSelector({
             accessibilityLabel={`${size.label}${isUnavailable ? ', unavailable' : ''}`}>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: FontSize.md.fontSize,
                 fontWeight: '600',
                 color: isSelected ? t.primaryForeground : t.text,
                 textDecorationLine: isUnavailable ? 'line-through' : undefined,

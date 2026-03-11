@@ -2,14 +2,19 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 import { useTheme } from '@/hooks/use-theme';
+import { FontSize } from '@/constants/theme';
 
 export type BreadcrumbItem = {
+  /** Display text for the breadcrumb segment */
   label: string;
+  /** Callback invoked when the segment is pressed */
   onPress?: () => void;
 };
 
 export type BreadcrumbProps = {
+  /** Ordered list of breadcrumb items */
   items: BreadcrumbItem[];
+  /** Character or string used as a separator between items */
   separator?: string;
 };
 
@@ -24,12 +29,12 @@ export function Breadcrumb({ items, separator = '/' }: BreadcrumbProps) {
         return (
           <View key={index} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             {index > 0 && (
-              <Text style={{ fontSize: 14, color: t.textTertiary }}>{separator}</Text>
+              <Text style={{ fontSize: FontSize.md.fontSize, color: t.textTertiary }}>{separator}</Text>
             )}
             {isLast ? (
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   fontWeight: '600',
                   color: t.text,
                 }}>
@@ -44,7 +49,7 @@ export function Breadcrumb({ items, separator = '/' }: BreadcrumbProps) {
                 })}>
                 <Text
                   style={{
-                    fontSize: 14,
+                    fontSize: FontSize.md.fontSize,
                     fontWeight: '500',
                     color: t.primary,
                   }}>
@@ -54,7 +59,7 @@ export function Breadcrumb({ items, separator = '/' }: BreadcrumbProps) {
             ) : (
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: FontSize.md.fontSize,
                   fontWeight: '500',
                   color: t.textSecondary,
                 }}>
