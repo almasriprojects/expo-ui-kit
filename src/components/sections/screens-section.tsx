@@ -6,12 +6,14 @@ import {
   BackButton,
   Box,
   Button,
+  CallScreen,
   CollapseTransition,
   Confetti,
   DescriptionList,
   FadeTransition,
   HStack,
   Highlight,
+  ImageEditor,
   Kbd,
   QRCode,
   Statistic,
@@ -19,11 +21,13 @@ import {
   VideoPlayer,
 } from '@/components/ui';
 import { useTheme } from '@/hooks/use-theme';
+import { useToast } from '@/hooks/use-toast';
 
 import { Demo, SectionHeader } from './demo-helpers';
 
 export function ScreensSection() {
   const t = useTheme();
+  const toast = useToast();
 
   const [fadeVisible, setFadeVisible] = useState(true);
   const [collapseExpanded, setCollapseExpanded] = useState(false);
@@ -169,6 +173,28 @@ export function ScreensSection() {
         <Box p={16} rounded="xl" shadow="md" bg="card">
           <Text style={{ color: t.text, fontSize: 14 }}>A Box with padding, rounded corners, shadow, and card background.</Text>
         </Box>
+      </Demo>
+
+      <Demo title="CallScreen">
+        <View style={{ height: 400, borderRadius: 16, overflow: 'hidden' }}>
+          <CallScreen
+            callerName="John Doe"
+            status="ringing"
+            onToggleMute={() => {}}
+            onToggleSpeaker={() => {}}
+            onHangUp={() => {}}
+          />
+        </View>
+      </Demo>
+
+      <Demo title="ImageEditor">
+        <View style={{ height: 450, borderRadius: 16, overflow: 'hidden' }}>
+          <ImageEditor
+            imageUri="https://picsum.photos/400/300"
+            onSave={(edits) => toast.show({ message: `Saved: ${edits.filter}`, variant: 'success' })}
+            onCancel={() => {}}
+          />
+        </View>
       </Demo>
     </>
   );

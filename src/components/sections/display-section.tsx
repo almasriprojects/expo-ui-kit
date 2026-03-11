@@ -8,10 +8,12 @@ import {
   Button,
   CountdownTimer,
   DataTable,
+  MarkdownRenderer,
   Progress,
   SkeletonCard,
   SkeletonText,
   StepIndicator,
+  StreamingText,
   Timeline,
 } from '@/components/ui';
 import { useTheme } from '@/hooks/use-theme';
@@ -106,6 +108,18 @@ export function DisplaySection() {
           <Text style={{ fontSize: 12, fontWeight: '400', color: t.textTertiary }}>Caption text</Text>
           <ThemedText type="code">{'const x = "monospace"'}</ThemedText>
         </View>
+      </Demo>
+
+      <Demo title="MarkdownRenderer">
+        <MarkdownRenderer content={`# Hello World\n\nThis is **bold** and *italic* text.\n\n## Features\n\n- First item\n- Second item\n- Third item\n\n> This is a blockquote\n\n\`\`\`\nconst x = 42;\n\`\`\`\n\nVisit [Expo](https://expo.dev) for more.`} />
+      </Demo>
+
+      <Demo title="StreamingText">
+        <StreamingText
+          text="Hello! I'm an AI assistant. I can help you build amazing React Native apps with Expo. Let me know what you'd like to create today."
+          speed={25}
+          cursor
+        />
       </Demo>
     </>
   );

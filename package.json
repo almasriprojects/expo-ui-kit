@@ -1,7 +1,7 @@
 {
   "name": "expo-ui-kit",
   "version": "1.0.0",
-  "description": "A production-ready React Native / Expo component library — 143 UI components, 8 shadcn-style color themes, 5 font presets, 10 app template demos.",
+  "description": "A production-ready React Native / Expo component library — 267 UI components, 8 shadcn-style color themes, 5 font presets, 10 app template demos.",
   "main": "expo-router/entry",
   "module": "src/index.ts",
   "types": "src/index.ts",

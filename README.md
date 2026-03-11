@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/almasriprojects/expo-ui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/almasriprojects/expo-ui-kit/actions/workflows/ci.yml)
 
-A production-ready **React Native component library** built with Expo SDK 54. Features **254 UI components**, **10 app template demos**, **5 auth screen templates**, **8 color themes**, **5 font presets**, and full light/dark mode support — all driven by a single centralized theme file.
+A production-ready **React Native component library** built with Expo SDK 54. Features **267 UI components**, **10 app template demos**, **5 auth screen templates**, **8 color themes**, **5 font presets**, and full light/dark mode support — all driven by a single centralized theme file.
 
 Think of it as **shadcn/ui for React Native**.
 
 ## Highlights
 
-- **254 reusable components** — buttons, inputs, cards, modals, charts, data tables, calendars, transitions, accessibility primitives, layout helpers, media players, and much more
+- **267 reusable components** — buttons, inputs, cards, modals, charts, data tables, calendars, transitions, accessibility primitives, layout helpers, media players, and much more
 - **10 full app template demos** — Marketplace, Finance, Project Management, Food Delivery, Booking, Social, Messaging, Fitness, Education, Real Estate
 - **5 auth screen templates** — Sign In, Sign Up, Forgot Password, OTP Verification, Reset Password
 - **8 color themes** — Default, Blue, Green, Orange, Red, Rose, Violet, Yellow (derived from shadcn's oklch palette)
@@ -47,7 +47,7 @@ src/
 │   └── explore.tsx         # Explore — app template demos
 │
 ├── components/
-│   ├── ui/                 # 254 reusable UI components
+│   ├── ui/                 # 267 reusable UI components
 │   │   └── index.ts        # Barrel export
 │   ├── primitives/         # Base components (ThemedText, ThemedView, HintRow, ExternalLink)
 │   ├── templates/          # 10 app demos + 5 auth screens
@@ -89,7 +89,7 @@ src/
 
 ## Start a New App
 
-Use this repo as a template to spin up a new app with all 254 components ready to go:
+Use this repo as a template to spin up a new app with all 267 components ready to go:
 
 ```bash
 git clone https://github.com/almasriprojects/expo-ui-kit.git my-new-app
@@ -117,7 +117,7 @@ npx expo start
 
 ## Run the Demo (Kitchen Sink)
 
-To explore all 254 components and 10 app templates before creating your app:
+To explore all 267 components and 10 app templates before creating your app:
 
 ```bash
 git clone https://github.com/almasriprojects/expo-ui-kit.git

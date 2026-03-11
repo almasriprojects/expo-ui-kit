@@ -23,10 +23,13 @@ import {
   GradientCard,
   InfoRow,
   LinkText,
+  LyricsDisplay,
   Marquee,
+  MiniPlayer,
   MultiSelect,
   Pagination,
   PinInput,
+  PipPlayer,
   RatingDisplay,
   ReadMoreText,
   Select,
@@ -60,6 +63,8 @@ export function AdvancedSection() {
   const [autoVal, setAutoVal] = useState('');
   const [rangeStart, setRangeStart] = useState<Date | undefined>();
   const [rangeEnd, setRangeEnd] = useState<Date | undefined>();
+  const [miniPlaying, setMiniPlaying] = useState(false);
+  const [pipVisible, setPipVisible] = useState(false);
 
   return (
     <>
@@ -347,6 +352,40 @@ return <Text style={{ color: t.text }}>Hello</Text>;`}
             { label: 'Breadcrumb' },
           ]}
         />
+      </Demo>
+
+      <Demo title="MiniPlayer">
+        <MiniPlayer
+          title="Bohemian Rhapsody"
+          subtitle="Queen"
+          isPlaying={miniPlaying}
+          onPlayPause={() => setMiniPlaying(!miniPlaying)}
+          progress={0.35}
+        />
+      </Demo>
+
+      <Demo title="LyricsDisplay">
+        <LyricsDisplay
+          lines={[
+            { time: 0, text: 'Is this the real life?' },
+            { time: 3, text: 'Is this just fantasy?' },
+            { time: 6, text: 'Caught in a landslide' },
+            { time: 9, text: 'No escape from reality' },
+            { time: 12, text: 'Open your eyes' },
+            { time: 15, text: 'Look up to the skies and see' },
+          ]}
+          currentTime={7}
+          maxHeight={200}
+        />
+      </Demo>
+
+      <Demo title="PipPlayer">
+        <Button title={pipVisible ? 'Hide PiP' : 'Show PiP'} onPress={() => setPipVisible(!pipVisible)} />
+        <PipPlayer visible={pipVisible} onClose={() => setPipVisible(false)}>
+          <View style={{ flex: 1, backgroundColor: t.primary, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ color: t.primaryForeground, fontWeight: '700' }}>PiP Content</Text>
+          </View>
+        </PipPlayer>
       </Demo>
     </>
   );

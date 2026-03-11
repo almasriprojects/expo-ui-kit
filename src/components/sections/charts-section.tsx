@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View } from 'react-native';
 
 import {
   AreaChart,
+  AudioVisualizer,
   BarChart,
+  Button,
   DonutChart,
   Gauge,
   HeatmapCalendar,
@@ -58,6 +60,7 @@ function useHeatmapData(): Record<string, number> {
 export function ChartsSection() {
   const t = useTheme();
   const heatmapData = useHeatmapData();
+  const [vizPlaying, setVizPlaying] = useState(true);
 
   const pieData = useMemo(
     () => [
@@ -130,6 +133,13 @@ export function ChartsSection() {
 
       <Demo title="HeatmapCalendar">
         <HeatmapCalendar data={heatmapData} weeks={12} />
+      </Demo>
+
+      <Demo title="AudioVisualizer">
+        <AudioVisualizer isPlaying={vizPlaying} bars={20} height={100} />
+        <View style={{ marginTop: 12 }}>
+          <Button title={vizPlaying ? 'Pause' : 'Play'} onPress={() => setVizPlaying(!vizPlaying)} variant="outline" />
+        </View>
       </Demo>
     </>
   );

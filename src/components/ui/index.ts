@@ -414,3 +414,41 @@ export { PullToRefresh } from './pull-to-refresh';
 export type { PullToRefreshProps } from './pull-to-refresh';
 export { ThemedSectionList } from './themed-section-list';
 export type { ThemedSectionListProps, ThemedSection } from './themed-section-list';
+
+// ── Messaging ──
+export { ReplyPreview } from './reply-preview';
+export type { ReplyPreviewProps } from './reply-preview';
+export { StickerPicker } from './sticker-picker';
+export type { StickerPickerProps, StickerCategory, StickerItem } from './sticker-picker';
+export { CallScreen } from './call-screen';
+export type { CallScreenProps, CallStatus } from './call-screen';
+
+// ── Content Rendering ──
+export { MarkdownRenderer } from './markdown-renderer';
+export type { MarkdownRendererProps } from './markdown-renderer';
+export { StreamingText } from './streaming-text';
+export type { StreamingTextProps } from './streaming-text';
+
+// ── Media Players ──
+export { MiniPlayer } from './mini-player';
+export type { MiniPlayerProps } from './mini-player';
+export { LyricsDisplay } from './lyrics-display';
+export type { LyricsDisplayProps, LyricLine } from './lyrics-display';
+export { AudioVisualizer } from './audio-visualizer';
+export type { AudioVisualizerProps } from './audio-visualizer';
+export { PipPlayer } from './pip-player';
+export type { PipPlayerProps } from './pip-player';
+export { ImageEditor } from './image-editor';
+export type { ImageEditorProps, ImageEdits } from './image-editor';
+
+// ── Split Layout ──
+export { SplitScreen } from './split-screen';
+export type { SplitScreenProps } from './split-screen';
+
+// ── Selectors ──
+export { EffectSelector } from './effect-selector';
+export type { EffectSelectorProps, EffectOption } from './effect-selector';
+
+// ── Commerce (extended) ──
+export { SplitFareCard } from './split-fare-card';
+export type { SplitFareCardProps, FareParticipant } from './split-fare-card';

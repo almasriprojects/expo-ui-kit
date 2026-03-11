@@ -9,6 +9,7 @@ import {
   InventoryBadge,
   Receipt,
   SizeSelector,
+  SplitFareCard,
   SubscriptionCard,
   TipSelector,
 } from '@/components/ui';
@@ -125,6 +126,18 @@ export function CommerceSection() {
             { feature: 'API Access', values: { basic: false, pro: true, enterprise: true } },
             { feature: 'Custom Domain', values: { basic: false, pro: false, enterprise: true } },
           ]}
+        />
+      </Demo>
+
+      <Demo title="SplitFareCard">
+        <SplitFareCard
+          total={48.50}
+          participants={[
+            { name: 'Alice', amount: 16.17, paid: true },
+            { name: 'Bob', amount: 16.17, paid: false },
+            { name: 'Charlie', amount: 16.16, paid: false },
+          ]}
+          onInvite={() => {}}
         />
       </Demo>
     </>

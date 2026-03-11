@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import { AtSign, Heart, Link, Mail, MessageCircle, MoreHorizontal, User } from 'lucide-react-native';
+import { AtSign, Heart, Link, Mail, MessageCircle, MoreHorizontal, Smile, User } from 'lucide-react-native';
 
 import {
   ActivityFeed,
@@ -10,7 +10,9 @@ import {
   Poll,
   ReactionBar,
   ReadReceipt,
+  ReplyPreview,
   ShareSheet,
+  StickerPicker,
   VoiceMessageBubble,
 } from '@/components/ui';
 import { useTheme } from '@/hooks/use-theme';
@@ -155,6 +157,43 @@ export function SocialSection() {
           onChangeText={setMentionValue}
           users={MENTION_USERS}
           placeholder="Type @ to mention..."
+        />
+      </Demo>
+
+      <Demo title="ReplyPreview">
+        <ReplyPreview
+          sender="Alice"
+          message="Hey, did you see the new design? I think it looks great and we should ship it soon."
+          onClose={() => {}}
+        />
+      </Demo>
+
+      <Demo title="StickerPicker">
+        <StickerPicker
+          categories={[
+            {
+              id: 'smileys',
+              name: 'Smileys',
+              icon: <Smile size={16} color={t.text} />,
+              items: [
+                { id: 's1', uri: 'https://via.placeholder.com/80/FFD700/000?text=😀', label: 'grin' },
+                { id: 's2', uri: 'https://via.placeholder.com/80/FF6347/fff?text=😍', label: 'love' },
+                { id: 's3', uri: 'https://via.placeholder.com/80/87CEEB/000?text=😎', label: 'cool' },
+                { id: 's4', uri: 'https://via.placeholder.com/80/98FB98/000?text=🤔', label: 'think' },
+              ],
+            },
+            {
+              id: 'animals',
+              name: 'Animals',
+              icon: <Heart size={16} color={t.text} />,
+              items: [
+                { id: 'a1', uri: 'https://via.placeholder.com/80/DEB887/000?text=🐱', label: 'cat' },
+                { id: 'a2', uri: 'https://via.placeholder.com/80/B0C4DE/000?text=🐶', label: 'dog' },
+              ],
+            },
+          ]}
+          onSelect={() => {}}
+          height={220}
         />
       </Demo>
     </>

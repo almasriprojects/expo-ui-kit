@@ -6,6 +6,7 @@ import {
   Accordion,
   Checkbox,
   Chip,
+  EffectSelector,
   QuantityStepper,
   RadioGroup,
   SegmentedControl,
@@ -27,6 +28,7 @@ export function ControlsSection() {
   const [quantity, setQuantity] = useState(1);
   const [starVal, setStarVal] = useState(4);
   const [chips, setChips] = useState(['React Native', 'Expo', 'NativeWind', 'TypeScript']);
+  const [selectedEffect, setSelectedEffect] = useState('original');
 
   return (
     <>
@@ -99,6 +101,21 @@ export function ControlsSection() {
             { key: '2', title: 'How many components?', content: '143 components, all token-based.' },
             { key: '3', title: 'Dark mode support?', content: 'Every component adapts to light & dark mode.' },
           ]}
+        />
+      </Demo>
+
+      <Demo title="EffectSelector">
+        <EffectSelector
+          effects={[
+            { id: 'original', label: 'Original', color: '#6B7280' },
+            { id: 'warm', label: 'Warm', color: '#F59E0B' },
+            { id: 'cool', label: 'Cool', color: '#3B82F6' },
+            { id: 'bw', label: 'B&W', color: '#1F2937' },
+            { id: 'vivid', label: 'Vivid', color: '#EC4899' },
+            { id: 'vintage', label: 'Vintage', color: '#92400E' },
+          ]}
+          selected={selectedEffect}
+          onSelect={setSelectedEffect}
         />
       </Demo>
     </>
