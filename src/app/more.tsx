@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import {
   BookOpen,
@@ -29,17 +29,27 @@ const MORE_APPS = [
   { key: 'realestate', label: 'Real Estate', icon: Home, desc: 'Listings, mortgage, tours' },
 ] as const;
 
+const GRID_GAP = 12;
+const HORIZONTAL_PAD = 20;
+
 export default function MoreScreen() {
   const t = useTheme();
   const f = useFont();
   const router = useRouter();
+  const { width: screenWidth } = useWindowDimensions();
+  const cardWidth = (screenWidth - HORIZONTAL_PAD * 2 - GRID_GAP) / 2;
+
+  const rows: (typeof MORE_APPS[number])[][] = [];
+  for (let i = 0; i < MORE_APPS.length; i += 2) {
+    rows.push(MORE_APPS.slice(i, i + 2) as unknown as (typeof MORE_APPS[number])[]);
+  }
 
   return (
     <Screen>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingHorizontal: Spacing[5],
+          paddingHorizontal: HORIZONTAL_PAD,
           paddingTop: Spacing[4],
           paddingBottom: Spacing[16],
         }}>
@@ -58,57 +68,61 @@ export default function MoreScreen() {
             ...FontSize.sm,
             fontFamily: resolveFontFamily(f, '400'),
             color: t.textSecondary,
-            marginBottom: Spacing[6],
+            marginBottom: Spacing[5],
           }}>
           Real-world demos built with the component library
         </Text>
 
-        <View
-          style={{
-            backgroundColor: t.card,
-            borderRadius: Radius.xl,
-            borderWidth: 1,
-            borderColor: t.border,
-            overflow: 'hidden',
-            ...Shadows.sm,
-          }}>
-          {MORE_APPS.map((app, index) => {
-            const Icon = app.icon;
-            const isLast = index === MORE_APPS.length - 1;
-            return (
-              <Pressable
-                key={app.key}
-                onPress={() => router.push(`/demo/${app.key}`)}
-                accessibilityRole="button"
-                accessibilityLabel={`${app.label} demo`}
-                style={({ pressed }) => ({
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingVertical: Spacing[4],
-                  paddingHorizontal: Spacing[4],
-                  backgroundColor: pressed ? t.surface : 'transparent',
-                  borderBottomWidth: isLast ? 0 : 1,
-                  borderBottomColor: t.border,
-                })}>
-                <View
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: Radius.lg,
-                    backgroundColor: t.primarySoft,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginRight: Spacing[4],
-                  }}>
-                  <Icon size={20} color={t.primary} />
-                </View>
-
-                <View style={{ flex: 1 }}>
+        {rows.map((row, rowIndex) => (
+          <View
+            key={rowIndex}
+            style={{
+              flexDirection: 'row',
+              marginBottom: GRID_GAP,
+            }}>
+            {row.map((app, colIndex) => {
+              const Icon = app.icon;
+              return (
+                <Pressable
+                  key={app.key}
+                  onPress={() => router.push(`/demo/${app.key}`)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${app.label} demo`}
+                  style={({ pressed }) => ({
+                    width: cardWidth,
+                    marginLeft: colIndex === 1 ? GRID_GAP : 0,
+                    backgroundColor: pressed ? t.surface : t.card,
+                    borderRadius: Radius.xl,
+                    padding: Spacing[4],
+                    borderWidth: 1,
+                    borderColor: pressed ? t.primary : t.border,
+                    ...Shadows.sm,
+                  })}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      marginBottom: Spacing[2],
+                    }}>
+                    <View
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: Radius.md,
+                        backgroundColor: t.primarySoft,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Icon size={18} color={t.primary} />
+                    </View>
+                    <View style={{ flex: 1 }} />
+                    <ChevronRight size={16} color={t.textTertiary} />
+                  </View>
                   <Text
                     style={{
-                      ...FontSize.md,
-                      fontWeight: '600',
-                      fontFamily: resolveFontFamily(f, '600'),
+                      ...FontSize.sm,
+                      fontWeight: '700',
+                      fontFamily: resolveFontFamily(f, '700'),
                       color: t.text,
                       marginBottom: 2,
                     }}
@@ -117,20 +131,18 @@ export default function MoreScreen() {
                   </Text>
                   <Text
                     style={{
-                      ...FontSize.xs,
+                      ...FontSize['2xs'],
                       color: t.textSecondary,
                       fontFamily: resolveFontFamily(f, '400'),
                     }}
-                    numberOfLines={1}>
+                    numberOfLines={2}>
                     {app.desc}
                   </Text>
-                </View>
-
-                <ChevronRight size={18} color={t.textTertiary} />
-              </Pressable>
-            );
-          })}
-        </View>
+                </Pressable>
+              );
+            })}
+          </View>
+        ))}
       </ScrollView>
     </Screen>
   );
