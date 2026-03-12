@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { BookOpen, Smartphone } from 'lucide-react-native';
+import { BookOpen, GraduationCap, Smartphone } from 'lucide-react-native';
 
 import {
   Card,
@@ -12,11 +12,11 @@ import {
   QuizOption,
   ReadMoreText,
   SearchBar,
-  Separator,
   StatCard,
   StepIndicator,
   VideoThumbnail,
 } from '@/components/ui';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function EducationDemo() {
@@ -27,7 +27,17 @@ export function EducationDemo() {
   const [quizRevealed, setQuizRevealed] = useState(false);
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40, gap: 20 }}>
+    <ScrollView contentContainerStyle={{ padding: Spacing[5], paddingBottom: Spacing[10], gap: Spacing[5] }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View>
+          <Text style={{ ...FontSize.sm, color: t.textSecondary }}>Good morning</Text>
+          <Text style={{ ...FontSize['2xl'], fontWeight: '700', color: t.text }}>Welcome back, John</Text>
+        </View>
+        <View style={{ width: 44, height: 44, borderRadius: Radius.full, backgroundColor: t.primarySoft, alignItems: 'center', justifyContent: 'center' }}>
+          <GraduationCap size={24} color={t.primary} />
+        </View>
+      </View>
+
       <SearchBar value={search} onChangeText={setSearch} placeholder="Search courses..." />
 
       <FilterBar
@@ -41,14 +51,13 @@ export function EducationDemo() {
         onValueChange={setFilter}
       />
 
-      <Separator label="Your Learning" />
-      <View style={{ flexDirection: 'row', gap: 10 }}>
+      <View style={{ flexDirection: 'row', gap: Spacing[2.5] }}>
         <StatCard title="Courses" value="3" subtitle="In progress" style={{ flex: 1 }} />
         <StatCard title="Hours" value="42" subtitle="Total learned" style={{ flex: 1 }} />
         <StatCard title="Streak" value="12" subtitle="Days" style={{ flex: 1 }} />
       </View>
 
-      <Separator label="Continue Learning" />
+      <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text }}>Continue Learning</Text>
       <ProgressCard
         title="React Native Masterclass"
         subtitle="12 of 24 lessons · 6h remaining"
@@ -64,13 +73,13 @@ export function EducationDemo() {
         completedLabel="Almost done!"
       />
 
-      <Separator label="Course Content" />
+      <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text }}>Course Content</Text>
       <StepIndicator
         steps={['Basics', 'Components', 'State', 'Navigation', 'APIs']}
         currentStep={2}
       />
 
-      <View style={{ gap: 8 }}>
+      <View style={{ gap: Spacing[2] }}>
         <LessonCard title="Introduction to React Native" subtitle="What and why" duration="8 min" completed lessonNumber={1} />
         <LessonCard title="Setting Up Your Environment" subtitle="Expo, Node.js, IDE" duration="12 min" completed lessonNumber={2} />
         <LessonCard title="Your First Component" subtitle="JSX, props, styling" duration="15 min" current progress={45} lessonNumber={3} />
@@ -78,7 +87,6 @@ export function EducationDemo() {
         <LessonCard title="Navigation" subtitle="Expo Router, tabs, stacks" duration="18 min" locked lessonNumber={5} />
       </View>
 
-      <Separator label="Video Lesson" />
       <VideoThumbnail
         title="Understanding React Hooks — A Complete Guide"
         duration="15:42"
@@ -86,7 +94,6 @@ export function EducationDemo() {
         channel="React Academy"
       />
 
-      <Separator label="Course Description" />
       <Card>
         <ReadMoreText
           text="This comprehensive course covers everything you need to know about building mobile applications with React Native and Expo. From basic component creation to advanced state management, navigation patterns, API integration, and deployment. You'll build 3 real-world projects throughout the course and learn industry best practices used by top companies."
@@ -94,15 +101,15 @@ export function EducationDemo() {
         />
       </Card>
 
-      <Separator label="Quiz" />
+      <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text }}>Quiz</Text>
       <Card>
-        <Text style={{ fontSize: 16, fontWeight: '700', color: t.text, marginBottom: 4 }}>
+        <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text, marginBottom: Spacing[1] }}>
           Lesson 3 Quiz
         </Text>
-        <Text style={{ fontSize: 13, color: t.textSecondary, marginBottom: 14 }}>
+        <Text style={{ ...FontSize.sm, color: t.textSecondary, marginBottom: Spacing[3.5] }}>
           Which hook is used to manage state in functional components?
         </Text>
-        <View style={{ gap: 8 }}>
+        <View style={{ gap: Spacing[2] }}>
           {['useEffect', 'useState', 'useRef', 'useMemo'].map((opt, i) => (
             <QuizOption
               key={opt}
@@ -118,7 +125,6 @@ export function EducationDemo() {
         </View>
       </Card>
 
-      <Separator label="Flash Cards" />
       <FlashCard
         front="What is JSX?"
         back="JSX is a syntax extension for JavaScript that lets you write HTML-like markup inside JavaScript files."
@@ -126,7 +132,7 @@ export function EducationDemo() {
         difficulty="easy"
       />
 
-      <Separator label="Code Example" />
+      <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text }}>Code Lab</Text>
       <CodeBlock
         language="tsx"
         showLineNumbers

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { Rocket } from 'lucide-react-native';
+import { ScrollView, Text, View } from 'react-native';
+import { FolderKanban, Rocket } from 'lucide-react-native';
 
 import {
   AvatarGroup,
@@ -13,12 +13,12 @@ import {
   KanbanCard,
   ProgressCard,
   SearchBar,
-  Separator,
   StatusIndicator,
   StepIndicator,
   TagInput,
   Timeline,
 } from '@/components/ui';
+import { FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function ProjectDemo() {
@@ -35,8 +35,50 @@ export function ProjectDemo() {
   ]);
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40, gap: 20 }}>
-      <SearchBar value={search} onChangeText={setSearch} placeholder="Search tasks, projects..." />
+    <ScrollView
+      contentContainerStyle={{
+        padding: Spacing[5],
+        paddingBottom: Spacing[10],
+        gap: Spacing[5],
+      }}
+    >
+      {/* Header */}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[2] }}>
+          <FolderKanban size={24} color={t.primary} />
+          <Text
+            style={{
+              ...FontSize['2xl'],
+              fontWeight: '700',
+              color: t.text,
+            }}
+          >
+            Workspace
+          </Text>
+        </View>
+        <AvatarGroup
+          avatars={[
+            { initials: 'S' },
+            { initials: 'A' },
+            { initials: 'M' },
+            { initials: 'J' },
+            { initials: 'L' },
+          ]}
+          max={4}
+        />
+      </View>
+
+      <SearchBar
+        value={search}
+        onChangeText={setSearch}
+        placeholder="Search tasks, projects..."
+      />
 
       <FilterBar
         options={[
@@ -49,25 +91,37 @@ export function ProjectDemo() {
         onValueChange={setFilter}
       />
 
-      <Separator label="Sprint Progress" />
-      <View style={{ gap: 10 }}>
-        <ProgressCard
-          title="Sprint 12 — Component Library"
-          subtitle="8 of 14 tasks completed"
-          progress={57}
-          icon={<Rocket size={20} color={t.primary} />}
-          completedLabel="57% done"
-          totalLabel="3 days left"
-        />
-      </View>
+      {/* Sprint progress */}
+      <ProgressCard
+        title="Sprint 12 — Component Library"
+        subtitle="8 of 14 tasks completed"
+        progress={57}
+        icon={<Rocket size={20} color={t.primary} />}
+        completedLabel="57% done"
+        totalLabel="3 days left"
+      />
 
       <StepIndicator
         steps={['Planning', 'Design', 'Development', 'Testing', 'Launch']}
         currentStep={2}
       />
 
-      <Separator label="Kanban Board" />
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 14 }}>
+      {/* Board */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        Board
+      </Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ gap: Spacing[3.5] }}
+      >
         <BoardColumn title="To Do" count={3} color={t.primary} onAdd={() => {}}>
           <KanbanCard
             title="Design login screen"
@@ -113,14 +167,34 @@ export function ProjectDemo() {
         </BoardColumn>
       </ScrollView>
 
-      <Separator label="Calendar" />
+      {/* Schedule */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        Schedule
+      </Text>
       <CalendarStrip
         selectedDate={calDate}
         onDateSelect={setCalDate}
         markedDates={['2026-03-10', '2026-03-12', '2026-03-15']}
       />
 
-      <Separator label="Today's Tasks" />
+      {/* Today's Tasks */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        {"Today's Tasks"}
+      </Text>
       <Card>
         {tasks.map((task, i) => (
           <View key={i}>
@@ -128,7 +202,9 @@ export function ProjectDemo() {
               title={task.title}
               checked={task.done}
               onToggle={(checked) =>
-                setTasks((prev) => prev.map((t, j) => (j === i ? { ...t, done: checked } : t)))
+                setTasks((prev) =>
+                  prev.map((t, j) => (j === i ? { ...t, done: checked } : t))
+                )
               }
               priority={i === 2 ? 'high' : i === 3 ? 'medium' : undefined}
             />
@@ -137,21 +213,46 @@ export function ProjectDemo() {
         ))}
       </Card>
 
-      <Separator label="Labels" />
       <TagInput tags={tags} onTagsChange={setTags} placeholder="Add label..." />
 
-      <Separator label="Team" />
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+      {/* Team */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        Team
+      </Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[3] }}>
         <AvatarGroup
-          avatars={[{ initials: 'S' }, { initials: 'A' }, { initials: 'M' }, { initials: 'J' }, { initials: 'L' }]}
+          avatars={[
+            { initials: 'S' },
+            { initials: 'A' },
+            { initials: 'M' },
+            { initials: 'J' },
+            { initials: 'L' },
+          ]}
           max={4}
         />
-        <View style={{ flexDirection: 'row', gap: 8 }}>
+        <View style={{ flexDirection: 'row', gap: Spacing[2] }}>
           <StatusIndicator status="online" label="3 online" />
         </View>
       </View>
 
-      <Separator label="Activity" />
+      {/* Activity */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        Activity
+      </Text>
       <Timeline
         items={[
           { title: 'Sarah completed "Design tokens"', time: '2h ago' },

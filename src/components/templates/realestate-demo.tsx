@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { MapPin } from 'lucide-react-native';
 
 import {
+  Avatar,
   BottomBar,
   Button,
   Card,
@@ -15,10 +17,10 @@ import {
   PropertyCard,
   RangeSlider,
   SearchBar,
-  Separator,
   StatCard,
   WishlistButton,
 } from '@/components/ui';
+import { FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function RealEstateDemo() {
@@ -32,7 +34,18 @@ export function RealEstateDemo() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100, gap: 20 }}>
+      <ScrollView contentContainerStyle={{ padding: Spacing[5], paddingBottom: 100, gap: Spacing[5] }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[2] }}>
+            <MapPin size={20} color={t.primary} />
+            <View>
+              <Text style={{ ...FontSize['2xl'], fontWeight: '700', color: t.text }}>San Francisco, CA</Text>
+              <Text style={{ ...FontSize.sm, color: t.textSecondary }}>Explore properties near you</Text>
+            </View>
+          </View>
+          <Avatar initials="JS" size="sm" />
+        </View>
+
         <SearchBar value={search} onChangeText={setSearch} placeholder="Search by city, zip, address..." />
 
         <FilterBar
@@ -45,13 +58,11 @@ export function RealEstateDemo() {
           onValueChange={setFilter}
         />
 
-        <Separator label="Market Overview" />
-        <View style={{ flexDirection: 'row', gap: 10 }}>
+        <View style={{ flexDirection: 'row', gap: Spacing[2.5] }}>
           <StatCard title="Avg Price" value="$485K" subtitle="+5.2% YoY" style={{ flex: 1 }} />
           <StatCard title="Listings" value="1,247" subtitle="New this week" style={{ flex: 1 }} />
         </View>
 
-        <Separator label="Price Range" />
         <Card>
           <RangeSlider
             min={100000}
@@ -63,7 +74,7 @@ export function RealEstateDemo() {
           />
         </Card>
 
-        <Separator label="Featured Listings" />
+        <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text }}>Featured Listings</Text>
         <PropertyCard
           title="Modern Downtown Condo"
           address="456 Main St, San Francisco, CA"
@@ -98,16 +109,15 @@ export function RealEstateDemo() {
           onFavorite={() => {}}
         />
 
-        <Separator label="Property Detail" />
         <ImageCarousel images={['exterior', 'interior', 'kitchen', 'bedroom']} />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-          <Text style={{ fontSize: 24, fontWeight: '800', color: t.text }}>$725,000</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: Spacing[2] }}>
+          <Text style={{ ...FontSize['2xl'], fontWeight: '800', color: t.text }}>$725,000</Text>
           <WishlistButton active={wishlist} onToggle={setWishlist} />
         </View>
-        <Text style={{ fontSize: 18, fontWeight: '600', color: t.text }}>Modern Downtown Condo</Text>
-        <Text style={{ fontSize: 14, color: t.textSecondary }}>456 Main St, San Francisco, CA 94102</Text>
+        <Text style={{ ...FontSize.lg, fontWeight: '600', color: t.text }}>Modern Downtown Condo</Text>
+        <Text style={{ ...FontSize.sm, color: t.textSecondary }}>456 Main St, San Francisco, CA 94102</Text>
 
-        <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
+        <View style={{ flexDirection: 'row', gap: Spacing[2], flexWrap: 'wrap', marginTop: Spacing[2] }}>
           <Chip label="2 Beds" />
           <Chip label="2 Baths" />
           <Chip label="1,200 sqft" />
@@ -116,7 +126,7 @@ export function RealEstateDemo() {
           <Chip label="Gym" />
         </View>
 
-        <View style={{ gap: 4, marginTop: 8 }}>
+        <View style={{ gap: Spacing[1], marginTop: Spacing[2] }}>
           <InfoRow label="Year Built" value="2020" />
           <InfoRow label="HOA Fee" value="$450/mo" />
           <InfoRow label="Property Tax" value="$8,700/yr" />
@@ -124,7 +134,7 @@ export function RealEstateDemo() {
           <InfoRow label="Status" value="Active" valueColor={t.success} />
         </View>
 
-        <Separator label="Mortgage Calculator" />
+        <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text }}>Mortgage Calculator</Text>
         <MortgageSlider
           loanAmount={loanAmount}
           onLoanAmountChange={setLoanAmount}
@@ -133,10 +143,9 @@ export function RealEstateDemo() {
           interestRate={6.5}
         />
 
-        <Separator label="Location" />
         <MapCard title="456 Main St" address="San Francisco, CA 94102" rating={4.5} />
 
-        <Separator label="Listing Agent" />
+        <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text }}>Listing Agent</Text>
         <ContactCard
           name="Jennifer Smith"
           role="Senior Real Estate Agent"

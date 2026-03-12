@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { Home, Shirt, Smartphone } from 'lucide-react-native';
+import { Bell, Home, ShoppingCart, Shirt, Smartphone } from 'lucide-react-native';
 
 import {
+  Avatar,
   BottomBar,
   Button,
   CartItem,
@@ -10,6 +11,7 @@ import {
   Chip,
   Divider,
   FilterBar,
+  IconButton,
   ImageCarousel,
   OrderSummary,
   PriceTag,
@@ -19,11 +21,11 @@ import {
   RatingDisplay,
   ReviewCard,
   SearchBar,
-  Separator,
   ShippingTracker,
   StarRating,
   WishlistButton,
 } from '@/components/ui';
+import { FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function MarketplaceDemo() {
@@ -38,7 +40,21 @@ export function MarketplaceDemo() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100, gap: 20 }}>
+      <ScrollView contentContainerStyle={{ padding: Spacing[5], paddingBottom: 100, gap: Spacing[5] }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[3] }}>
+            <Avatar initials="J" size="md" />
+            <View>
+              <Text style={{ ...FontSize.sm, color: t.textSecondary }}>Welcome back</Text>
+              <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text }}>Hi, John</Text>
+            </View>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[2] }}>
+            <IconButton icon={<Bell size={22} color={t.text} />} onPress={() => {}} />
+            <IconButton icon={<ShoppingCart size={22} color={t.text} />} onPress={() => {}} />
+          </View>
+        </View>
+
         <SearchBar value={search} onChangeText={setSearch} placeholder="Search products..." />
 
         <FilterBar
@@ -52,14 +68,16 @@ export function MarketplaceDemo() {
           onValueChange={setFilter}
         />
 
-        <Separator label="Categories" />
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12 }}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: Spacing[3] }}>
           <CategoryCard title="Electronics" subtitle="2.4K items" color={t.primary} icon={<Smartphone size={36} color={t.textOnColor} />} />
           <CategoryCard title="Fashion" subtitle="1.8K items" color={t.purple} icon={<Shirt size={36} color={t.textOnColor} />} />
           <CategoryCard title="Home" subtitle="960 items" color={t.warning} icon={<Home size={36} color={t.textOnColor} />} />
         </ScrollView>
 
-        <Separator label="Featured Products" />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text }}>Featured</Text>
+          <Text style={{ ...FontSize.sm, color: t.primary }}>See all</Text>
+        </View>
         <ProductCard
           title="Wireless Headphones Pro"
           price={129.99}
@@ -75,7 +93,6 @@ export function MarketplaceDemo() {
           reviewCount={128}
         />
 
-        <Separator label="Price Filter" />
         <RangeSlider
           min={0}
           max={1000}
@@ -85,16 +102,19 @@ export function MarketplaceDemo() {
           prefix="$"
         />
 
-        <Separator label="Product Detail" />
-        <View style={{ gap: 12 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text }}>Deals for You</Text>
+          <Text style={{ ...FontSize.sm, color: t.primary }}>See all</Text>
+        </View>
+        <View style={{ gap: Spacing[3] }}>
           <ImageCarousel images={['placeholder1', 'placeholder2', 'placeholder3']} />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
             <PriceTag amount={129.99} originalAmount={199.99} />
             <WishlistButton active={wishlist} onToggle={setWishlist} variant="pill" count={47} />
           </View>
-          <Text style={{ fontSize: 18, fontWeight: '700', color: t.text }}>Wireless Headphones Pro</Text>
+          <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text }}>Wireless Headphones Pro</Text>
           <RatingDisplay rating={4.8} reviews={342} variant="badge" />
-          <View style={{ flexDirection: 'row', gap: 6 }}>
+          <View style={{ flexDirection: 'row', gap: Spacing[1.5] }}>
             <Chip label="Bluetooth 5.3" />
             <Chip label="40h Battery" />
             <Chip label="ANC" />
@@ -102,7 +122,10 @@ export function MarketplaceDemo() {
           <StarRating value={rating} onValueChange={setRating} label="Rate this product" />
         </View>
 
-        <Separator label="Shopping Cart" />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text }}>Your Cart</Text>
+          <Text style={{ ...FontSize.sm, color: t.textSecondary }}>2 items</Text>
+        </View>
         <CartItem
           title="Wireless Headphones Pro"
           price={129.99}
@@ -130,7 +153,7 @@ export function MarketplaceDemo() {
           total={{ label: 'Total', value: '$127.48' }}
         />
 
-        <Separator label="Order Tracking" />
+        <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text }}>Track Order</Text>
         <ShippingTracker
           trackingNumber="1Z999AA10123456784"
           estimatedDelivery="Mar 15, 2026"
@@ -142,14 +165,14 @@ export function MarketplaceDemo() {
           ]}
         />
 
-        <Separator label="Reviews" />
+        <Text style={{ ...FontSize.lg, fontWeight: '700', color: t.text }}>Reviews</Text>
         <ReviewCard author="Alex M." rating={5} comment="Best headphones I've ever owned. The noise cancellation is incredible!" date="2 days ago" />
         <ReviewCard author="Sarah K." rating={4} comment="Great sound quality. Battery life is amazing." date="1 week ago" />
       </ScrollView>
       <BottomBar>
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 12, color: t.textSecondary }}>Total</Text>
-          <Text style={{ fontSize: 20, fontWeight: '800', color: t.text }}>$127.48</Text>
+          <Text style={{ ...FontSize.xs, color: t.textSecondary }}>Total</Text>
+          <Text style={{ ...FontSize.xl, fontWeight: '800', color: t.text }}>$127.48</Text>
         </View>
         <Button title="Add to Cart" style={{ flex: 1 }} />
       </BottomBar>

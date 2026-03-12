@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { Activity, Dumbbell, Droplets, Flower2, Target } from 'lucide-react-native';
+import { Activity, Dumbbell, Droplets, Flame, Flower2, Target } from 'lucide-react-native';
 
 import {
   ActivityRing,
@@ -13,12 +13,12 @@ import {
   MediaControls,
   Progress,
   ProgressCard,
-  Separator,
   Slider,
   StatCard,
   StreakCounter,
   WorkoutCard,
 } from '@/components/ui';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function FitnessDemo() {
@@ -28,8 +28,55 @@ export function FitnessDemo() {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40, gap: 20 }}>
-      <Separator label="Today's Activity" />
+    <ScrollView
+      contentContainerStyle={{
+        padding: Spacing[5],
+        paddingBottom: Spacing[10],
+        gap: Spacing[5],
+      }}
+    >
+      {/* Header */}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Text
+          style={{
+            ...FontSize['2xl'],
+            fontWeight: '700',
+            color: t.text,
+          }}
+        >
+          Hey, John
+        </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: Spacing[1],
+            backgroundColor: t.primarySoft,
+            paddingHorizontal: Spacing[2.5],
+            paddingVertical: Spacing[1],
+            borderRadius: Radius.full,
+          }}
+        >
+          <Flame size={16} color={t.orange} />
+          <Text
+            style={{
+              ...FontSize.sm,
+              fontWeight: '700',
+              color: t.orange,
+            }}
+          >
+            12
+          </Text>
+        </View>
+      </View>
+
+      {/* Activity Rings */}
       <View style={{ alignItems: 'center' }}>
         <ActivityRing
           size={160}
@@ -42,28 +89,72 @@ export function FitnessDemo() {
         />
       </View>
 
-      <View style={{ flexDirection: 'row', gap: 10 }}>
+      {/* Stats row */}
+      <View style={{ flexDirection: 'row', gap: Spacing[2.5] }}>
         <StatCard title="Steps" value="8,432" subtitle="Goal: 10,000" style={{ flex: 1 }} />
         <StatCard title="Calories" value="486" subtitle="Goal: 650" style={{ flex: 1 }} />
         <StatCard title="Distance" value="5.2 km" subtitle="Goal: 8 km" style={{ flex: 1 }} />
       </View>
 
-      <Separator label="Streak" />
       <StreakCounter count={12} weekdays={[true, true, true, true, true, false, false]} />
 
-      <Separator label="Weekly Schedule" />
+      {/* This Week */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        This Week
+      </Text>
       <CalendarStrip
         selectedDate={calDate}
         onDateSelect={setCalDate}
         markedDates={['2026-03-09', '2026-03-10', '2026-03-11', '2026-03-13']}
       />
 
-      <Separator label="Today's Workouts" />
-      <WorkoutCard name="Morning HIIT" category="Cardio" duration="30 min" calories="320 cal" exercises={8} difficulty="intermediate" completed icon={<Activity size={22} color={t.success} />} />
-      <WorkoutCard name="Upper Body Strength" category="Strength" duration="45 min" calories="280 cal" exercises={12} difficulty="advanced" icon={<Dumbbell size={22} color={t.primary} />} />
-      <WorkoutCard name="Evening Yoga" category="Flexibility" duration="20 min" calories="90 cal" exercises={6} difficulty="beginner" icon={<Flower2 size={22} color={t.primary} />} />
+      {/* Workouts */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        Workouts
+      </Text>
+      <WorkoutCard
+        name="Morning HIIT"
+        category="Cardio"
+        duration="30 min"
+        calories="320 cal"
+        exercises={8}
+        difficulty="intermediate"
+        completed
+        icon={<Activity size={22} color={t.success} />}
+      />
+      <WorkoutCard
+        name="Upper Body Strength"
+        category="Strength"
+        duration="45 min"
+        calories="280 cal"
+        exercises={12}
+        difficulty="advanced"
+        icon={<Dumbbell size={22} color={t.primary} />}
+      />
+      <WorkoutCard
+        name="Evening Yoga"
+        category="Flexibility"
+        duration="20 min"
+        calories="90 cal"
+        exercises={6}
+        difficulty="beginner"
+        icon={<Flower2 size={22} color={t.primary} />}
+      />
 
-      <Separator label="Progress" />
       <ProgressCard
         title="Weekly Workout Goal"
         subtitle="4 of 5 workouts completed"
@@ -73,24 +164,56 @@ export function FitnessDemo() {
         totalLabel="1 remaining"
       />
 
-      <Separator label="Water Intake" />
+      {/* Hydration */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        Hydration
+      </Text>
       <Card>
-        <View style={{ gap: 12 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+        <View style={{ gap: Spacing[3] }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[1.5] }}>
               <Droplets size={15} color={t.primary} />
-              <Text style={{ fontSize: 15, fontWeight: '600', color: t.text }}>Water</Text>
+              <Text
+                style={{
+                  ...FontSize.md,
+                  fontWeight: '600',
+                  color: t.text,
+                }}
+              >
+                Water
+              </Text>
             </View>
-            <Text style={{ fontSize: 14, fontWeight: '700', color: t.primary }}>{water} / 8 glasses</Text>
+            <Text
+              style={{
+                ...FontSize.sm,
+                fontWeight: '700',
+                color: t.primary,
+              }}
+            >
+              {water} / 8 glasses
+            </Text>
           </View>
           <Progress value={(water / 8) * 100} />
           <Slider value={water} onValueChange={setWater} min={0} max={8} step={1} />
         </View>
       </Card>
 
-      <Separator label="Active Workout" />
+      {/* Active Workout */}
       <Card>
-        <View style={{ alignItems: 'center', gap: 12 }}>
+        <View style={{ alignItems: 'center', gap: Spacing[3] }}>
           <CircularProgress progress={65} size={100} label="Progress" />
           <CountdownTimer
             targetDate={new Date(Date.now() + 5 * 60 * 1000)}
@@ -100,7 +223,6 @@ export function FitnessDemo() {
         </View>
       </Card>
 
-      <Separator label="Workout Music" />
       <MediaControls
         title="High Energy Mix"
         artist="Workout Playlist"
@@ -110,11 +232,26 @@ export function FitnessDemo() {
         duration={242}
       />
 
-      <Separator label="Daily Goals" />
+      {/* Daily Goals */}
+      <Text
+        style={{
+          ...FontSize.lg,
+          fontWeight: '600',
+          color: t.text,
+          marginTop: Spacing[1],
+        }}
+      >
+        Daily Goals
+      </Text>
       <Card>
         <ChecklistItem title="30 min workout" checked onToggle={() => {}} priority="high" />
         <Divider />
-        <ChecklistItem title="8 glasses of water" checked={water >= 8} onToggle={() => {}} priority="medium" />
+        <ChecklistItem
+          title="8 glasses of water"
+          checked={water >= 8}
+          onToggle={() => {}}
+          priority="medium"
+        />
         <Divider />
         <ChecklistItem title="10,000 steps" checked={false} onToggle={() => {}} priority="low" />
         <Divider />

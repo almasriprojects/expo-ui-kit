@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { Coffee, UtensilsCrossed } from 'lucide-react-native';
+import { Coffee, MapPin, UtensilsCrossed } from 'lucide-react-native';
 
 import {
+  Avatar,
   BottomBar,
   Button,
   CartItem,
@@ -16,9 +17,9 @@ import {
   RestaurantCard,
   ReviewCard,
   SearchBar,
-  Separator,
   ShippingTracker,
 } from '@/components/ui';
+import { FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function FoodDemo() {
@@ -29,10 +30,21 @@ export function FoodDemo() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100, gap: 20 }}>
+      <ScrollView contentContainerStyle={{ padding: Spacing[5], paddingBottom: 100, gap: Spacing[5] }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[2] }}>
+            <MapPin size={20} color={t.primary} />
+            <View>
+              <Text style={{ ...FontSize.xs, color: t.textSecondary }}>Deliver to</Text>
+              <Text style={{ ...FontSize.md, fontWeight: '700', color: t.text }}>123 Main Street</Text>
+            </View>
+          </View>
+          <Avatar initials="A" size="sm" />
+        </View>
+
         <SearchBar value={search} onChangeText={setSearch} placeholder="Search food, restaurants..." />
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12 }}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: Spacing[3] }}>
           <CategoryCard title="Pizza" subtitle="28 places" color={t.error} icon={<UtensilsCrossed size={24} color={t.textOnColor} />} />
           <CategoryCard title="Sushi" subtitle="15 places" color={t.primary} icon={<UtensilsCrossed size={24} color={t.textOnColor} />} />
           <CategoryCard title="Burger" subtitle="32 places" color={t.warning} icon={<UtensilsCrossed size={24} color={t.textOnColor} />} />
@@ -50,7 +62,7 @@ export function FoodDemo() {
           onValueChange={setFilter}
         />
 
-        <Separator label="Near You" />
+        <Text style={{ ...FontSize.xl, fontWeight: '800', color: t.text }}>Near You</Text>
         <RestaurantCard
           name="Sakura Japanese Kitchen"
           cuisine="Japanese · Sushi · Asian"
@@ -69,7 +81,7 @@ export function FoodDemo() {
           deliveryFee="Free"
         />
 
-        <Separator label="Menu — Sakura Kitchen" />
+        <Text style={{ ...FontSize.xl, fontWeight: '800', color: t.text }}>Popular on Menu</Text>
         <MenuItemCard
           name="Dragon Roll"
           description="Shrimp tempura, avocado, eel, spicy mayo, tobiko"
@@ -95,7 +107,7 @@ export function FoodDemo() {
           onAdd={() => {}}
         />
 
-        <Separator label="Your Cart" />
+        <Text style={{ ...FontSize.xl, fontWeight: '800', color: t.text }}>Your Order</Text>
         <CartItem title="Dragon Roll x2" price={33.98} quantity={2} onQuantityChange={() => {}} />
         <CartItem title="Miso Soup" price={4.99} quantity={1} onQuantityChange={() => {}} />
         <PromoCodeInput onApply={(c) => setPromo(c)} appliedCode={promo || undefined} discount={promo ? 'Free delivery' : undefined} />
@@ -109,10 +121,8 @@ export function FoodDemo() {
           total={{ label: 'Total', value: '$43.46' }}
         />
 
-        <Separator label="Delivery" />
         <MapCard title="Sakura Japanese Kitchen" address="456 Oak Avenue" rating={4.8} />
 
-        <Separator label="Delivery Status" />
         <ShippingTracker
           estimatedDelivery="25-35 min"
           steps={[
@@ -123,13 +133,12 @@ export function FoodDemo() {
           ]}
         />
 
-        <Separator label="Reviews" />
         <ReviewCard author="John D." rating={5} comment="Best sushi in town! Always fresh and on time." date="Yesterday" />
       </ScrollView>
       <BottomBar>
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 11, color: t.textSecondary }}>2 items · $43.46</Text>
-          <Text style={{ fontSize: 17, fontWeight: '800', color: t.text }}>Place Order</Text>
+          <Text style={{ ...FontSize.xs, color: t.textSecondary }}>2 items · $43.46</Text>
+          <Text style={{ ...FontSize.lg, fontWeight: '800', color: t.text }}>Place Order</Text>
         </View>
         <Button title="Checkout" style={{ flex: 1 }} />
       </BottomBar>

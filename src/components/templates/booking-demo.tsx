@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { Globe } from 'lucide-react-native';
 
 import {
   BookingCard,
@@ -18,8 +19,8 @@ import {
   ReviewCard,
   RoomCard,
   SearchBar,
-  Separator,
 } from '@/components/ui';
+import { FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function BookingDemo() {
@@ -38,7 +39,12 @@ export function BookingDemo() {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40, gap: 20 }}>
+    <ScrollView contentContainerStyle={{ padding: Spacing[5], paddingBottom: Spacing[10], gap: Spacing[5] }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Text style={{ ...FontSize['2xl'], fontWeight: '800', color: t.text }}>Explore</Text>
+        <Globe size={24} color={t.textSecondary} />
+      </View>
+
       <SearchBar value={search} onChangeText={setSearch} placeholder="Where are you going?" />
 
       <FilterBar
@@ -52,19 +58,17 @@ export function BookingDemo() {
         onValueChange={setFilter}
       />
 
-      <Separator label="Select Dates" />
       <CalendarStrip
         selectedDate={calDate}
         onDateSelect={setCalDate}
         markedDates={['2026-03-12', '2026-03-15']}
       />
 
-      <Separator label="Guests" />
       <Card>
         <GuestSelector guests={guests} onChange={handleGuestChange} />
       </Card>
 
-      <Separator label="Featured Listings" />
+      <Text style={{ ...FontSize.xl, fontWeight: '800', color: t.text }}>Featured Stays</Text>
       <RoomCard
         title="Luxury Ocean View Suite"
         host="Maria"
@@ -89,13 +93,12 @@ export function BookingDemo() {
         amenities={['Fireplace', 'Hot Tub', 'WiFi']}
       />
 
-      <Separator label="Listing Detail" />
       <ImageCarousel images={['room1', 'room2', 'room3']} />
-      <Text style={{ fontSize: 20, fontWeight: '700', color: t.text, marginTop: 8 }}>
+      <Text style={{ ...FontSize.xl, fontWeight: '700', color: t.text, marginTop: Spacing[2] }}>
         Luxury Ocean View Suite
       </Text>
       <RatingDisplay rating={4.9} reviews={128} variant="badge" />
-      <View style={{ gap: 4, marginTop: 8 }}>
+      <View style={{ gap: Spacing[1], marginTop: Spacing[2] }}>
         <InfoRow label="Check-in" value="Mar 14, 2026 — 3:00 PM" />
         <InfoRow label="Check-out" value="Mar 18, 2026 — 11:00 AM" />
         <InfoRow label="Guests" value="2 adults, 1 child" />
@@ -113,7 +116,7 @@ export function BookingDemo() {
       />
       <Button title="Reserve — $839.50" />
 
-      <Separator label="Events Nearby" />
+      <Text style={{ ...FontSize.xl, fontWeight: '800', color: t.text }}>Events Nearby</Text>
       <EventCard
         title="Wine Tasting Experience"
         date="Mar 15"
@@ -125,10 +128,9 @@ export function BookingDemo() {
         rsvpStatus="going"
       />
 
-      <Separator label="Location" />
       <MapCard title="Luxury Ocean View Suite" address="123 Beachfront Drive, Malibu, CA" rating={4.9} />
 
-      <Separator label="Your Bookings" />
+      <Text style={{ ...FontSize.xl, fontWeight: '800', color: t.text }}>Your Trips</Text>
       <BookingCard
         title="Mountain Retreat"
         date="Mar 20"
@@ -138,7 +140,6 @@ export function BookingDemo() {
         price="$500.00"
       />
 
-      <Separator label="Reviews" />
       <ReviewCard author="Emma S." rating={5} comment="Absolutely stunning views! Maria was an incredible host." date="Last week" />
     </ScrollView>
   );
