@@ -64,9 +64,10 @@ export default function AppTabs() {
         }}
       />
       <Tabs.Screen
-        name="demo/[type]"
+        name="demo"
         options={{
           href: null,
+          headerShown: false,
         }}
       />
     </Tabs>
