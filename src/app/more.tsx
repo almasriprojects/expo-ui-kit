@@ -1,10 +1,10 @@
 import React from 'react';
-import { Dimensions, Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { ChevronRight } from 'lucide-react-native';
 import {
   BookOpen,
   Building,
+  ChevronRight,
   ClipboardList,
   Dumbbell,
   Home,
@@ -29,11 +29,6 @@ const MORE_APPS = [
   { key: 'realestate', label: 'Real Estate', icon: Home, desc: 'Listings, mortgage, tours' },
 ] as const;
 
-const PADDING = Spacing[5];
-const GAP = Spacing[3];
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const CARD_WIDTH = (SCREEN_WIDTH - PADDING * 2 - GAP) / 2;
-
 export default function MoreScreen() {
   const t = useTheme();
   const f = useFont();
@@ -44,7 +39,7 @@ export default function MoreScreen() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingHorizontal: PADDING,
+          paddingHorizontal: Spacing[5],
           paddingTop: Spacing[4],
           paddingBottom: Spacing[16],
         }}>
@@ -68,9 +63,18 @@ export default function MoreScreen() {
           Real-world demos built with the component library
         </Text>
 
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: GAP }}>
-          {MORE_APPS.map((app) => {
+        <View
+          style={{
+            backgroundColor: t.card,
+            borderRadius: Radius.xl,
+            borderWidth: 1,
+            borderColor: t.border,
+            overflow: 'hidden',
+            ...Shadows.sm,
+          }}>
+          {MORE_APPS.map((app, index) => {
             const Icon = app.icon;
+            const isLast = index === MORE_APPS.length - 1;
             return (
               <Pressable
                 key={app.key}
@@ -78,56 +82,51 @@ export default function MoreScreen() {
                 accessibilityRole="button"
                 accessibilityLabel={`${app.label} demo`}
                 style={({ pressed }) => ({
-                  width: CARD_WIDTH,
-                  backgroundColor: t.card,
-                  borderRadius: Radius.xl,
-                  padding: Spacing[4],
-                  borderWidth: 1,
-                  borderColor: pressed ? t.primary : t.border,
-                  opacity: pressed ? 0.9 : 1,
-                  ...Shadows.sm,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingVertical: Spacing[4],
+                  paddingHorizontal: Spacing[4],
+                  backgroundColor: pressed ? t.surface : 'transparent',
+                  borderBottomWidth: isLast ? 0 : 1,
+                  borderBottomColor: t.border,
                 })}>
                 <View
                   style={{
-                    flexDirection: 'row',
+                    width: 44,
+                    height: 44,
+                    borderRadius: Radius.lg,
+                    backgroundColor: t.primarySoft,
                     alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: Spacing[3],
+                    justifyContent: 'center',
+                    marginRight: Spacing[4],
                   }}>
-                  <View
-                    style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: Radius.lg,
-                      backgroundColor: t.primarySoft,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Icon size={20} color={t.primary} />
-                  </View>
-                  <ChevronRight size={16} color={t.textTertiary} />
+                  <Icon size={20} color={t.primary} />
                 </View>
-                <Text
-                  style={{
-                    ...FontSize.md,
-                    fontWeight: '700',
-                    fontFamily: resolveFontFamily(f, '700'),
-                    color: t.text,
-                    marginBottom: Spacing[0.5],
-                  }}
-                  numberOfLines={1}>
-                  {app.label}
-                </Text>
-                <Text
-                  style={{
-                    ...FontSize.xs,
-                    color: t.textSecondary,
-                    fontFamily: resolveFontFamily(f, '400'),
-                    lineHeight: 16,
-                  }}
-                  numberOfLines={2}>
-                  {app.desc}
-                </Text>
+
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      ...FontSize.md,
+                      fontWeight: '600',
+                      fontFamily: resolveFontFamily(f, '600'),
+                      color: t.text,
+                      marginBottom: 2,
+                    }}
+                    numberOfLines={1}>
+                    {app.label}
+                  </Text>
+                  <Text
+                    style={{
+                      ...FontSize.xs,
+                      color: t.textSecondary,
+                      fontFamily: resolveFontFamily(f, '400'),
+                    }}
+                    numberOfLines={1}>
+                    {app.desc}
+                  </Text>
+                </View>
+
+                <ChevronRight size={18} color={t.textTertiary} />
               </Pressable>
             );
           })}
