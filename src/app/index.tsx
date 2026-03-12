@@ -260,7 +260,7 @@ export default function HomeScreen() {
 
         <View style={{ alignItems: 'center', marginTop: 40, marginBottom: 20 }}>
           <Text style={{ fontSize: 13, fontWeight: '500', color: t.textTertiary }}>
-            Swipe to Apps tab for domain templates
+            Tap Marketplace, Social, Finance, or More for app demos
           </Text>
         </View>
       </ScrollView>
