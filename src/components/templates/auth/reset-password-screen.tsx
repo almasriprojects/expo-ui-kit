@@ -4,7 +4,7 @@ import { ArrowLeft, CheckCircle, Lock } from 'lucide-react-native';
 
 import { Button } from '@/components/ui/button';
 import { PasswordInput } from '@/components/ui/password-input';
-import { Spacing, resolveFontFamily } from '@/constants/theme';
+import { FontSize, Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -56,17 +56,17 @@ export function ResetPasswordScreen({
         keyboardShouldPersistTaps="handled">
 
         {success ? (
-          <View style={{ gap: 16, alignItems: 'center' }}>
+          <View style={{ gap: Spacing[4], alignItems: 'center' }}>
             <CheckCircle size={56} color={t.success} />
             <Text style={{
-              fontSize: 26, fontWeight: '800', textAlign: 'center',
+              fontSize: FontSize['2xl'].fontSize, fontWeight: '800', textAlign: 'center',
               fontFamily: resolveFontFamily(f, '700'), color: t.text,
             }}>
               Password reset!
             </Text>
             <Text style={{
-              fontSize: 15, fontFamily: resolveFontFamily(f, '400'),
-              color: t.textSecondary, textAlign: 'center', lineHeight: 22,
+              fontSize: FontSize.md.fontSize, fontFamily: resolveFontFamily(f, '400'),
+              color: t.textSecondary, textAlign: 'center', lineHeight: FontSize.md.lineHeight,
             }}>
               Your password has been updated successfully. You can now sign in with your new password.
             </Text>
@@ -76,28 +76,28 @@ export function ResetPasswordScreen({
               size="lg"
               onPress={onBack}
               fullWidth
-              style={{ marginTop: 8 }}
+              style={{ marginTop: Spacing[2] }}
             />
           </View>
         ) : (
           <>
-            <View style={{ gap: 8, marginBottom: 8 }}>
-              <Lock size={48} color={t.text} style={{ marginBottom: 4 }} />
+            <View style={{ gap: Spacing[2], marginBottom: Spacing[2] }}>
+              <Lock size={48} color={t.text} style={{ marginBottom: Spacing[1] }} />
               <Text style={{
-                fontSize: 28, fontWeight: '800',
+                fontSize: FontSize['2xl'].fontSize, fontWeight: '800',
                 fontFamily: resolveFontFamily(f, '700'), color: t.text,
               }}>
                 Set new password
               </Text>
               <Text style={{
-                fontSize: 15, fontFamily: resolveFontFamily(f, '400'),
-                color: t.textSecondary, lineHeight: 22,
+                fontSize: FontSize.md.fontSize, fontFamily: resolveFontFamily(f, '400'),
+                color: t.textSecondary, lineHeight: FontSize.md.lineHeight,
               }}>
                 Your new password must be at least 8 characters long and different from your previous password.
               </Text>
             </View>
 
-            <View style={{ gap: 16 }}>
+            <View style={{ gap: Spacing[4] }}>
               <PasswordInput
                 label="New Password"
                 placeholder="Min. 8 characters"
@@ -128,10 +128,10 @@ export function ResetPasswordScreen({
               fullWidth
             />
 
-            <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: 8, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+            <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: Spacing[2], flexDirection: 'row', alignItems: 'center', gap: Spacing[1] }}>
               <ArrowLeft size={16} color={t.textSecondary} />
               <Text style={{
-                fontSize: 14, fontWeight: '600', color: t.textSecondary,
+                fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textSecondary,
                 fontFamily: resolveFontFamily(f, '600'),
               }}>
                 Back to Sign In

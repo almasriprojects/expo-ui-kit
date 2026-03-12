@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
-import { Radius, Shadows, resolveFontFamily } from '@/constants/theme';
+import { FontSize, Radius, Shadows, Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -32,7 +32,7 @@ export function AuthDemo() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 16, gap: 6, paddingVertical: 10 }}>
+          contentContainerStyle={{ paddingHorizontal: Spacing[4], gap: Spacing[1.5], paddingVertical: Spacing[2.5] }}>
           {AUTH_SCREENS.map((screen) => {
             const isActive = screen.key === activeScreen;
             return (
@@ -42,8 +42,8 @@ export function AuthDemo() {
                 accessibilityRole="tab"
                 accessibilityState={{ selected: isActive }}
                 style={{
-                  paddingHorizontal: 14,
-                  paddingVertical: 7,
+                  paddingHorizontal: Spacing[3.5],
+                  paddingVertical: Spacing[1.5],
                   borderRadius: Radius.lg,
                   backgroundColor: isActive ? t.primary : t.card,
                   borderWidth: isActive ? 0 : 1,
@@ -52,7 +52,7 @@ export function AuthDemo() {
                 }}>
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: FontSize.xs.fontSize,
                     fontWeight: '600',
                     fontFamily: resolveFontFamily(f, '600'),
                     color: isActive ? t.primaryForeground : t.text,

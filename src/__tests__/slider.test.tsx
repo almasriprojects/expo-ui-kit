@@ -17,6 +17,7 @@ jest.mock('@/hooks/use-font', () => ({
 }));
 
 jest.mock('react-native-reanimated', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const RN = require('react-native');
   return {
     __esModule: true,
@@ -30,7 +31,6 @@ jest.mock('react-native-reanimated', () => {
 });
 
 jest.mock('react-native-gesture-handler', () => {
-  const React = require('react');
   const createChainable = (): any => {
     const obj: any = {};
     const chain = () => obj;
@@ -40,7 +40,7 @@ jest.mock('react-native-gesture-handler', () => {
     return obj;
   };
   return {
-    GestureDetector: ({ children }: { children: React.ReactNode }) => children,
+    GestureDetector: ({ children }: { children: any }) => children,
     Gesture: {
       Pan: () => createChainable(),
       Tap: () => createChainable(),

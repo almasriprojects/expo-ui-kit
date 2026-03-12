@@ -1,4 +1,5 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import { render, fireEvent } from '@testing-library/react-native';
 
 import { Button } from '@/components/ui/button';
@@ -46,7 +47,6 @@ describe('Button', () => {
     );
     expect(getByText('Loading')).toBeTruthy();
 
-    const { ActivityIndicator } = require('react-native');
     expect(UNSAFE_getByType(ActivityIndicator)).toBeTruthy();
   });
 

@@ -43,7 +43,7 @@ describe('Select', () => {
   });
 
   it('renders options when opened', () => {
-    const { getByText, getAllByRole } = render(
+    const { getByText } = render(
       <Select options={options} onValueChange={onValueChange} />
     );
     fireEvent.press(getByText('Select...'));

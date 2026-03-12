@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { SocialButton } from '@/components/ui/social-button';
 import { Divider } from '@/components/ui/divider';
-import { Spacing, resolveFontFamily } from '@/constants/theme';
+import { FontSize, Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -67,22 +67,22 @@ export function SignUpScreen({
         }}
         keyboardShouldPersistTaps="handled">
 
-        <View style={{ gap: 8, marginBottom: 8 }}>
+        <View style={{ gap: Spacing[2], marginBottom: Spacing[2] }}>
           <Text style={{
-            fontSize: 30, fontWeight: '800',
+            fontSize: FontSize['2xl'].fontSize, fontWeight: '800',
             fontFamily: resolveFontFamily(f, '700'), color: t.text,
           }}>
             Create account
           </Text>
           <Text style={{
-            fontSize: 15, fontFamily: resolveFontFamily(f, '400'),
+            fontSize: FontSize.md.fontSize, fontFamily: resolveFontFamily(f, '400'),
             color: t.textSecondary,
           }}>
             Sign up to get started
           </Text>
         </View>
 
-        <View style={{ gap: 16 }}>
+        <View style={{ gap: Spacing[4] }}>
           <Input
             label="Full Name"
             placeholder="John Doe"
@@ -127,26 +127,26 @@ export function SignUpScreen({
           />
         </View>
 
-        <View style={{ gap: 4 }}>
+        <View style={{ gap: Spacing[1] }}>
           <Checkbox
             checked={agreed}
             onCheckedChange={setAgreed}
             label=""
           />
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginLeft: 34, marginTop: -22 }}>
-            <Text style={{ fontSize: 13, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
               I agree to the{' '}
             </Text>
             <Pressable onPress={onTermsPress}>
-              <Text style={{ fontSize: 13, fontWeight: '600', color: t.primary }}>Terms of Service</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.primary }}>Terms of Service</Text>
             </Pressable>
-            <Text style={{ fontSize: 13, color: t.textSecondary }}> and </Text>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary }}> and </Text>
             <Pressable onPress={onPrivacyPress}>
-              <Text style={{ fontSize: 13, fontWeight: '600', color: t.primary }}>Privacy Policy</Text>
+              <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.primary }}>Privacy Policy</Text>
             </Pressable>
           </View>
           {errors.agreed && (
-            <Text style={{ fontSize: 12, color: t.error, marginLeft: 34 }}>{errors.agreed}</Text>
+            <Text style={{ fontSize: FontSize.xs.fontSize, color: t.error, marginLeft: 34 }}>{errors.agreed}</Text>
           )}
         </View>
 
@@ -159,25 +159,25 @@ export function SignUpScreen({
           fullWidth
         />
 
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[4] }}>
           <Divider style={{ flex: 1 }} />
-          <Text style={{ fontSize: 13, color: t.textTertiary, fontFamily: resolveFontFamily(f, '400') }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary, fontFamily: resolveFontFamily(f, '400') }}>
             or sign up with
           </Text>
           <Divider style={{ flex: 1 }} />
         </View>
 
-        <View style={{ gap: 12 }}>
+        <View style={{ gap: Spacing[3] }}>
           <SocialButton provider="google" onPress={() => onSocialLogin?.('google')} />
           <SocialButton provider="apple" onPress={() => onSocialLogin?.('apple')} />
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 4, marginTop: 8 }}>
-          <Text style={{ fontSize: 14, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', gap: Spacing[1], marginTop: Spacing[2] }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
             Already have an account?
           </Text>
           <Pressable onPress={onSignIn}>
-            <Text style={{ fontSize: 14, fontWeight: '700', color: t.primary, fontFamily: resolveFontFamily(f, '700') }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.primary, fontFamily: resolveFontFamily(f, '700') }}>
               Sign In
             </Text>
           </Pressable>

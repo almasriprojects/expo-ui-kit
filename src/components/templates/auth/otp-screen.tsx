@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react-native';
 
 import { Button } from '@/components/ui/button';
 import { OTPInput } from '@/components/ui/otp-input';
-import { Spacing, resolveFontFamily } from '@/constants/theme';
+import { FontSize, Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -83,17 +83,17 @@ export function OTPScreen({
         }}
         keyboardShouldPersistTaps="handled">
 
-        <View style={{ gap: 8, alignItems: 'center' }}>
-          <Text style={{ fontSize: 48, marginBottom: 4 }}>📨</Text>
+        <View style={{ gap: Spacing[2], alignItems: 'center' }}>
+          <Text style={{ fontSize: FontSize['4xl'].fontSize, marginBottom: Spacing[1] }}>📨</Text>
           <Text style={{
-            fontSize: 28, fontWeight: '800', textAlign: 'center',
+            fontSize: FontSize['2xl'].fontSize, fontWeight: '800', textAlign: 'center',
             fontFamily: resolveFontFamily(f, '700'), color: t.text,
           }}>
             Verify your {email ? 'email' : 'phone'}
           </Text>
           <Text style={{
-            fontSize: 15, fontFamily: resolveFontFamily(f, '400'),
-            color: t.textSecondary, textAlign: 'center', lineHeight: 22,
+            fontSize: FontSize.md.fontSize, fontFamily: resolveFontFamily(f, '400'),
+            color: t.textSecondary, textAlign: 'center', lineHeight: FontSize.md.lineHeight,
           }}>
             We sent a {length}-digit code to{'\n'}
             <Text style={{ fontWeight: '600', color: t.text }}>{destination}</Text>
@@ -116,14 +116,14 @@ export function OTPScreen({
           fullWidth
         />
 
-        <View style={{ alignItems: 'center', gap: 16 }}>
-          <View style={{ flexDirection: 'row', gap: 4 }}>
-            <Text style={{ fontSize: 14, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
+        <View style={{ alignItems: 'center', gap: Spacing[4] }}>
+          <View style={{ flexDirection: 'row', gap: Spacing[1] }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
               {"Didn't receive the code?"}
             </Text>
             <Pressable onPress={handleResend} disabled={resendCooldown > 0}>
               <Text style={{
-                fontSize: 14, fontWeight: '700',
+                fontSize: FontSize.sm.fontSize, fontWeight: '700',
                 color: resendCooldown > 0 ? t.textTertiary : t.primary,
                 fontFamily: resolveFontFamily(f, '700'),
               }}>
@@ -132,10 +132,10 @@ export function OTPScreen({
             </Pressable>
           </View>
 
-          <Pressable onPress={onBack} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+          <Pressable onPress={onBack} style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[1] }}>
             <ArrowLeft size={16} color={t.textSecondary} />
             <Text style={{
-              fontSize: 14, fontWeight: '600', color: t.textSecondary,
+              fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textSecondary,
               fontFamily: resolveFontFamily(f, '600'),
             }}>
               Back

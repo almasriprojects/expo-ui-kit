@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react-native';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Spacing, resolveFontFamily } from '@/constants/theme';
+import { FontSize, Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -52,17 +52,17 @@ export function ForgotPasswordScreen({
         }}
         keyboardShouldPersistTaps="handled">
 
-        <View style={{ gap: 8, marginBottom: 8 }}>
-          <Text style={{ fontSize: 48, marginBottom: 4 }}>🔑</Text>
+        <View style={{ gap: Spacing[2], marginBottom: Spacing[2] }}>
+          <Text style={{ fontSize: FontSize['4xl'].fontSize, marginBottom: Spacing[1] }}>🔑</Text>
           <Text style={{
-            fontSize: 28, fontWeight: '800',
+            fontSize: FontSize['2xl'].fontSize, fontWeight: '800',
             fontFamily: resolveFontFamily(f, '700'), color: t.text,
           }}>
             Forgot password?
           </Text>
           <Text style={{
-            fontSize: 15, fontFamily: resolveFontFamily(f, '400'),
-            color: t.textSecondary, lineHeight: 22,
+            fontSize: FontSize.md.fontSize, fontFamily: resolveFontFamily(f, '400'),
+            color: t.textSecondary, lineHeight: FontSize.md.lineHeight,
           }}>
             {sent
               ? `We've sent a reset link to ${email}. Check your inbox and follow the instructions.`
@@ -105,7 +105,7 @@ export function ForgotPasswordScreen({
 
             <Pressable onPress={handleSubmit}>
               <Text style={{
-                fontSize: 14, fontWeight: '600', color: t.primary,
+                fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.primary,
                 fontFamily: resolveFontFamily(f, '600'), textAlign: 'center',
               }}>
                 {"Didn't receive it? Resend"}
@@ -114,10 +114,10 @@ export function ForgotPasswordScreen({
           </>
         )}
 
-        <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: 8, flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+        <Pressable onPress={onBack} style={{ alignSelf: 'center', marginTop: Spacing[2], flexDirection: 'row', alignItems: 'center', gap: Spacing[1] }}>
           <ArrowLeft size={16} color={t.textSecondary} />
           <Text style={{
-            fontSize: 14, fontWeight: '600', color: t.textSecondary,
+            fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.textSecondary,
             fontFamily: resolveFontFamily(f, '600'),
           }}>
             Back to Sign In

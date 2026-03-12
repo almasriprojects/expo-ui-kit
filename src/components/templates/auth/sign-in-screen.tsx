@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { SocialButton } from '@/components/ui/social-button';
 import { Divider } from '@/components/ui/divider';
-import { Spacing, resolveFontFamily } from '@/constants/theme';
+import { FontSize, Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -58,22 +58,22 @@ export function SignInScreen({
         }}
         keyboardShouldPersistTaps="handled">
 
-        <View style={{ gap: 8, marginBottom: 8 }}>
+        <View style={{ gap: Spacing[2], marginBottom: Spacing[2] }}>
           <Text style={{
-            fontSize: 30, fontWeight: '800',
+            fontSize: FontSize['2xl'].fontSize, fontWeight: '800',
             fontFamily: resolveFontFamily(f, '700'), color: t.text,
           }}>
             Welcome back
           </Text>
           <Text style={{
-            fontSize: 15, fontFamily: resolveFontFamily(f, '400'),
+            fontSize: FontSize.md.fontSize, fontFamily: resolveFontFamily(f, '400'),
             color: t.textSecondary,
           }}>
             Sign in to your account to continue
           </Text>
         </View>
 
-        <View style={{ gap: 16 }}>
+        <View style={{ gap: Spacing[4] }}>
           <Input
             label="Email"
             placeholder="you@example.com"
@@ -86,7 +86,7 @@ export function SignInScreen({
             textContentType="emailAddress"
           />
 
-          <View style={{ gap: 6 }}>
+          <View style={{ gap: Spacing[1.5] }}>
             <PasswordInput
               label="Password"
               placeholder="Enter your password"
@@ -98,7 +98,7 @@ export function SignInScreen({
             />
             <Pressable onPress={onForgotPassword} style={{ alignSelf: 'flex-end' }}>
               <Text style={{
-                fontSize: 13, fontWeight: '600', color: t.primary,
+                fontSize: FontSize.sm.fontSize, fontWeight: '600', color: t.primary,
                 fontFamily: resolveFontFamily(f, '600'),
               }}>
                 Forgot password?
@@ -116,25 +116,25 @@ export function SignInScreen({
           fullWidth
         />
 
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing[4] }}>
           <Divider style={{ flex: 1 }} />
-          <Text style={{ fontSize: 13, color: t.textTertiary, fontFamily: resolveFontFamily(f, '400') }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textTertiary, fontFamily: resolveFontFamily(f, '400') }}>
             or continue with
           </Text>
           <Divider style={{ flex: 1 }} />
         </View>
 
-        <View style={{ gap: 12 }}>
+        <View style={{ gap: Spacing[3] }}>
           <SocialButton provider="google" onPress={() => onSocialLogin?.('google')} />
           <SocialButton provider="apple" onPress={() => onSocialLogin?.('apple')} />
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 4, marginTop: 8 }}>
-          <Text style={{ fontSize: 14, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', gap: Spacing[1], marginTop: Spacing[2] }}>
+          <Text style={{ fontSize: FontSize.sm.fontSize, color: t.textSecondary, fontFamily: resolveFontFamily(f, '400') }}>
             {"Don't have an account?"}
           </Text>
           <Pressable onPress={onSignUp}>
-            <Text style={{ fontSize: 14, fontWeight: '700', color: t.primary, fontFamily: resolveFontFamily(f, '700') }}>
+            <Text style={{ fontSize: FontSize.sm.fontSize, fontWeight: '700', color: t.primary, fontFamily: resolveFontFamily(f, '700') }}>
               Sign Up
             </Text>
           </Pressable>
