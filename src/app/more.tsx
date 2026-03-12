@@ -52,13 +52,15 @@ function AppCard({
       <View
         style={{
           width,
+          height: 140,
           backgroundColor: t.surface,
           borderRadius: Radius.xl,
           padding: 16,
           borderWidth: 1.5,
           borderColor: t.border,
+          justifyContent: 'space-between',
         }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <View
             style={{
               width: 40,
@@ -72,27 +74,29 @@ function AppCard({
           </View>
           <ChevronRight size={16} color={t.textTertiary} />
         </View>
-        <Text
-          numberOfLines={1}
-          style={{
-            fontSize: 15,
-            fontWeight: '700',
-            fontFamily: resolveFontFamily(f, '700'),
-            color: t.text,
-            marginBottom: 3,
-          }}>
-          {app.label}
-        </Text>
-        <Text
-          numberOfLines={2}
-          style={{
-            fontSize: 12,
-            lineHeight: 16,
-            color: t.textSecondary,
-            fontFamily: resolveFontFamily(f, '400'),
-          }}>
-          {app.desc}
-        </Text>
+        <View>
+          <Text
+            numberOfLines={1}
+            style={{
+              fontSize: 15,
+              fontWeight: '700',
+              fontFamily: resolveFontFamily(f, '700'),
+              color: t.text,
+              marginBottom: 3,
+            }}>
+            {app.label}
+          </Text>
+          <Text
+            numberOfLines={2}
+            style={{
+              fontSize: 12,
+              lineHeight: 16,
+              color: t.textSecondary,
+              fontFamily: resolveFontFamily(f, '400'),
+            }}>
+            {app.desc}
+          </Text>
+        </View>
       </View>
     </Pressable>
   );
