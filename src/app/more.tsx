@@ -1,6 +1,7 @@
 import React from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Dimensions, Pressable, ScrollView, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { ChevronRight } from 'lucide-react-native';
 import {
   BookOpen,
   Building,
@@ -28,6 +29,11 @@ const MORE_APPS = [
   { key: 'realestate', label: 'Real Estate', icon: Home, desc: 'Listings, mortgage, tours' },
 ] as const;
 
+const PADDING = Spacing[5];
+const GAP = Spacing[3];
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const CARD_WIDTH = (SCREEN_WIDTH - PADDING * 2 - GAP) / 2;
+
 export default function MoreScreen() {
   const t = useTheme();
   const f = useFont();
@@ -37,7 +43,11 @@ export default function MoreScreen() {
     <Screen>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: Spacing[5], paddingBottom: Spacing[16] }}>
+        contentContainerStyle={{
+          paddingHorizontal: PADDING,
+          paddingTop: Spacing[4],
+          paddingBottom: Spacing[16],
+        }}>
         <Text
           style={{
             ...FontSize['2xl'],
@@ -53,12 +63,12 @@ export default function MoreScreen() {
             ...FontSize.sm,
             fontFamily: resolveFontFamily(f, '400'),
             color: t.textSecondary,
-            marginBottom: Spacing[5],
+            marginBottom: Spacing[6],
           }}>
-          Real-world demos for every app type
+          Real-world demos built with the component library
         </Text>
 
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: Spacing[3] }}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: GAP }}>
           {MORE_APPS.map((app) => {
             const Icon = app.icon;
             return (
@@ -68,27 +78,34 @@ export default function MoreScreen() {
                 accessibilityRole="button"
                 accessibilityLabel={`${app.label} demo`}
                 style={({ pressed }) => ({
-                  width: '48%',
-                  flexGrow: 1,
+                  width: CARD_WIDTH,
                   backgroundColor: t.card,
                   borderRadius: Radius.xl,
-                  padding: Spacing[5],
+                  padding: Spacing[4],
                   borderWidth: 1,
-                  borderColor: t.border,
-                  opacity: pressed ? 0.85 : 1,
+                  borderColor: pressed ? t.primary : t.border,
+                  opacity: pressed ? 0.9 : 1,
                   ...Shadows.sm,
                 })}>
                 <View
                   style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: Radius.lg,
-                    backgroundColor: t.primarySoft,
+                    flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                     marginBottom: Spacing[3],
                   }}>
-                  <Icon size={22} color={t.primary} />
+                  <View
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: Radius.lg,
+                      backgroundColor: t.primarySoft,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon size={20} color={t.primary} />
+                  </View>
+                  <ChevronRight size={16} color={t.textTertiary} />
                 </View>
                 <Text
                   style={{
@@ -96,8 +113,9 @@ export default function MoreScreen() {
                     fontWeight: '700',
                     fontFamily: resolveFontFamily(f, '700'),
                     color: t.text,
-                    marginBottom: Spacing[1],
-                  }}>
+                    marginBottom: Spacing[0.5],
+                  }}
+                  numberOfLines={1}>
                   {app.label}
                 </Text>
                 <Text
@@ -105,6 +123,7 @@ export default function MoreScreen() {
                     ...FontSize.xs,
                     color: t.textSecondary,
                     fontFamily: resolveFontFamily(f, '400'),
+                    lineHeight: 16,
                   }}
                   numberOfLines={2}>
                   {app.desc}
