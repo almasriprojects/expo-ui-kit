@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { FlatList, Pressable, ScrollView, Text, TextInput, View, type ViewStyle } from 'react-native';
+import { Pressable, ScrollView, Text, TextInput, View, type ViewStyle } from 'react-native';
 import { Image } from 'expo-image';
 import { Search, X } from 'lucide-react-native';
 
@@ -138,39 +138,36 @@ export function StickerPicker({
         })}
       </ScrollView>
 
-      <FlatList
-        data={filteredItems}
-        numColumns={columns}
-        keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: Spacing[2], paddingBottom: Spacing[2] }}
-        columnWrapperStyle={{ gap: Spacing[1] }}
-        ItemSeparatorComponent={() => <View style={{ height: Spacing[1] }} />}
-        renderItem={({ item }) => (
-          <Pressable
-            onPress={() => onSelect(item)}
-            accessibilityRole="button"
-            accessibilityLabel={item.label ?? 'Sticker'}
-            style={{
-              flex: 1,
-              aspectRatio: 1,
-              borderRadius: Radius.md,
-              overflow: 'hidden',
-            }}>
-            <Image
-              source={{ uri: item.uri }}
-              style={{ width: '100%', height: '100%' }}
-              contentFit="contain"
-              accessibilityLabel={item.label ?? 'Sticker'}
-            />
-          </Pressable>
-        )}
-        ListEmptyComponent={
+      <View style={{ paddingHorizontal: Spacing[2], paddingBottom: Spacing[2], flex: 1 }}>
+        {filteredItems.length === 0 ? (
           <View style={{ alignItems: 'center', paddingTop: Spacing[8] }}>
             <Text style={{ ...FontSize.sm, color: t.textTertiary }}>No stickers found</Text>
           </View>
-        }
-      />
+        ) : (
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: Spacing[1] }}>
+            {filteredItems.map((item) => (
+              <Pressable
+                key={item.id}
+                onPress={() => onSelect(item)}
+                accessibilityRole="button"
+                accessibilityLabel={item.label ?? 'Sticker'}
+                style={{
+                  width: `${(100 - columns) / columns}%`,
+                  aspectRatio: 1,
+                  borderRadius: Radius.md,
+                  overflow: 'hidden',
+                }}>
+                <Image
+                  source={{ uri: item.uri }}
+                  style={{ width: '100%', height: '100%', borderRadius: Radius.sm }}
+                  contentFit="contain"
+                  accessibilityLabel={item.label ?? 'Sticker'}
+                />
+              </Pressable>
+            ))}
+          </View>
+        )}
+      </View>
     </View>
   );
 }
