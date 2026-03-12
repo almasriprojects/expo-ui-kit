@@ -14,7 +14,7 @@ import {
 } from 'lucide-react-native';
 
 import { Screen } from '@/components/layout';
-import { FontSize, Radius, Shadows, Spacing, resolveFontFamily } from '@/constants/theme';
+import { FontSize, Radius, Spacing, resolveFontFamily } from '@/constants/theme';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
 
@@ -29,27 +29,88 @@ const MORE_APPS = [
   { key: 'realestate', label: 'Real Estate', icon: Home, desc: 'Listings, mortgage, tours' },
 ] as const;
 
-const GRID_GAP = 12;
-const HORIZONTAL_PAD = 20;
+const GAP = 12;
+const PAD = 20;
+
+function AppCard({
+  app,
+  width,
+  t,
+  f,
+  onPress,
+}: {
+  app: (typeof MORE_APPS)[number];
+  width: number;
+  t: ReturnType<typeof useTheme>;
+  f: ReturnType<typeof useFont>;
+  onPress: () => void;
+}) {
+  const Icon = app.icon;
+
+  return (
+    <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={`${app.label} demo`}>
+      <View
+        style={{
+          width,
+          backgroundColor: t.surface,
+          borderRadius: Radius.xl,
+          padding: 16,
+          borderWidth: 1.5,
+          borderColor: t.border,
+        }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+          <View
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: Radius.md,
+              backgroundColor: t.primarySoft,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Icon size={18} color={t.primary} />
+          </View>
+          <ChevronRight size={16} color={t.textTertiary} />
+        </View>
+        <Text
+          numberOfLines={1}
+          style={{
+            fontSize: 15,
+            fontWeight: '700',
+            fontFamily: resolveFontFamily(f, '700'),
+            color: t.text,
+            marginBottom: 3,
+          }}>
+          {app.label}
+        </Text>
+        <Text
+          numberOfLines={2}
+          style={{
+            fontSize: 12,
+            lineHeight: 16,
+            color: t.textSecondary,
+            fontFamily: resolveFontFamily(f, '400'),
+          }}>
+          {app.desc}
+        </Text>
+      </View>
+    </Pressable>
+  );
+}
 
 export default function MoreScreen() {
   const t = useTheme();
   const f = useFont();
   const router = useRouter();
   const { width: screenWidth } = useWindowDimensions();
-  const cardWidth = (screenWidth - HORIZONTAL_PAD * 2 - GRID_GAP) / 2;
-
-  const rows: (typeof MORE_APPS[number])[][] = [];
-  for (let i = 0; i < MORE_APPS.length; i += 2) {
-    rows.push(MORE_APPS.slice(i, i + 2) as unknown as (typeof MORE_APPS[number])[]);
-  }
+  const cardWidth = Math.floor((screenWidth - PAD * 2 - GAP) / 2);
 
   return (
     <Screen>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingHorizontal: HORIZONTAL_PAD,
+          paddingHorizontal: PAD,
           paddingTop: Spacing[4],
           paddingBottom: Spacing[16],
         }}>
@@ -59,7 +120,7 @@ export default function MoreScreen() {
             fontWeight: '800',
             fontFamily: resolveFontFamily(f, '700'),
             color: t.text,
-            marginBottom: Spacing[1],
+            marginBottom: 4,
           }}>
           App Templates
         </Text>
@@ -68,79 +129,29 @@ export default function MoreScreen() {
             ...FontSize.sm,
             fontFamily: resolveFontFamily(f, '400'),
             color: t.textSecondary,
-            marginBottom: Spacing[5],
+            marginBottom: 24,
           }}>
           Real-world demos built with the component library
         </Text>
 
-        {rows.map((row, rowIndex) => (
-          <View
-            key={rowIndex}
-            style={{
-              flexDirection: 'row',
-              marginBottom: GRID_GAP,
-            }}>
-            {row.map((app, colIndex) => {
-              const Icon = app.icon;
-              return (
-                <Pressable
-                  key={app.key}
-                  onPress={() => router.push(`/demo/${app.key}`)}
-                  accessibilityRole="button"
-                  accessibilityLabel={`${app.label} demo`}
-                  style={({ pressed }) => ({
-                    width: cardWidth,
-                    marginLeft: colIndex === 1 ? GRID_GAP : 0,
-                    backgroundColor: pressed ? t.surface : t.card,
-                    borderRadius: Radius.xl,
-                    padding: Spacing[4],
-                    borderWidth: 1,
-                    borderColor: pressed ? t.primary : t.border,
-                    ...Shadows.sm,
-                  })}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginBottom: Spacing[2],
-                    }}>
-                    <View
-                      style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: Radius.md,
-                        backgroundColor: t.primarySoft,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}>
-                      <Icon size={18} color={t.primary} />
-                    </View>
-                    <View style={{ flex: 1 }} />
-                    <ChevronRight size={16} color={t.textTertiary} />
-                  </View>
-                  <Text
-                    style={{
-                      ...FontSize.sm,
-                      fontWeight: '700',
-                      fontFamily: resolveFontFamily(f, '700'),
-                      color: t.text,
-                      marginBottom: 2,
-                    }}
-                    numberOfLines={1}>
-                    {app.label}
-                  </Text>
-                  <Text
-                    style={{
-                      ...FontSize['2xs'],
-                      color: t.textSecondary,
-                      fontFamily: resolveFontFamily(f, '400'),
-                    }}
-                    numberOfLines={2}>
-                    {app.desc}
-                  </Text>
-                </Pressable>
-              );
-            })}
+        {[0, 2, 4, 6].map((startIdx) => (
+          <View key={startIdx} style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: GAP }}>
+            <AppCard
+              app={MORE_APPS[startIdx]}
+              width={cardWidth}
+              t={t}
+              f={f}
+              onPress={() => router.push(`/demo/${MORE_APPS[startIdx].key}`)}
+            />
+            {MORE_APPS[startIdx + 1] && (
+              <AppCard
+                app={MORE_APPS[startIdx + 1]}
+                width={cardWidth}
+                t={t}
+                f={f}
+                onPress={() => router.push(`/demo/${MORE_APPS[startIdx + 1].key}`)}
+              />
+            )}
           </View>
         ))}
       </ScrollView>
